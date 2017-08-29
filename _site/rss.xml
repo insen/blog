@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title> | </title>
+    <link></link>
+    <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Personal blog of </description>
+    <language>en-us</language>
+    <pubDate>Tue, 29 Aug 2017 16:22:53 +0530</pubDate>
+    <lastBuildDate>Tue, 29 Aug 2017 16:22:53 +0530</lastBuildDate>
+    
+    <item>
+      <title>Getting started with Github Pages and Pretzel</title>
+      <link>/2017/08/29/getting-started-github-pretzel.html</link>
+      <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
+      <author> ()</author>
+      <guid isPermaLink="true">/2017/08/29/getting-started-github-pretzel.html</guid>
+      <description>&lt;p&gt;As I mentioned in my &apos;hello-blog&apos; post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will document my experience of setting up a blog using github pages and pretzel.&lt;/p&gt;
+&lt;p&gt;Note - If you don�t have a github account, this is a good time to create one.&lt;/p&gt;
+&lt;p&gt;So what are Github Pages ( https://help.github.com/articles/user-organization-and-project-pages/ )&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Github Pages are a feature inbuilt into Github which enables you to host static web-sites with minimum effort. There are a few flavors of this.
+
+User Pages Site 
+	? If your github account is UA, Create a new repository named as  UA, viz, your account is at UA.github.com. 
+	? Add your static web-site into the master branch of the repo just created.
+	?  Ensure there is a index.html at top level of repo.  This automatically gets published as a http://userName.github.io . 
+
+Organization Pages Site - Similar to user pages except the repo is at the organization level, and has the same name as the organization. Gets published at http://github.com/organizationName
+
+Project Pages - Is usually at per-repository level. Can be configured so that content is served either from  master branch, from a top level folder within the repo named as &apos;docs&apos; or a branch specifically named as &apos;gh-pages&apos;.
+
+Note - 
+	a. It is perfectly possible to have user-pages, organization-pages and project-pages in the same account. Assuming your user account is UA, your organization name is OA, and your project repo name is PA, your sites will be published at 
+		i. http://UA.github.io  - User Pages Site
+		ii. http://github.com/OA. - Org Pages Site
+		iii. http://UA.github.io/PA  - Project Pages Site  
+	b. You could have the web-site be a jekyll web-site OR a html website with an index.html at the top level of the site. 
+		i. In case of using jekyll, you need to create a jekyll website in the repo and branch you chose. Additionally Github has inbuilt support for jekyll publishing. More details can be found in  https://help.github.com/articles/user-organization-and-project-pages/
+		
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What is Pretzel
+Pretzel is a open source, static-site generator in .NET.&lt;/p&gt;
+&lt;p&gt;Approach
+We will be hosting a project site, which will be served from the content checked in to the docs folder of the master branch. This  uses the Github Pages feature.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;We will use pretzel to create the web-site template, write posts and generate the site on local machine.  Once done, we push the raw site into the repo and the publishable version into the docs folder. 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Gh-Pages setup in github portal
+- create a repository in github. I created blog-repo - https://github.com/insen/blog-repo
+- clone in local
+- add a docs folder.
+- add an index.html with &apos;Hello world&apos;
+- Goto Settings
+- Goto Gh-Pages - Select &apos;master branch/docs folder&apos;&lt;/p&gt;
+&lt;p&gt;And that�s it. Navigate to https://insen.github.io/blog-repo . You should see the contents of the index.html (as per example here - you should see a page with &apos;Hello World&apos;) on your browser.&lt;/p&gt;
+&lt;p&gt;Onto the Pretzel parts of the install -
+Get pretzel from here - https://github.com/Code52/pretzel . Accompanied by basic documentation. We will only be using the basic steps here.
+Or use chocolatey - choco install pretzel.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hello Blog !</title>
+      <link>/2017/08/29/helloblog.html</link>
+      <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
+      <author> ()</author>
+      <guid isPermaLink="true">/2017/08/29/helloblog.html</guid>
+      <description>&lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
+&lt;p&gt;But, I had conditions -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not much overhead beyond the writing.&lt;/li&gt;
+&lt;li&gt;Retain maximum possible control over content, display and offline support.&lt;/li&gt;
+&lt;li&gt;Also, I have a technical background so I wanted to learn something out of it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Note :&lt;/em&gt; The first and the third above may be self-contradictory, but I am ok with that.&lt;/p&gt;
+&lt;p&gt;So I started looking. Now, traditional blogging platforms end up keeping my data. I didnt like that. Plus I havent seen good web based blog editors. Now I had encountered github blogging in the past and liked what I saw, so I started looking at it again. Soon, it was clear that the simplicity of a static site was hard to beat. The catch was, Github integrates Jekyl. Now Jekyll is good, but getting Jekyll on windows involves some fiddling and a good deal of ruby. Having recently gone through .Net Core, Scala, Spark, Azure and NodeJs recently in quick succession, I had no appetite for another. A little more looking, and I found &lt;a href=&quot;http://localhost:8080/#&quot;&gt;Pretzel&lt;/a&gt; - a .NET based static-site generator, plus extras.&lt;/p&gt;
+&lt;p&gt;And I settled. &lt;em&gt;(The living-happily-there-ever-after-question has no answers yet.)&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Blogging should be simple. Hence Github pages.&lt;/li&gt;
+&lt;li&gt;Blogging i.e. content, display and offline mode should remain in blogger&apos;s control. Hence pretzel and not jekyll. Also see &lt;a href=&quot;https://thomasfreudenberg.com/archive/2016/05/16/from-jekyll-to-pretzel/&quot;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
+&lt;li&gt;And I get to dig into pretzel and maybe learn about static-site-generators.
+Therefore, this blog is being served from a github-pages static site, with the site actually being generated by pretzel on local machine and getting checked into Github.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Technically speaking, I am back to build, compile, test and deploy. Blog or not, thats like coming home.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>/2017/08/28/defaultpost.html</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0530</pubDate>
+      <author> ()</author>
+      <guid isPermaLink="true">/2017/08/28/defaultpost.html</guid>
+      <description>&lt;h2&gt;Hello world...&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-cs&quot;&gt;static void Main() 
+{
+    Console.WriteLine(&amp;quot;Hello World!&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is my first post on the site!&lt;/p&gt;</description>
+    </item>
+    
+  </channel> 
+</rss>
