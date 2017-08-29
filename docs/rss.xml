@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
     <title>Write, Code, Dream ! | [name, insen][url, https://linkedin.com/nilsengupta]</title>
-    <link>http://insen.github.io/blog/</link>
-    <atom:link href="http://insen.github.io/blog//rss.xml" rel="self" type="application/rss+xml" />
+    <link>https://insen.github.io/blog/</link>
+    <atom:link href="https://insen.github.io/blog//rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 29 Aug 2017 23:37:02 +0530</pubDate>
-    <lastBuildDate>Tue, 29 Aug 2017 23:37:02 +0530</lastBuildDate>
+    <pubDate>Tue, 29 Aug 2017 23:40:10 +0530</pubDate>
+    <lastBuildDate>Tue, 29 Aug 2017 23:40:10 +0530</lastBuildDate>
     
     <item>
       <title>Blog like you are coming home.</title>
-      <link>http://insen.github.io/blog//2017/08/29/helloblog/</link>
+      <link>https://insen.github.io/blog//2017/08/29/helloblog/</link>
       <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://insen.github.io/blog//2017/08/29/helloblog/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog//2017/08/29/helloblog/</guid>
       <description>&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
 &lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
 &lt;p&gt;But, I had conditions -&lt;/p&gt;
