@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Write, Code, Dream !</title>
- <link href="http://insen.github.io/blog-site/atom.xml" rel="self"/>
- <link href="http://insen.github.io/blog-site/"/>
- <updated>2017-08-29T22:24:42.6154373+05:30</updated>
- <id>http://insen.github.io/blog-site</id>
+ <link href="http://insen.github.io/blog//atom.xml" rel="self"/>
+ <link href="http://insen.github.io/blog//"/>
+ <updated>2017-08-29T22:37:50.712083+05:30</updated>
+ <id>http://insen.github.io/blog/</id>
  <author>
    <name>insen</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Blog like you are coming home.</title>
-   <link href="http://insen.github.io/blog-site/2017/08/29/helloblog/"/>
+   <link href="http://insen.github.io/blog//2017/08/29/helloblog/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>http://insen.github.io/blog-site/2017/08/29/helloblog/</id>
+   <id>http://insen.github.io/blog//2017/08/29/helloblog/</id>
    <content type="html">&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
 &lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
 &lt;p&gt;But, I had conditions -&lt;/p&gt;

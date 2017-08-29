@@ -10,7 +10,7 @@ relative_permalinks: true
 title:            'Write, Code, Dream !'
 tagline:          'A varied and opinionated personal blog.'  
 description:      'By <a href="https://github.com/insen" target="_blank">@insen</a>.'
-url:              http://insen.github.io/blog-site
+url:              http://insen.github.io/blog/
 baseurl:          /
 
 author:
@@ -22,7 +22,7 @@ paginate:         5
 # Custom vars
 version:          1.0.0
 
-contact:
+connect:
   github:          'https://github.com/insen'
   linkedin:        'https://linkedin.com/nilsengupta'
-  gmail:           'mailto:indranil.sengupta@gmail.com'
+  email:           'mailto:indranil.sengupta@gmail.com'
