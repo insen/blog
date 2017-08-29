@@ -1,8 +1,28 @@
-pretzel: 
-    engine: liquid
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
 
-# Site settings
-author: # name of the author
-title: # site title
-url: # site url
-contact: # mail of the author
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            'Write, Code, Dream !'
+tagline:          'A varied and opinionated personal blog.'  
+description:      'By <a href="https://github.com/insen" target="_blank">@insen</a>.'
+url:              http://insen.github.io/blog-site
+baseurl:          /
+
+author:
+  name:           'insen'
+  url:            https://linkedin.com/nilsengupta
+
+paginate:         5
+
+# Custom vars
+version:          1.0.0
+
+contact:
+  github:          'https://github.com/insen'
+  linkedin:        'https://linkedin.com/nilsengupta'
+  gmail:           'mailto:indranil.sengupta@gmail.com'

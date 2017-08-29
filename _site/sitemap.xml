@@ -7,27 +7,21 @@
   <!-- Generated with pretzel -->
   
   <url>
-    <loc>http://domain/2017/08/29/getting-started-github-pretzel.html</loc>
+    <loc>http://domain/2017/08/29/helloblog/</loc>
     <lastmod>2017-08-29T00:00:00+05:30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
   
-  <url>
-    <loc>http://domain/2017/08/29/helloblog.html</loc>
-    <lastmod>2017-08-29T00:00:00+05:30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.00</priority>
-  </url>
-  
-  <url>
-    <loc>http://domain/2017/08/28/defaultpost.html</loc>
-    <lastmod>2017-08-28T00:00:00+05:30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.00</priority>
-  </url>
   
   
+	
+	<url>
+		<loc>http://domain404.html</loc>
+		<changefreq>daily</changefreq>
+		<priority>1.00</priority>
+	</url>
+	
   
 	
 	<url>
@@ -46,11 +40,17 @@
 	
   
 	
+  
+	
 	<url>
 		<loc>http://domain/index.html</loc>
 		<changefreq>daily</changefreq>
 		<priority>1.00</priority>
 	</url>
+	
+  
+	
+  
 	
   
 	
@@ -67,18 +67,6 @@
 		<changefreq>daily</changefreq>
 		<priority>1.00</priority>
 	</url>
-	
-  
-	
-  
-	
-  
-	
-  
-	
-  
-	
-  
 	
   
 	
