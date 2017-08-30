@@ -7,11 +7,11 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            'Write, Code, Dream !'
-tagline:          'A varied and opinionated personal blog.'  
-description:      'By <a href="https://github.com/insen" target="_blank">@insen</a>.'
-url:              https://insen.github.io/blog/
-baseurl:          https://insen.github.io/blog/
+title:            'Insen'
+tagline:          'Write, Code, Dream !'  
+description:      'Write, Code, Dream ! <a href="https://github.com/insen" target="_blank">@insen</a>.'
+url:              'https://insen.github.io/blog/'
+baseurl:          'https://insen.github.io/blog/'
 
 author:
   name:           'insen'

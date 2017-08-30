@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-    <title>Write, Code, Dream ! | [name, insen][url, https://linkedin.com/nilsengupta]</title>
+    <title>Insen | [name, insen][url, https://linkedin.com/nilsengupta]</title>
     <link>https://insen.github.io/blog/</link>
     <atom:link href="https://insen.github.io/blog//rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Wed, 30 Aug 2017 19:15:14 +0530</pubDate>
-    <lastBuildDate>Wed, 30 Aug 2017 19:15:14 +0530</lastBuildDate>
+    <pubDate>Wed, 30 Aug 2017 22:29:54 +0530</pubDate>
+    <lastBuildDate>Wed, 30 Aug 2017 22:29:54 +0530</lastBuildDate>
     
     <item>
       <title>Getting started with Github Pages and Pretzel</title>
@@ -133,7 +133,7 @@ lookup the various possible options.&lt;/li&gt;
 &lt;p&gt;This happens because Hyde is a Jekyll theme, and Jekyll has a parser for the &lt;strong&gt;gist&lt;/strong&gt; command as shown above. Pretzel does NOT. To fix the error, we need to remove this part from the post. However, this also means, you have to figure out an alternative way to embed gists in your post, if you need to. Once you have deleted this line, Run &lt;strong&gt;bake&lt;/strong&gt; again with default options (means dont provide anything other than the source folder, or if your prompt is at the root level, then provide no parameters). If no parameters, Pretzel by default uses the current directory as the source directory. Now, &lt;strong&gt;bake&lt;/strong&gt; should succeed, and you should see a sub-folder called &lt;strong&gt;_site&lt;/strong&gt;. This contains your entire blog site.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Delete the &lt;strong&gt;CNAME&lt;/strong&gt; file from the repository folder as well as the generated &lt;strong&gt;_site&lt;/strong&gt; folder. This causes issues.  if you dont really have a domain name. You CANNOT point this to the Gh-Pages URL.&lt;/li&gt;
-&lt;li&gt;Update the config.yml. My config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;span&gt;Write, Code, Dream !&lt;/span&gt; or &lt;span&gt;https://github.com/insen&lt;/span&gt;, etc.&lt;/li&gt;
+&lt;li&gt;Update the config.yml. My config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;span&gt;Insen&lt;/span&gt; or &lt;span&gt;https://github.com/insen&lt;/span&gt;, etc.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;\# Dependencies
 markdown:         redcarpet

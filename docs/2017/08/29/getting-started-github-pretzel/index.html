@@ -11,7 +11,7 @@
 
   <title>
     
-      Getting started with Github Pages and Pretzel &middot; Write, Code, Dream !
+      Getting started with Github Pages and Pretzel &middot; Insen
     
   </title>
 
@@ -37,7 +37,7 @@
     <div class="sidebar-about">
       <h1>
         <a href="https://insen.github.io/blog/">
-          Write, Code, Dream !
+          Insen
         </a>
       </h1>
       <p class="lead">By <a href="https://github.com/insen" target="_blank">@insen</a>.</p>
@@ -224,7 +224,7 @@ lookup the various possible options.</li>
 <p>This happens because Hyde is a Jekyll theme, and Jekyll has a parser for the <strong>gist</strong> command as shown above. Pretzel does NOT. To fix the error, we need to remove this part from the post. However, this also means, you have to figure out an alternative way to embed gists in your post, if you need to. Once you have deleted this line, Run <strong>bake</strong> again with default options (means dont provide anything other than the source folder, or if your prompt is at the root level, then provide no parameters). If no parameters, Pretzel by default uses the current directory as the source directory. Now, <strong>bake</strong> should succeed, and you should see a sub-folder called <strong>_site</strong>. This contains your entire blog site.</p>
 <ul>
 <li>Delete the <strong>CNAME</strong> file from the repository folder as well as the generated <strong>_site</strong> folder. This causes issues.  if you dont really have a domain name. You CANNOT point this to the Gh-Pages URL.</li>
-<li>Update the config.yml. My config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <span>Write, Code, Dream !</span> or <span>https://github.com/insen</span>, etc.</li>
+<li>Update the config.yml. My config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <span>Insen</span> or <span>https://github.com/insen</span>, etc.</li>
 </ul>
 <pre><code class="language-yml">\# Dependencies
 markdown:         redcarpet
