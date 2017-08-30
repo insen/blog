@@ -1,0 +1,1 @@
+pretzel bake --destination=./docs --cleantarget;

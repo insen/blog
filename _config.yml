@@ -26,3 +26,11 @@ connect:
   github:          'https://github.com/insen'
   linkedin:        'https://linkedin.com/nilsengupta'
   email:           'mailto:indranil.sengupta@gmail.com'
+
+exclude:
+  - docs\
+  - .gitignore
+  - .git
+  - pbake.bat
+  - ptaste.bat
+  
