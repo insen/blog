@@ -7,14 +7,14 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            'Insen'
+title:            Insen
 tagline:          'Write, Code, Dream !'  
 description:      'Write, Code, Dream ! <a href="https://github.com/insen" target="_blank">@insen</a>.'
-url:              'https://insen.github.io/blog/'
-baseurl:          'https://insen.github.io/blog/'
+url:              https://insen.github.io/blog/
+baseurl:          https://insen.github.io/blog/
 
 author:
-  name:           'insen'
+  name:           insen
   url:            https://linkedin.com/nilsengupta
 
 paginate:         5
@@ -23,8 +23,8 @@ paginate:         5
 version:          1.0.0
 
 connect:
-  github:          'https://github.com/insen'
-  linkedin:        'https://linkedin.com/nilsengupta'
+  github:          https://github.com/insen
+  linkedin:        https://linkedin.com/nilsengupta
   email:           'mailto:indranil.sengupta@gmail.com'
 
 exclude:
