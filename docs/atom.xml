@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog//atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog//"/>
- <updated>2017-08-31T11:11:31.5105182+05:30</updated>
+ <updated>2017-08-31T12:41:09.6076988+05:30</updated>
  <id>https://insen.github.io/blog/</id>
  <author>
    <name>insen</name>
@@ -45,6 +45,7 @@ blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while s
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Pretzel&lt;/strong&gt; to build/rebuild the web-site template, new/edited posts and generate/preview the updated web-site while offline. Some batch files for the builds with Pretzel commands, so that the process is seamlessly repeatable.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Git&lt;/strong&gt;, to push the updates to the template, the posts and to the generated web-site (docs folder) into the repo and the publishable version into the docs folder. &lt;em&gt;(Note that we didn&apos;t say anything about copying anything over to docs folder - Pretzel build scripts take care of that.)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Oh, and I almost forgot. &lt;strong&gt;Visual Studio Code&lt;/strong&gt; is the text editor. Pick whichever you like.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;(Note - If you don&apos;t have a github account, this is a good time to create one. Also, if you don&apos;t know Git, much of this blog won&apos;t make sense to you. if you really, really want to blog, this is a good alternative option &lt;a href=&quot;http://tumblr.com&quot;&gt;tumblr&lt;/a&gt;)&lt;/em&gt;.&lt;/p&gt;
 &lt;h3&gt;Github and &lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/&quot;&gt;Github Pages&lt;/a&gt;&lt;/h3&gt;
@@ -128,8 +129,8 @@ lookup the various possible options.&lt;/li&gt;
 &lt;p&gt;I will be creating batch scripts for the &lt;em&gt;(bake)&lt;/em&gt; and &lt;em&gt;(taste)&lt;/em&gt; snippets which will be useful.&lt;/p&gt;
 &lt;h3&gt;Getting jiggy with it.&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Delete the contents of your repository - the one where I added the  (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.&lt;/li&gt;
-&lt;li&gt;Run the Pretzel bake command from a prompt at the repository root folder. Pretzel should create a folder called &lt;strong&gt;_site&lt;/strong&gt; under repository folder. It does NOT. It does this instead.&lt;/li&gt;
+&lt;li&gt;Delete the contents of your repository (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.&lt;/li&gt;
+&lt;li&gt;Run the Pretzel bake command from a prompt at the repository root folder with no command-line args. Pretzel should create a folder called &lt;strong&gt;_site&lt;/strong&gt; under repository folder. It does NOT. It does this instead.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code class=&quot;language-c#&quot;&gt;	Unhandled Exception: Pretzel.Logic.Exceptions.PageProcessingException: Failed to process E:\work\blogging\blog\_site\201
 	2\02\07\example-content\index.html, see inner exception for more details ---&amp;gt; DotLiquid.Exceptions.SyntaxException: Unknown tag &apos;gist&apos;
@@ -156,18 +157,20 @@ lookup the various possible options.&lt;/li&gt;
 &lt;p&gt;Change &lt;strong&gt;index.html&lt;/strong&gt;. This file should be in the &lt;strong&gt;repo&lt;/strong&gt; directory.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;There should be a line towards the top. md &lt;code&gt;\{\% for post in paginator.posts \%\}&lt;/code&gt;. Change &apos;paginator&apos; to &apos;site&apos;. Paginator is a Jekyll plugin and doesn&apos;t work in Pretzel. No posts show up if we retain paginator.&lt;/p&gt;
+&lt;p&gt;There should be a line towards the top. md &lt;code&gt;\{\% for post in paginator.posts \%\}&lt;/code&gt;. Change &apos;paginator&apos; to &apos;site&apos;. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;There should be a line a little below the above &lt;code&gt;&amp;lt;a href=&amp;quot;\{\{ post.url \}\}&amp;quot;&amp;gt;&lt;/code&gt;. Change this to &lt;code&gt;&amp;lt;a href=&amp;quot;\{\{ post.url | prepend: site.baseurl }}&amp;quot;&amp;gt;&lt;/code&gt;. Navigation between posts does not work otherwise.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;  &lt;em&gt;(Note - In code snippets above the &apos;slash&apos; before &apos;curly braces&apos; are extra. The &apos;slash&apos; is not part of actual code. it was needed to escape Liquid processing)&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Update the config.yml. A config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;span&gt;Insen&lt;/span&gt; or &lt;span&gt;https://github.com/insen&lt;/span&gt;, etc. The sections marked as &lt;em&gt;(Setup)&lt;/em&gt; in ths file have to be filed in and be accurate. They are used to generate the site.&lt;/p&gt;
+&lt;p&gt;Update the config.yml. A config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;code&gt;&amp;lt;span&amp;gt;\{\{ site.title }}&amp;lt;/span&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;lt;span&amp;gt;\{\{ site.connect.github }}&amp;lt;/span&amp;gt;&lt;/code&gt;, etc. The sections marked as &lt;em&gt;(Setup)&lt;/em&gt; in ths file have to be filed in and be accurate. They are used to generate the site.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;  &lt;em&gt;(Note - In code snippets above and config.yml file below the &apos;slash&apos; before &apos;curly braces&apos;, &apos;percent&apos; or &apos;hash&apos; 	symbol are extra. The &apos;slash&apos; is not part of actual code. it was needed to escape Liquid processing)&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;\# Dependencies
 markdown:         redcarpet
 highlighter:      pygments
@@ -257,7 +260,7 @@ try first. Having encountered github blogging in the past and liked what I saw, 
 Soon, it was clear that the simplicity of a static site was hard to beat. The catch was, Github integrates
 Jekyl. Now Jekyll is good, but getting Jekyll on windows involves some fiddling and a good deal of ruby.
 Having recently gone through .Net Core, Scala, Spark, Azure and NodeJs recently in quick succession, I had
-no appetite for another. A little more looking, and I found &lt;a href=&quot;http://localhost:8080/#&quot;&gt;Pretzel&lt;/a&gt; - a .NET
+no appetite for another. A little more looking, and I found &lt;a href=&quot;https://Github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; - a .NET
 based static-site generator, plus extras.&lt;/p&gt;
 &lt;p&gt;Thus I settled. &lt;em&gt;(The living-happily-there-ever-after-question has no answers yet.)&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -271,7 +274,7 @@ more details.&lt;/li&gt;
 &lt;p&gt;Therefore, this blog is being served from a Github-pages static site, with the site template taken from
 the Jekyll theme called Hyde, actually being generated by Pretzel on local machine and getting checked
 into Github.&lt;/p&gt;
-&lt;p&gt;I just need to figure out markdown now, and then technically speaking, I am back to &lt;strong&gt;build, compile,
+&lt;p&gt;I just need to figure out markdown now, and then technically speaking, I am back to &lt;strong&gt;write, build,
 test and deploy&lt;/strong&gt;. Blog or not, thats like coming home.&lt;/p&gt;</content>
  </entry>
  

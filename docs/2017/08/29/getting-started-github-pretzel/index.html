@@ -134,6 +134,7 @@ blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while s
 </li>
 <li><strong>Pretzel</strong> to build/rebuild the web-site template, new/edited posts and generate/preview the updated web-site while offline. Some batch files for the builds with Pretzel commands, so that the process is seamlessly repeatable.</li>
 <li><strong>Git</strong>, to push the updates to the template, the posts and to the generated web-site (docs folder) into the repo and the publishable version into the docs folder. <em>(Note that we didn't say anything about copying anything over to docs folder - Pretzel build scripts take care of that.)</em></li>
+<li>Oh, and I almost forgot. <strong>Visual Studio Code</strong> is the text editor. Pick whichever you like.</li>
 </ul>
 <p><em>(Note - If you don't have a github account, this is a good time to create one. Also, if you don't know Git, much of this blog won't make sense to you. if you really, really want to blog, this is a good alternative option <a href="http://tumblr.com">tumblr</a>)</em>.</p>
 <h3>Github and <a href="https://help.github.com/articles/user-organization-and-project-pages/">Github Pages</a></h3>
@@ -217,8 +218,8 @@ lookup the various possible options.</li>
 <p>I will be creating batch scripts for the <em>(bake)</em> and <em>(taste)</em> snippets which will be useful.</p>
 <h3>Getting jiggy with it.</h3>
 <ul>
-<li>Delete the contents of your repository - the one where I added the  (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.</li>
-<li>Run the Pretzel bake command from a prompt at the repository root folder. Pretzel should create a folder called <strong>_site</strong> under repository folder. It does NOT. It does this instead.</li>
+<li>Delete the contents of your repository (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.</li>
+<li>Run the Pretzel bake command from a prompt at the repository root folder with no command-line args. Pretzel should create a folder called <strong>_site</strong> under repository folder. It does NOT. It does this instead.</li>
 </ul>
 <pre><code class="language-c#">	Unhandled Exception: Pretzel.Logic.Exceptions.PageProcessingException: Failed to process E:\work\blogging\blog\_site\201
 	2\02\07\example-content\index.html, see inner exception for more details ---&gt; DotLiquid.Exceptions.SyntaxException: Unknown tag 'gist'
@@ -245,18 +246,20 @@ lookup the various possible options.</li>
 <p>Change <strong>index.html</strong>. This file should be in the <strong>repo</strong> directory.</p>
 <ul>
 <li>
-<p>There should be a line towards the top. md <code>\{\% for post in paginator.posts \%\}</code>. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and doesn't work in Pretzel. No posts show up if we retain paginator.</p>
+<p>There should be a line towards the top. md <code>\{\% for post in paginator.posts \%\}</code>. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.</p>
 </li>
 <li>
 <p>There should be a line a little below the above <code>&lt;a href=&quot;\{\{ post.url \}\}&quot;&gt;</code>. Change this to <code>&lt;a href=&quot;\{\{ post.url | prepend: site.baseurl }}&quot;&gt;</code>. Navigation between posts does not work otherwise.</p>
 </li>
 </ul>
-<p>  <em>(Note - In code snippets above the 'slash' before 'curly braces' are extra. The 'slash' is not part of actual code. it was needed to escape Liquid processing)</em>.</p>
 </li>
 <li>
-<p>Update the config.yml. A config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <span>Insen</span> or <span>https://github.com/insen</span>, etc. The sections marked as <em>(Setup)</em> in ths file have to be filed in and be accurate. They are used to generate the site.</p>
+<p>Update the config.yml. A config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <code>&lt;span&gt;\{\{ site.title }}&lt;/span&gt;</code> or <code>&lt;span&gt;\{\{ site.connect.github }}&lt;/span&gt;</code>, etc. The sections marked as <em>(Setup)</em> in ths file have to be filed in and be accurate. They are used to generate the site.</p>
 </li>
 </ul>
+<blockquote>
+<p>  <em>(Note - In code snippets above and config.yml file below the 'slash' before 'curly braces', 'percent' or 'hash' 	symbol are extra. The 'slash' is not part of actual code. it was needed to escape Liquid processing)</em>.</p>
+</blockquote>
 <pre><code class="language-yml">\# Dependencies
 markdown:         redcarpet
 highlighter:      pygments

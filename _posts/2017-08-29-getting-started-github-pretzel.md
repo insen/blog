@@ -28,6 +28,7 @@ The infrastructure
 	-	A directory within the repository named 'docs' (as per Github rules) holding the pre-assembled auto-generated and checked-in web-site. Github pages automatically serves this web-site from a public Url. 
 -	**Pretzel** to build/rebuild the web-site template, new/edited posts and generate/preview the updated web-site while offline. Some batch files for the builds with Pretzel commands, so that the process is seamlessly repeatable.
 -	**Git**, to push the updates to the template, the posts and to the generated web-site (docs folder) into the repo and the publishable version into the docs folder. *(Note that we didn't say anything about copying anything over to docs folder - Pretzel build scripts take care of that.)*
+- 	Oh, and I almost forgot. **Visual Studio Code** is the text editor. Pick whichever you like.
 
 *(Note - If you don't have a github account, this is a good time to create one. Also, if you don't know Git, much of this blog won't make sense to you. if you really, really want to blog, this is a good alternative option [tumblr](http://tumblr.com))*.
 
@@ -141,8 +142,8 @@ I will be creating batch scripts for the *(bake)* and *(taste)* snippets which w
 
 ### Getting jiggy with it.
 
-- Delete the contents of your repository - the one where I added the  (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.
--  Run the Pretzel bake command from a prompt at the repository root folder. Pretzel should create a folder called **_site** under repository folder. It does NOT. It does this instead.  
+- Delete the contents of your repository (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.
+-  Run the Pretzel bake command from a prompt at the repository root folder with no command-line args. Pretzel should create a folder called **_site** under repository folder. It does NOT. It does this instead.  
 ``` c#
 	Unhandled Exception: Pretzel.Logic.Exceptions.PageProcessingException: Failed to process E:\work\blogging\blog\_site\201
 	2\02\07\example-content\index.html, see inner exception for more details ---> DotLiquid.Exceptions.SyntaxException: Unknown tag 'gist'
@@ -164,14 +165,15 @@ Why again? Because Hyde is a Jekyll theme, and Jekyll has a parser for the **gis
 
 - Delete the **CNAME** file from the repository folder as well as the generated **_site** folder *(This causes issues   if you don't have a top level domain name. And no, you CANNOT point this to the Github site url).
 
+
 - Change **index.html**. This file should be in the **repo** directory. 
-	-	There should be a line towards the top. md ```\{\% for post in paginator.posts \%\}```. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and doesn't work in Pretzel. No posts show up if we retain paginator. 
+	-	There should be a line towards the top. md ```\{\% for post in paginator.posts \%\}```. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator. 
 	
 	-	There should be a line a little below the above ```<a href="\{\{ post.url \}\}">```. Change this to ```<a href="\{\{ post.url | prepend: site.baseurl }}">```. Navigation between posts does not work otherwise.
 
-	*(Note - In code snippets above the 'slash' before 'curly braces' are extra. The 'slash' is not part of actual code. it was needed to escape Liquid processing)*.
+- Update the config.yml. A config.yml is given below. I changed the **'connect'** and its sub-items. These fields are used in the Liquid based html templates, viz. ```<span>\{\{ site.title }}</span>``` or ```<span>\{\{ site.connect.github }}</span>```, etc. The sections marked as *(Setup)* in ths file have to be filed in and be accurate. They are used to generate the site. 
 
-- Update the config.yml. A config.yml is given below. I changed the **'connect'** and its sub-items. These fields are used in the Liquid based html templates, viz. <span>{{ site.title }}</span> or <span>{{ site.connect.github }}</span>, etc. The sections marked as *(Setup)* in ths file have to be filed in and be accurate. They are used to generate the site. 
+>	*(Note - In code snippets above and config.yml file below the 'slash' before 'curly braces', 'percent' or 'hash' 	symbol are extra. The 'slash' is not part of actual code. it was needed to escape Liquid processing)*.
 
 ```yml
 \# Dependencies
