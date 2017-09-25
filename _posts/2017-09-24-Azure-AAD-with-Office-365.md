@@ -126,7 +126,7 @@ Enter Azure AD and OAuth SSO.
 
 ## Azure Active Directory (AAD) and OAuth.
 
-Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like ![this]({{ site.pageUrl }}/img/posts/azureoauth.png). 
+Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like ![this](/blog/img/posts/azureoauth.png). 
 
 *More documentation can be found at [https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main).*
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Insen</title>
- <link href="https://insen.github.io/blog//atom.xml" rel="self"/>
- <link href="https://insen.github.io/blog//"/>
- <updated>2017-09-25T20:23:26.0921192+05:30</updated>
- <id>https://insen.github.io/blog/</id>
+ <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
+ <link href="https://insen.github.io/blog/"/>
+ <updated>2017-09-25T20:41:46.3286943+05:30</updated>
+ <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Azure AD and Office 365 OAuth Integration via Postman</title>
-   <link href="https://insen.github.io/blog//2017/09/24/Azure-AAD-with-Office-365/"/>
+   <link href="https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/"/>
    <updated>2017-09-24T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog//2017/09/24/Azure-AAD-with-Office-365/</id>
+   <id>https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/</id>
    <content type="html">&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Longer answer.&lt;/h2&gt;
 &lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our windows credentials. We also office 365 accounts linked to our exchange AD and Azure AD. I can seamlessly navigate to office 365 on the browser after logging into Azure portal through my windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
@@ -109,7 +109,7 @@
 Request Body and Response - Check.
 Enter Azure AD and OAuth SSO.&lt;/p&gt;
 &lt;h2&gt;Azure Active Directory (AAD) and OAuth.&lt;/h2&gt;
-&lt;p&gt;Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like &lt;img src=&quot;/img/posts/azureoauth.png&quot; alt=&quot;this&quot; /&gt;.&lt;/p&gt;
+&lt;p&gt;Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like &lt;img src=&quot;/blog/img/posts/azureoauth.png&quot; alt=&quot;this&quot; /&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;More documentation can be found at &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In our case, for the authentication, we need to do the following -&lt;/p&gt;
 &lt;ul&gt;
@@ -368,9 +368,9 @@ Authorization: bearer myJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkhIQnlLVS0wRH
  
  <entry>
    <title>Getting started with Github Pages and Pretzel</title>
-   <link href="https://insen.github.io/blog//2017/08/29/getting-started-github-pretzel/"/>
+   <link href="https://insen.github.io/blog/2017/08/29/getting-started-github-pretzel/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog//2017/08/29/getting-started-github-pretzel/</id>
+   <id>https://insen.github.io/blog/2017/08/29/getting-started-github-pretzel/</id>
    <content type="html">&lt;p&gt;As I mentioned in my &lt;a href=&quot;http://insen.github.io/blog/2017/08/29/helloblog/&quot;&gt;&apos;hello-blog&apos;&lt;/a&gt; post, my search for
 blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a
 blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.&lt;/p&gt;
@@ -596,9 +596,9 @@ exclude:
  
  <entry>
    <title>Blog like you are coming home.</title>
-   <link href="https://insen.github.io/blog//2017/08/29/helloblog/"/>
+   <link href="https://insen.github.io/blog/2017/08/29/helloblog/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog//2017/08/29/helloblog/</id>
+   <id>https://insen.github.io/blog/2017/08/29/helloblog/</id>
    <content type="html">&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
 &lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
 &lt;p&gt;But, I had conditions -&lt;/p&gt;
