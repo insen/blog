@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Mon, 25 Sep 2017 20:41:46 +0530</pubDate>
-    <lastBuildDate>Mon, 25 Sep 2017 20:41:46 +0530</lastBuildDate>
+    <pubDate>Mon, 25 Sep 2017 20:52:53 +0530</pubDate>
+    <lastBuildDate>Mon, 25 Sep 2017 20:52:53 +0530</lastBuildDate>
     
     <item>
       <title>Azure AD and Office 365 OAuth Integration via Postman</title>
