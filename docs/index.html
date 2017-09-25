@@ -124,7 +124,7 @@
 <ul>
 <li>Create an Azure AD application / Service principal.</li>
 <li>Redirect user to exchange Active Directory for Authentication.</li>
-<li>Returns Auth Code after Azure, through OAUTH, authenticates against organization AD.</li>
+<li>Returns Auth Code after Azure, through OAUTH, has authenticated against organization AD.</li>
 <li>Convert OAuth Code into Azure bearer token.</li>
 <li>Call Microsoft office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.</li>
 </ul>
@@ -132,176 +132,104 @@
 <p>In the process, I will briefly touch on OAuth in Azure, Azure AD, Scopes and Resources in MS Online Api, Azure Service Principals aka App registrations, App permissions aka OAuth on-behalf-of consent flow, Azure bearer tokens in Postman, JWT.io and the Microsoft Graph explorer. Oh! and the Graph and Oulook sandboxes.</p>
 <p><em>Note: In Azure, things change. The information here is of 24th Sept 2017.</em></p>
 <p><em>For the rest you need an Azure subscription, an office 365 account, and an Azure AD membership. You can have non work accounts for all three, but its a lot easier if your company admin has done the configuring for you. Blogs are the way to go here if you want to setup trial accounts for each.</em></p>
-<h2>First, the APIs.</h2>
-<p>Do such APIs exist? Well, yes.</p>
-<p>Problem is, more than <strong><em>one</em></strong> exist.</p>
-<h3>Outlook/Office 365 APIs</h3>
-<p>Documentation link here - <a href="https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times">https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times</a>.</p>
-<p>API looks like this.</p>
+<h2>findMeetingTimes API</h2>
+<p>Do such APIs exist? Well, yes, they do. Problem is, more than <strong><em>one</em></strong> exist.</p>
+<h4>Outlook/Office 365 APIs</h4>
+<p>Documentation link here - <a href="https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times">https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times</a>.
+This API looks like this -</p>
 <pre><code>POST https://outlook.office.com/api/{version}/me/findmeetingtimes
 </code></pre>
-<p>And there are <em>three</em> <em>version</em>s of it</p>
-<pre><code>-   v1.0
--   v2.0 
--   beta 
-</code></pre>
-<p>Also note - The first three lines in the relevant section of the link mention that we need at least one of the following scopes. Note these scopes, these are important. We'll see more of them.</p>
-<pre><code>-   https://outlook.office.com/calendars.read.shared
--   wl.calendars 
--   wl.contacts_calendars
-</code></pre>
-<p>And the sandbox to play-around with this is here <a href="https://oauthplay.azurewebsites.net/">https://oauthplay.azurewebsites.net/</a>.</p>
-<h3>Microsoft Graph APIs</h3>
-<p>Again, documentation is here - <a href="https://developer.microsoft.com/en-us/graph/docs/concepts/findmeetingtimes_example">https://developer.microsoft.com/en-us/graph/docs/concepts/findmeetingtimes_example</a>.</p>
-<p>API looks like this,</p>
+<p>and there are <em>three</em> <em>version</em>s of it - <em>v1.0, v2.0, beta</em>.</p>
+<p>Moreover, to use the API, the docs mention that we also need at least one of the following scopes -  <code>https://outlook.office.com/calendars.read.shared, wl.calendars, wl.contacts_calendars</code>. Scopes are an important concept in Azure auth governing permissions, and we'll see more of them in later sections.</p>
+<p>The sandbox to play-around with all of this is here <a href="https://oauthplay.azurewebsites.net/">https://oauthplay.azurewebsites.net/</a>.</p>
+<h4>Microsoft Graph APIs</h4>
+<p>This is the second, latest and greatest option from Microsoft. Again, documentation is here - <a href="https://developer.microsoft.com/en-us/graph/docs/concepts/findmeetingtimes_example">https://developer.microsoft.com/en-us/graph/docs/concepts/findmeetingtimes_example</a>, the API looks like this</p>
 <pre><code>POST https://graph.microsoft.com/v1.0/me/findMeetingTimes
 </code></pre>
-<p>And the sandbox (called MS Graph Explorer), is here - <a href="https://developer.microsoft.com/en-us/graph/graph-explorer">https://developer.microsoft.com/en-us/graph/graph-explorer</a>.</p>
-<p><em>Note: I wonder if the book 'Don't make me think.' is popular in MS?</em></p>
-<h3>Outlook vs Graph.</h3>
+<p>and the sandbox (called MS Graph Explorer), is here - <a href="https://developer.microsoft.com/en-us/graph/graph-explorer">https://developer.microsoft.com/en-us/graph/graph-explorer</a>.</p>
+<h4>Outlook vs Graph.</h4>
 <p>So why two? When to use what?</p>
 <p>Well previously MS had multiple APIs available - Office, Azure AD, etc. MS Graph is intended to unify all of these endpoints into a single consolidated REST gateway for all of Microsoft's underlying platform APIs viz. Azure AD, Excel, Outlook, OneDrive, OneNote, SharePoint etc. It is not fully at par with existing APIs, but MS recommendation is to prefer MS Graph unless you need a feature which it does not have.</p>
 <p>For current and future work, prefer MS Graph over other means.</p>
-<h3>The Request</h3>
-<p>In either case the POST body is the same, so that's a little better.</p>
-<pre><code class="language-json">{ 
-  &quot;attendees&quot;: [ 
-    { 
-      &quot;type&quot;: &quot;required&quot;,  
-      &quot;emailAddress&quot;: { 
-        &quot;name&quot;: &quot;Samantha Booth&quot;,
-        &quot;address&quot;: &quot;samanthab@contoso.onmicrosoft.com&quot; 
-      } 
-    }
-  ],  
-  &quot;locationConstraint&quot;: { 
-    &quot;isRequired&quot;: &quot;false&quot;,  
-    &quot;suggestLocation&quot;: &quot;false&quot;,  
-    &quot;locations&quot;: [ 
-      { 
-        &quot;resolveAvailability&quot;: &quot;false&quot;,
-        &quot;displayName&quot;: &quot;Conf room Hood&quot; 
-      } 
-    ] 
-  },  
-  &quot;timeConstraint&quot;: {
-    &quot;activityDomain&quot;:&quot;work&quot;, 
-    &quot;timeslots&quot;: [ 
-      { 
-        &quot;start&quot;: { 
-          &quot;dateTime&quot;: &quot;2017-04-18T09:00:00&quot;,  
-          &quot;timeZone&quot;: &quot;Pacific Standard Time&quot; 
-        },  
-        &quot;end&quot;: { 
-          &quot;dateTime&quot;: &quot;2017-04-20T17:00:00&quot;,  
-          &quot;timeZone&quot;: &quot;Pacific Standard Time&quot; 
-        } 
-      } 
-    ] 
-  },  
-  &quot;meetingDuration&quot;: &quot;PT2H&quot;,
-  &quot;returnSuggestionReasons&quot;: &quot;true&quot;,
-  &quot;minimumAttendeePercentage&quot;: &quot;100&quot;
-}
-
-</code></pre>
-<p>Endpoints - Check.
-Request Body and Response - Check.
-Enter Azure AD and OAuth SSO.</p>
+<h4>API Request body.</h4>
+<p>In either case the POST body is the same, so that's a relief. A detailed request is given towards the end of this post.</p>
+<p>So endpoints - Check.</p>
+<p>Request Body and Response - Check.</p>
+<p>Well, on to Azure AD and OAuth SSO, then.</p>
 <h2>Azure Active Directory (AAD) and OAuth.</h2>
 <p>Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like <img src="/blog/img/posts/azureoauth.png" alt="this" />.</p>
 <p><em>More documentation can be found at <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main">https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main</a>.</em></p>
-<p>In our case, for the authentication, we need to do the following -</p>
+<p>In our case, for the authentication, we need to do the following</p>
 <ul>
 <li>Register an app with Azure AD / Generate Service Principal.</li>
 <li>Authorize and retrieve authentication code.</li>
 <li>Convert authentication code into Azure authorization token for use by Outlook calendar APIs.</li>
 </ul>
-<h3>App Registration / Generate Service Principal</h3>
-<p>First, someone needs to get authenticated. This, in Azure terms, is a Service Principal. This is achieved by registering an application with Azure AD, which gives us three keys -<em>tenantId, clientId, clientSecret</em>- at the end.</p>
+<h4>App Registration / Generate Service Principal</h4>
+<p>First, someone needs to get authenticated. This, in Azure terms, is a Service Principal. This is achieved by registering an application with Azure AD, which gives us three important keys, the <em>tenantId, clientId</em> and the <em>clientSecret</em> after registration.
+<em>For details about how to register an app, see  <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications">https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications</a>.</em></p>
+<p>After registration, we save the following key-value pairs for subsequent use.</p>
 <ul>
-<li>
-<p>Added a new application called 'Postman' in the linked Azure Active Directory. This is our work AD.</p>
-</li>
-<li>
-<p>Specified 'Read User and Shared Calendars' in the permissions panel, and explicitly granted those permissions.</p>
-</li>
-<li>
-<p>Added two response_uri, one for Postman REST client to use the response auth code, and one to see the raw http auth request and response in a browser window myself. In app registration, I specified these two callback urls as</p>
-<ul>
-<li>https://www.getpostman.com/oauth2/callback
-<ul>
-<li><em>(As per Postman REST client requirements)</em></li>
-</ul>
-</li>
-<li>http://localhost/myapp/
-<ul>
-<li><em>(For my in-browser call-backs)</em></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><em>For details about how to register an app, see  <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications">https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications</a>.</em></p>
-<p>After registration, we save the following keys for subsequent use.</p>
-<ul>
-<li><em>tenantId</em>: guid looking code of the AD instance.</li>
+<li><em>tenantId</em>: guid looking code of the AD instance in your Azure subscription.</li>
 <li><em>clientId</em>: guid looking code of the application being registered.</li>
 <li><em>clientSecret</em>: guid looking key corresponding to a code we create in the application properties on Azure.</li>
 </ul>
 <p><em>Note : The clientSecret will be shown only once when creating a app property. If you don't note it down, you need to delete and recreate a key. It canot be recovered.</em></p>
-<h3>OAUTH Authorize via Azure AD</h3>
-<p>The OAuth dance is a two-step process here. Get a authentication code from the underlying authentication provider (OpenId, Active Directory), and then convert that code into a JSON Web Token (see specs at <a href="https://jwt.io">JWT</a>). For subsequent calls, use this token as the Authorization header.</p>
-<h4>Get Authentication Code / Authorize API</h4>
-<p>The following are the current (as-of-date) logon authorization endpoints.</p>
-<p><em>(Note: Previous versions had the domain login.windows.net. Also note we have two versions of the current endpoint as well - v1.0 and v2.0)</em></p>
-<pre><code>v1.0 - https://login.microsoftonline.com/{tenantId}/oauth2/authorize 
-v2.0 - https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
+<h4>Azure AD and OAuth.</h4>
+<p>The OAuth dance is a two-step process here.</p>
+<ul>
+<li>Get a authentication code from the underlying authentication provider (OpenId, Active Directory).</li>
+<li>Convert that code into a <a href="https://jwt.io">JSON Web Token</a>. For subsequent calls, this token needs to be used as the Authorization header.</li>
+</ul>
+<p><strong>Authorize API</strong></p>
+<p>The following are the current logon/authorization endpoints for both v1.0 and v2.0.</p>
+<pre><code>https://login.microsoftonline.com/{tenantId}/oauth2/authorize
+https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
 </code></pre>
-<p>For an example, a complete logon request with query parameters is as follows -</p>
+<p>and a sample logon request with query parameters is as follows -</p>
 <pre><code>GET https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=CLIENT_ID&amp;redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&amp;response_type=code&amp;scope=openid+https://office.outlook.com/Calendars.Read.Shared
 </code></pre>
-<p>The following are the Query Params -</p>
+<p>The query parameter definitions are given below -</p>
 <pre><code>-   client_id: the clientId generated before during registering the app. This lets Azure know which app/service principal is requesting the logon.
 -   redirect_uri: the location that Azure will redirect to once the user has granted consent to the app. This value must correspond to the value of Redirect URI used when *registering the app*.
--   response_type: the type of response the app is expecting. For the Authorization Grant Flow, this should always be the string *code*.
+-   response_type: the type of response the app is expecting. For the Authorization Grant Flow, this should always be the string `code`.
 -   scope: a space-delimited list of access scopes that the app requires. For access to all outlook shared readable calendars in our Active Directory We have specified the following 
-    -   scope=openid+https://office.outlook.com/Calendars.Read.Shared
+    - scope=openid+https://office.outlook.com/Calendars.Read.Shared
 </code></pre>
-<p>Key things to remember -</p>
+<p><strong>Key things to remember</strong></p>
 <ul>
-<li>For multi-tenant apps, replace <em>tenantId</em> with '<em>common</em>'.</li>
-<li>The v2.0 endpoint does not understand the query parameter resource and throws an error, the first versions does not. <em>(Note - not sure about this, need to check)</em>.</li>
+<li>Previous versions had the domain <code>login.windows.net</code>. Some blogs use this. This is now not exposed, even though, based on inspection of HTTP headers, can be seen to be active in the background.</li>
+<li>Also note we have two versions of the current endpoint as well - v1.0 and v2.0, and v2.0 has some differences from v1.0, viz., <em>v2.0 endpoint does not understand the query parameter 'resource' and throws an error</em>.</li>
+<li>For multi-tenant apps, replace <em>tenantId</em> with <em>'common'</em>.</li>
 <li>The keys given to us from Azure app registration are <strong><em>clientId, tenantId, clientSecret</em></strong>. However, in the authorize call, the API expects the query parameters as <em>underscore_separated</em>, i.e., as <strong><em>client_id, tenant_id, and client_secret</em></strong>. I got stuck here for a while too.</li>
 </ul>
+<p><strong>OAuth response</strong></p>
 <p>The authorization takes the required query string parameters, in our case, returns an authentication code. This is one of the possible variations on the request.</p>
 <p>Using OAuth, authentication is redirected to your organizations windows active directory SSO page, so that you can log in with your windows credentials.</p>
 <p>It then returns the code to the <em>response_uri</em> specified. The <em>code</em> looks like this</p>
-<pre><code class="language-batch">QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef1Ul7-oG7KBrwigC8DAjBC0nxZdQznVfSBuLT7kuLY0D2CdcRC3J4Mz7neJRhmGBNSE6NQuGEzC2CNeEcr8TBO7szAZW9_gU8yUc9mGwupdc-pq_WRNDBVQVjnElgWlWszPAjIsBCWphvMdGGsAXu_QeJNtcDA1pi9eaDdgElri94ZBj2emnE9eCOOZIXkKqgiL4xCSNwYUPiZFRSuZSXUS-X5ZB6_RGSbv8s0Avh09frjYHqmIuM_4cb5tDHGinl4wwlxqb_rHoHh1PqJYPCdTss8-fnT60JwvpnM0JeywsqEZAl0Og6cg0yEhuKZ0fNt-NCMHmEAC8DoKzGrd28HbXtz9WJS1yo_KbtPBosyvFixyuqTQJD_UhM2xtaDP1V7BO2SVv_vosBAEsOoEIMbgiYs9SjVT9Ywe_Q9OWnNhthY6l44ttk2Z8ozlClzMDRcfJuOdxDBMLTvbqDpNcGnx_NdJ8hOWGe1pyJOu-6PthlOLdpPHUYFkvzz7_riHp_3Kf_o7Fa-YIr1uMrYj9C-0pvYicDZL7CIxaTJkQ8vaJH0xEUHqkm3aV1ZoTTZRMlSoziVyXHadlcFo51afFW5OhzgCcxR_Y-q3eSaZq7u_Bc4SzHHDRlbk3liUassQOSXEQcdFf2RLPAXbz30RgbyAA
+<pre><code>QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef_{removed_lots_of_crazy_characters_here}_OSXEQcdFf2RLPAXbz30RgbyAA
 </code></pre>
-<p><em>(Token is not accurate and wont work in JWT.io. Have removed 1 character)</em>.</p>
-<h4>A note on Scopes.</h4>
+<h4>Scopes in brief.</h4>
 <p>Scopes correspond to permissions which the account making the Rest API call will need to successfully interact with Azure resources. In our case, it the application corresponding to the <em>clientId</em> which needs the permissions, as we are logging on to our tenant as this client, i.e. we will use this <em>clientId</em> during the logon/authorize call.</p>
-<p>Roughly speaking, we can think of an Azure Resource equals an domain viz. office.outlook.com, graph.microsoft.com, etc. Note that Azure resources can be a lot more granular though.</p>
+<p>Roughly speaking, we can think of an Azure Resource equals an domain viz. <code>office.outlook.com, graph.microsoft.com,</code> etc. Note that Azure resources can be a lot more granular though.</p>
 <p>The application we registered can request these set of permissions after the logon page is past,
 OR we can pre-allow these permissions to the application while registering. This option is the <em>OAuth On-Behalf-Of Consent Flow</em>.</p>
 <p>A fuller discussion on scopes can be found at <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes">https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes</a>.</p>
-<p>A key thing to remember is the difference between how scopes are stated for Outlook REST APIs (outlook.office.com) vs. MS Graph (graph.microsoft.com). For Outlook - resource level permissions (permissions for a prticular URL) need to be specified in the query parameter in the format {url/permission} -</p>
+<p>A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at <code>outlook.office.com</code> vs. MS Graph at <code>graph.microsoft.com</code>. For Outlook - <em>resource</em> permissions (permissions for a particular url) need to be specified in the query parameter in the format <code>https://url/permissions</code>. See example below.</p>
 <pre><code>openid+offline access+https://outlook.office.com/Calendars.Read.Shared+https://outlook.office.com/Contacts.Read
 </code></pre>
 <p>For Graph API, the URL can be omitted, so the query param for MS Graph will be</p>
 <pre><code>openid+offline access+Calendars.Read.Shared+Contacts.Read
 </code></pre>
-<p>Here even though we may have asked for permissions to the Graph API at https://graph.microsoft.com, we dont need to add it in the URL.</p>
+<p>We do not need <code>https://graph.microsoft.com</code> in the url's <em>scope</em> parameter.</p>
 <h3>Convert Auth Code To Bearer Token</h3>
-<p>The second part of authentication is in converting the received token into a JWT specs based azure access token.</p>
-<p>The base tokenization URL is:</p>
+<p>The second part of authentication is in converting the auth code into a JSON Web Token (see <code>https://jwt.io</code>). The base tokenization URL is</p>
 <pre><code>POST https://login.windows.net/common/oauth2/token
 </code></pre>
-<p>The body is form encoded:</p>
+<p>The body is of type www-form-encoded and has the following key-value pairs.</p>
 <pre><code>grant_type=authorization_code&amp;code={code from the authorize request}&amp;redirect_uri={reply url for your application}&amp;client_id={your application's client id in AAD}&amp;client_secret={your application's client secret}
 </code></pre>
-<p>The result is a JSON document of form -</p>
+<p>The HTTP response is a JSON document of form -</p>
 <pre><code class="language-JSON">{
     &quot;token_type&quot;: &quot;Bearer&quot;,
     &quot;scope&quot;: &quot;Calendars.Read Calendars.Read.All Calendars.Read.Shared offline_access&quot;
@@ -315,13 +243,11 @@ OR we can pre-allow these permissions to the application while registering. This
     &quot;id_token&quot;: &quot;{removed-use your own tokens}&quot;
 }
 </code></pre>
-<p>A access token is as per the JWT specification. Encoded, it looks like this -</p>
-<pre><code>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkhIQnlLVS0wRHFBcU1aaDZaRlBkMlZXYU90ZyIsImtpZCI6IkhIQnlLVS0wRHFBcU1aaDZaRlBkMlZXYU90ZyJ9.eyJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbS8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mZWE4NThmMC01MTJkLTQ2NDktODIyOC1kNzhmZDllZjNjN2UvIiwiaWF0IjoxNTA2MDcwODQ5LCJuYmYiOjE1MDYwNzA4NDksImV4cCI6MTUwNjA3NDc0OSwiYWNyIjoiMSIsImFpbyI6IlkyVmdZSGp1SmoxUFNKdjFxTGI4aDlZOXMzd3ZSYTVOU2VnTEVGTnFzSHF4OWQ2TEhnY0EiLCJhbXIiOlsicHdkIl0sImFwcGlkIjoiNzk0YjUzYTYtZTE3Ni00MTg1LTkyZmUtNjE3ZGQ4NTEyZGEwIiwiYXBwaWRhY3IiOiIxIiwiZV9leHAiOjI2MjgwMCwiZW5mcG9saWRzIjpbXSwiZmFtaWx5X25hbWUiOiJTZW5ndXB0YSIsImdpdmVuX25hbWUiOiJJbmRyYW5pbCIsImlwYWRkciI6IjIxOS45MS4xNjAuOTgiLCJuYW1lIjoiU2VuZ3VwdGEsIEluZHJhbmlsIiwib2lkIjoiNTFhYmU5MWUtMzZlZS00ZGUyLTg0OTUtYWRlMjlkYjAwYjQyIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTE3MDg1Mzc3NjgtNzg5MzM2MDU4LTcyNTM0NTU0My0xOTc0MjA4IiwicHVpZCI6IjEwMDNCRkZEODcwRjRCQjQiLCJzY3AiOiJDYWxlbmRhcnMuUmVhZCBDYWxlbmRhcnMuUmVhZC5BbGwgQ2FsZW5kYXJzLlJlYWQuU2hhcmVkIENvbnRhY3RzLlJlYWQgQ29udGFjdHMuUmVhZC5TaGFyZWQgb2ZmbGluZV9hY2Nlc3MiLCJzdWIiOiI1TTRfWWhyUEV0ZDU1OFRDTElXVkhHeGhnS3l4cXNjdEt2dGpZcG5FeDFvIiwidGlkIjoiZmVhODU4ZjAtNTEyZC00NjQ5LTgyMjgtZDc4ZmQ5ZWYzYzdlIiwidW5pcXVlX25hbWUiOiJJU2VuZ3VwdGFAc3BpZGVybG9naWMuY29tIiwidXBuIjoiSVNlbmd1cHRhQHNwaWRlcmxvZ2ljLmNvbSIsInZlciI6IjEuMCJ9.FBbuguQOmDFp5Jm5BLE-HgRrAs640eEBJltm_uesld6J950MBlol-IVCAYejuQaYIRj96EICbb2GMkD6O2cEcz-ypFCu_E0yn-VnixM2VsXs5vy45biowPO85xdWQXxqyYm7A94z7nc-jnMvy7LFa1e8I_C2AonmhYXD7ckMiw9OMhFYs9r2steeWuIihCgOUaLGjOTHU-2-uTn5Ce4xcuMtPrx8pynreWoBK2Ry0XZhGKMKMFnYKwoN3KA9285eCquOxctf3f6w67LvO_XJXz-y-vlA16ifAL1mlE6FgnG8jpAtaoR-HdXI-eWFCTN2M3GXpo53GaXko0FgwPFjPA
-</code></pre>
+<p>A access token is as per the JWT specification. Encoded, it looks like this - <code>eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1-{removed_lots_of_chars_here}-CTN2M3GXpo53GaXko0FgwPFjPA</code></p>
 <p>However, this contains a lot of information. When decoded (via <a href="http://jwt.io">JWT.io</a>), we can see the information it contains -</p>
 <pre><code class="language-JSON">{
   &quot;aud&quot;: &quot;https://outlook.office.com/&quot;,
-  &quot;iss&quot;: &quot;https://sts.windows.net/fea858f0-512d-4649-8228-d78fd9ef3c7e/&quot;,
+  &quot;iss&quot;: &quot;https://sts.windows.net/{tenantId}/&quot;,
   &quot;iat&quot;: 1506070849,
   &quot;nbf&quot;: 1506070849,
   &quot;exp&quot;: 1506074749,
@@ -330,7 +256,7 @@ OR we can pre-allow these permissions to the application while registering. This
   &quot;amr&quot;: [
     &quot;pwd&quot;
   ],
-  &quot;appid&quot;: &quot;794b53a6-e176-4185-92fe-617dd8512da0&quot;,
+  &quot;appid&quot;: &quot;registered_app_id&quot;,
   &quot;appidacr&quot;: &quot;1&quot;,
   &quot;e_exp&quot;: 262800,
   &quot;enfpolids&quot;: [],
@@ -338,12 +264,12 @@ OR we can pre-allow these permissions to the application while registering. This
   &quot;given_name&quot;: &quot;my_first_name&quot;,
   &quot;ipaddr&quot;: &quot;219.91.160.98&quot;,
   &quot;name&quot;: &quot;my_full_name&quot;,
-  &quot;oid&quot;: &quot;51abe91e-36ee-4de2-8495-ade29db00b42&quot;,
+  &quot;oid&quot;: &quot;oid&quot;,
   &quot;onprem_sid&quot;: &quot;S-1-5-21-1708537768-789336058-725345543-1974208&quot;,
   &quot;puid&quot;: &quot;1003BFFD870F4BB4&quot;,
   &quot;scp&quot;: &quot;Calendars.Read Calendars.Read.All Calendars.Read.Shared Contacts.Read Contacts.Read.Shared offline_access&quot;,
   &quot;sub&quot;: &quot;5M4_YhrPEtd558TCLIWVHGxhgKyxqsctKvtjYpnEx1o&quot;,
-  &quot;tid&quot;: &quot;fea858f0-512d-4649-8228-d78fd9ef3c7e&quot;,
+  &quot;tid&quot;: &quot;tenantId&quot;,
   &quot;unique_name&quot;: &quot;my logon mail id here&quot;,
   &quot;upn&quot;: &quot;my logon mail id here&quot;,
   &quot;ver&quot;: &quot;1.0&quot;
@@ -362,15 +288,19 @@ OR we can pre-allow these permissions to the application while registering. This
 <p>And voila. everything works. or does it? Since practise beats theory everytime, let's get down to browsers and POSTMAN.</p>
 <h2>Putting it all together.</h2>
 <p>Okay, lets get down to it.</p>
-<h4>Add Application into AD. Save the <em>tenantId, clientId and clientSecret</em>.</h4>
-<p>My Application is named 'Postman'. My key-values are as follows -</p>
+<h4>Add Application into AD.  Save the <em>tenantId, clientId and clientSecret</em>.</h4>
+<ul>
+<li>Added a new application called 'Postman' in the linked Azure Active Directory through Azure portal.</li>
+<li>Specify 'Read User and Shared Calendars' in the permissions panel, and explicitly granted those permissions. Through this, we are implementing <em>OAuth On-Behalf-Of-Consent flow</em>. Otherwise, we would have an intermediate screen after entering our windows credentials where we would have to accept the use of these permissions.</li>
+<li>Add two response_uri, one for Postman REST client to use the response auth code, and one to see the raw http auth request and response in a browser window myself. For Postman I added <code>https://www.getpostman.com/oauth2/callback</code>, as per Postman REST client requirements, and a second one, <code>http://localhost/myapp/</code> for my browser based calls.</li>
+</ul>
+<p>Once done, we keep the following key-values (<em>not exact, of course</em>) handy.</p>
 <pre><code class="language-JSON">tenantId : fea858f0-512d-4649-8228-d78fd9ef3c7f
 clientId : 794b53a6-e176-4185-92fe-617dd8512db5
 clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
-
 </code></pre>
 <h4>Invoke Azure Authorize API.</h4>
-<p>The full GET request for my use case is as follows. Paste this into a browser window which is not already signed into azure -</p>
+<p>The full <code>GET</code> request for my use case is as follows. Paste this into a browser window which is not already signed into azure.</p>
 <pre><code>https://login.microsoftonline.com/common/oauth2/authorize?client_id=794b53a6-e176-4185-92fe-617dd8512db5&amp;redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&amp;response_type=code&amp;scope=https://outlook.office.com/calendars.read.shared
 </code></pre>
 <p>Important points to remember</p>
@@ -385,21 +315,21 @@ clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
 <p>When the call returns, it shows me a browser page with HTTP 404. That is expected, as the actual URL does not exist. The URL that can be seen in the browser address bar, is like this -</p>
 <pre><code>http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef1Ul7-oG7KBrwigC8DAjBC0nxZdQznVfSBuLT7kuLY0D2CdcRC3J4Mz7neJRhmGBNSE6NQuGEzC2CNeEcr8TBO7szAZW9_gU8yUc9mGwupdc-pq_WRNDBVQVjnElgWlWszPAjIsBCWphvMdGGsAXu_QeJNtcDA1pi9eaDdgElri94ZBj2emnE9eCOOZIXkKqgiL4xCSNwYUPiZFRSuZSXUS-X5ZB6_RGSbv8s0Avh09frjYHqmIuM_4cb5tDHGinl4wwlxqb_rHoHh1PqJYPCdTss8-fnT60JwvpnM0JeywsqEZAl0Og6cg0yEhuKZ0fNt-NCMHmEAC8DoKzGrd28HbXtz9WJS1yo_KbtPBosyvFixyuqTQJD_UhM2xtaDP1V7BO2SVv_vosBAEsOoEIMbgiYs9SjVT9Ywe_Q9OWnNhthY6l44ttk2Z8ozlClzMDRcfJuOdxDBMLTvbqDpNcGnx_NdJ8hOWGe1pyJOu-6PthlOLdpPHUYFkvzz7_riHp_3Kf_o7Fa-YIr1uMrYj9C-0pvYicDZL7CIxaTJkQ8vaJH0xEUHqkm3aV1ZoTTZRMlSoziVyXHadlcFo51afFW5OhzgCcxR_Y-q3eSaZq7u_Bc4SzHHDRlbk3liUassQOSXEQcdFf2RLPAXbz30RgbyAA&amp;session_state=f4db04de-60f7-426b-a599-48be3e45d8d4
 </code></pre>
-<p>Note that this is the callback URL specified during App Registration with the auth code appended in the querystring. We will need this code subsequently.</p>
+<p>Note that this is the callback url specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.</p>
 <h4>Invoke Azure token API</h4>
-<p>In POSTMAN, Create a new POST request to the following endpoint</p>
+<p>In POSTMAN, Create a new <code>POST</code> request to the following endpoint</p>
 <pre><code>https://login.microsoftonline.com/common/oauth2/token
 </code></pre>
-<p>Create a request body as type 'x-www-form-urlencoded'. In the POSTMAN bulk-edit mode, add the following JSON parameters to it.</p>
+<p>Create a request body as type <code>x-www-form-urlencoded</code>. In the POSTMAN bulk-edit mode, add the following JSON parameters to it.</p>
 <pre><code>client_id: 794b53a6-e176-4185-92fe-617dd8512db5
 scope: https://outlook.office.com/calendars.read.shared/
 resource: https://outlook.office.com/
-code: QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef1Ul7-oG7KBrwigC8DAjBC0nxZdQznVfSBuLT7kuLY0D2CdcRC3J4Mz7neJRhmGBNSE6NQuGEzC2CNeEcr8TBO7szAZW9_gU8yUc9mGwupdc-pq_WRNDBVQVjnElgWlWszPAjIsBCWphvMdGGsAXu_QeJNtcDA1pi9eaDdgElri94ZBj2emnE9eCOOZIXkKqgiL4xCSNwYUPiZFRSuZSXUS-X5ZB6_RGSbv8s0Avh09frjYHqmIuM_4cb5tDHGinl4wwlxqb_rHoHh1PqJYPCdTss8-fnT60JwvpnM0JeywsqEZAl0Og6cg0yEhuKZ0fNt-NCMHmEAC8DoKzGrd28HbXtz9WJS1yo_KbtPBosyvFixyuqTQJD_UhM2xtaDP1V7BO2SVv_vosBAEsOoEIMbgiYs9SjVT9Ywe_Q9OWnNhthY6l44ttk2Z8ozlClzMDRcfJuOdxDBMLTvbqDpNcGnx_NdJ8hOWGe1pyJOu-6PthlOLdpPHUYFkvzz7_riHp_3Kf_o7Fa-YIr1uMrYj9C-0pvYicDZL7CIxaTJkQ8vaJH0xEUHqkm3aV1ZoTTZRMlSoziVyXHadlcFo51afFW5OhzgCcxR_Y-q3eSaZq7u_Bc4SzHHDRlbk3liUassQOSXEQcdFf2RLPAXbz30RgbyAA
+code: QABAAIAAAABlDrq-{removed_lots_of_chars_here}-UassQOSXEQcdFf2RLPAXbz30RgbyAA
 redirect_uri: http://localhost/myapp/
 grant_type: authorization_code
 client_secret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
 </code></pre>
-<p>Fire the request. We should get the following response (<em>tokens are edited. Not valid</em>) -</p>
+<p>Fire the request. We should get the following response.</p>
 <pre><code>{
     &quot;token_type&quot;: &quot;Bearer&quot;,
     &quot;scope&quot;: &quot;Calendars.Read Calendars.Read.All Calendars.Read.Shared Contacts.Read Contacts.Read.Shared offline_access&quot;,
@@ -407,24 +337,21 @@ client_secret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
     &quot;ext_expires_in&quot;: &quot;262800&quot;,
     &quot;expires_on&quot;: &quot;1506082448&quot;,
     &quot;not_before&quot;: &quot;1506078548&quot;,
-    &quot;resource&quot;: &quot;https://outlook.office.com/&quot;,
-    
-    &quot;access_token&quot;: &quot;myJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkhIQnlLVS0wRHFBcU1aaDZaRlBkMlZXYU90ZyIsImtpZCI6IkhIQnlLVS0wRHFBcU1aaDZaRlBkMlZXYU90ZyJ9.myJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbS8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mZWE4NThmMC01MTJkLTQ2NDktODIyOC1kNzhmZDllZjNjN2UvIiwiaWF0IjoxNTA2MDc4NTQ4LCJuYmYiOjE1MDYwNzg1NDgsImV4cCI6MTUwNjA4MjQ0OCwiYWNyIjoiMSIsImFpbyI6IlkyVmdZSkMxZHpxOGhmM1NJcjRvbGVqSFU2NHFYWTM1dDdtMFlQVzVxSGhXYzNrSjNxOEEiLCJhbXIiOlsicHdkIl0sImFwcGlkIjoiNzk0YjUzYTYtZTE3Ni00MTg1LTkyZmUtNjE3ZGQ4NTEyZGEwIiwiYXBwaWRhY3IiOiIxIiwiZV9leHAiOjI2MjgwMCwiZW5mcG9saWRzIjpbXSwiZmFtaWx5X25hbWUiOiJTZW5ndXB0YSIsImdpdmVuX25hbWUiOiJJbmRyYW5pbCIsImlwYWRkciI6IjIxOS45MS4xNjAuOTgiLCJuYW1lIjoiU2VuZ3VwdGEsIEluZHJhbmlsIiwib2lkIjoiNTFhYmU5MWUtMzZlZS00ZGUyLTg0OTUtYWRlMjlkYjAwYjQyIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTE3MDg1Mzc3NjgtNzg5MzM2MDU4LTcyNTM0NTU0My0xOTc0MjA4IiwicHVpZCI6IjEwMDNCRkZEODcwRjRCQjQiLCJzY3AiOiJDYWxlbmRhcnMuUmVhZCBDYWxlbmRhcnMuUmVhZC5BbGwgQ2FsZW5kYXJzLlJlYWQuU2hhcmVkIENvbnRhY3RzLlJlYWQgQ29udGFjdHMuUmVhZC5TaGFyZWQgb2ZmbGluZV9hY2Nlc3MiLCJzdWIiOiI1TTRfWWhyUEV0ZDU1OFRDTElXVkhHeGhnS3l4cXNjdEt2dGpZcG5FeDFvIiwidGlkIjoiZmVhODU4ZjAtNTEyZC00NjQ5LTgyMjgtZDc4ZmQ5ZWYzYzdlIiwidW5pcXVlX25hbWUiOiJJU2VuZ3VwdGFAc3BpZGVybG9naWMuY29tIiwidXBuIjoiSVNlbmd1cHRhQHNwaWRlcmxvZ2ljLmNvbSIsInZlciI6IjEuMCJ9.lnN62jNPXBGodcrRYSWKyPkFxG4dXu200S2WAD4ud_zb_fQJS-duItEFx_CbTLaSnUbh2zb5bQfYwJJ2Ur-iWH7XPrmraf0UqugpTsT6pwBxhz1DXwiucasT6VK-xifEFBa95LZbW3gURuOuJ1ViQXPszuIaQN9OAwSSjV09FQfSOdTF9JoPQfv-t7_DaTgNCTREWIDWgT0VMFalsuz-rrid845RioXCa-QwTzw2uFo9Gv3mcEcuHAU_b3-04VtcXIaXi6p3zaZJdToVKQ433eo55cWX-8xUB1XWmttAG0Rr8M97rcsMfqII701ZBGnBLE_oX1PNukX3nBlRfzh6Sg&quot;,
-    
-    &quot;refresh_token&quot;: &quot;QABAAAAAAABlDrqfEFlSaui6xnRjX5EEyM3jOuyerkOIS68ew5lWXOgIkUIbI0-kEfeP1G9tNWsuGmvyZmNHaTSWUsg315AdmsPGBDhS9FtRVTuUSY1lHSVTzWQWaUF-XlEWAcCgKC7XQlKtbmnjuwzZtKMj-Nc5s4qo5S4waeu7IOUZzlvD_R-E2YaC2aA5yEf_ule2mgcvfOiUOZVujNRxrxUzoP497W4H4-VpVfxlA7o5athBpdlqQYCvq0K8E_GhoKo1UYSDAdBiLUrRZ6qTV2SqOpdxQTY6WEiSbKv_Q3E1a8C0eLQlndV54K0Epuk2PhGJKEXeNRmoLsyHSVGqOvKG9jdHBx3Aco1iKBOPbPzpaP9i1xE6v7xgOrUtAOdi98q22RzaT7Zxl4rtVMDhqn_bhtNSZpThTJ1oKCJ6WCKq3zQ9l2iBsN8ld9kTVcVq02wLSubVYi3ubxiPVDyZ5C524jodTkkrAVdhdAPJ6YNN-0Y5WQk-FfY5I-iBy_v-M6YAYj86ZuQs1OB2nTNVlo7snlUTWWFtXVJafW6eTFhV_Q8rFUz3NkkpVYa92Vyw-bsMjIB_GaVXunbYNWT0Ks72JJNelNwokVqtfb926Cj0JhP2TJHQ2s7ziP4TLI2LoJoAC2PTHGVSQ6QVFicbR1DDPpiBnp-0JwmGcWX1dYFHNLmceG2KroXprLLjx7DZGNCjPYD12mgHE4QROMt1RDpiP4haGf86_f_r6rfQvnUGvD0gpL2nKpn5znjAFhMZQ6JXi0BKI4zeGvmmURD-8uJXFgTS3UdK4OBLicg1Rv1sAA-kMlRu1FoGzajO9Od6mdk8_NUQDMgJ3oq9KdtmBwGokeqOGHicL2tzuoBFATkE6ZJHyAA&quot;,
-    
-    &quot;id_token&quot;: &quot;yJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiI3OTRiNTNhNi1lMTc2LTQxODUtOTJmZS02MTdkZDg1MTJkYTAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mZWE4NThmMC01MTJkLTQ2NDktODIyOC1kNzhmZDllZjNjN2UvIiwiaWF0IjoxNTA2MDc4NTQ4LCJuYmYiOjE1MDYwNzg1NDgsImV4cCI6MTUwNjA4MjQ0OCwiYW1yIjpbInB3ZCJdLCJmYW1pbHlfbmFtZSI6IlNlbmd1cHRhIiwiZ2l2ZW5fbmFtZSI6IkluZHJhbmlsIiwiaXBhZGRyIjoiMjE5LjkxLjE2MC45OCIsIm5hbWUiOiJTZW5ndXB0YSwgSW5kcmFuaWwiLCJvaWQiOiI1MWFiZTkxZS0zNmVlLTRkZTItODQ5NS1hZGUyOWRiMDBiNDIiLCJvbnByZW1fc2lkIjoiUy0xLTUtMjEtMTcwODUzNzc2OC03ODkzMzYwNTgtNzI1MzQ1NTQzLTE5NzQyMDgiLCJzdWIiOiJ6eW5Ob084bkxfMmY3bWhLaWo4Y3R4RlBXczlTMW0yZ3d0VDZhYjJuX1BzIiwidGlkIjoiZmVhODU4ZjAtNTEyZC00NjQ5LTgyMjgtZDc4ZmQ5ZWYzYzdlIiwidW5pcXVlX25hbWUiOiJJU2VuZ3VwdGFAc3BpZGVybG9naWMuY29tIiwidXBuIjoiSVNlbmd1cHRhQHNwaWRlcmxvZ2ljLmNvbSIsInZlciI6IjEuMCJ9.&quot;
+    &quot;resource&quot;: &quot;https://outlook.office.com/&quot;,        
+    &quot;access_token&quot;: &quot;myJ0eXAiOiJKV1Qi-{removed_lots_of_crazy_chars_here}-ukX3nBlRfzh6Sg&quot;,        
+    &quot;refresh_token&quot;: &quot;QABAAAAAAABlDrq-{removed_lots_of_crazy_chars_here}-uoBFATkE6ZJHyAA&quot;,        
+    &quot;id_token&quot;: &quot;yJ0eXAiOiJKV1QiL-{removed_lots_of_crazy_chars_here}-SIsInZlciI6IjEuMCJ9.&quot;
 }
 </code></pre>
 <h4>Invoke Outlook REST API.</h4>
-<p>Again in POSTMAN, craft another HTTP POST request for the following URI.</p>
+<p>Again in POSTMAN, create another <code>POST</code> request for the following URI.</p>
 <pre><code>https://outlook.office.com/api/v2.0/me/findmeetingtimes
 </code></pre>
 <p>Add the HTTP headers</p>
 <pre><code>Content-Type: application/json,
-Authorization: bearer myJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkhIQnlLVS0wRHFBcU1aaDZaRlBkMlZXYU90ZyIsImtpZCI6IkhIQnlLVS0wRHFBcU1aaDZaRlBkMlZXYU90ZyJ9.myJhdWQiOiJodHRwczovL291dGxvb2sub2ZmaWNlLmNvbS8iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC9mZWE4NThmMC01MTJkLTQ2NDktODIyOC1kNzhmZDllZjNjN2UvIiwiaWF0IjoxNTA2MDc4NTQ4LCJuYmYiOjE1MDYwNzg1NDgsImV4cCI6MTUwNjA4MjQ0OCwiYWNyIjoiMSIsImFpbyI6IlkyVmdZSkMxZHpxOGhmM1NJcjRvbGVqSFU2NHFYWTM1dDdtMFlQVzVxSGhXYzNrSjNxOEEiLCJhbXIiOlsicHdkIl0sImFwcGlkIjoiNzk0YjUzYTYtZTE3Ni00MTg1LTkyZmUtNjE3ZGQ4NTEyZGEwIiwiYXBwaWRhY3IiOiIxIiwiZV9leHAiOjI2MjgwMCwiZW5mcG9saWRzIjpbXSwiZmFtaWx5X25hbWUiOiJTZW5ndXB0YSIsImdpdmVuX25hbWUiOiJJbmRyYW5pbCIsImlwYWRkciI6IjIxOS45MS4xNjAuOTgiLCJuYW1lIjoiU2VuZ3VwdGEsIEluZHJhbmlsIiwib2lkIjoiNTFhYmU5MWUtMzZlZS00ZGUyLTg0OTUtYWRlMjlkYjAwYjQyIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTE3MDg1Mzc3NjgtNzg5MzM2MDU4LTcyNTM0NTU0My0xOTc0MjA4IiwicHVpZCI6IjEwMDNCRkZEODcwRjRCQjQiLCJzY3AiOiJDYWxlbmRhcnMuUmVhZCBDYWxlbmRhcnMuUmVhZC5BbGwgQ2FsZW5kYXJzLlJlYWQuU2hhcmVkIENvbnRhY3RzLlJlYWQgQ29udGFjdHMuUmVhZC5TaGFyZWQgb2ZmbGluZV9hY2Nlc3MiLCJzdWIiOiI1TTRfWWhyUEV0ZDU1OFRDTElXVkhHeGhnS3l4cXNjdEt2dGpZcG5FeDFvIiwidGlkIjoiZmVhODU4ZjAtNTEyZC00NjQ5LTgyMjgtZDc4ZmQ5ZWYzYzdlIiwidW5pcXVlX25hbWUiOiJJU2VuZ3VwdGFAc3BpZGVybG9naWMuY29tIiwidXBuIjoiSVNlbmd1cHRhQHNwaWRlcmxvZ2ljLmNvbSIsInZlciI6IjEuMCJ9.lnN62jNPXBGodcrRYSWKyPkFxG4dXu200S2WAD4ud_zb_fQJS-duItEFx_CbTLaSnUbh2zb5bQfYwJJ2Ur-iWH7XPrmraf0UqugpTsT6pwBxhz1DXwiucasT6VK-xifEFBa95LZbW3gURuOuJ1ViQXPszuIaQN9OAwSSjV09FQfSOdTF9JoPQfv-t7_DaTgNCTREWIDWgT0VMFalsuz-rrid845RioXCa-QwTzw2uFo9Gv3mcEcuHAU_b3-04VtcXIaXi6p3zaZJdToVKQ433eo55cWX-8xUB1XWmttAG0Rr8M97rcsMfqII701ZBGnBLE_oX1PNukX3nBlRfzh6Sg
+Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6Sg
 </code></pre>
-<p>Note the space between bearer and the rest of the <em>access_token</em> returned by the previous token call.</p>
+<p><strong>Note</strong> the space between bearer and the rest of the <em>access_token</em> returned by the previous token call.</p>
 <p>Add the following as raw request JSON -</p>
 <pre><code class="language-json">{ 
 &quot;Attendees&quot;: [ 
@@ -461,8 +388,8 @@ Authorization: bearer myJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkhIQnlLVS0wRH
 &quot;MeetingDuration&quot;: &quot;PT1H&quot; 
 } 
 </code></pre>
-<p>Fire the request, we should see outlook API return a valid response against your outlook API. Worked for me. Hope it works for you too.</p>
-<p>Well, that's the whole of it. Hope this helps, and all the best.</p>
+<p>Fire the request.  The outlook API should now return a valid response from office 365.</p>
+<p>And that's it. We can go home now.</p>
 <hr />
   </div>
   
