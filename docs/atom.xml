@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-09-27T13:15:05.0666857+05:30</updated>
+ <updated>2017-09-27T13:22:58.2124797+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -118,13 +118,13 @@ https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
 &lt;p&gt;The application we registered can request these set of permissions after the logon page is past,
 OR we can pre-allow these permissions to the application while registering. This option is the &lt;em&gt;OAuth On-Behalf-Of Consent Flow&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;A fuller discussion on scopes can be found at &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at &lt;code&gt;outlook.office.com&lt;/code&gt; vs. MS Graph at &lt;code&gt;graph.microsoft.com&lt;/code&gt;. For Outlook - &lt;em&gt;resource&lt;/em&gt; permissions (permissions for a particular url) need to be specified in the query parameter in the format &lt;code&gt;https://url/permissions&lt;/code&gt;. See example below.&lt;/p&gt;
+&lt;p&gt;A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at &lt;code&gt;outlook.office.com&lt;/code&gt; vs. MS Graph at &lt;code&gt;graph.microsoft.com&lt;/code&gt;. For Outlook - &lt;em&gt;resource&lt;/em&gt; permissions (permissions for a particular URL) need to be specified in the query parameter in the format &lt;code&gt;https://url/permissions&lt;/code&gt;. See example below.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;openid+offline access+https://outlook.office.com/Calendars.Read.Shared+https://outlook.office.com/Contacts.Read
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For Graph API, the URL can be omitted, so the query param for MS Graph will be&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;openid+offline access+Calendars.Read.Shared+Contacts.Read
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We do not need &lt;code&gt;https://graph.microsoft.com&lt;/code&gt; in the url&apos;s &lt;em&gt;scope&lt;/em&gt; parameter.&lt;/p&gt;
+&lt;p&gt;We do not need &lt;code&gt;https://graph.microsoft.com&lt;/code&gt; in the URL&apos;s &lt;em&gt;scope&lt;/em&gt; parameter.&lt;/p&gt;
 &lt;h3&gt;Theory - Convert Auth Code To Bearer Token&lt;/h3&gt;
 &lt;p&gt;The second part of authentication is in converting the auth code into a JSON Web Token (see &lt;code&gt;https://jwt.io&lt;/code&gt;). The base tokenization URL is&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;POST https://login.windows.net/common/oauth2/token
@@ -213,12 +213,12 @@ clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
 &lt;li&gt;Note the callback used here &apos;http://localhost/myapp/&apos;. This was one of the endpoints registered with AD as the call back URI for the &apos;Postman&apos; application/service principal.&lt;/li&gt;
 &lt;li&gt;Ensure that all URLs mentioned are escaped properly. in the above the &lt;em&gt;request_uri&lt;/em&gt; is escaped right, but the scope one isn&apos;t. It still works, but try not to do this.&lt;/li&gt;
 &lt;li&gt;Ensure that all URLs end with a trailing slash. This one causes a nasty error with an incomprehensible error message.&lt;/li&gt;
-&lt;li&gt;Add the scopes correctly and ecnsure that the corresponding permissions are granted in Azure portal to the Application.&lt;/li&gt;
+&lt;li&gt;Add the scopes correctly and ensure that the corresponding permissions are granted in Azure portal to the Application.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;When the call returns, it shows me a browser page with HTTP 404. That is expected, as the actual URL does not exist. The URL that can be seen in the browser address bar, is like this -&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6-{removed_lots_of_chars_here}-e3e45d8d4
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that this is the callback url specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.&lt;/p&gt;
+&lt;p&gt;Note that this is the callback URL specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.&lt;/p&gt;
 &lt;h4&gt;Practise - Invoke Azure token API&lt;/h4&gt;
 &lt;p&gt;In POSTMAN, Create a new &lt;code&gt;POST&lt;/code&gt; request to the following endpoint&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/common/oauth2/token
@@ -292,7 +292,8 @@ Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6
 } 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Fire the request.  The outlook API should now return a valid response from Office 365.&lt;/p&gt;
-&lt;p&gt;And that&apos;s it. We can go home now.&lt;/p&gt;
+&lt;p&gt;If you want to try out the equivalent graph API, you need to do a fresh authentication. This time use the scopes as required for MS Graph &lt;em&gt;(no url, just the scope value)&lt;/em&gt;. Then use this Auth Code to get a fresh bearer token. Using this token for a call to the MS Graph API should work. It did work for me without any hassles.&lt;/p&gt;
+&lt;p&gt;And that&apos;s all of it. We can go home now.&lt;/p&gt;
 &lt;hr /&gt;</content>
  </entry>
  

@@ -140,7 +140,7 @@ OR we can pre-allow these permissions to the application while registering. This
 
 A fuller discussion on scopes can be found at [https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes).
 
-A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at `outlook.office.com` vs. MS Graph at `graph.microsoft.com`. For Outlook - *resource* permissions (permissions for a particular url) need to be specified in the query parameter in the format `https://url/permissions`. See example below. 
+A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at `outlook.office.com` vs. MS Graph at `graph.microsoft.com`. For Outlook - *resource* permissions (permissions for a particular URL) need to be specified in the query parameter in the format `https://url/permissions`. See example below. 
 
     openid+offline access+https://outlook.office.com/Calendars.Read.Shared+https://outlook.office.com/Contacts.Read
 
@@ -148,7 +148,7 @@ For Graph API, the URL can be omitted, so the query param for MS Graph will be
 
     openid+offline access+Calendars.Read.Shared+Contacts.Read
 
-We do not need `https://graph.microsoft.com` in the url's *scope* parameter.
+We do not need `https://graph.microsoft.com` in the URL's *scope* parameter.
 
 ### Theory - Convert Auth Code To Bearer Token
 
@@ -250,13 +250,13 @@ Important points to remember
 -   Note the callback used here 'http://localhost/myapp/'. This was one of the endpoints registered with AD as the call back URI for the 'Postman' application/service principal.
 -   Ensure that all URLs mentioned are escaped properly. in the above the *request_uri* is escaped right, but the scope one isn't. It still works, but try not to do this.
 -   Ensure that all URLs end with a trailing slash. This one causes a nasty error with an incomprehensible error message.
--   Add the scopes correctly and ecnsure that the corresponding permissions are granted in Azure portal to the Application.
+-   Add the scopes correctly and ensure that the corresponding permissions are granted in Azure portal to the Application.
 
 When the call returns, it shows me a browser page with HTTP 404. That is expected, as the actual URL does not exist. The URL that can be seen in the browser address bar, is like this - 
 
     http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6-{removed_lots_of_chars_here}-e3e45d8d4
 
-Note that this is the callback url specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.
+Note that this is the callback URL specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.
 
 #### Practise - Invoke Azure token API
 
@@ -341,7 +341,9 @@ Add the following as raw request JSON -
 
 Fire the request.  The outlook API should now return a valid response from Office 365. 
 
-And that's it. We can go home now. 
+If you want to try out the equivalent graph API, you need to do a fresh authentication. This time use the scopes as required for MS Graph *(no url, just the scope value)*. Then use this Auth Code to get a fresh bearer token. Using this token for a call to the MS Graph API should work. It did work for me without any hassles.
+
+And that's all of it. We can go home now. 
 
 -------------------------------------------------------------------------------------------------------------------
 

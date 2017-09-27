@@ -218,13 +218,13 @@ https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
 <p>The application we registered can request these set of permissions after the logon page is past,
 OR we can pre-allow these permissions to the application while registering. This option is the <em>OAuth On-Behalf-Of Consent Flow</em>.</p>
 <p>A fuller discussion on scopes can be found at <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes">https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes</a>.</p>
-<p>A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at <code>outlook.office.com</code> vs. MS Graph at <code>graph.microsoft.com</code>. For Outlook - <em>resource</em> permissions (permissions for a particular url) need to be specified in the query parameter in the format <code>https://url/permissions</code>. See example below.</p>
+<p>A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at <code>outlook.office.com</code> vs. MS Graph at <code>graph.microsoft.com</code>. For Outlook - <em>resource</em> permissions (permissions for a particular URL) need to be specified in the query parameter in the format <code>https://url/permissions</code>. See example below.</p>
 <pre><code>openid+offline access+https://outlook.office.com/Calendars.Read.Shared+https://outlook.office.com/Contacts.Read
 </code></pre>
 <p>For Graph API, the URL can be omitted, so the query param for MS Graph will be</p>
 <pre><code>openid+offline access+Calendars.Read.Shared+Contacts.Read
 </code></pre>
-<p>We do not need <code>https://graph.microsoft.com</code> in the url's <em>scope</em> parameter.</p>
+<p>We do not need <code>https://graph.microsoft.com</code> in the URL's <em>scope</em> parameter.</p>
 <h3>Theory - Convert Auth Code To Bearer Token</h3>
 <p>The second part of authentication is in converting the auth code into a JSON Web Token (see <code>https://jwt.io</code>). The base tokenization URL is</p>
 <pre><code>POST https://login.windows.net/common/oauth2/token
@@ -313,12 +313,12 @@ clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
 <li>Note the callback used here 'http://localhost/myapp/'. This was one of the endpoints registered with AD as the call back URI for the 'Postman' application/service principal.</li>
 <li>Ensure that all URLs mentioned are escaped properly. in the above the <em>request_uri</em> is escaped right, but the scope one isn't. It still works, but try not to do this.</li>
 <li>Ensure that all URLs end with a trailing slash. This one causes a nasty error with an incomprehensible error message.</li>
-<li>Add the scopes correctly and ecnsure that the corresponding permissions are granted in Azure portal to the Application.</li>
+<li>Add the scopes correctly and ensure that the corresponding permissions are granted in Azure portal to the Application.</li>
 </ul>
 <p>When the call returns, it shows me a browser page with HTTP 404. That is expected, as the actual URL does not exist. The URL that can be seen in the browser address bar, is like this -</p>
 <pre><code>http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6-{removed_lots_of_chars_here}-e3e45d8d4
 </code></pre>
-<p>Note that this is the callback url specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.</p>
+<p>Note that this is the callback URL specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.</p>
 <h4>Practise - Invoke Azure token API</h4>
 <p>In POSTMAN, Create a new <code>POST</code> request to the following endpoint</p>
 <pre><code>https://login.microsoftonline.com/common/oauth2/token
@@ -392,7 +392,8 @@ Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6
 } 
 </code></pre>
 <p>Fire the request.  The outlook API should now return a valid response from Office 365.</p>
-<p>And that's it. We can go home now.</p>
+<p>If you want to try out the equivalent graph API, you need to do a fresh authentication. This time use the scopes as required for MS Graph <em>(no url, just the scope value)</em>. Then use this Auth Code to get a fresh bearer token. Using this token for a call to the MS Graph API should work. It did work for me without any hassles.</p>
+<p>And that's all of it. We can go home now.</p>
 <hr />
   </div>
   
