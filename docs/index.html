@@ -117,21 +117,21 @@
 
     <span class="post-date">24 Sep 2017</span>
 
-    <p>I spent last week answering a question. Is there a way to find available meeting times on a given user's office 365 calendar next week? The short answer is <strong>yes</strong>.</p>
+    <p>I spent last week answering a question. Is there a way to find available meeting times on a given user's Office 365 calendar next week? The short answer is <strong>yes</strong>.</p>
 <h2>Longer answer.</h2>
-<p>At work we have MSDN Azure subscriptions. These are linked to our organization's Azure Active Directory (AAD) and we can sign on to Azure with our windows credentials. We also office 365 accounts linked to our exchange AD and Azure AD. I can seamlessly navigate to office 365 on the browser after logging into Azure portal through my windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.</p>
-<p>The goal here is to understand how Azure OAuth authentication works when calling the outlook APIs through Azure AD. Preferably, I want to achieve this through raw HTTP calls, using browser windows or Postman REST client, so that HTTP based protocols and interactions are clear and open to visual inspection. In a nutshell, the steps are as follows.</p>
+<p>At work we have MSDN Azure subscriptions. These are linked to our organization's Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.</p>
+<p>The goal here is to understand how Azure OAuth authentication works when calling the outlook APIs through Azure AD. Preferably, I want to achieve this through raw HTTP calls, using browser Windows or Postman REST client, so that HTTP based protocols and interactions are clear and open to visual inspection. In a nutshell, the steps are as follows.</p>
 <ul>
 <li>Create an Azure AD application / Service principal.</li>
-<li>Redirect user to exchange Active Directory for Authentication.</li>
-<li>Returns Auth Code after Azure, through OAUTH, has authenticated against organization AD.</li>
+<li>Redirect user to Exchange Active Directory for Authentication.</li>
+<li>Returns Auth Code after Azure, through OAUTH, has authenticated against organization's Exchange AD.</li>
 <li>Convert OAuth Code into Azure bearer token.</li>
-<li>Call Microsoft office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.</li>
+<li>Call Microsoft Office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.</li>
 </ul>
 <p>Now, many online resources already exist on this, yet getting all the pieces playing together was rough. So, we'll walk the route I did and hope that the eco-system clears itself up.</p>
-<p>In the process, I will briefly touch on OAuth in Azure, Azure AD, Scopes and Resources in MS Online Api, Azure Service Principals aka App registrations, App permissions aka OAuth on-behalf-of consent flow, Azure bearer tokens in Postman, JWT.io and the Microsoft Graph explorer. Oh! and the Graph and Oulook sandboxes.</p>
+<p>In the process, I will briefly touch on OAuth in Azure, Azure AD, Scopes and Resources in MS Online API, Azure Service Principals aka App registrations, App permissions aka OAuth <em>on-behalf-of consent</em> flow, Azure bearer tokens in Postman, JSON Web Tokens (JWT) and the Microsoft Graph explorer. Oh! and the Graph and Outlook sandboxes.</p>
 <p><em>Note: In Azure, things change. The information here is of 24th Sept 2017.</em></p>
-<p><em>For the rest you need an Azure subscription, an office 365 account, and an Azure AD membership. You can have non work accounts for all three, but its a lot easier if your company admin has done the configuring for you. Blogs are the way to go here if you want to setup trial accounts for each.</em></p>
+<p><em>For the rest you need an Azure subscription, an Office 365 account, and an Azure AD membership. You can have non work accounts for all three, but its a lot easier if your company admin has done the configuring for you. Blogs are the way to go here if you want to setup trial accounts for each.</em></p>
 <h2>findMeetingTimes API</h2>
 <p>Do such APIs exist? Well, yes, they do. Problem is, more than <strong><em>one</em></strong> exist.</p>
 <h4>Outlook/Office 365 APIs</h4>
@@ -205,7 +205,7 @@ https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
 </ul>
 <p><strong>OAuth response</strong></p>
 <p>The authorization takes the required query string parameters, in our case, returns an authentication code. This is one of the possible variations on the request.</p>
-<p>Using OAuth, authentication is redirected to your organizations windows active directory SSO page, so that you can log in with your windows credentials.</p>
+<p>Using OAuth, authentication is redirected to your organizations Windows Active Directory SSO page, so that you can log in with your Windows credentials.</p>
 <p>It then returns the code to the <em>response_uri</em> specified. The <em>code</em> looks like this</p>
 <pre><code>QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef_{removed_lots_of_crazy_characters_here}_OSXEQcdFf2RLPAXbz30RgbyAA
 </code></pre>
@@ -291,7 +291,7 @@ OR we can pre-allow these permissions to the application while registering. This
 <h4>Add Application into AD.  Save the <em>tenantId, clientId and clientSecret</em>.</h4>
 <ul>
 <li>Added a new application called 'Postman' in the linked Azure Active Directory through Azure portal.</li>
-<li>Specify 'Read User and Shared Calendars' in the permissions panel, and explicitly granted those permissions. Through this, we are implementing <em>OAuth On-Behalf-Of-Consent flow</em>. Otherwise, we would have an intermediate screen after entering our windows credentials where we would have to accept the use of these permissions.</li>
+<li>Specify 'Read User and Shared Calendars' in the permissions panel, and explicitly granted those permissions. Through this, we are implementing <em>OAuth On-Behalf-Of-Consent flow</em>. Otherwise, we would have an intermediate screen after entering our Windows credentials where we would have to accept the use of these permissions.</li>
 <li>Add two response_uri, one for Postman REST client to use the response auth code, and one to see the raw http auth request and response in a browser window myself. For Postman I added <code>https://www.getpostman.com/oauth2/callback</code>, as per Postman REST client requirements, and a second one, <code>http://localhost/myapp/</code> for my browser based calls.</li>
 </ul>
 <p>Once done, we keep the following key-values (<em>not exact, of course</em>) handy.</p>
@@ -388,7 +388,7 @@ Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6
 &quot;MeetingDuration&quot;: &quot;PT1H&quot; 
 } 
 </code></pre>
-<p>Fire the request.  The outlook API should now return a valid response from office 365.</p>
+<p>Fire the request.  The outlook API should now return a valid response from Office 365.</p>
 <p>And that's it. We can go home now.</p>
 <hr />
   </div>
