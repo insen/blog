@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-09-27T13:08:27.6469563+05:30</updated>
+ <updated>2017-09-27T13:15:05.0666857+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -190,7 +190,7 @@ OR we can pre-allow these permissions to the application while registering. This
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt; : Note the string &lt;em&gt;bearer&lt;/em&gt;, followed by a space, in front of the token. I struggled for a long time at this step before figuring this out.&lt;/p&gt;
 &lt;p&gt;And voila. everything works. or does it? Since practise beats theory everytime, let&apos;s get down to browsers and POSTMAN.&lt;/p&gt;
 &lt;h2&gt;Practise - Putting it all together.&lt;/h2&gt;
-&lt;p&gt;Okay, lets get down to it.&lt;/p&gt;
+&lt;p&gt;Okay, brass-tacking time now.&lt;/p&gt;
 &lt;h4&gt;Practise - Add Application into AD.  Save the &lt;em&gt;tenantId, clientId and clientSecret&lt;/em&gt;.&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Added a new application called &apos;Postman&apos; in the linked Azure Active Directory through Azure portal.&lt;/li&gt;

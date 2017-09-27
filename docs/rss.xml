@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Wed, 27 Sep 2017 13:08:27 +0530</pubDate>
-    <lastBuildDate>Wed, 27 Sep 2017 13:08:27 +0530</lastBuildDate>
+    <pubDate>Wed, 27 Sep 2017 13:15:05 +0530</pubDate>
+    <lastBuildDate>Wed, 27 Sep 2017 13:15:05 +0530</lastBuildDate>
     
     <item>
       <title>Azure AD and Office 365 OAuth Integration via Postman</title>
@@ -188,7 +188,7 @@ OR we can pre-allow these permissions to the application while registering. This
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt; : Note the string &lt;em&gt;bearer&lt;/em&gt;, followed by a space, in front of the token. I struggled for a long time at this step before figuring this out.&lt;/p&gt;
 &lt;p&gt;And voila. everything works. or does it? Since practise beats theory everytime, let&apos;s get down to browsers and POSTMAN.&lt;/p&gt;
 &lt;h2&gt;Practise - Putting it all together.&lt;/h2&gt;
-&lt;p&gt;Okay, lets get down to it.&lt;/p&gt;
+&lt;p&gt;Okay, brass-tacking time now.&lt;/p&gt;
 &lt;h4&gt;Practise - Add Application into AD.  Save the &lt;em&gt;tenantId, clientId and clientSecret&lt;/em&gt;.&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Added a new application called &apos;Postman&apos; in the linked Azure Active Directory through Azure portal.&lt;/li&gt;

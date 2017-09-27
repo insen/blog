@@ -226,7 +226,7 @@ And voila. everything works. or does it? Since practise beats theory everytime, 
 
 ## Practise - Putting it all together.
 
-Okay, lets get down to it.
+Okay, brass-tacking time now.
 
 ####   Practise - Add Application into AD.  Save the *tenantId, clientId and clientSecret*.
 -   Added a new application called 'Postman' in the linked Azure Active Directory through Azure portal. 
