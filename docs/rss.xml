@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Wed, 27 Sep 2017 12:51:01 +0530</pubDate>
-    <lastBuildDate>Wed, 27 Sep 2017 12:51:01 +0530</lastBuildDate>
+    <pubDate>Wed, 27 Sep 2017 13:08:27 +0530</pubDate>
+    <lastBuildDate>Wed, 27 Sep 2017 13:08:27 +0530</lastBuildDate>
     
     <item>
       <title>Azure AD and Office 365 OAuth Integration via Postman</title>
@@ -18,11 +18,11 @@
       <description>&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s Office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Longer answer.&lt;/h2&gt;
 &lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
-&lt;p&gt;The goal here is to understand how Azure OAuth authentication works when calling the outlook APIs through Azure AD. Preferably, I want to achieve this through raw HTTP calls, using browser Windows or Postman REST client, so that HTTP based protocols and interactions are clear and open to visual inspection. In a nutshell, the steps are as follows.&lt;/p&gt;
+&lt;p&gt;The goal here is to understand how Azure OAuth authentication works when calling the outlook APIs through Azure AD. Preferably, I want to achieve this through raw HTTP calls, using just the browsers or Postman REST client, so that the HTTP based protocols and interactions are clear and open to visual inspection. In a nutshell, the steps are as follows.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Create an Azure AD application / Service principal.&lt;/li&gt;
 &lt;li&gt;Redirect user to Exchange Active Directory for Authentication.&lt;/li&gt;
-&lt;li&gt;Returns Auth Code after Azure, through OAUTH, has authenticated against organization&apos;s Exchange AD.&lt;/li&gt;
+&lt;li&gt;Return Auth Code to user after Azure AD, through OAuth, has authenticated against organization&apos;s Exchange AD.&lt;/li&gt;
 &lt;li&gt;Convert OAuth Code into Azure bearer token.&lt;/li&gt;
 &lt;li&gt;Call Microsoft Office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.&lt;/li&gt;
 &lt;/ul&gt;
@@ -33,8 +33,8 @@
 &lt;h2&gt;findMeetingTimes API&lt;/h2&gt;
 &lt;p&gt;Do such APIs exist? Well, yes, they do. Problem is, more than &lt;strong&gt;&lt;em&gt;one&lt;/em&gt;&lt;/strong&gt; exist.&lt;/p&gt;
 &lt;h4&gt;Outlook/Office 365 APIs&lt;/h4&gt;
-&lt;p&gt;Documentation link here - &lt;a href=&quot;https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times&quot;&gt;https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times&lt;/a&gt;.
-This API looks like this -&lt;/p&gt;
+&lt;p&gt;Documentation link here - &lt;a href=&quot;https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times&quot;&gt;https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times&lt;/a&gt;,
+The API is shown below -&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;POST https://outlook.office.com/api/{version}/me/findmeetingtimes
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and there are &lt;em&gt;three&lt;/em&gt; &lt;em&gt;version&lt;/em&gt;s of it - &lt;em&gt;v1.0, v2.0, beta&lt;/em&gt;.&lt;/p&gt;
@@ -47,7 +47,7 @@ This API looks like this -&lt;/p&gt;
 &lt;p&gt;and the sandbox (called MS Graph Explorer), is here - &lt;a href=&quot;https://developer.microsoft.com/en-us/graph/graph-explorer&quot;&gt;https://developer.microsoft.com/en-us/graph/graph-explorer&lt;/a&gt;.&lt;/p&gt;
 &lt;h4&gt;Outlook vs Graph.&lt;/h4&gt;
 &lt;p&gt;So why two? When to use what?&lt;/p&gt;
-&lt;p&gt;Well previously MS had multiple APIs available - Office, Azure AD, etc. MS Graph is intended to unify all of these endpoints into a single consolidated REST gateway for all of Microsoft&apos;s underlying platform APIs viz. Azure AD, Excel, Outlook, OneDrive, OneNote, SharePoint etc. It is not fully at par with existing APIs, but MS recommendation is to prefer MS Graph unless you need a feature which it does not have.&lt;/p&gt;
+&lt;p&gt;Well previously MS had multiple APIs available - Office, Azure AD, etc. MS Graph is intended to unify all of these endpoints into a single REST-ful gateway for all of Microsoft&apos;s underlying platform APIs viz. Azure AD, Excel, Outlook, OneDrive, OneNote, SharePoint etc. It is not fully at par with existing APIs, but Microsoft&apos;s recommendation is to prefer MS Graph unless you need a feature which it does not have.&lt;/p&gt;
 &lt;p&gt;For current and future work, prefer MS Graph over other means.&lt;/p&gt;
 &lt;h4&gt;API Request body.&lt;/h4&gt;
 &lt;p&gt;In either case the POST body is the same, so that&apos;s a relief. A detailed request is given towards the end of this post.&lt;/p&gt;
@@ -56,14 +56,17 @@ This API looks like this -&lt;/p&gt;
 &lt;p&gt;Well, on to Azure AD and OAuth SSO, then.&lt;/p&gt;
 &lt;h2&gt;Azure Active Directory (AAD) and OAuth.&lt;/h2&gt;
 &lt;p&gt;Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like &lt;img src=&quot;/blog/img/posts/azureoauth.png&quot; alt=&quot;this&quot; /&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;More documentation can be found at &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;In our case, for the authentication, we need to do the following&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The diagram source and more documentation can be found at &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In our case, as mentioned before, the full authentication process needs the following -&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Register an app with Azure AD / Generate Service Principal.&lt;/li&gt;
-&lt;li&gt;Authorize and retrieve authentication code.&lt;/li&gt;
-&lt;li&gt;Convert authentication code into Azure authorization token for use by Outlook calendar APIs.&lt;/li&gt;
+&lt;li&gt;Create an Azure AD application / Service principal.&lt;/li&gt;
+&lt;li&gt;Redirect user to Exchange Active Directory for Authentication.&lt;/li&gt;
+&lt;li&gt;Return Auth Code to user after Azure AD, through OAuth, has authenticated against organization&apos;s Exchange AD.&lt;/li&gt;
+&lt;li&gt;Convert OAuth Code into Azure bearer token.&lt;/li&gt;
+&lt;li&gt;Call Microsoft Office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4&gt;App Registration / Generate Service Principal&lt;/h4&gt;
+&lt;p&gt;But lets look at the details, where the devils lurk.&lt;/p&gt;
+&lt;h4&gt;Theory - App Registration / Generate Service Principal&lt;/h4&gt;
 &lt;p&gt;First, someone needs to get authenticated. This, in Azure terms, is a Service Principal. This is achieved by registering an application with Azure AD, which gives us three important keys, the &lt;em&gt;tenantId, clientId&lt;/em&gt; and the &lt;em&gt;clientSecret&lt;/em&gt; after registration.
 &lt;em&gt;For details about how to register an app, see  &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;After registration, we save the following key-value pairs for subsequent use.&lt;/p&gt;
@@ -73,13 +76,13 @@ This API looks like this -&lt;/p&gt;
 &lt;li&gt;&lt;em&gt;clientSecret&lt;/em&gt;: guid looking key corresponding to a code we create in the application properties on Azure.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;Note : The clientSecret will be shown only once when creating a app property. If you don&apos;t note it down, you need to delete and recreate a key. It canot be recovered.&lt;/em&gt;&lt;/p&gt;
-&lt;h4&gt;Azure AD and OAuth.&lt;/h4&gt;
+&lt;h4&gt;Theory - Azure AD and OAuth.&lt;/h4&gt;
 &lt;p&gt;The OAuth dance is a two-step process here.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Get a authentication code from the underlying authentication provider (OpenId, Active Directory).&lt;/li&gt;
 &lt;li&gt;Convert that code into a &lt;a href=&quot;https://jwt.io&quot;&gt;JSON Web Token&lt;/a&gt;. For subsequent calls, this token needs to be used as the Authorization header.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Authorize API&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theory - Authorize API&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The following are the current logon/authorization endpoints for both v1.0 and v2.0.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/{tenantId}/oauth2/authorize
 https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
@@ -94,20 +97,20 @@ https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
 -   scope: a space-delimited list of access scopes that the app requires. For access to all outlook shared readable calendars in our Active Directory We have specified the following 
     - scope=openid+https://office.outlook.com/Calendars.Read.Shared
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Key things to remember&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theory - Key things to remember&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Previous versions had the domain &lt;code&gt;login.windows.net&lt;/code&gt;. Some blogs use this. This is now not exposed, even though, based on inspection of HTTP headers, can be seen to be active in the background.&lt;/li&gt;
 &lt;li&gt;Also note we have two versions of the current endpoint as well - v1.0 and v2.0, and v2.0 has some differences from v1.0, viz., &lt;em&gt;v2.0 endpoint does not understand the query parameter &apos;resource&apos; and throws an error&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;For multi-tenant apps, replace &lt;em&gt;tenantId&lt;/em&gt; with &lt;em&gt;&apos;common&apos;&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;The keys given to us from Azure app registration are &lt;strong&gt;&lt;em&gt;clientId, tenantId, clientSecret&lt;/em&gt;&lt;/strong&gt;. However, in the authorize call, the API expects the query parameters as &lt;em&gt;underscore_separated&lt;/em&gt;, i.e., as &lt;strong&gt;&lt;em&gt;client_id, tenant_id, and client_secret&lt;/em&gt;&lt;/strong&gt;. I got stuck here for a while too.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;OAuth response&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theory - OAuth response&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;The authorization takes the required query string parameters, in our case, returns an authentication code. This is one of the possible variations on the request.&lt;/p&gt;
 &lt;p&gt;Using OAuth, authentication is redirected to your organizations Windows Active Directory SSO page, so that you can log in with your Windows credentials.&lt;/p&gt;
 &lt;p&gt;It then returns the code to the &lt;em&gt;response_uri&lt;/em&gt; specified. The &lt;em&gt;code&lt;/em&gt; looks like this&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef_{removed_lots_of_crazy_characters_here}_OSXEQcdFf2RLPAXbz30RgbyAA
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;Scopes in brief.&lt;/h4&gt;
+&lt;h4&gt;Theory - Scopes in brief.&lt;/h4&gt;
 &lt;p&gt;Scopes correspond to permissions which the account making the Rest API call will need to successfully interact with Azure resources. In our case, it the application corresponding to the &lt;em&gt;clientId&lt;/em&gt; which needs the permissions, as we are logging on to our tenant as this client, i.e. we will use this &lt;em&gt;clientId&lt;/em&gt; during the logon/authorize call.&lt;/p&gt;
 &lt;p&gt;Roughly speaking, we can think of an Azure Resource equals an domain viz. &lt;code&gt;office.outlook.com, graph.microsoft.com,&lt;/code&gt; etc. Note that Azure resources can be a lot more granular though.&lt;/p&gt;
 &lt;p&gt;The application we registered can request these set of permissions after the logon page is past,
@@ -120,7 +123,7 @@ OR we can pre-allow these permissions to the application while registering. This
 &lt;pre&gt;&lt;code&gt;openid+offline access+Calendars.Read.Shared+Contacts.Read
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We do not need &lt;code&gt;https://graph.microsoft.com&lt;/code&gt; in the url&apos;s &lt;em&gt;scope&lt;/em&gt; parameter.&lt;/p&gt;
-&lt;h3&gt;Convert Auth Code To Bearer Token&lt;/h3&gt;
+&lt;h3&gt;Theory - Convert Auth Code To Bearer Token&lt;/h3&gt;
 &lt;p&gt;The second part of authentication is in converting the auth code into a JSON Web Token (see &lt;code&gt;https://jwt.io&lt;/code&gt;). The base tokenization URL is&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;POST https://login.windows.net/common/oauth2/token
 &lt;/code&gt;&lt;/pre&gt;
@@ -173,7 +176,7 @@ OR we can pre-allow these permissions to the application while registering. This
   &amp;quot;ver&amp;quot;: &amp;quot;1.0&amp;quot;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;MS Office API, REST call.&lt;/h3&gt;
+&lt;h3&gt;Theory - MS Office API, REST call.&lt;/h3&gt;
 &lt;p&gt;Most of the nitty-gritties should have been worked out of the way now. We just need to call the Outlook REST API as follows -&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;POST https://outlook.office.com/api/{version}/me/findmeetingtimes
 &lt;/code&gt;&lt;/pre&gt;
@@ -184,9 +187,9 @@ OR we can pre-allow these permissions to the application while registering. This
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt; : Note the string &lt;em&gt;bearer&lt;/em&gt;, followed by a space, in front of the token. I struggled for a long time at this step before figuring this out.&lt;/p&gt;
 &lt;p&gt;And voila. everything works. or does it? Since practise beats theory everytime, let&apos;s get down to browsers and POSTMAN.&lt;/p&gt;
-&lt;h2&gt;Putting it all together.&lt;/h2&gt;
+&lt;h2&gt;Practise - Putting it all together.&lt;/h2&gt;
 &lt;p&gt;Okay, lets get down to it.&lt;/p&gt;
-&lt;h4&gt;Add Application into AD.  Save the &lt;em&gt;tenantId, clientId and clientSecret&lt;/em&gt;.&lt;/h4&gt;
+&lt;h4&gt;Practise - Add Application into AD.  Save the &lt;em&gt;tenantId, clientId and clientSecret&lt;/em&gt;.&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Added a new application called &apos;Postman&apos; in the linked Azure Active Directory through Azure portal.&lt;/li&gt;
 &lt;li&gt;Specify &apos;Read User and Shared Calendars&apos; in the permissions panel, and explicitly granted those permissions. Through this, we are implementing &lt;em&gt;OAuth On-Behalf-Of-Consent flow&lt;/em&gt;. Otherwise, we would have an intermediate screen after entering our Windows credentials where we would have to accept the use of these permissions.&lt;/li&gt;
@@ -197,7 +200,7 @@ OR we can pre-allow these permissions to the application while registering. This
 clientId : 794b53a6-e176-4185-92fe-617dd8512db5
 clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;Invoke Azure Authorize API.&lt;/h4&gt;
+&lt;h4&gt;Practise - Invoke Azure Authorize API.&lt;/h4&gt;
 &lt;p&gt;The full &lt;code&gt;GET&lt;/code&gt; request for my use case is as follows. Paste this into a browser window which is not already signed into azure.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/common/oauth2/authorize?client_id=794b53a6-e176-4185-92fe-617dd8512db5&amp;amp;redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&amp;amp;response_type=code&amp;amp;scope=https://outlook.office.com/calendars.read.shared
 &lt;/code&gt;&lt;/pre&gt;
@@ -211,10 +214,10 @@ clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
 &lt;li&gt;Add the scopes correctly and ecnsure that the corresponding permissions are granted in Azure portal to the Application.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;When the call returns, it shows me a browser page with HTTP 404. That is expected, as the actual URL does not exist. The URL that can be seen in the browser address bar, is like this -&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef1Ul7-oG7KBrwigC8DAjBC0nxZdQznVfSBuLT7kuLY0D2CdcRC3J4Mz7neJRhmGBNSE6NQuGEzC2CNeEcr8TBO7szAZW9_gU8yUc9mGwupdc-pq_WRNDBVQVjnElgWlWszPAjIsBCWphvMdGGsAXu_QeJNtcDA1pi9eaDdgElri94ZBj2emnE9eCOOZIXkKqgiL4xCSNwYUPiZFRSuZSXUS-X5ZB6_RGSbv8s0Avh09frjYHqmIuM_4cb5tDHGinl4wwlxqb_rHoHh1PqJYPCdTss8-fnT60JwvpnM0JeywsqEZAl0Og6cg0yEhuKZ0fNt-NCMHmEAC8DoKzGrd28HbXtz9WJS1yo_KbtPBosyvFixyuqTQJD_UhM2xtaDP1V7BO2SVv_vosBAEsOoEIMbgiYs9SjVT9Ywe_Q9OWnNhthY6l44ttk2Z8ozlClzMDRcfJuOdxDBMLTvbqDpNcGnx_NdJ8hOWGe1pyJOu-6PthlOLdpPHUYFkvzz7_riHp_3Kf_o7Fa-YIr1uMrYj9C-0pvYicDZL7CIxaTJkQ8vaJH0xEUHqkm3aV1ZoTTZRMlSoziVyXHadlcFo51afFW5OhzgCcxR_Y-q3eSaZq7u_Bc4SzHHDRlbk3liUassQOSXEQcdFf2RLPAXbz30RgbyAA&amp;amp;session_state=f4db04de-60f7-426b-a599-48be3e45d8d4
+&lt;pre&gt;&lt;code&gt;http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6-{removed_lots_of_chars_here}-e3e45d8d4
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Note that this is the callback url specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.&lt;/p&gt;
-&lt;h4&gt;Invoke Azure token API&lt;/h4&gt;
+&lt;h4&gt;Practise - Invoke Azure token API&lt;/h4&gt;
 &lt;p&gt;In POSTMAN, Create a new &lt;code&gt;POST&lt;/code&gt; request to the following endpoint&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/common/oauth2/token
 &lt;/code&gt;&lt;/pre&gt;
@@ -236,12 +239,12 @@ client_secret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
     &amp;quot;expires_on&amp;quot;: &amp;quot;1506082448&amp;quot;,
     &amp;quot;not_before&amp;quot;: &amp;quot;1506078548&amp;quot;,
     &amp;quot;resource&amp;quot;: &amp;quot;https://outlook.office.com/&amp;quot;,        
-    &amp;quot;access_token&amp;quot;: &amp;quot;myJ0eXAiOiJKV1Qi-{removed_lots_of_crazy_chars_here}-ukX3nBlRfzh6Sg&amp;quot;,        
-    &amp;quot;refresh_token&amp;quot;: &amp;quot;QABAAAAAAABlDrq-{removed_lots_of_crazy_chars_here}-uoBFATkE6ZJHyAA&amp;quot;,        
-    &amp;quot;id_token&amp;quot;: &amp;quot;yJ0eXAiOiJKV1QiL-{removed_lots_of_crazy_chars_here}-SIsInZlciI6IjEuMCJ9.&amp;quot;
+    &amp;quot;access_token&amp;quot;: &amp;quot;myJ0eXAiOiJKV1Qi-{removed_lots_of_chars_here}-ukX3nBlRfzh6Sg&amp;quot;,        
+    &amp;quot;refresh_token&amp;quot;: &amp;quot;QABAAAAAAABlDrq-{removed_lots_of_chars_here}-uoBFATkE6ZJHyAA&amp;quot;,        
+    &amp;quot;id_token&amp;quot;: &amp;quot;yJ0eXAiOiJKV1QiL-{removed_lots_of_chars_here}-SIsInZlciI6IjEuMCJ9.&amp;quot;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h4&gt;Invoke Outlook REST API.&lt;/h4&gt;
+&lt;h4&gt;Practise - Invoke Outlook REST API.&lt;/h4&gt;
 &lt;p&gt;Again in POSTMAN, create another &lt;code&gt;POST&lt;/code&gt; request for the following URI.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;https://outlook.office.com/api/v2.0/me/findmeetingtimes
 &lt;/code&gt;&lt;/pre&gt;
