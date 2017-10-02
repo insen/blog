@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      DevOps - An Implementation Strategy &middot; Insen
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/poole.css">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://insen.github.io/blog/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="https://insen.github.io/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="https://insen.github.io/blog/">
+          Insen
+        </a>
+      </h1>
+      <p class="lead">Write, Code, Dream ! <a href="https://github.com/insen" target="_blank">@insen</a>.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://insen.github.io/blog/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/E:/work/blogging/blog/./docs/about.html">About</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/insen">@Github</a>
+      <a class="sidebar-nav-item" href="https://linkedin.com/nilsengupta">@LinkedIn</a>
+      <a class="sidebar-nav-item" href="mailto:indranil.sengupta@gmail.com">@gmail</a>
+      <span class="sidebar-nav-item">Currently v1.0.0</span>
+    </nav>
+
+    <p>&copy; 2017. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">DevOps - An Implementation Strategy</h1>
+  <span class="post-date">27 Sep 2017</span>
+  <p><strong>Goal</strong></p>
+<p>Implementing DevOps in Spider. Brainstorming Session.</p>
+<h4>Background</h4>
+<p>We would like to see what we can do to get more 'DevOps'y.</p>
+<ul>
+<li>Culture</li>
+<li>Tools</li>
+</ul>
+<p>We are currently looking at the tool options. Goal is to identify subset of <strong>tools</strong> and <strong>practises</strong> that we should start off with.</p>
+<p><strong>Key Drivers - Context</strong></p>
+<ul>
+<li>Spider is Azure oriented.</li>
+<li>Spider deals with .NET, WEB and Mobile on Azure, primarily. - <em>big assumption here ??</em></li>
+<li><em>more??</em></li>
+</ul>
+<p><strong>Key Drivers - Basic DevOps Practises</strong></p>
+<ul>
+<li>One Step Test/Build/deploy AKA Continuous Delivery.</li>
+<li>Automation.</li>
+<li>Feedback Loops AKA Shared Dashboards - <em>these shared dashboard seem key to implementing devops and also the most problematic</em></li>
+</ul>
+<h2>SDLC Stages</h2>
+<p>This is from wikipedia, btw.</p>
+<ul>
+<li>Code</li>
+<li>Test</li>
+<li>Build/Package/Release  - <em>I have merged these three sections as the boundaries seem very difficult to draw</em>.</li>
+<li>Monitor</li>
+</ul>
+<p>There are several goals and working forces here</p>
+<h2>Tools / Practises / Activities by SDLC Stage</h2>
+<h3>Code</h3>
+<h4>Practises</h4>
+<ul>
+<li>Version Control</li>
+<li>Development Workflows - viz. Gitflow - <em>possible activity here</em></li>
+<li><strong>Microservice architectures</strong> - <em>possible activity here</em></li>
+</ul>
+<h4>Tools</h4>
+<ul>
+<li>All your standard ones.</li>
+</ul>
+<h3>Test</h3>
+<h4>Practises</h4>
+<ul>
+<li>Automation - Lots of it.</li>
+<li>TDD.</li>
+<li>BDD.</li>
+</ul>
+<h4>Tools</h4>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/visualstudio/test/intellitest-manual/introduction">Pex - Generates boundary conditions tests</a>. - <em>(possible activity here - for viability check)</em></li>
+<li>Standard Unit Testing Frameworks viz. <strong>NUnit</strong>, MSTest, NSubstitute</li>
+<li>Standard Integrated Testing frameworks - SpecFlow, Jasmine, Selenium, Mocha etc - <em>(possible activity to idebntify standard tooling)</em></li>
+<li>Metrics tools - NCover, Ndepend, Ncrunch - <em>(definite activity to estalish standard tools, metrics and reports)</em></li>
+<li>Other tools - http://www.dotnetcurry.com/patterns-practices/1358/code-quality-tools</li>
+</ul>
+<p><strong>Activities</strong></p>
+<ul>
+<li>There seems to be no standards in the world around</li>
+<li>
+<ul>
+<li>Logging formats</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Test reports</li>
+</ul>
+</li>
+<li>Metrics which make sense</li>
+<li>Metrics based on personas - <em>who needs what metrics?</em></li>
+<li>Automation ROI</li>
+</ul>
+<p><strong>Gaps</strong></p>
+<ul>
+<li>Product basic quality needs to be certified by Automated tests, not manual.</li>
+<li>Product quality metrics - coverage, boundary conditions, CC</li>
+<li>specs/traceability.</li>
+<li>Standardized test reports - Ideally automated.</li>
+<li>Local Automated Tests for developer feedback.</li>
+</ul>
+<h3>Build/Release/Package (BRP in short)</h3>
+<h4>Practises</h4>
+<ul>
+<li>One Touch Build and Deploys.</li>
+<li>Build Pipelines - <em>(possible activity here)</em></li>
+<li>Standardized resources for builds - <em>(possible activity - samples and start-up kits etc)</em></li>
+<li>Same builds on dev and test machines.</li>
+<li>Setup builds/Automated local deployment.</li>
+<li>Complex Testing Needs.</li>
+<li>Advanced Process Automation.</li>
+<li>
+<ul>
+<li>Automated provisioning - particularly useful in cloud scenarios.</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Infrastructure configuration and management</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Infrastructure as Code tools</li>
+</ul>
+</li>
+</ul>
+<h4>Tools</h4>
+<ul>
+<li>MSBuild</li>
+<li>Powershell,</li>
+<li>PSake,</li>
+<li>MSDeploy,</li>
+<li>DACPAC,</li>
+<li>WIX,</li>
+<li>VSTS.</li>
+<li>Puppet/Chef - Desired State Configuration tools</li>
+<li>Ansible/OctopusDeploy - Multi Step Deploy tools.</li>
+<li>ARM Templates,</li>
+<li>Docker</li>
+<li><em>(others??)</em></li>
+</ul>
+<h4>Activities</h4>
+<ul>
+<li>workshops and trainings on the following</li>
+<li>
+<ul>
+<li>PowerShell</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ARM templates</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>PSake/VSTS?</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Docker</li>
+</ul>
+</li>
+<li>
+<ul>
+<li><em>Puppet/chef/ansible ??</em> - Am not sure if we should even go after these.</li>
+</ul>
+</li>
+</ul>
+<h2>Monitoring</h2>
+<p>This is the one we are probably going to have the most difficulty with.</p>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+  </ul>
+</div>
+    </div>
+
+  </body>
+</html>

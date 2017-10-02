@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      DevOps - Making a Start ! &middot; Insen
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/poole.css">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://insen.github.io/blog/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="https://insen.github.io/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="https://insen.github.io/blog/">
+          Insen
+        </a>
+      </h1>
+      <p class="lead">Write, Code, Dream ! <a href="https://github.com/insen" target="_blank">@insen</a>.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://insen.github.io/blog/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/E:/work/blogging/blog/./docs/about.html">About</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+
+      <a class="sidebar-nav-item" href="https://github.com/insen">@Github</a>
+      <a class="sidebar-nav-item" href="https://linkedin.com/nilsengupta">@LinkedIn</a>
+      <a class="sidebar-nav-item" href="mailto:indranil.sengupta@gmail.com">@gmail</a>
+      <span class="sidebar-nav-item">Currently v1.0.0</span>
+    </nav>
+
+    <p>&copy; 2017. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">DevOps - Making a Start !</h1>
+  <span class="post-date">27 Sep 2017</span>
+  <p>DevOps is everywhere these days. As it should be, yes. Yet that doesn't take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the <em>where to begin</em> question comes in, and that is a very difficult question for something as nebulous as DevOps.</p>
+<p>So how does one start being 'DevOps'y?  What drives DevOps?</p>
+<h2>Context, Culture, Tools, Change, Automation, Feedback Loops and Collaboration !</h2>
+<p>The above set summarizes the key drivers of DevOps anywhere. Additionally, there are a small but definite set of foundational DevOps practises, which have been proven enablers of DevOps over time.</p>
+<h2>Foundational DevOps Practises</h2>
+<ul>
+<li>One touch build - <em>there should be a single command to build and package the tested version of a system.</em></li>
+<li>One touch deploy - <em>there should be a single command to deploy a tried and tested version to an environment.</em></li>
+<li>Automation - <em>everything repetitive should be automated.</em></li>
+<li>Monitoring Dashboards - <em>all process information, tests, builds, deploys, operations, features, analytics should be monitored and available.</em></li>
+</ul>
+<p>Essentially, the practises above together cumulate into a CI/CD pipeline. How sophisticated/refined your CI/CD pipeline is, is one of the key technological measures of a DevOps oriented teams' maturity level.</p>
+<p>So then the question driving a group trying to adopt a DevOps-y approach to software service delivery is, most likely, this</p>
+<h2>Our DevOps Question</h2>
+<p><em>Given our current context, what culture, practises and tools should I adopt which will enable</em></p>
+<ul>
+<li><em><strong>faster change adoption</strong>?</em></li>
+<li><em><strong>more automation</strong>?</em></li>
+<li><em><strong>more shared process information</strong>?</em></li>
+<li><em><strong>more closed feedback loops</strong>?</em></li>
+</ul>
+<p><em>Note : Remember this question, We'll come back to this time and again.</em></p>
+<p>If we formulate an answer to the question above, we should have a workable Devops Strategy 101. Let us try an exercise and see.</p>
+<h2>Setting the '<em>Context</em>'</h2>
+<p><strong>Context</strong> is all about <em>NOT</em> sacrificing global optima to achieve local optima. <em>But then my junior dev comes up, the one I hired last month, saying he doesn't know what the ceo knows so he doesn't have all the context so he can't code a-la DevOps.</em></p>
+<p>Oops!</p>
+<p>That didn't sound legit, did it? Cos it wasn't. In DevOps context itself is context-sensitive, i.e. it means take the biggest picture from where you stand. That's all you can do anyways.</p>
+<p>Since context is king, we will set a context. Assume the following organizational scenario within which to start out on a DevOps analysis first.</p>
+<p><em>A team trying to provide custom software development and integration services on Azure. A team trying to a create a distributed processing layer for the .NET Stack system. A team working on big-data analytics and data presentation system on Azure. A management team trying to manage all these.</em></p>
+<p><em>Also assume that all of the teams have various degrees of maturity on the build, test, deploy aspects of their individual systems - so effectively, automated builds, automated tests, and CI/CD exists, but to various degrees. Which is usually the case in diverse organizations.</em></p>
+<p>So the context here is a bunch of <em>software engineers trying to provide system development services on Azure</em>.</p>
+<p>Next.</p>
+<h2>Consider 'Culture'</h2>
+<p>Now what can we do about Culture here?</p>
+<p>Well, in a software development group, there is one <em>'Culture'</em> culture, or group culture or organization culture.</p>
+<p>Now this top-level culture is probably not something everybody can start off with. But in every culture, there are sub-cultures. And there are sub-cultures across development tools, eco-systems or resources. <em>(Java vs .Net, anyone?)</em>. So for a start, let's just pick a culture by eco-system. Since Azure is common across, let's pick Azure.</p>
+<p>Enter <em><strong>Azure Culture</strong></em>. But what does <em>Azure Culture</em> in a DevOps organization mean? Let's go back and see how our original question changes.</p>
+<p><em>What practises and tools should I adopt which will enable</em></p>
+<ul>
+<li><em><strong>faster change adoption</strong> in Azure?</em></li>
+<li><em><strong>more automation</strong> in Azure?</em></li>
+<li><em><strong>more shared process</strong> information in Azure?</em></li>
+<li><em><strong>more closed feedback</strong> loops in Azure?</em></li>
+</ul>
+<p><em>Note - Should we limit ourselves to Azure specific tools. What if we work on Scala, Node, .NET? So perhaps, we need to analyse tooling more comprehensively.</em></p>
+<p><em>The above is the kind of question that completely derails initiatives if we sit down to exhaustively analyse the options. Sometime you just pick the first option and go - just so that it sets an operational context, if nothing else.</em></p>
+<p>We will just set one - the .NET stack. <em>Keeping things within the family, you see. You pick scala, or hadoop or node as per your needs. After all, you need multiple iterations of this.</em></p>
+<p>So our task has now decomposed into a search for tooling options on the Azure platform and the .NET software development stack that enables foundational DevOps practises while achieving one or more of our goals - <em>faster change adoption, more automation,more shared process information, more closed feedback loops</em>. Once we identify tools and technologies, we <em>assess our maturity levels on identified tools and practises</em> to <em>identify <strong>gaps</strong> which can be plugged</em>.</p>
+<p><strong>The gaps are what we attack in our DevOps strategy 101</strong>. The number of iterations of this process you go through, and the reviews with all concerned stakeholders should pare the list to items with highest priority overall.</p>
+<p>Now we will do a non technical map-reduce. In <em>map</em> phase, we list out every possible tool, practise or activity that looks like it might help. In <em>reduce</em> phase - we prioritize items from list.</p>
+<p>And in map phase our goals are simple.</p>
+<ul>
+<li><em><strong>tools we can adopt</strong></em></li>
+<li><em><strong>practises we can encourage</strong></em></li>
+<li><em><strong>activities we can do</strong></em></li>
+</ul>
+<p>Now, the initial list will probably be large, as both Azure nor Microsoft .NET are huge eco-systems, but remember two things,</p>
+<ul>
+<li>We are just looking for what to start with.</li>
+<li>As of now, we are just identifying as many options as we can that are applicable.</li>
+</ul>
+<p>But we do need to manage, classify and process this list. Wikipedia, in its DevOps page, suggests the SDLC stages - Code, Test, Build/Package/Relase (<em>merged these as boundaries between them are overlapping, especially in the matter of tooling</em>), and Monitor.</p>
+<h3>Azure/.NET Stack | SDLC Stage - Code</h3>
+<p>A basic DevOps practises here is <em>Version Control</em>. Distributed VCS are now standard, so we pick <em><strong>Git</strong></em>.</p>
+<p>Architectural support targeting DevOps enablement for Azure PaaS systems is a much-needed eco-system centric practise. Enter <em><strong>Microservice architectures</strong></em> which by encouraging by encouraging small pieces and plug-and-play composition help keeping pieces small and nimble.</p>
+<p><em><strong>Test-Driven Design (TDD)</strong></em> and <em><strong>Domain Driven Design (DDD)</strong></em> are other standard practises that help in better code, decoupled pieces.</p>
+<h4>Tools</h4>
+<ul>
+<li>Git.</li>
+</ul>
+<h4>Practises</h4>
+<ul>
+<li>Test Driven Design (TDD)</li>
+<li>Domain Driven Design (DDD)</li>
+<li>Microservices architectural style</li>
+</ul>
+<h3>Azure/.NET Stack | SDLC Stage - Test</h3>
+<p>Test automation has several flavours</p>
+<ul>
+<li>Unit Tests</li>
+<li>Integration Tests</li>
+<li>Performance tests.</li>
+</ul>
+<p>Additionally, we can also automate the test generation process through Behavior Driven Design Tools like SpecFlow. And test execution automation is usually done through build pipelines and Continuous Integration (CI)/Continuous Delivery(CD).</p>
+<h4>Tools</h4>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/visualstudio/test/intellitest-manual/introduction">Pex - Generates boundary conditions tests</a></li>
+<li>Unit And Integrated Testing Frameworks</li>
+<li>Identify Metrics and tools to report Metrics - NCover, Ndepend, Ncrunch</li>
+<li><strong>Azure Dev/Test Labs</strong></li>
+</ul>
+<p>Some possible activities. The one around <em>logging formats</em> and <em>test reports</em> is especially interesting -</p>
+<h4>Activities</h4>
+<ul>
+<li><em><strong>There seems to be no standards in the world around Logging formats and Test reports</strong></em>.</li>
+<li>Persona based metrics - <em>who needs what metrics?</em></li>
+<li>Automation ROI graphs - <em>how to demonstrate?</em></li>
+<li>How to enable specification to final product traceability?</li>
+</ul>
+<h3>Azure .NET Stack | SDLC Stage - Build/Package/Release</h3>
+<p>In this section, practises are common across software development verticals and horizontals.</p>
+<h4>Practises</h4>
+<ul>
+<li>One Touch Build and Deploys.</li>
+<li>Build Pipelines - Same builds on dev and test machines, Setup builds and Automated local deployment.</li>
+<li>Automated provisioning <em>(Infrastructure configuration and management and Infrastructure as Code tools)</em></li>
+</ul>
+<h4>Tools</h4>
+<p>These include</p>
+<ul>
+<li>Automation tools (in and out-system) - Powershell, MSDeploy,  Puppet, Chef, Docker, Ansible, OctopusDeploy.</li>
+<li>Build tools and Servers (in and out-system) - MSBuild, PSake, DACPAC, TeamCity, Jenkins.</li>
+<li>Eco System specific tools - Azure Resource Management (ARM) Templates and Azure CLI.</li>
+</ul>
+<h3>Azure/.NET Stack | SDLC Stage - Monitor</h3>
+<p>This is probably a big problem area. For now we will gloss over it, but in practise, we would now probably take just monitoring as a problem area for DevOps and resort to the same technique we used throughout this post to break that down into tools, practises and activities.</p>
+<h4>Practises</h4>
+<p>What is needed here is feedback loops and operation trend monitoring through shared dashboards. To large extents, these feedback loops across localized scope (from a DevOps point of view) can be provided by ALM tools like JIRA on the scope and requirements and features perspective, while build and test feedback loops can be provided by CI servers and build-pipelines.</p>
+<p>The difficult part is actually setting up on what to record and monitor. Sifting noise from signal here is a significant and <em>not-always-technical</em> step. And once past this, we have the technically demanding part in setting up a system which integrates separate local scopes into integrated dashboards. That is hard and definitely not DevOps 101. Maybe later.</p>
+<p>Tools include VSTS - for application life-cycle management, Azure AppInsight for application operation management, standard external tools like NewRelic, and ELK, advanced services like Azure OMS (native) and Google Analytics (external).</p>
+<h4>Activities</h4>
+<p>Following activities are required.</p>
+<ul>
+<li>Run Maturity Model evaluation on standard tools.</li>
+<li>Establish Personas for Dashboards</li>
+<li>Estrablish Metrics by View/Persona</li>
+</ul>
+<p>At some point, build a <strong>Data Collection and Aggregation Tooling/Implementation</strong>.</p>
+<h2><strong><em>Big List of Tools, Practises and Activities</em></strong></h2>
+<p>What we have been doing so far, is basically running the <em>map</em> part of a map-reduce analysis. Aggregating all of the tools, practises and activities found above, we get the following big list.</p>
+<h3>Tools / Practises</h3>
+<ul>
+<li>Git</li>
+<li>Selenium</li>
+<li>Build pipelines and CI</li>
+<li>PowerShell</li>
+<li>Azure CLI</li>
+<li>Azure Dev/Test Labs</li>
+<li>Azure Operations Management Services</li>
+<li>Azure AppInsights.</li>
+<li>Azure Application Resource Templates</li>
+<li>VSTS</li>
+<li>Google Analytics</li>
+<li>NewRelic</li>
+<li>ELK</li>
+</ul>
+<h1>Practises</h1>
+<ul>
+<li>Microservices</li>
+<li>TDD</li>
+<li>DDD</li>
+<li>BDD</li>
+<li>Automated Unit Tests</li>
+<li>Automated Integration Tests</li>
+<li>One Touch Build and Deploys.</li>
+<li>Build Pipelines - Same builds on dev and test machines, Setup builds and Automated local deployment.</li>
+</ul>
+<h3>Activities</h3>
+<ul>
+<li><em><strong>There seems to be no standards in the world around Logging formats and Test reports</strong></em>.</li>
+<li>Persona based metrics - <em>who needs what metrics?</em></li>
+<li>Automation ROI graphs - <em>how to demonstrate?</em></li>
+<li>How to enable specification to final product traceability?</li>
+<li>Maturity Model evaluation on identified tools.</li>
+<li>Establish Personas for Dashboards</li>
+<li>Establish Metrics by View/Persona</li>
+<li>Establish Data Collection and Aggregation Tooling/Implementation.</li>
+</ul>
+<p>This may not be exactly the list you come up with, but if you followed along on the exercise model, you have your own list.</p>
+<p>I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group's maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no of items should '<em>reduce</em>' in reduce phase.</p>
+<p>So there you go, now we have a set of starting points for a DevOps Strategy 101. All we have to do now is Go forth, and Iterate.</p>
+<p>Oh, and of course, implement !</p>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+  </ul>
+</div>
+    </div>
+
+  </body>
+</html>

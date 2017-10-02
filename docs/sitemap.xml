@@ -7,7 +7,14 @@
   <!-- Generated with pretzel -->
   
   <url>
-    <loc>http://domain/2017/09/24/Azure-AAD-with-Office-365/</loc>
+    <loc>http://domain/2017/09/27/DevOps-Making-A-Start/</loc>
+    <lastmod>2017-09-27T00:00:00+05:30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>
+  
+  <url>
+    <loc>http://domain/2017/09/24/Azure-AAD-with-Office-365.1/</loc>
     <lastmod>2017-09-24T00:00:00+05:30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
