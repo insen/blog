@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 03 Oct 2017 00:35:01 +0530</pubDate>
-    <lastBuildDate>Tue, 03 Oct 2017 00:35:01 +0530</lastBuildDate>
+    <pubDate>Tue, 03 Oct 2017 00:39:03 +0530</pubDate>
+    <lastBuildDate>Tue, 03 Oct 2017 00:39:03 +0530</lastBuildDate>
     
     <item>
       <title>DevOps - Making a Start !</title>
@@ -186,7 +186,8 @@
 &lt;p&gt;This may not be exactly the list you come up with, but if you followed along on the exercise model, you have your own list.&lt;/p&gt;
 &lt;p&gt;I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group&apos;s maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no of items should &apos;&lt;em&gt;reduce&lt;/em&gt;&apos; in reduce phase.&lt;/p&gt;
 &lt;p&gt;So there you go, now we have a set of starting points for a DevOps Strategy 101. All we have to do now is Go forth, and Iterate.&lt;/p&gt;
-&lt;p&gt;Oh, and of course, implement !&lt;/p&gt;</description>
+&lt;p&gt;Oh, and of course, implement !&lt;/p&gt;
+&lt;hr /&gt;</description>
     </item>
     
     <item>

@@ -202,3 +202,5 @@ I am leaving the reduce part of this operation out, as that will probably diverg
 So there you go, now we have a set of starting points for a DevOps Strategy 101. All we have to do now is Go forth, and Iterate.
 
 Oh, and of course, implement !
+
+------------------------------------------------------------------------------------------------------------
