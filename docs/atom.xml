@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-03T00:33:15.002233+05:30</updated>
+ <updated>2017-10-03T00:35:01.9931488+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -193,9 +193,9 @@
  
  <entry>
    <title>Azure AD and Office 365 OAuth Integration via Postman</title>
-   <link href="https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365.1/"/>
+   <link href="https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/"/>
    <updated>2017-09-24T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365.1/</id>
+   <id>https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/</id>
    <content type="html">&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s Office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Longer answer.&lt;/h2&gt;
 &lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
