@@ -1,6 +1,6 @@
 --- 
 layout: post
-title: "Azure AD and Office 365 OAuth Integration via Postman"
+title: "Azure AD and Office 365 OAuth integration through browsers and Postman."
 author: "Author"
 comments: true
 tags : [Azure, OAuth, Azure Active Directory, Office 365, Outlook, Postman]

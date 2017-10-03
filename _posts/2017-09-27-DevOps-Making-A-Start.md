@@ -1,9 +1,9 @@
 --- 
 layout: post
-title: "DevOps - Making a Start !"
+title: "DevOps - Getting off the blocks."
 author: "Author"
 comments: true
-tags : [DevOps, Automation, Strategy]
+tags : [DevOps, Automation, Strategy, Azure]
 ---
 
 DevOps is everywhere these days. As it should be, yes. Yet that doesn't take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the *where to begin* question comes in, and that is a very difficult question for something as nebulous as DevOps.

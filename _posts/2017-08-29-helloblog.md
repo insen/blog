@@ -3,6 +3,7 @@ layout: page
 title: "Blog like you are coming home."
 author: "Author"
 comments: true
+tags : [Blogging]
 ---
 
 ## Hello blog, eh, I mean, world!

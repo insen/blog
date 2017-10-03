@@ -1,6 +1,6 @@
 --- 
 layout: post
-title: "Getting started with Github Pages and Pretzel"
+title: "Blogging with Github Pages and Pretzel."
 author: "Author"
 comments: true
 tags : [Github, Pretzel, Hyde, Markdown, Blogging, Static Site Generators]
