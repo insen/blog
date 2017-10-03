@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 03 Oct 2017 15:25:01 +0530</pubDate>
-    <lastBuildDate>Tue, 03 Oct 2017 15:25:01 +0530</lastBuildDate>
+    <pubDate>Tue, 03 Oct 2017 15:32:03 +0530</pubDate>
+    <lastBuildDate>Tue, 03 Oct 2017 15:32:03 +0530</lastBuildDate>
     
     <item>
       <title>GOF - The hidden pattern.</title>
@@ -27,8 +27,8 @@
 &lt;p&gt;So you have maybe a concept or two of your own. &lt;em&gt;Yes, Even better&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Now here&apos;s the kicker - explain your concept to me, in writing. (&lt;em&gt;It doesn&apos;t have to be technical even. It could be in woodworking for all I care&lt;/em&gt;). But try writing down the concept.&lt;/p&gt;
 &lt;p&gt;Yes, go right ahead. Get some notes, stickers, postits, onenotes/evernotes, mindmaps and just write out the outline of your explanation. I can wait. See I have coffee, blogs, white-noise. I am all good with waiting a bit.&lt;/p&gt;
-&lt;p&gt;Writing down a concept is not an uncommom activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I had done my fair share.&lt;/p&gt;
-&lt;p&gt;Recently I did another - A &lt;em&gt;&apos;starting devOps&apos;&lt;/em&gt; analysis. And it was while doing this that I also started to think about &apos;&lt;em&gt;how to explain&lt;/em&gt;&apos; such a thing to someone else. And I found that basically I take the same fashion of describing a concept any-time. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.&lt;/p&gt;
+&lt;p&gt;Writing down a concept is not an uncommon activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I have done my fair share.&lt;/p&gt;
+&lt;p&gt;Recently I did one more - A &lt;em&gt;&apos;starting devOps&apos;&lt;/em&gt; analysis. And it was while doing this that I also started to think about &apos;&lt;em&gt;how to explain&lt;/em&gt;&apos; such a thing to someone else. And I found that everytime I need to explain a concept, I tend to use the same patterns to do so. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.&lt;/p&gt;
 &lt;h2&gt;Explaining yourself, preferably clearly.&lt;/h2&gt;
 &lt;p&gt;So a quick look at what I do when writing down a concept?&lt;/p&gt;
 &lt;h3&gt;Step 1&lt;/h3&gt;
@@ -51,11 +51,11 @@
 &lt;li&gt;Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Step 4&lt;/h3&gt;
-&lt;p&gt;The next steps is usally to play devils advocate. In this step, we make a listing of&lt;/p&gt;
+&lt;p&gt;The next step is usually to play devils advocate. As such, we make a listing of&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;assumptions&lt;/li&gt;
-&lt;li&gt;tradeoffs&lt;/li&gt;
-&lt;li&gt;areas of applicability&lt;/li&gt;
+&lt;li&gt;Assumptions&lt;/li&gt;
+&lt;li&gt;Tradeoffs&lt;/li&gt;
+&lt;li&gt;Areas of applicability&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Step 5&lt;/h3&gt;
 &lt;p&gt;We are now reaching the close of the explanation. At this point, we should be citing&lt;/p&gt;
@@ -64,13 +64,13 @@
 &lt;li&gt;Documentation for further details.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Step 6&lt;/h3&gt;
-&lt;p&gt;No concept paper is complete without a brief note about cases which have a high chance of rending the current concept invalid and lead us to look for alternative solutions. So we note down the&lt;/p&gt;
+&lt;p&gt;No concept paper is complete without a brief note about cases which have a high chance of rendering the current concept invalid and leads us to look for alternative solutions. So we note down the&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Limitations of concept&lt;/li&gt;
 &lt;li&gt;Alternative possibilities.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Hopefully still here with me. And not too many objections. Ok.&lt;/p&gt;
-&lt;p&gt;Now I will copy somethign from somewhere. The following section is a verbatim copy paste from the GOF book&lt;/p&gt;
+&lt;p&gt;Now I will copy a passage from a textbook. The following section is a verbatim copy-paste from the GOF book&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;Describing Design Patterns
 
 How do we describe design patterns? Graphical notations, while important and useful, aren&apos;t sufficient. They simply capture the end product of the design process as relationships between classes and objects. To reuse the design, we must also record the decisions, alternatives, and trade-offs that led to it. Concrete examples are important too, because they help you see the design in action.

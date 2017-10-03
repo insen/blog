@@ -29,9 +29,9 @@ Now here's the kicker - explain your concept to me, in writing. (*It doesn't hav
 
 Yes, go right ahead. Get some notes, stickers, postits, onenotes/evernotes, mindmaps and just write out the outline of your explanation. I can wait. See I have coffee, blogs, white-noise. I am all good with waiting a bit.
 
-Writing down a concept is not an uncommom activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I had done my fair share.
+Writing down a concept is not an uncommon activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I have done my fair share.
 
-Recently I did another - A *'starting devOps'* analysis. And it was while doing this that I also started to think about '*how to explain*' such a thing to someone else. And I found that basically I take the same fashion of describing a concept any-time. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.
+Recently I did one more - A *'starting devOps'* analysis. And it was while doing this that I also started to think about '*how to explain*' such a thing to someone else. And I found that everytime I need to explain a concept, I tend to use the same patterns to do so. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.
 
 ## Explaining yourself, preferably clearly.
 So a quick look at what I do when writing down a concept? 
@@ -53,10 +53,10 @@ Given the *drivers, and the structure*, we now drill down further into
 -   Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.
 
 ### Step 4
-The next steps is usally to play devils advocate. In this step, we make a listing of 
--   assumptions 
--   tradeoffs
--   areas of applicability
+The next step is usually to play devils advocate. As such, we make a listing of 
+-   Assumptions 
+-   Tradeoffs
+-   Areas of applicability
 
 ### Step 5
 We are now reaching the close of the explanation. At this point, we should be citing
@@ -64,13 +64,13 @@ We are now reaching the close of the explanation. At this point, we should be ci
 - Documentation for further details.
 
 ### Step 6
-No concept paper is complete without a brief note about cases which have a high chance of rending the current concept invalid and lead us to look for alternative solutions. So we note down the 
+No concept paper is complete without a brief note about cases which have a high chance of rendering the current concept invalid and leads us to look for alternative solutions. So we note down the 
 -   Limitations of concept
 -   Alternative possibilities.
 
 Hopefully still here with me. And not too many objections. Ok. 
 
-Now I will copy somethign from somewhere. The following section is a verbatim copy paste from the GOF book
+Now I will copy a passage from a textbook. The following section is a verbatim copy-paste from the GOF book
 
     Describing Design Patterns
 
@@ -131,4 +131,4 @@ Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.
 
 All yours, now.
 
-------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
