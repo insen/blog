@@ -123,7 +123,7 @@ Now I will copy a passage from a textbook. The following section is a verbatim c
 
 And here we are. The approach taken to describe the Patterns in the first place. 
 
-It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It like not just learning algorithms, but analysing them as well.
+It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It's like not just learning how to code algorithms, but analysing them as well.
 
 Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.
 

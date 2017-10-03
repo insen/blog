@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-03T15:32:03.0809615+05:30</updated>
+ <updated>2017-10-03T23:38:49.2722448+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -122,7 +122,7 @@ The appendices provide background information that will help you understand the 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;The hidden pattern, finally&lt;/h2&gt;
 &lt;p&gt;And here we are. The approach taken to describe the Patterns in the first place.&lt;/p&gt;
-&lt;p&gt;It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It like not just learning algorithms, but analysing them as well.&lt;/p&gt;
+&lt;p&gt;It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It&apos;s like not just learning how to code algorithms, but analysing them as well.&lt;/p&gt;
 &lt;p&gt;Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.&lt;/p&gt;
 &lt;h2&gt;The &apos;Concept Elucidation Pattern&apos;.&lt;/h2&gt;
 &lt;p&gt;All yours, now.&lt;/p&gt;
