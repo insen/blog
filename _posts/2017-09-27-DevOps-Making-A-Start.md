@@ -199,7 +199,7 @@ This may not be exactly the list you come up with, but if you followed along on 
 
 I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group's maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no of items should '*reduce*' in reduce phase.
 
-So there you go, now we have a set of starting points for a DevOps Strategy 101. All we have to do now is Go forth, and Iterate.
+So there you are, with a set of starting points for a DevOps 101 Strategy. All we have to do now is Go forth, and Iterate.
 
 Oh, and of course, implement !
 

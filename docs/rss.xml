@@ -6,8 +6,126 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 03 Oct 2017 11:34:44 +0530</pubDate>
-    <lastBuildDate>Tue, 03 Oct 2017 11:34:44 +0530</lastBuildDate>
+    <pubDate>Tue, 03 Oct 2017 15:14:43 +0530</pubDate>
+    <lastBuildDate>Tue, 03 Oct 2017 15:14:43 +0530</lastBuildDate>
+    
+    <item>
+      <title>GOF - The hidden pattern.</title>
+      <link>https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/</guid>
+      <description>&lt;p&gt;The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it. Considering that I first encountered the book in 2005.&lt;/p&gt;
+&lt;p&gt;I know, I know. I can hear the collective tirade of protest. All the analysis and the literature says 23.&lt;/p&gt;
+&lt;p&gt;Anyone who can count to 23 says 23.&lt;/p&gt;
+&lt;p&gt;The number of pattern descriptions in the book are 23.&lt;/p&gt;
+&lt;p&gt;In this case at least, as far as common knowledge goes, 23 is the answer, not 42.&lt;/p&gt;
+&lt;p&gt;Yet I will argue. There is another pattern in there. A pattern that is repeated over and over. A pattern that embeds yourself in your psyche and you use it unconsciously for several years until it hits you.&lt;/p&gt;
+&lt;p&gt;You disagree, eh?  Ok then, we&apos;ll try a different tack.&lt;/p&gt;
+&lt;h2&gt;Pattern No. 24. An oblique introduction.&lt;/h2&gt;
+&lt;p&gt;Are you familiar with the word &apos;concept&apos;? &lt;em&gt;Yes. Good. Thank you. A no here would have made it really difficult to proceed&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So you have maybe a concept or two of your own. &lt;em&gt;Yes, Even better&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Now here&apos;s the kicker - explain your concept to me, in writing. (&lt;em&gt;It doesn&apos;t have to be technical even. It could be in woodworking for all I care&lt;/em&gt;). But try writing down the concept.&lt;/p&gt;
+&lt;p&gt;Yes, go right ahead. Get some notes, stickers, postits, onenotes/evernotes, mindmaps and just write out the outline of your explanation. I can wait. See I have coffee, blogs, white-noise. I am all good with waiting a bit.&lt;/p&gt;
+&lt;p&gt;Writing down a concept is not an uncommom activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I had done my fair share.&lt;/p&gt;
+&lt;p&gt;Recently I did another - A &lt;em&gt;&apos;starting devOps&apos;&lt;/em&gt; analysis. And it was while doing this that I also started to think about &apos;&lt;em&gt;how to explain&lt;/em&gt;&apos; such a thing to someone else. And I found that basically I take the same fashion of describing a concept any-time. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.&lt;/p&gt;
+&lt;h2&gt;Explaining yourself, preferably clearly.&lt;/h2&gt;
+&lt;p&gt;So a quick look at what I do when writing down a concept?&lt;/p&gt;
+&lt;h3&gt;Step 1&lt;/h3&gt;
+&lt;p&gt;This part defines the motivations and reasons for the concept. In my case, It has traditionally involved consideration and listing down of the following&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The driving forces&lt;/li&gt;
+&lt;li&gt;The constraining forces&lt;/li&gt;
+&lt;li&gt;The goals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 2&lt;/h3&gt;
+&lt;p&gt;Given the &lt;em&gt;drivers, constraints and goals&lt;/em&gt;, I now proceed to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An explanation of the general structure of the concept.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 3&lt;/h3&gt;
+&lt;p&gt;Given the &lt;em&gt;drivers, and the structure&lt;/em&gt;, we now drill down further into&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Key stake-holders&lt;/li&gt;
+&lt;li&gt;Key components involved in the concept,&lt;/li&gt;
+&lt;li&gt;Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 4&lt;/h3&gt;
+&lt;p&gt;The next steps is usally to play devils advocate. In this step, we make a listing of&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;assumptions&lt;/li&gt;
+&lt;li&gt;tradeoffs&lt;/li&gt;
+&lt;li&gt;areas of applicability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 5&lt;/h3&gt;
+&lt;p&gt;We are now reaching the close of the explanation. At this point, we should be citing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;References&lt;/li&gt;
+&lt;li&gt;Documentation for further details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 6&lt;/h3&gt;
+&lt;p&gt;No concept paper is complete without a brief note about cases which have a high chance of rending the current concept invalid and lead us to look for alternative solutions. So we note down the&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Limitations of concept&lt;/li&gt;
+&lt;li&gt;Alternative possibilities.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hopefully still here with me. And not too many objections. Ok.&lt;/p&gt;
+&lt;p&gt;Now I will copy somethign from somewhere. The following section is a verbatim copy paste from the GOF book&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Describing Design Patterns
+
+How do we describe design patterns? Graphical notations, while important and useful, aren&apos;t sufficient. They simply capture the end product of the design process as relationships between classes and objects. To reuse the design, we must also record the decisions, alternatives, and trade-offs that led to it. Concrete examples are important too, because they help you see the design in action.
+
+We describe design patterns using a consistent format. Each pattern is divided into sections according to the following template. The template lends a uniform structure to the information, making design patterns easier to learn, compare, and use.
+
+Pattern Name and Classification
+The pattern&apos;s name conveys the essence of the pattern succinctly. A good name is vital, because it will become part of your design vocabulary. The pattern&apos;s classification reflects the scheme we introduce in Section 1.5.
+
+Intent
+A short statement that answers the following questions: What does the design pattern do? What is its rationale and intent? What particular design issue or problem does it address?
+
+Also Known As
+Other well-known names for the pattern, if any.
+
+Motivation
+A scenario that illustrates a design problem and how the class and object structures in the pattern solve the problem. The scenario will help you understand the more abstract description of the pattern that follows.
+
+Applicability
+What are the situations in which the design pattern can be applied? What are examples of poor designs that the pattern can address? How can you recognize these situations?
+
+Structure
+A graphical representation of the classes in the pattern using a notation based on the Object Modeling Technique (OMT) [RBP+91]. We also use interaction diagrams [JCJO92, Boo94] to illustrate sequences of requests and collaborations between objects. Appendix B describes these notations in detail.
+
+Participants
+The classes and/or objects participating in the design pattern and their responsibilities.
+
+Collaborations
+How the participants collaborate to carry out their responsibilities.
+
+Consequences
+How does the pattern support its objectives? What are the trade-offs and results of using the pattern? What aspect of system structure does it let you vary independently?
+
+Implementation
+What pitfalls, hints, or techniques should you be aware of when implementing the pattern? Are there language-specific issues?
+
+Sample Code
+Code fragments that illustrate how you might implement the pattern in C++ or Smalltalk.
+
+Known Uses
+Examples of the pattern found in real systems. We include at least two examples from different domains.
+
+Related Patterns
+What design patterns are closely related to this one? What are the important differences? With which other patterns should this one be used?
+
+The appendices provide background information that will help you understand the patterns and the discussions surrounding them. Appendix A is a glossary of terminology we use. We&apos;ve already mentioned Appendix B, which presents the various notations. We&apos;ll also describe aspects of the notations as we introduce them in the upcoming discussions. Finally, Appendix C contains source code for the foundation classes we use in code samples.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;The hidden pattern, finally&lt;/h2&gt;
+&lt;p&gt;And here we are. The approach taken to describe the Patterns in the first place.&lt;/p&gt;
+&lt;p&gt;It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It like not just learning algorithms, but analysing them as well.&lt;/p&gt;
+&lt;p&gt;Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.&lt;/p&gt;
+&lt;h2&gt;The &apos;Concept Elucidation Pattern&apos;.&lt;/h2&gt;
+&lt;p&gt;All yours, now.&lt;/p&gt;
+&lt;hr /&gt;</description>
+    </item>
     
     <item>
       <title>DevOps - Getting off the blocks.</title>
@@ -185,7 +303,7 @@
 &lt;/ul&gt;
 &lt;p&gt;This may not be exactly the list you come up with, but if you followed along on the exercise model, you have your own list.&lt;/p&gt;
 &lt;p&gt;I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group&apos;s maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no of items should &apos;&lt;em&gt;reduce&lt;/em&gt;&apos; in reduce phase.&lt;/p&gt;
-&lt;p&gt;So there you go, now we have a set of starting points for a DevOps Strategy 101. All we have to do now is Go forth, and Iterate.&lt;/p&gt;
+&lt;p&gt;So there you are, with a set of starting points for a DevOps 101 Strategy. All we have to do now is Go forth, and Iterate.&lt;/p&gt;
 &lt;p&gt;Oh, and of course, implement !&lt;/p&gt;
 &lt;hr /&gt;</description>
     </item>
