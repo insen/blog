@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
     <title>Insen | [name, insen][url, https://linkedin.com/nilsengupta]</title>
-    <link>http://localhost:8080</link>
-    <atom:link href="http://localhost:8080/rss.xml" rel="self" type="application/rss+xml" />
+    <link>https://insen.github.io/blog</link>
+    <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Thu, 05 Oct 2017 02:21:03 +0530</pubDate>
-    <lastBuildDate>Thu, 05 Oct 2017 02:21:03 +0530</lastBuildDate>
+    <pubDate>Thu, 05 Oct 2017 02:24:27 +0530</pubDate>
+    <lastBuildDate>Thu, 05 Oct 2017 02:24:27 +0530</lastBuildDate>
     
     <item>
       <title>Blogging - Curious things with Pretzel.</title>
-      <link>http://localhost:8080/2017/10/04/Pretzel-Curious-Things/</link>
+      <link>https://insen.github.io/blog/2017/10/04/Pretzel-Curious-Things/</link>
       <pubDate>Wed, 04 Oct 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://localhost:8080/2017/10/04/Pretzel-Curious-Things/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/10/04/Pretzel-Curious-Things/</guid>
       <description>&lt;p&gt;Pretzel blogging turned up some very curious head-scratchers.&lt;/p&gt;
 &lt;h4&gt;Paginator&lt;/h4&gt;
 &lt;p&gt;Couldn&apos;t get paginator to work. Well, it works now. Turns out you have to add&lt;/p&gt;
@@ -46,10 +46,10 @@
     
     <item>
       <title>GOF - The hidden pattern.</title>
-      <link>http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/</link>
+      <link>https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/</link>
       <pubDate>Tue, 03 Oct 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/</guid>
       <description>&lt;p&gt;The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.&lt;/p&gt;
 &lt;p&gt;I know, I know. I can hear the collective tirade of protest.&lt;/p&gt;
 &lt;p&gt;All the analysis and the literature says 23.&lt;/p&gt;
@@ -166,10 +166,10 @@ The appendices provide background information that will help you understand the 
     
     <item>
       <title>DevOps - Getting off the blocks.</title>
-      <link>http://localhost:8080/2017/09/27/DevOps-Making-A-Start/</link>
+      <link>https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/</link>
       <pubDate>Wed, 27 Sep 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://localhost:8080/2017/09/27/DevOps-Making-A-Start/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/</guid>
       <description>&lt;p&gt;DevOps is everywhere these days. As it should be, yes. Yet that doesn&apos;t take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the &lt;em&gt;where to begin&lt;/em&gt; question comes in, and that is a very difficult question for something as nebulous as DevOps.&lt;/p&gt;
 &lt;p&gt;So how does one start being &apos;DevOps&apos;y?  What drives DevOps?&lt;/p&gt;
 &lt;h2&gt;Context, Culture, Tools, Change, Automation, Feedback Loops and Collaboration !&lt;/h2&gt;
@@ -347,10 +347,10 @@ The appendices provide background information that will help you understand the 
     
     <item>
       <title>Azure AD and Office 365 OAuth integration through browsers and Postman.</title>
-      <link>http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/</link>
+      <link>https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/</link>
       <pubDate>Sun, 24 Sep 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/</guid>
       <description>&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s Office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Longer answer.&lt;/h2&gt;
 &lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
@@ -633,10 +633,10 @@ Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6
     
     <item>
       <title>Blogging with Github Pages and Pretzel.</title>
-      <link>http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/</link>
+      <link>https://insen.github.io/blog/2017/08/29/Blogging-Github-Pretzel/</link>
       <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/08/29/Blogging-Github-Pretzel/</guid>
       <description>&lt;p&gt;As I mentioned in my &lt;a href=&quot;http://insen.github.io/blog/2017/08/29/helloblog/&quot;&gt;&apos;hello-blog&apos;&lt;/a&gt; post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.&lt;/p&gt;
 &lt;h3&gt;The Goal.&lt;/h3&gt;
 &lt;p&gt;The goal here is a system which has the following publish-a-blog sequence -&lt;/p&gt;
@@ -857,10 +857,10 @@ exclude:
     
     <item>
       <title>Blog like you are coming home.</title>
-      <link>http://localhost:8080/2017/08/29/Hello-Blog/</link>
+      <link>https://insen.github.io/blog/2017/08/29/Hello-Blog/</link>
       <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">http://localhost:8080/2017/08/29/Hello-Blog/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/08/29/Hello-Blog/</guid>
       <description>&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
 &lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
 &lt;p&gt;But, I had conditions -&lt;/p&gt;
