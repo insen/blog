@@ -6,9 +6,11 @@ comments: true
 tags : [Pattern, Analysis, Strategy, Design]
 ---
 
-The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it. Considering that I first encountered the book in 2005.
+The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.
 
-I know, I know. I can hear the collective tirade of protest. All the analysis and the literature says 23. 
+I know, I know. I can hear the collective tirade of protest. 
+
+All the analysis and the literature says 23. 
 
 Anyone who can count to 23 says 23. 
 
@@ -123,7 +125,7 @@ Now I will copy a passage from a textbook. The following section is a verbatim c
 
 And here we are. The approach taken to describe the Patterns in the first place. 
 
-It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It's like not just learning how to code algorithms, but analysing them as well.
+It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It's not just learning algorithms, but learning how to analyse them as well.
 
 Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.
 

@@ -19,7 +19,7 @@ The above set summarizes the key drivers of DevOps anywhere. Additionally, there
 -   Automation - *everything repetitive should be automated.*
 -   Monitoring Dashboards - *all process information, tests, builds, deploys, operations, features, analytics should be monitored and available.* 
 
-Essentially, the practises above together cumulate into a CI/CD pipeline. How sophisticated/refined your CI/CD pipeline is, is one of the key technological measures of a DevOps oriented teams' maturity level.
+Essentially, the practises above together cumulate into a CI/CD pipeline. How sophisticated/refined your CI/CD pipeline is, is one of the key technological measures of a DevOps oriented team's maturity level.
 
 So then the question driving a group trying to adopt a DevOps-y approach to software service delivery is, most likely, this
 
@@ -41,7 +41,7 @@ Oops!
 
 That didn't sound legit, did it? Cos it wasn't. In DevOps context itself is context-sensitive, i.e. it means take the biggest picture from where you stand. That's all you can do anyways. 
 
-Since context is king, we will set a context. Assume the following organizational scenario within which to start out on a DevOps analysis first. 
+Since context is king, we will set a context within which to start out on our DevOps analysis. Assume the following organizational scenario first. 
 
 *A team trying to provide custom software development and integration services on Azure. A team trying to a create a distributed processing layer for the .NET Stack system. A team working on big-data analytics and data presentation system on Azure. A management team trying to manage all these.*
 
@@ -70,11 +70,11 @@ Enter *__Azure Culture__*. But what does *Azure Culture* in a DevOps organizatio
 
 *The above is the kind of question that completely derails initiatives if we sit down to exhaustively analyse the options. Sometime you just pick the first option and go - just so that it sets an operational context, if nothing else.*
 
-We will just set one - the .NET stack. *Keeping things within the family, you see. You pick scala, or hadoop or node as per your needs. After all, you need multiple iterations of this.*
+So we will just set one - the .NET stack. *Keeping things within the family, you see. You pick scala, or hadoop or node as per your needs. After all, you need multiple iterations of this.*
 
 So our task has now decomposed into a search for tooling options on the Azure platform and the .NET software development stack that enables foundational DevOps practises while achieving one or more of our goals - *faster change adoption, more automation,more shared process information, more closed feedback loops*. Once we identify tools and technologies, we *assess our maturity levels on identified tools and practises* to *identify __gaps__ which can be plugged*.
 
-__The gaps are what we attack in our DevOps strategy 101__. The number of iterations of this process you go through, and the reviews with all concerned stakeholders should pare the list to items with highest priority overall.
+__The gaps are what we attack in our DevOps strategy 101__. The number of iterations of this process you go through, and the reviews with all concerned stakeholders should pare the list to items with highest overall priority.
 
 Now we will do a non technical map-reduce. In *map* phase, we list out every possible tool, practise or activity that looks like it might help. In *reduce* phase - we prioritize items from list. 
 
@@ -83,14 +83,14 @@ And in map phase our goals are simple.
 -   *__practises we can encourage__* 
 -   *__activities we can do__*  
 
-Now, the initial list will probably be large, as both Azure nor Microsoft .NET are huge eco-systems, but remember two things, 
+Now, the initial list will probably be large, as both Azure and Microsoft .NET are huge eco-systems, but remember two things, 
 -   We are just looking for what to start with.
 -   As of now, we are just identifying as many options as we can that are applicable. 
 
 But we do need to manage, classify and process this list. Wikipedia, in its DevOps page, suggests the SDLC stages - Code, Test, Build/Package/Relase (*merged these as boundaries between them are overlapping, especially in the matter of tooling*), and Monitor. 
 
 ### Azure/.NET Stack | SDLC Stage - Code
-A basic DevOps practises here is *Version Control*. Distributed VCS are now standard, so we pick *__Git__*.
+A basic DevOps practise here is *Version Control*. Distributed VCS are now standard, so we pick *__Git__*.
 
 Architectural support targeting DevOps enablement for Azure PaaS systems is a much-needed eco-system centric practise. Enter *__Microservice architectures__* which by encouraging by encouraging small pieces and plug-and-play composition help keeping pieces small and nimble.
 
@@ -110,7 +110,7 @@ Test automation has several flavours
 -   Integration Tests
 -   Performance tests.
 
-Additionally, we can also automate the test generation process through Behavior Driven Design Tools like SpecFlow. And test execution automation is usually done through build pipelines and Continuous Integration (CI)/Continuous Delivery(CD).
+Additionally, we can also automate the test generation process through Behavior Driven Design Tools like SpecFlow, and test execution automation is usually done through build pipelines and Continuous Integration (CI)/Continuous Delivery(CD).
 #### Tools
 -   [Pex - Generates boundary conditions tests](https://docs.microsoft.com/en-us/visualstudio/test/intellitest-manual/introduction)
 -   Unit And Integrated Testing Frameworks 
@@ -156,7 +156,6 @@ Following activities are required.
 
 At some point, build a __Data Collection and Aggregation Tooling/Implementation__.
 
-
 ## __*Big List of Tools, Practises and Activities*__
 What we have been doing so far, is basically running the *map* part of a map-reduce analysis. Aggregating all of the tools, practises and activities found above, we get the following big list. 
 
@@ -197,10 +196,10 @@ What we have been doing so far, is basically running the *map* part of a map-red
 
 This may not be exactly the list you come up with, but if you followed along on the exercise model, you have your own list. 
 
-I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group's maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no of items should '*reduce*' in reduce phase.
+I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group's maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no. of items should '*reduce*' in reduce phase.
 
 So there you are, with a set of starting points for a DevOps 101 Strategy. All we have to do now is Go forth, and Iterate.
 
 Oh, and of course, implement !
 
-------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------

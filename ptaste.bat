@@ -1,1 +1,1 @@
-pretzel taste --cleantarget
+pretzel taste --source=./docs --cleantarget

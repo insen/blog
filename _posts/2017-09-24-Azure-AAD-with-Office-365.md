@@ -285,7 +285,7 @@ Fire the request. We should get the following response.
         "not_before": "1506078548",
         "resource": "https://outlook.office.com/",        
         "access_token": "myJ0eXAiOiJKV1Qi-{removed_lots_of_chars_here}-ukX3nBlRfzh6Sg",        
-        "refresh_token": "QABAAAAAAABlDrq-{removed_lots_of_chars_here}-uoBFATkE6ZJHyAA",        
+        "refresh_token": "QABAAAAAAABlDrq-{removed_lots_of_chars_here}-uoBFATkE6ZJHyAA",       
         "id_token": "yJ0eXAiOiJKV1QiL-{removed_lots_of_chars_here}-SIsInZlciI6IjEuMCJ9."
     }
 
@@ -345,6 +345,6 @@ If you want to try out the equivalent graph API, you need to do a fresh authenti
 
 And that's all of it. We can go home now. 
 
--------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 

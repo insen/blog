@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Insen
 tagline:          'Write, Code, Dream !'  
-description:      'Write, Code, Dream ! <a href="https://github.com/insen" target="_blank">@insen</a>.'
+description:      'Write, Code, Dream !<a href="https://github.com/insen" target="_blank"> @insen</a>.'
 url:              https://insen.github.io/blog
 baseurl:          https://insen.github.io/blog/
 
@@ -17,7 +17,8 @@ author:
   name:           insen
   url:            https://linkedin.com/nilsengupta
 
-paginate:         3
+paginate:         5
+
 # Custom vars
 version:          1.0.0
 

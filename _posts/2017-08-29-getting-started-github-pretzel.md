@@ -6,9 +6,7 @@ comments: true
 tags : [Github, Pretzel, Hyde, Markdown, Blogging, Static Site Generators]
 ---
 
-As I mentioned in my ['hello-blog'](http://insen.github.io/blog/2017/08/29/helloblog/) post, my search for 
-blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a 
-blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.
+As I mentioned in my ['hello-blog'](http://insen.github.io/blog/2017/08/29/helloblog/) post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.
 
 ### The Goal.
 The goal here is a system which has the following publish-a-blog sequence -
