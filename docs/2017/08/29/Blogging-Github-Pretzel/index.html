@@ -16,14 +16,14 @@
   </title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/poole.css">
-  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/syntax.css">
-  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="httP://localhost:8080/public/css/poole.css">
+  <link rel="stylesheet" href="httP://localhost:8080/public/css/syntax.css">
+  <link rel="stylesheet" href="httP://localhost:8080/public/css/hyde.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://insen.github.io/blog/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="https://insen.github.io/blog/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="httP://localhost:8080/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="httP://localhost:8080/public/favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
@@ -36,7 +36,7 @@
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
       <h1>
-        <a href="https://insen.github.io/blog/">
+        <a href="httP://localhost:8080/">
           Insen
         </a>
       </h1>
@@ -44,7 +44,7 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a class="sidebar-nav-item" href="https://insen.github.io/blog/">Home</a>
+      <a class="sidebar-nav-item" href="httP://localhost:8080/">Home</a>
 
       
 
@@ -246,29 +246,27 @@ lookup the various possible options.</li>
 <p>Change <strong>index.html</strong>. This file should be in the <strong>repo</strong> directory.</p>
 <ul>
 <li>
-<p>There should be a line towards the top. md <code>\{\% for post in paginator.posts \%\}</code>. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.</p>
+<p>There should be a line towards the top. md <code>{% for post in paginator.posts %}</code>. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.</p>
 </li>
 <li>
-<p>There should be a line a little below the above <code>&lt;a href=&quot;\{\{ post.url \}\}&quot;&gt;</code>. Change this to <code>&lt;a href=&quot;\{\{ post.url | prepend: site.baseurl }}&quot;&gt;</code>. Navigation between posts does not work otherwise.</p>
+<p>There should be a line a little below the above <code>&lt;a href=&quot; {{ post.url }}&quot;&gt;</code>. Change this to <code>&lt;a href=&quot;{{ post.url | prepend: site.baseurl }}&quot;&gt;</code>. Navigation between posts does not work otherwise.</p>
 </li>
 </ul>
 </li>
 <li>
-<p>Update the config.yml. A config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <code>&lt;span&gt;\{\{ site.title }}&lt;/span&gt;</code> or <code>&lt;span&gt;\{\{ site.connect.github }}&lt;/span&gt;</code>, etc. The sections marked as <em>(Setup)</em> in ths file have to be filed in and be accurate. They are used to generate the site.</p>
+<p>Update the config.yml. A config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <code>&lt;span&gt;{{ site.title }}&lt;/span&gt;</code> or <code>&lt;span&gt;{{ site.connect.github }}&lt;/span&gt;</code>, etc. The sections marked as <em>(Setup)</em> in ths file have to be filed in and be accurate. They are used to generate the site.</p>
 </li>
 </ul>
-<blockquote>
-<p>  <em>(Note - In code snippets above and config.yml file below the 'slash' before 'curly braces', 'percent' or 'hash' 	symbol are extra. The 'slash' is not part of actual code. it was needed to escape Liquid processing)</em>.</p>
-</blockquote>
-<pre><code class="language-yml">\# Dependencies
+<p>My config.yml is shown.</p>
+<pre><code class="language-yml"># Dependencies
 markdown:         redcarpet
 highlighter:      pygments
 
-\# Permalinks
+# Permalinks
 permalink:        pretty
 relative_permalinks: true
 
-\# Setup
+# Setup
 title:            'Some text'
 tagline:          'Some text'  
 description:      'Some text'
@@ -281,7 +279,7 @@ author:
 
 paginate:         5
 
-\# Custom vars
+# Custom vars
 version:          1.0.0
 
 connect:
@@ -296,7 +294,6 @@ exclude:
   - pbake.bat
   - ptaste.bat 
 </code></pre>
-<p><em>(Note - Also for each line which begins with 'hash' is preceded by a 'slash'. the 'slash' is not part of config.yml. it was needed to escape markdown processing)</em>.</p>
 <ul>
 <li>
 <p>Run <strong>taste</strong> command as specified above from the repository directory. This command should run, open a browser on local machine and show you the sample posts (ref - we removed the 'gist' tag from one of them).</p>

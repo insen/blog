@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Insen</title>
- <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
- <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-04T13:50:43.3129361+05:30</updated>
- <id>https://insen.github.io/blog</id>
+ <link href="http://localhost:8080/atom.xml" rel="self"/>
+ <link href="http://localhost:8080/"/>
+ <updated>2017-10-05T02:21:03.9654029+05:30</updated>
+ <id>http://localhost:8080</id>
  <author>
    <name>insen</name>
    <email></email>
@@ -13,10 +13,44 @@
 
  
  <entry>
+   <title>Blogging - Curious things with Pretzel.</title>
+   <link href="http://localhost:8080/2017/10/04/Pretzel-Curious-Things/"/>
+   <updated>2017-10-04T00:00:00+05:30</updated>
+   <id>http://localhost:8080/2017/10/04/Pretzel-Curious-Things/</id>
+   <content type="html">&lt;p&gt;Pretzel blogging turned up some very curious head-scratchers.&lt;/p&gt;
+&lt;h4&gt;Paginator&lt;/h4&gt;
+&lt;p&gt;Couldn&apos;t get paginator to work. Well, it works now. Turns out you have to add&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;
+    paginate:   3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;at the top of your &lt;code&gt;index.html&lt;/code&gt; in the yml frontmatter.&lt;/p&gt;
+&lt;h4&gt;Escaping Liquid&lt;/h4&gt;
+&lt;p&gt;I couldn&apos;t escape the characters &lt;code&gt;{{&lt;/code&gt; or the characters &lt;code&gt;{%&lt;/code&gt; in any fashion.&lt;/p&gt;
+&lt;p&gt;You can, if you put it like this &lt;code&gt;{{ \&amp;quot; }}&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Landing page to show list only.&lt;/h4&gt;
+&lt;p&gt;The landing page was updated to show list of posts. Change is in &lt;code&gt;index.html&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Comment out the following line &lt;code&gt;{{ post.content }}&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Css font-size reduction&lt;/h4&gt;
+&lt;p&gt;The basic font size was too large. Changes in &lt;code&gt;hyde.css&lt;/code&gt;. &lt;code&gt;font-size&lt;/code&gt; reduce by &lt;code&gt;2px&lt;/code&gt;. The section below is the relevant section. All other fonts are in &lt;code&gt;em&lt;/code&gt; with relation to these two. So this is a across all devices and form-factors thing.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;
+    @media (min-width: 48em) {
+        html {
+            font-size: 14px;
+        }
+    }
+    @media (min-width: 58em) {
+        html {
+            font-size: 18px;
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
    <title>GOF - The hidden pattern.</title>
-   <link href="https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/"/>
+   <link href="http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/"/>
    <updated>2017-10-03T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/</id>
+   <id>http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/</id>
    <content type="html">&lt;p&gt;The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.&lt;/p&gt;
 &lt;p&gt;I know, I know. I can hear the collective tirade of protest.&lt;/p&gt;
 &lt;p&gt;All the analysis and the literature says 23.&lt;/p&gt;
@@ -34,39 +68,39 @@
 &lt;p&gt;Recently I did one more - A &lt;em&gt;&apos;starting devOps&apos;&lt;/em&gt; analysis. And it was while doing this that I also started to think about &apos;&lt;em&gt;how to explain&lt;/em&gt;&apos; such a thing to someone else. And I found that everytime I need to explain a concept, I tend to use the same patterns to do so. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.&lt;/p&gt;
 &lt;h2&gt;Explaining yourself, preferably clearly.&lt;/h2&gt;
 &lt;p&gt;So a quick look at what I do when writing down a concept?&lt;/p&gt;
-&lt;h3&gt;Step 1&lt;/h3&gt;
-&lt;p&gt;This part defines the motivations and reasons for the concept. In my case, It has traditionally involved consideration and listing down of the following&lt;/p&gt;
+&lt;h3&gt;Step 1 - Motivation&lt;/h3&gt;
+&lt;p&gt;This part defines the &lt;em&gt;motivations and reasons&lt;/em&gt; for the concept. In my case, It has traditionally involved consideration and listing down of the following&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The driving forces&lt;/li&gt;
 &lt;li&gt;The constraining forces&lt;/li&gt;
 &lt;li&gt;The goals&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Step 2&lt;/h3&gt;
+&lt;h3&gt;Step 2 - Drivers and Constraints&lt;/h3&gt;
 &lt;p&gt;Given the &lt;em&gt;drivers, constraints and goals&lt;/em&gt;, I now proceed to&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;An explanation of the general structure of the concept.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Step 3&lt;/h3&gt;
+&lt;h3&gt;Step 3 - Structure&lt;/h3&gt;
 &lt;p&gt;Given the &lt;em&gt;drivers, and the structure&lt;/em&gt;, we now drill down further into&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Key stake-holders&lt;/li&gt;
 &lt;li&gt;Key components involved in the concept,&lt;/li&gt;
 &lt;li&gt;Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Step 4&lt;/h3&gt;
+&lt;h3&gt;Step 4 - Downsides and Limitations&lt;/h3&gt;
 &lt;p&gt;The next step is usually to play devils advocate. As such, we make a listing of&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Assumptions&lt;/li&gt;
 &lt;li&gt;Tradeoffs&lt;/li&gt;
 &lt;li&gt;Areas of applicability&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Step 5&lt;/h3&gt;
+&lt;h3&gt;Step 5 - References&lt;/h3&gt;
 &lt;p&gt;We are now reaching the close of the explanation. At this point, we should be citing&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;References&lt;/li&gt;
 &lt;li&gt;Documentation for further details.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Step 6&lt;/h3&gt;
+&lt;h3&gt;Step 6 - Risks, Mitigations and Alternatives&lt;/h3&gt;
 &lt;p&gt;No concept paper is complete without a brief note about cases which have a high chance of rendering the current concept invalid and leads us to look for alternative solutions. So we note down the&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Limitations of concept&lt;/li&gt;
@@ -123,8 +157,9 @@ The appendices provide background information that will help you understand the 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;The hidden pattern, finally&lt;/h2&gt;
 &lt;p&gt;And here we are. The approach taken to describe the Patterns in the first place.&lt;/p&gt;
-&lt;p&gt;It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It&apos;s not just learning algorithms, but learning how to analyse them as well.&lt;/p&gt;
-&lt;p&gt;Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.&lt;/p&gt;
+&lt;p&gt;It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It is similiar to learning algorithms, but it is &lt;em&gt;NOT just about learning algorithms&lt;/em&gt;, but learning &lt;em&gt;how to analyse them&lt;/em&gt; as well.&lt;/p&gt;
+&lt;p&gt;The outline presented here is basically what I fall back to everytime I need to explain a concept. And like patterns itself, I use some of it, all of it, or in combination with something else, but the concept remains.&lt;/p&gt;
+&lt;p&gt;Thus, Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.&lt;/p&gt;
 &lt;h2&gt;The &apos;Concept Elucidation Pattern&apos;.&lt;/h2&gt;
 &lt;p&gt;All yours, now.&lt;/p&gt;
 &lt;hr /&gt;</content>
@@ -132,9 +167,9 @@ The appendices provide background information that will help you understand the 
  
  <entry>
    <title>DevOps - Getting off the blocks.</title>
-   <link href="https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/"/>
+   <link href="http://localhost:8080/2017/09/27/DevOps-Making-A-Start/"/>
    <updated>2017-09-27T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/</id>
+   <id>http://localhost:8080/2017/09/27/DevOps-Making-A-Start/</id>
    <content type="html">&lt;p&gt;DevOps is everywhere these days. As it should be, yes. Yet that doesn&apos;t take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the &lt;em&gt;where to begin&lt;/em&gt; question comes in, and that is a very difficult question for something as nebulous as DevOps.&lt;/p&gt;
 &lt;p&gt;So how does one start being &apos;DevOps&apos;y?  What drives DevOps?&lt;/p&gt;
 &lt;h2&gt;Context, Culture, Tools, Change, Automation, Feedback Loops and Collaboration !&lt;/h2&gt;
@@ -312,9 +347,9 @@ The appendices provide background information that will help you understand the 
  
  <entry>
    <title>Azure AD and Office 365 OAuth integration through browsers and Postman.</title>
-   <link href="https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/"/>
+   <link href="http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/"/>
    <updated>2017-09-24T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/</id>
+   <id>http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/</id>
    <content type="html">&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s Office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Longer answer.&lt;/h2&gt;
 &lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
@@ -597,9 +632,9 @@ Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6
  
  <entry>
    <title>Blogging with Github Pages and Pretzel.</title>
-   <link href="https://insen.github.io/blog/2017/08/29/getting-started-github-pretzel/"/>
+   <link href="http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/08/29/getting-started-github-pretzel/</id>
+   <id>http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/</id>
    <content type="html">&lt;p&gt;As I mentioned in my &lt;a href=&quot;http://insen.github.io/blog/2017/08/29/helloblog/&quot;&gt;&apos;hello-blog&apos;&lt;/a&gt; post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.&lt;/p&gt;
 &lt;h3&gt;The Goal.&lt;/h3&gt;
 &lt;p&gt;The goal here is a system which has the following publish-a-blog sequence -&lt;/p&gt;
@@ -738,29 +773,27 @@ lookup the various possible options.&lt;/li&gt;
 &lt;p&gt;Change &lt;strong&gt;index.html&lt;/strong&gt;. This file should be in the &lt;strong&gt;repo&lt;/strong&gt; directory.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;There should be a line towards the top. md &lt;code&gt;\{\% for post in paginator.posts \%\}&lt;/code&gt;. Change &apos;paginator&apos; to &apos;site&apos;. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.&lt;/p&gt;
+&lt;p&gt;There should be a line towards the top. md &lt;code&gt;{% for post in paginator.posts %}&lt;/code&gt;. Change &apos;paginator&apos; to &apos;site&apos;. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;There should be a line a little below the above &lt;code&gt;&amp;lt;a href=&amp;quot;\{\{ post.url \}\}&amp;quot;&amp;gt;&lt;/code&gt;. Change this to &lt;code&gt;&amp;lt;a href=&amp;quot;\{\{ post.url | prepend: site.baseurl }}&amp;quot;&amp;gt;&lt;/code&gt;. Navigation between posts does not work otherwise.&lt;/p&gt;
+&lt;p&gt;There should be a line a little below the above &lt;code&gt;&amp;lt;a href=&amp;quot; {{ post.url }}&amp;quot;&amp;gt;&lt;/code&gt;. Change this to &lt;code&gt;&amp;lt;a href=&amp;quot;{{ post.url | prepend: site.baseurl }}&amp;quot;&amp;gt;&lt;/code&gt;. Navigation between posts does not work otherwise.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Update the config.yml. A config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;code&gt;&amp;lt;span&amp;gt;\{\{ site.title }}&amp;lt;/span&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;lt;span&amp;gt;\{\{ site.connect.github }}&amp;lt;/span&amp;gt;&lt;/code&gt;, etc. The sections marked as &lt;em&gt;(Setup)&lt;/em&gt; in ths file have to be filed in and be accurate. They are used to generate the site.&lt;/p&gt;
+&lt;p&gt;Update the config.yml. A config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;code&gt;&amp;lt;span&amp;gt;{{ site.title }}&amp;lt;/span&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;lt;span&amp;gt;{{ site.connect.github }}&amp;lt;/span&amp;gt;&lt;/code&gt;, etc. The sections marked as &lt;em&gt;(Setup)&lt;/em&gt; in ths file have to be filed in and be accurate. They are used to generate the site.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;  &lt;em&gt;(Note - In code snippets above and config.yml file below the &apos;slash&apos; before &apos;curly braces&apos;, &apos;percent&apos; or &apos;hash&apos; 	symbol are extra. The &apos;slash&apos; is not part of actual code. it was needed to escape Liquid processing)&lt;/em&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;\# Dependencies
+&lt;p&gt;My config.yml is shown.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;# Dependencies
 markdown:         redcarpet
 highlighter:      pygments
 
-\# Permalinks
+# Permalinks
 permalink:        pretty
 relative_permalinks: true
 
-\# Setup
+# Setup
 title:            &apos;Some text&apos;
 tagline:          &apos;Some text&apos;  
 description:      &apos;Some text&apos;
@@ -773,7 +806,7 @@ author:
 
 paginate:         5
 
-\# Custom vars
+# Custom vars
 version:          1.0.0
 
 connect:
@@ -788,7 +821,6 @@ exclude:
   - pbake.bat
   - ptaste.bat 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;em&gt;(Note - Also for each line which begins with &apos;hash&apos; is preceded by a &apos;slash&apos;. the &apos;slash&apos; is not part of config.yml. it was needed to escape markdown processing)&lt;/em&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Run &lt;strong&gt;taste&lt;/strong&gt; command as specified above from the repository directory. This command should run, open a browser on local machine and show you the sample posts (ref - we removed the &apos;gist&apos; tag from one of them).&lt;/p&gt;
@@ -823,9 +855,9 @@ exclude:
  
  <entry>
    <title>Blog like you are coming home.</title>
-   <link href="https://insen.github.io/blog/2017/08/29/helloblog/"/>
+   <link href="http://localhost:8080/2017/08/29/Hello-Blog/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/08/29/helloblog/</id>
+   <id>http://localhost:8080/2017/08/29/Hello-Blog/</id>
    <content type="html">&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
 &lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
 &lt;p&gt;But, I had conditions -&lt;/p&gt;

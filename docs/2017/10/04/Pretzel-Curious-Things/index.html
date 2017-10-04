@@ -11,7 +11,7 @@
 
   <title>
     
-      Insen &middot; Write, Code, Dream !
+      Blogging - Curious things with Pretzel. &middot; Insen
     
   </title>
 
@@ -105,74 +105,43 @@
 
 
     <div class="content container">
-      <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:8080/2017/10/04/Pretzel-Curious-Things/">
-        Blogging - Curious things with Pretzel.
-      </a>
-    </h1>
-    <span class="post-date">04 Oct 2017</span>
-    <!--Liquid error: Value cannot be null.
-Parameter name: input-->
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/">
-        GOF - The hidden pattern.
-      </a>
-    </h1>
-    <span class="post-date">03 Oct 2017</span>
-    <!--Liquid error: Value cannot be null.
-Parameter name: input-->
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:8080/2017/09/27/DevOps-Making-A-Start/">
-        DevOps - Getting off the blocks.
-      </a>
-    </h1>
-    <span class="post-date">27 Sep 2017</span>
-    <!--Liquid error: Value cannot be null.
-Parameter name: input-->
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/">
-        Azure AD and Office 365 OAuth integration through browsers and Postman.
-      </a>
-    </h1>
-    <span class="post-date">24 Sep 2017</span>
-    <!--Liquid error: Value cannot be null.
-Parameter name: input-->
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/">
-        Blogging with Github Pages and Pretzel.
-      </a>
-    </h1>
-    <span class="post-date">29 Aug 2017</span>
-    <!--Liquid error: Value cannot be null.
-Parameter name: input-->
-  </div>
-  
+      <div class="post">
+  <h1 class="post-title">Blogging - Curious things with Pretzel.</h1>
+  <span class="post-date">04 Oct 2017</span>
+  <p>Pretzel blogging turned up some very curious head-scratchers.</p>
+<h4>Paginator</h4>
+<p>Couldn't get paginator to work. Well, it works now. Turns out you have to add</p>
+<pre><code class="language-yaml">
+    paginate:   3
+</code></pre>
+<p>at the top of your <code>index.html</code> in the yml frontmatter.</p>
+<h4>Escaping Liquid</h4>
+<p>I couldn't escape the characters <code>{{</code> or the characters <code>{%</code> in any fashion.</p>
+<p>You can, if you put it like this <code>{{ \&quot; }}</code>.</p>
+<h4>Landing page to show list only.</h4>
+<p>The landing page was updated to show list of posts. Change is in <code>index.html</code>.</p>
+<p>Comment out the following line <code>{{ post.content }}</code>.</p>
+<h4>Css font-size reduction</h4>
+<p>The basic font size was too large. Changes in <code>hyde.css</code>. <code>font-size</code> reduce by <code>2px</code>. The section below is the relevant section. All other fonts are in <code>em</code> with relation to these two. So this is a across all devices and form-factors thing.</p>
+<pre><code class="language-css">
+    @media (min-width: 48em) {
+        html {
+            font-size: 14px;
+        }
+    }
+    @media (min-width: 58em) {
+        html {
+            font-size: 18px;
+        }
+    }
+</code></pre>
 </div>
 
-<div class="pagination">
-  
-    <a class="pagination-item older" href="httP://localhost:8080/page/2">Older</a>
-  
-  
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
     
-      <a class="pagination-item newer" href="httP://localhost:8080/page/0">Newer</a>
-    
-  
+  </ul>
 </div>
     </div>
 

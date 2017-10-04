@@ -38,34 +38,34 @@ Recently I did one more - A *'starting devOps'* analysis. And it was while doing
 ## Explaining yourself, preferably clearly.
 So a quick look at what I do when writing down a concept? 
 
-### Step 1
-This part defines the motivations and reasons for the concept. In my case, It has traditionally involved consideration and listing down of the following
+### Step 1 - Motivation
+This part defines the *motivations and reasons* for the concept. In my case, It has traditionally involved consideration and listing down of the following
 -   The driving forces
 -   The constraining forces
 -   The goals
 
-### Step 2
+### Step 2 - Drivers and Constraints
 Given the *drivers, constraints and goals*, I now proceed to 
 -   An explanation of the general structure of the concept. 
 
-### Step 3
+### Step 3 - Structure
 Given the *drivers, and the structure*, we now drill down further into 
 -   Key stake-holders 
 -   Key components involved in the concept, 
 -   Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.
 
-### Step 4
+### Step 4 - Downsides and Limitations
 The next step is usually to play devils advocate. As such, we make a listing of 
 -   Assumptions 
 -   Tradeoffs
 -   Areas of applicability
 
-### Step 5
+### Step 5 - References
 We are now reaching the close of the explanation. At this point, we should be citing
 - References
 - Documentation for further details.
 
-### Step 6
+### Step 6 - Risks, Mitigations and Alternatives
 No concept paper is complete without a brief note about cases which have a high chance of rendering the current concept invalid and leads us to look for alternative solutions. So we note down the 
 -   Limitations of concept
 -   Alternative possibilities.
@@ -125,9 +125,11 @@ Now I will copy a passage from a textbook. The following section is a verbatim c
 
 And here we are. The approach taken to describe the Patterns in the first place. 
 
-It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It's not just learning algorithms, but learning how to analyse them as well.
+It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It is similiar to learning algorithms, but it is *NOT just about learning algorithms*, but learning *how to analyse them* as well.
 
-Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.
+The outline presented here is basically what I fall back to everytime I need to explain a concept. And like patterns itself, I use some of it, all of it, or in combination with something else, but the concept remains.
+
+Thus, Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.
 
 ## The 'Concept Elucidation Pattern'.
 

@@ -165,24 +165,24 @@ Why again? Because Hyde is a Jekyll theme, and Jekyll has a parser for the **gis
 
 
 - Change **index.html**. This file should be in the **repo** directory. 
-	-	There should be a line towards the top. md ```\{\% for post in paginator.posts \%\}```. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator. 
+	-	There should be a line towards the top. md ```{{ "{%" }} for post in paginator.posts %}```. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator. 
 	
-	-	There should be a line a little below the above ```<a href="\{\{ post.url \}\}">```. Change this to ```<a href="\{\{ post.url | prepend: site.baseurl }}">```. Navigation between posts does not work otherwise.
+	-	There should be a line a little below the above ```<a href=" {{ "{{" }} post.url }}">```. Change this to ```<a href="{{ "{{" }} post.url | prepend: site.baseurl }}">```. Navigation between posts does not work otherwise.
 
-- Update the config.yml. A config.yml is given below. I changed the **'connect'** and its sub-items. These fields are used in the Liquid based html templates, viz. ```<span>\{\{ site.title }}</span>``` or ```<span>\{\{ site.connect.github }}</span>```, etc. The sections marked as *(Setup)* in ths file have to be filed in and be accurate. They are used to generate the site. 
+- Update the config.yml. A config.yml is given below. I changed the **'connect'** and its sub-items. These fields are used in the Liquid based html templates, viz. ```<span>{{ "{{" }} site.title }}</span>``` or ```<span>{{ "{{" }} site.connect.github }}</span>```, etc. The sections marked as *(Setup)* in ths file have to be filed in and be accurate. They are used to generate the site. 
 
->	*(Note - In code snippets above and config.yml file below the 'slash' before 'curly braces', 'percent' or 'hash' 	symbol are extra. The 'slash' is not part of actual code. it was needed to escape Liquid processing)*.
+My config.yml is shown.
 
 ```yml
-\# Dependencies
+{{ "#" }} Dependencies
 markdown:         redcarpet
 highlighter:      pygments
 
-\# Permalinks
+{{ "#" }} Permalinks
 permalink:        pretty
 relative_permalinks: true
 
-\# Setup
+{{ "#" }} Setup
 title:            'Some text'
 tagline:          'Some text'  
 description:      'Some text'
@@ -195,7 +195,7 @@ author:
 
 paginate:         5
 
-\# Custom vars
+{{ "#" }} Custom vars
 version:          1.0.0
 
 connect:
@@ -210,8 +210,6 @@ exclude:
   - pbake.bat
   - ptaste.bat 
 ```
-
-*(Note - Also for each line which begins with 'hash' is preceded by a 'slash'. the 'slash' is not part of config.yml. it was needed to escape markdown processing)*.
 
 - Run **taste** command as specified above from the repository directory. This command should run, open a browser on local machine and show you the sample posts (ref - we removed the 'gist' tag from one of them).
 
