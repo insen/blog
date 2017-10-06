@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Insen
 tagline:          'Write, Code, Dream !'  
-description:      'Write, Code, Dream !<a href="https://github.com/insen" target="_blank"> @insen</a>.'
+description:      'Write, Code, Dream !'
 url:              https://insen.github.io/blog
 baseurl:          https://insen.github.io/blog/
 

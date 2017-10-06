@@ -62,7 +62,7 @@ Adding a profile picture to the sidebar was easy. Getting it to vertically align
       {% if (page.title != post.title and post.tags contains page.tags[0]) %}
         <li>
           <h3>
-            <a href="{{ post.url }}">
+            <a href="{{ post.url | prepend: site.url }}">
               {{ post.title }}
               <small>{{ post.date | date_to_string }}</small>
             </a>

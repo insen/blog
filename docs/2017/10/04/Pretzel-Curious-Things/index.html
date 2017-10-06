@@ -42,7 +42,7 @@
           Insen
         </a>
       </h1>
-      <p class="lead">Write, Code, Dream !<a href="https://github.com/insen" target="_blank"> @insen</a>.</p>
+      <p class="lead">Write, Code, Dream !</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -121,6 +121,9 @@
 
   <p>&copy; 2017. All rights reserved. 
       <small>Personal opinions. <i>Hefty pinches of salt !!</i></small>.</p>
+  
+  <p><i><small><small> site based on <a href="hyde"> hyde </a> by <a href="https://twitter.com/mdo">@mdo</a> </small></small></i></p>
+
   </div>
 </div>
 
@@ -171,7 +174,7 @@ paginate:   number_of_posts_in_a_page
       {% if (page.title != post.title and post.tags contains page.tags[0]) %}
         &lt;li&gt;
           &lt;h3&gt;
-            &lt;a href=&quot;{{ post.url }}&quot;&gt;
+            &lt;a href=&quot;{{ post.url | prepend: site.url }}&quot;&gt;
               {{ post.title }}
               &lt;small&gt;{{ post.date | date_to_string }}&lt;/small&gt;
             &lt;/a&gt;
@@ -216,7 +219,7 @@ paginate:   number_of_posts_in_a_page
       
         <li>
           <h3>
-            <a href="/2017/08/29/Blogging-Github-Pretzel/">
+            <a href="https://insen.github.io/blog/2017/08/29/Blogging-Github-Pretzel/">
               Blogging with Github Pages and Pretzel.
               <small>29 Aug 2017</small>
             </a>
@@ -227,7 +230,7 @@ paginate:   number_of_posts_in_a_page
       
         <li>
           <h3>
-            <a href="/2017/08/29/Hello-Blog/">
+            <a href="https://insen.github.io/blog/2017/08/29/Hello-Blog/">
               Blog like you are coming home.
               <small>29 Aug 2017</small>
             </a>

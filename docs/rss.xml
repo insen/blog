@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Fri, 06 Oct 2017 16:11:57 +0530</pubDate>
-    <lastBuildDate>Fri, 06 Oct 2017 16:11:57 +0530</lastBuildDate>
+    <pubDate>Sat, 07 Oct 2017 00:47:39 +0530</pubDate>
+    <lastBuildDate>Sat, 07 Oct 2017 00:47:39 +0530</lastBuildDate>
     
     <item>
       <title>Blogging - Loose ends and curious things when using Pretzel and the Jekyll-Hyde template.</title>
@@ -57,7 +57,7 @@ paginate:   number_of_posts_in_a_page
       {% if (page.title != post.title and post.tags contains page.tags[0]) %}
         &amp;lt;li&amp;gt;
           &amp;lt;h3&amp;gt;
-            &amp;lt;a href=&amp;quot;{{ post.url }}&amp;quot;&amp;gt;
+            &amp;lt;a href=&amp;quot;{{ post.url | prepend: site.url }}&amp;quot;&amp;gt;
               {{ post.title }}
               &amp;lt;small&amp;gt;{{ post.date | date_to_string }}&amp;lt;/small&amp;gt;
             &amp;lt;/a&amp;gt;
