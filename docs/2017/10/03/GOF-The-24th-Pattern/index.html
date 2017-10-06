@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      GOF - The hidden pattern. &middot; Insen
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:8080/public/css/poole.css">
+  <link rel="stylesheet" href="http://localhost:8080/public/css/syntax.css">
+  <link rel="stylesheet" href="http://localhost:8080/public/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="http://localhost:8080/public/css/font-awesome.css" >
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:8080/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:8080/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="http://localhost:8080/"> 
+          <img src="http://localhost:8080//img/profile.png"/>
+          Insen
+        </a>
+      </h1>
+      <p class="lead">Write, Code, Dream !<a href="https://github.com/insen" target="_blank"> @insen</a>.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="http://localhost:8080/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/E:/work/blogging/blog/./docs/about.html">About</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+
+  <!-- subsequent parts use fontawesome content icons!-->
+  <a class="sidebar-nav-item fa rss" href="/atom.xml"></a> 
+  <a class="sidebar-nav-item fa github" href="https://github.com/insen"></a> 
+  <a class="sidebar-nav-item fa linkedin" href="https://www.linkedin.com/in/nilsengupta/"></a> 
+
+  <p>&copy; 2017. All rights reserved. 
+      <small>Personal opinions. <i>Hefty pinches of salt !!</i></small>.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">GOF - The hidden pattern.</h1>
+  <span class="post-date">03 Oct 2017</span>
+  <p>The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.</p>
+<p>I know, I know. I can hear the collective tirade of protest.</p>
+<p>All the analysis and the literature says 23.</p>
+<p>Anyone who can count to 23 says 23.</p>
+<p>The number of pattern descriptions in the book are 23.</p>
+<p>In this case at least, as far as common knowledge goes, 23 is the answer, not 42.</p>
+<p>Yet I will argue. There is another pattern in there. A pattern that is repeated over and over. A pattern that embeds yourself in your psyche and you use it unconsciously for several years until it hits you.</p>
+<p>You disagree, eh?  Ok then, we'll try a different tack.</p>
+<h2>Pattern No. 24. An oblique introduction.</h2>
+<p>Are you familiar with the word 'concept'? <em>Yes. Good. Thank you. A no here would have made it really difficult to proceed</em>.</p>
+<p>So you have maybe a concept or two of your own. <em>Yes, Even better</em>.</p>
+<p>Now here's the kicker - explain your concept to me, in writing. (<em>It doesn't have to be technical even. It could be in woodworking for all I care</em>). But try writing down the concept.</p>
+<p>Yes, go right ahead. Get some notes, stickers, postits, onenotes/evernotes, mindmaps and just write out the outline of your explanation. I can wait. See I have coffee, blogs, white-noise. I am all good with waiting a bit.</p>
+<p>Writing down a concept is not an uncommon activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I have done my bit.</p>
+<p>Recently I did one more - A <em>'starting devOps'</em> analysis. And it was while doing this that I also started to think about '<em>how to explain</em>' such a thing to someone else. And I found that everytime I need to explain a concept, I tend to use the same patterns to do so. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.</p>
+<h2>Explaining yourself, preferably clearly.</h2>
+<p>So a quick look at what I do when writing down a concept?</p>
+<h3>Step 1 - Motivation</h3>
+<p>This part defines the <em>motivations and reasons</em> for the concept. In my case, It has traditionally involved consideration and listing down of the following</p>
+<ul>
+<li>The driving forces</li>
+<li>The constraining forces</li>
+<li>The goals</li>
+</ul>
+<h3>Step 2 - Drivers and Constraints</h3>
+<p>Given the <em>drivers, constraints and goals</em>, I now proceed to</p>
+<ul>
+<li>An explanation of the general structure of the concept.</li>
+</ul>
+<h3>Step 3 - Structure</h3>
+<p>Given the <em>drivers, and the structure</em>, we now drill down further into</p>
+<ul>
+<li>Key stake-holders</li>
+<li>Key components involved in the concept,</li>
+<li>Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.</li>
+</ul>
+<h3>Step 4 - Downsides and Limitations</h3>
+<p>The next step is usually to play devils advocate. As such, we make a listing of</p>
+<ul>
+<li>Assumptions</li>
+<li>Tradeoffs</li>
+<li>Areas of applicability</li>
+</ul>
+<h3>Step 5 - References</h3>
+<p>We are now reaching the close of the explanation. At this point, we should be citing</p>
+<ul>
+<li>References</li>
+<li>Documentation for further details.</li>
+</ul>
+<h3>Step 6 - Risks, Mitigations and Alternatives</h3>
+<p>No concept paper is complete without a brief note about cases which have a high chance of rendering the current concept invalid and leads us to look for alternative solutions. So we note down the</p>
+<ul>
+<li>Limitations of concept</li>
+<li>Alternative possibilities.</li>
+</ul>
+<p>Hopefully still here with me. And not too many objections. Ok.</p>
+<p>Now I will copy a passage from a textbook. The following section is a verbatim copy-paste from the GOF book</p>
+<pre><code>Describing Design Patterns
+
+How do we describe design patterns? Graphical notations, while important and useful, aren't sufficient. They simply capture the end product of the design process as relationships between classes and objects. To reuse the design, we must also record the decisions, alternatives, and trade-offs that led to it. Concrete examples are important too, because they help you see the design in action.
+
+We describe design patterns using a consistent format. Each pattern is divided into sections according to the following template. The template lends a uniform structure to the information, making design patterns easier to learn, compare, and use.
+
+Pattern Name and Classification
+The pattern's name conveys the essence of the pattern succinctly. A good name is vital, because it will become part of your design vocabulary. The pattern's classification reflects the scheme we introduce in Section 1.5.
+
+Intent
+A short statement that answers the following questions: What does the design pattern do? What is its rationale and intent? What particular design issue or problem does it address?
+
+Also Known As
+Other well-known names for the pattern, if any.
+
+Motivation
+A scenario that illustrates a design problem and how the class and object structures in the pattern solve the problem. The scenario will help you understand the more abstract description of the pattern that follows.
+
+Applicability
+What are the situations in which the design pattern can be applied? What are examples of poor designs that the pattern can address? How can you recognize these situations?
+
+Structure
+A graphical representation of the classes in the pattern using a notation based on the Object Modeling Technique (OMT) [RBP+91]. We also use interaction diagrams [JCJO92, Boo94] to illustrate sequences of requests and collaborations between objects. Appendix B describes these notations in detail.
+
+Participants
+The classes and/or objects participating in the design pattern and their responsibilities.
+
+Collaborations
+How the participants collaborate to carry out their responsibilities.
+
+Consequences
+How does the pattern support its objectives? What are the trade-offs and results of using the pattern? What aspect of system structure does it let you vary independently?
+
+Implementation
+What pitfalls, hints, or techniques should you be aware of when implementing the pattern? Are there language-specific issues?
+
+Sample Code
+Code fragments that illustrate how you might implement the pattern in C++ or Smalltalk.
+
+Known Uses
+Examples of the pattern found in real systems. We include at least two examples from different domains.
+
+Related Patterns
+What design patterns are closely related to this one? What are the important differences? With which other patterns should this one be used?
+
+The appendices provide background information that will help you understand the patterns and the discussions surrounding them. Appendix A is a glossary of terminology we use. We've already mentioned Appendix B, which presents the various notations. We'll also describe aspects of the notations as we introduce them in the upcoming discussions. Finally, Appendix C contains source code for the foundation classes we use in code samples.
+</code></pre>
+<h2>The hidden pattern, finally</h2>
+<p>And here we are. The approach taken to describe the Patterns in the first place.</p>
+<p>It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It is similiar to learning algorithms, but it is <em>NOT just about learning algorithms</em>, but learning <em>how to analyse them</em> as well.</p>
+<p>The outline presented here is basically what I fall back to everytime I need to explain a concept. And like patterns itself, I use some of it, all of it, or in combination with something else, but the concept remains.</p>
+<p>Thus, Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.</p>
+<h2>The 'Concept Elucidation Pattern'.</h2>
+<p>All yours, now.</p>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </ul>
+</div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Blogging with Github Pages and Pretzel. &middot; Insen
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://localhost:8080/public/css/poole.css">
+  <link rel="stylesheet" href="http://localhost:8080/public/css/syntax.css">
+  <link rel="stylesheet" href="http://localhost:8080/public/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="http://localhost:8080/public/css/font-awesome.css" >
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:8080/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://localhost:8080/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="http://localhost:8080/"> 
+          <img src="http://localhost:8080//img/profile.png"/>
+          Insen
+        </a>
+      </h1>
+      <p class="lead">Write, Code, Dream !<a href="https://github.com/insen" target="_blank"> @insen</a>.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="http://localhost:8080/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/E:/work/blogging/blog/./docs/about.html">About</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+
+  <!-- subsequent parts use fontawesome content icons!-->
+  <a class="sidebar-nav-item fa rss" href="/atom.xml"></a> 
+  <a class="sidebar-nav-item fa github" href="https://github.com/insen"></a> 
+  <a class="sidebar-nav-item fa linkedin" href="https://www.linkedin.com/in/nilsengupta/"></a> 
+
+  <p>&copy; 2017. All rights reserved. 
+      <small>Personal opinions. <i>Hefty pinches of salt !!</i></small>.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Blogging with Github Pages and Pretzel.</h1>
+  <span class="post-date">29 Aug 2017</span>
+  <p>As I mentioned in my <a href="http://insen.github.io/blog/2017/08/29/helloblog/">'hello-blog'</a> post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.</p>
+<h3>The Goal.</h3>
+<p>The goal here is a system which has the following publish-a-blog sequence -</p>
+<ul>
+<li>Write the blog in as close to english as possible. We use Markdown (filename.md) for close-to-english text files.</li>
+<li>Add the file into a specific directory on local machine.</li>
+<li>Review add/edited blog-site and added/edited blog-post without internet connectivity. Rinse and repeat as needed.</li>
+<li>Check in all updates (aka backup). Enter Github - On successful check-in, online blog is automatically updated with new content. (Only this step needs internet connectivity).</li>
+</ul>
+<p>Essentially, its very developer friendly. This process emulates the <strong><em>code, build, test, deploy</em></strong> cycle of software development.</p>
+<h3>The Pieces.</h3>
+<p>The infrastructure</p>
+<ul>
+<li>A <strong>Github project pages repository</strong> which will have
+<ul>
+<li>A template project for a web-site, which I chose to be <strong>Hyde</strong>. Why?
+<ol>
+<li>I liked it.</li>
+<li>It is a Jekyll theme. Github pages default is Jekyll. I avoided using Jekyll because of reasons cited later, But staying close to defaults seemed a good idea.	</li>
+</ol>
+</li>
+<li>A directory within the repository named 'docs' (as per Github rules) holding the pre-assembled auto-generated and checked-in web-site. Github pages automatically serves this web-site from a public Url.</li>
+</ul>
+</li>
+<li><strong>Pretzel</strong> to build/rebuild the web-site template, new/edited posts and generate/preview the updated web-site while offline. Some batch files for the builds with Pretzel commands, so that the process is seamlessly repeatable.</li>
+<li><strong>Git</strong>, to push the updates to the template, the posts and to the generated web-site (docs folder) into the repo and the publishable version into the docs folder. <em>(Note that we didn't say anything about copying anything over to docs folder - Pretzel build scripts take care of that.)</em></li>
+<li>Oh, and I almost forgot. <strong>Visual Studio Code</strong> is the text editor. Pick whichever you like.</li>
+</ul>
+<p><em>(Note - If you don't have a github account, this is a good time to create one. Also, if you don't know Git, much of this blog won't make sense to you. if you really, really want to blog, this is a good alternative option <a href="http://tumblr.com">tumblr</a>)</em>.</p>
+<h3>Github and <a href="https://help.github.com/articles/user-organization-and-project-pages/">Github Pages</a></h3>
+<p>Github Pages are a feature inbuilt into Github which enables you to host static web-sites with minimum effort. There are a few different flavors.</p>
+<h4>User Pages</h4>
+<p>If your github account is <strong>acc</strong>, Create a new repository named as <strong>acc</strong> (same as the account name). A public web-site with no content is available at http://<strong>acc</strong>.github.io.</p>
+<p>Add a index.html with only the text 'Hello World' into the 'master' branch.  You should see 'Hello World' in your browser from http://<strong>acc</strong>.github.io/.</p>
+<h4>Organization Pages</h4>
+<p>Similar to user pages except the repo is at the organization level, and has the same name as the
+organization. Gets published(approximately) at http://github.com/<strong>organizationname</strong>. *Check with official Github documentation as I didn't investigate this much.</p>
+<h4>Project Pages</h4>
+<p>If your github account is <strong>acc</strong>, viz, your Github account is at https://<strong>acc</strong>.github.com, and you add a new repository named as <strong>repo</strong>, the Project pages site with no content is available at https://<strong>acc</strong>.github.io/<strong>repo</strong></p>
+<p>Add a folder called 'docs' in repo in the master branch.</p>
+<p>Add a <strong>index.html</strong> with just the text 'Hello World' into the 'docs' folder. This automatically gets published as http://<strong>acc</strong>.github.io/<strong>repo</strong>. You should see 'Hello World' in your browser from this site.</p>
+<p>These sites are available at a per-repository level. They can also be configured so that the web-site is geing served either from master branch, from a top level folder in the master branch named as <strong>docs</strong> or a branch specifically named as <strong>gh-pages</strong>.</p>
+<p>I am using the <strong>docs</strong> option above.</p>
+<h4>Other Things...</h4>
+<p>Note that it is perfectly possible to have user-pages, organization-pages and project-pages in the same account. Given that the user account is <strong>acc</strong>, the organization name is <strong>organizationname</strong>, and the project repo name is <strong>repo</strong>, the following public web-sites will be available.
+-	http://<strong>acc</strong>.github.io/  as the User Page Site.
+-	http://github.com/<strong>organizationname</strong> as an Organization Page Site
+-	http://<strong>acc</strong>.github.io/<strong>repo</strong>  as a Project Page Site</p>
+<p>The site can be a Jekyll based, <strong>OR</strong> a plain vanilla html website but with with an index.html at the top level of the site. I presume how this works is this - Github passes a http call to the site url through a web-server which can process <a href="http://liquid.org">Liquid</a> - a html templating engine. This engine passes on plain vanilla html as is, so html spec based content just flows through that web server. We are using this approach as we are pre-building the web-site as a collection of static html pages.</p>
+<p>If using Jekyll, you need to create a Jekyll based website in the repo and branch as per your choice from the page types - user, organization or project. Github's Jekyll based build process will probably do the Jekyll builds on your behalf before publishing online. More details about Github's inbuilt support for Jekyll publishing can be found at <a href="https://help.github.com/articles/user-organization-and-project-pages/">here</a>.</p>
+<h3>Hello <a href="https://Github.com/Code52/pretzel">Pretzel</a> <em>(and Static-site generators)</em>!</h3>
+<p>Pretzel is a open source, static-site generator in .NET.</p>
+<p>Maybe the first question to address is how many of these there are? <a href="https://www.staticgen.com/">Take a look</a>. When it comes to frameworks, We are living in a world of plenty these days.</p>
+<p>What do they do? Well, basically a static site generator, especially the ones targeting blogging, take a bunch of layout templates (e.g. site-header.html, sidebar.html, footer.html), your CSS stylesheets, your Javascript, and your posts (usually in markdown, but based on support you could probably use any syntax - markdown, yaml, plain html, razor) - and processes them to a colection of plain vanilla HTML/CSS/Javascript pages - one for each post. Each page generated is a complete and self-contained html page, combining all the common layout templates, the CSS, the  Javascript and the Markdown content, with links between pages and navigation.</p>
+<p>I picked Pretzel because it is written in C#. I know C# well so I can read the code, debug or enhance Pretzel if I ever so require. (Other possible options included <a href="http://wyam.io">Wyam</a>, and <a href="https://github.com">Sandra.Snow</a>).</p>
+<p>Now Pretzel tries to keep as close as possible to Jekyll. Considering I am looking for a offline Jekyll replacement, Pretzel seemed appropriate.</p>
+<p>And with Pretzel I can build/rebuild/run the entire site on my local machine with minimal fiddling (Which Jekyll setup, debug, or enhancement will all force me to do, and all in Ruby). As a .NET developer, my primary machine is usually all set to do just about anything with the CLR. Once testing is done, all I need to do is copy the local machine site folder into the folder from which Github serves project pages (the <strong>'docs'</strong> folder under Github repository root). With build scripts, I can automate this step. When I check-in to Github, after allowing some time for Github to build the site and CDN propagation to happen, the latest content comes up on the public site.</p>
+<p>For further details, check out the <a href="https://Github.com/Code52/pretzel/wiki">Pretzel wiki</a>.</p>
+<h3>Setup</h3>
+<h4>Setting up the repository in Github portal.</h4>
+<p>Do the following to setup your Github blogging. This method sets up a Project Site as the blog site.</p>
+<ul>
+<li>Create a Github account, viz. <strong>acc</strong>.</li>
+<li>Create a repository in github, viz. <strong>repo</strong>. I created https://github.com/insen/blog.</li>
+<li>Git clone into local machine. This is where you will be adding your site.
+<ul>
+<li>Add a <strong>docs</strong> folder. <em>(Name needs to be exact)</em>.
+<ul>
+<li>Add an index.html with the text 'Hello world'.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Push to Github.</li>
+<li>Goto Github repository settings, Gh-Pages section - Select 'master branch/docs folder'.</li>
+<li>Check <a href="#">https://<strong>acc</strong>.github.io/repo/</a> - the contents of index.html should be visible in your browser.</li>
+</ul>
+<p>And that's it. The blog post you are currently reading at <a href="https://insen.github.io/blog/">https://insen.github.io/blog/</a> has been built in the same fashion, though we are still missing a few steps yet - We need to setup pretzel and then make our site look decent. But reversing th order makes things easier, So onto Hyde first, then Pretzel.</p>
+<h4>Importing Hyde to local machine.</h4>
+<p>Hyde is a pre-built theme for Jekyll. Since Pretzel closely follows Jekyll paradigms, It should work without issues, or so I thought. I was mostly correct. All we have to do here is git clone the <a href="https://github.com/poole/hyde">Hyde repository at Github</a>.</p>
+<p>The reason we need this is that the basic site created by Pretzel is quite horrible, both aesthetically and structurally. I started looking for something that works from an aesthetic point of view, but as close to Jekyll as possible, which led me to <a href="https://github.com/poole/hyde">Hyde</a>.</p>
+<h4>Setting up Pretzel on local machine and basic usage.</h4>
+<p>Setting up Pretzel is quite straight forward. Get Pretzel from <a href="https://github.com/Code52/pretzel">here</a>, <strong>OR</strong> use Chocolatey - a package manager for windows. To use Chocolatey, install Chocolatey from <a href="https://chocolatey.org/">here</a>, and on an elevated command prompt or powershell console, run the command</p>
+<pre><code class="language-batch">	choco install pretzel
+</code></pre>
+<ul>
+<li>To create a basic site for you. The command details are <a href="https://Github.com/Code52/pretzel/wiki">here</a>. You can
+lookup the various possible options.</li>
+</ul>
+<pre><code class="language-batch">	pretzel create [options]
+</code></pre>
+<ul>
+<li>Bake the site - means generate the output website and put it into a default folder. Usually named <strong>_site</strong> and located at project root level. The command details are <a href="https://Github.com/Code52/pretzel/wiki">here</a>. I will use the following version.</li>
+</ul>
+<pre><code class="language-batch">	pretzel bake 
+		--source=&quot;c://srcpath&quot; 
+		--destination=&quot;d://dpath&quot; 
+		--cleantarget
+</code></pre>
+<ul>
+<li>Test the site</li>
+</ul>
+<pre><code class="language-batch">	pretzel taste 
+		--source=&quot;c://dpath&quot; 
+		--port=8001
+</code></pre>
+<p><em>Important note</em> - the source directory in <em>'taste'</em> command is the destination directory in <em>'bake'</em> command. This is what we are using. For other options, check Pretzel wiki.</p>
+<p>I will be creating batch scripts for the <em>(bake)</em> and <em>(taste)</em> snippets which will be useful.</p>
+<h3>Getting jiggy with it.</h3>
+<ul>
+<li>Delete the contents of your repository (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.</li>
+<li>Run the Pretzel bake command from a prompt at the repository root folder with no command-line args. Pretzel should create a folder called <strong>_site</strong> under repository folder. It does NOT. It does this instead.</li>
+</ul>
+<pre><code class="language-c#">	Unhandled Exception: Pretzel.Logic.Exceptions.PageProcessingException: Failed to process E:\work\blogging\blog\_site\201
+	2\02\07\example-content\index.html, see inner exception for more details ---&gt; DotLiquid.Exceptions.SyntaxException: Unknown tag 'gist'
+		at DotLiquid.Block.UnknownTag(String tag, String markup, List`1 tokens)
+		at DotLiquid.Block.Parse(List`1 tokens)
+		at DotLiquid.Document.Initialize(String tagName, String markup, List`1 tokens)
+		at DotLiquid.Template.ParseInternal(String source)
+</code></pre>
+<p>Why? The reason here is that a sample post in the _posts folder contains, among other bits, the following content</p>
+<blockquote>
+<p>{&#37; gist 5555251 gist.md &#37;}</p>
+</blockquote>
+<p>And this does not work in Pretzel.</p>
+<p>Why again? Because Hyde is a Jekyll theme, and Jekyll has a parser for the <strong>gist</strong> command. Pretzel does NOT. Delete this line from the post.</p>
+<p><em>(However, this also means, you have to figure out an alternative way to embed gists in your post, if you need to)</em>.</p>
+<ul>
+<li>
+<p>Run <strong>bake</strong> again with no parameters. Pretzel uses the current directory as the source directory and creates the web-site. Now, <strong>bake</strong> should succeed, and you should see a sub-folder called <strong>_site</strong>. This contains your entire blog site.</p>
+</li>
+<li>
+<p>Delete the <strong>CNAME</strong> file from the repository folder as well as the generated <strong>_site</strong> folder *(This causes issues   if you don't have a top level domain name. And no, you CANNOT point this to the Github site url).</p>
+</li>
+<li>
+<p>Change <strong>index.html</strong>. This file should be in the <strong>repo</strong> directory.</p>
+<ul>
+<li>
+<p>There should be a line towards the top. md <code>{% for post in paginator.posts %}</code>. Change 'paginator' to 'site'. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.</p>
+</li>
+<li>
+<p>There should be a line a little below the above <code>&lt;a href=&quot; {{ post.url }}&quot;&gt;</code>. Change this to <code>&lt;a href=&quot;{{ post.url | prepend: site.baseurl }}&quot;&gt;</code>. Navigation between posts does not work otherwise.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Update the config.yml. A config.yml is given below. I changed the <strong>'connect'</strong> and its sub-items. These fields are used in the Liquid based html templates, viz. <code>&lt;span&gt;{{ site.title }}&lt;/span&gt;</code> or <code>&lt;span&gt;{{ site.connect.github }}&lt;/span&gt;</code>, etc. The sections marked as <em>(Setup)</em> in ths file have to be filed in and be accurate. They are used to generate the site.</p>
+</li>
+</ul>
+<p>My config.yml is shown.</p>
+<pre><code class="language-yml"># Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            'Some text'
+tagline:          'Some text'  
+description:      'Some text'
+url:              'your blog url after publication - use https if https expected, else use http'
+baseurl:          'your blog url after publication - use https if https expected, else use http. Could be same or different from previous'
+
+author:
+  name:           'a name'
+  url:            'a url'
+
+paginate:         5
+
+# Custom vars
+version:          1.0.0
+
+connect:
+  github:          '@github'
+  linkedin:        '@linkedin'
+  email:           '@email'
+
+exclude:
+  - docs\
+  - .gitignore
+  - .git
+  - pbake.bat
+  - ptaste.bat 
+</code></pre>
+<ul>
+<li>
+<p>Run <strong>taste</strong> command as specified above from the repository directory. This command should run, open a browser on local machine and show you the sample posts (ref - we removed the 'gist' tag from one of them).</p>
+</li>
+<li>
+<p>Bake and taste the site again - Check the _site and the docs folder. There should be no recursive folder patterns. <em>(Note - this means that the bake and taste commands you used are correct with source and destination file names and other options. Otherwise your site generation times, and github check-in times, and github repo size will exponentially increase with the number of bakes. The two example commands given in usage section are correct except for file-names and avoid the recursive folders issue. I added these two commands as batch files to my repo - pbake.bat and ptaste.bat. These are my build files. Also, since the pretzel bake output is already redirected to the 'docs' folder in the batch files, I don't have to manually copy anything)</em>.</p>
+</li>
+<li>
+<p>Check-in to Github.</p>
+</li>
+</ul>
+<h3>Next is what?</h3>
+<p>There's quite a bit left to do -</p>
+<ul>
+<li>A header</li>
+<li>Landing site should show a list of posts, not posts and post-content.</li>
+<li>Disqus integration.</li>
+<li>Google Analytics integration.</li>
+<li>Tag cloud.</li>
+<li>Maybe CNAME and site search.</li>
+</ul>
+<p>But for now, this blog seems to be showing up on the internet. If you followed along this far with no problems, you should also be good to go.</p>
+<p>Go forth, and typo. <em>(pssst !! pun intended)</em>.</p>
+<h3>Additional resources</h3>
+<ul>
+<li><a href="https://www.freeformatter.com/html-entities.html">Free Formatter</a> for html encoding.</li>
+<li><a href="https://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a> for reference.</li>
+<li><a href="https://gist.githubusercontent.com/VEnis/7465176/raw">Markdown Sample</a> which works in Github.</li>
+</ul>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      
+        <li>
+          <h3>
+            <a href="/2017/10/04/Pretzel-Curious-Things/">
+              Blogging - Loose ends and curious things when using Pretzel, Hyde and Jekyll together.
+              <small>04 Oct 2017</small>
+            </a>
+          </h3>
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <li>
+          <h3>
+            <a href="/2017/08/29/Hello-Blog/">
+              Blog like you are coming home.
+              <small>29 Aug 2017</small>
+            </a>
+          </h3>
+        </li>
+      
+    
+  </ul>
+</div>
+    </div>
+
+  </body>
+</html>

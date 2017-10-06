@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>Insen | [name, insen][url, https://linkedin.com/nilsengupta]</title>
+    <link>http://localhost:8080</link>
+    <atom:link href="http://localhost:8080/rss.xml" rel="self" type="application/rss+xml" />
+    <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
+    <language>en-us</language>
+    <pubDate>Fri, 06 Oct 2017 16:07:01 +0530</pubDate>
+    <lastBuildDate>Fri, 06 Oct 2017 16:07:01 +0530</lastBuildDate>
+    
+    <item>
+      <title>Blogging - Loose ends and curious things when using Pretzel, Hyde and Jekyll together.</title>
+      <link>http://localhost:8080/2017/10/04/Pretzel-Curious-Things/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">http://localhost:8080/2017/10/04/Pretzel-Curious-Things/</guid>
+      <description>&lt;p&gt;Pretzel blogging turned up some normal headscratchers, and some very curious ones.&lt;/p&gt;
+&lt;h4&gt;Paginator&lt;/h4&gt;
+&lt;p&gt;Couldn&apos;t get paginator to work. Well, it works now. Turns out you have to add&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yaml&quot;&gt;
+paginate:   number_of_posts_in_a_page
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;at the top of your &lt;code&gt;index.html&lt;/code&gt; in the &lt;code&gt;yml&lt;/code&gt; frontmatter.&lt;/p&gt;
+&lt;h4&gt;Escaping Liquid&lt;/h4&gt;
+&lt;p&gt;I couldn&apos;t escape the characters &lt;code&gt;{{&lt;/code&gt; or the characters &lt;code&gt;{%&lt;/code&gt; in any fashion.&lt;/p&gt;
+&lt;p&gt;You can, if you put it like this &lt;code&gt;{{&amp;quot;{{&amp;quot;}}&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Landing page to show list only.&lt;/h4&gt;
+&lt;p&gt;The landing page was updated to show list of posts. Change is in &lt;code&gt;index.html&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Comment out the following line &lt;code&gt;{{ post.content }}&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;Css font-size reduction&lt;/h4&gt;
+&lt;p&gt;The basic font size was too large. Changes in &lt;code&gt;hyde.css&lt;/code&gt;. The &lt;code&gt;font-size&lt;/code&gt; was reduced by &lt;code&gt;2px&lt;/code&gt;. The section below is the relevant section. All other fonts are in &lt;code&gt;em&lt;/code&gt; with relation to these two. So this is a across all devices and form-factors thing.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;
+@media (min-width: 48em) {
+    html {
+        font-size: 14px;
+    }
+}
+@media (min-width: 58em) {
+    html {
+        font-size: 18px;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Sidebar profile image responsive display and alignment&lt;/h4&gt;
+&lt;p&gt;Adding a profile picture to the sidebar was easy. Getting it to vertically align centers with the rest of the sidebar and do so in all form-factors/view-ports was challenging. Ended up modifying &lt;code&gt;hyde.css&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;pre&amp;gt;&amp;lt;code class=&amp;quot;language-css&amp;quot;&amp;gt;
+    .sidebar-about img { margin : 0.1rem; height: 80%; width: 100%; vertical-align: text-bottom; justify-content: center;}
+&amp;lt;/code&amp;gt;&amp;lt;/pre&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&apos;Related Post&apos; working&lt;/h4&gt;
+&lt;p&gt;&apos;Related Posts&apos; section was not working. That is because the Pretzel site object model which exists is different from that expected by Hyde.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;related&amp;quot;&amp;gt;
+  &amp;lt;h2&amp;gt;Related Posts&amp;lt;/h2&amp;gt;
+  &amp;lt;ul class=&amp;quot;related-posts&amp;quot;&amp;gt;
+    {% for post in site.posts limit:6 %}
+      {% if (page.title != post.title and post.tags contains page.tags[0]) %}
+        &amp;lt;li&amp;gt;
+          &amp;lt;h3&amp;gt;
+            &amp;lt;a href=&amp;quot;{{ post.url }}&amp;quot;&amp;gt;
+              {{ post.title }}
+              &amp;lt;small&amp;gt;{{ post.date | date_to_string }}&amp;lt;/small&amp;gt;
+            &amp;lt;/a&amp;gt;
+          &amp;lt;/h3&amp;gt;
+        &amp;lt;/li&amp;gt;
+      {% endif %}
+    {% endfor %}
+  &amp;lt;/ul&amp;gt;
+&amp;lt;/div&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the part where &lt;code&gt;site.posts limit:6&lt;/code&gt;, the code contained &lt;code&gt;site.related_posts&lt;/code&gt;. Pretzel does not expose a property called &lt;code&gt;related_posts&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;&apos;FontAwesome&apos; social icons&lt;/h4&gt;
+&lt;p&gt;FontAwesome is a font family with awesome icons. I wanted these icons for the social links, so had to integrate FontAwesome. Following steps apply&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Download the fontawesome fonts and put them in &lt;code&gt;root/public/fonts&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Download &lt;code&gt;fontawesome.css&lt;/code&gt; and add a stylesheet link in &lt;code&gt;head.html&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add the following classes to &lt;code&gt;hyde.css&lt;/code&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot;&gt;
+    .fa::before {font: normal normal normal 14px/1 FontAwesome}
+    .linkedin::before { content: &quot;\f08c&quot;; font-size: 1.5em}
+    .github::before { content: &quot;\f09b&quot;; font-size: 1.5em}
+    .rss::before { content: &quot;\f143&quot;; font-size: 1.5em}    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;Add the classes to the relevant social &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; tags in the &lt;code&gt;sidebar.html&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And in general, all navigation, posts and rss feed link now working ok.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>GOF - The hidden pattern.</title>
+      <link>http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">http://localhost:8080/2017/10/03/GOF-The-24th-Pattern/</guid>
+      <description>&lt;p&gt;The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.&lt;/p&gt;
+&lt;p&gt;I know, I know. I can hear the collective tirade of protest.&lt;/p&gt;
+&lt;p&gt;All the analysis and the literature says 23.&lt;/p&gt;
+&lt;p&gt;Anyone who can count to 23 says 23.&lt;/p&gt;
+&lt;p&gt;The number of pattern descriptions in the book are 23.&lt;/p&gt;
+&lt;p&gt;In this case at least, as far as common knowledge goes, 23 is the answer, not 42.&lt;/p&gt;
+&lt;p&gt;Yet I will argue. There is another pattern in there. A pattern that is repeated over and over. A pattern that embeds yourself in your psyche and you use it unconsciously for several years until it hits you.&lt;/p&gt;
+&lt;p&gt;You disagree, eh?  Ok then, we&apos;ll try a different tack.&lt;/p&gt;
+&lt;h2&gt;Pattern No. 24. An oblique introduction.&lt;/h2&gt;
+&lt;p&gt;Are you familiar with the word &apos;concept&apos;? &lt;em&gt;Yes. Good. Thank you. A no here would have made it really difficult to proceed&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;So you have maybe a concept or two of your own. &lt;em&gt;Yes, Even better&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Now here&apos;s the kicker - explain your concept to me, in writing. (&lt;em&gt;It doesn&apos;t have to be technical even. It could be in woodworking for all I care&lt;/em&gt;). But try writing down the concept.&lt;/p&gt;
+&lt;p&gt;Yes, go right ahead. Get some notes, stickers, postits, onenotes/evernotes, mindmaps and just write out the outline of your explanation. I can wait. See I have coffee, blogs, white-noise. I am all good with waiting a bit.&lt;/p&gt;
+&lt;p&gt;Writing down a concept is not an uncommon activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I have done my bit.&lt;/p&gt;
+&lt;p&gt;Recently I did one more - A &lt;em&gt;&apos;starting devOps&apos;&lt;/em&gt; analysis. And it was while doing this that I also started to think about &apos;&lt;em&gt;how to explain&lt;/em&gt;&apos; such a thing to someone else. And I found that everytime I need to explain a concept, I tend to use the same patterns to do so. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.&lt;/p&gt;
+&lt;h2&gt;Explaining yourself, preferably clearly.&lt;/h2&gt;
+&lt;p&gt;So a quick look at what I do when writing down a concept?&lt;/p&gt;
+&lt;h3&gt;Step 1 - Motivation&lt;/h3&gt;
+&lt;p&gt;This part defines the &lt;em&gt;motivations and reasons&lt;/em&gt; for the concept. In my case, It has traditionally involved consideration and listing down of the following&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The driving forces&lt;/li&gt;
+&lt;li&gt;The constraining forces&lt;/li&gt;
+&lt;li&gt;The goals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 2 - Drivers and Constraints&lt;/h3&gt;
+&lt;p&gt;Given the &lt;em&gt;drivers, constraints and goals&lt;/em&gt;, I now proceed to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An explanation of the general structure of the concept.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 3 - Structure&lt;/h3&gt;
+&lt;p&gt;Given the &lt;em&gt;drivers, and the structure&lt;/em&gt;, we now drill down further into&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Key stake-holders&lt;/li&gt;
+&lt;li&gt;Key components involved in the concept,&lt;/li&gt;
+&lt;li&gt;Key interactions between components themselves or with a stakeholder, all being traceable to one or more of the motivations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 4 - Downsides and Limitations&lt;/h3&gt;
+&lt;p&gt;The next step is usually to play devils advocate. As such, we make a listing of&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Assumptions&lt;/li&gt;
+&lt;li&gt;Tradeoffs&lt;/li&gt;
+&lt;li&gt;Areas of applicability&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 5 - References&lt;/h3&gt;
+&lt;p&gt;We are now reaching the close of the explanation. At this point, we should be citing&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;References&lt;/li&gt;
+&lt;li&gt;Documentation for further details.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Step 6 - Risks, Mitigations and Alternatives&lt;/h3&gt;
+&lt;p&gt;No concept paper is complete without a brief note about cases which have a high chance of rendering the current concept invalid and leads us to look for alternative solutions. So we note down the&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Limitations of concept&lt;/li&gt;
+&lt;li&gt;Alternative possibilities.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hopefully still here with me. And not too many objections. Ok.&lt;/p&gt;
+&lt;p&gt;Now I will copy a passage from a textbook. The following section is a verbatim copy-paste from the GOF book&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Describing Design Patterns
+
+How do we describe design patterns? Graphical notations, while important and useful, aren&apos;t sufficient. They simply capture the end product of the design process as relationships between classes and objects. To reuse the design, we must also record the decisions, alternatives, and trade-offs that led to it. Concrete examples are important too, because they help you see the design in action.
+
+We describe design patterns using a consistent format. Each pattern is divided into sections according to the following template. The template lends a uniform structure to the information, making design patterns easier to learn, compare, and use.
+
+Pattern Name and Classification
+The pattern&apos;s name conveys the essence of the pattern succinctly. A good name is vital, because it will become part of your design vocabulary. The pattern&apos;s classification reflects the scheme we introduce in Section 1.5.
+
+Intent
+A short statement that answers the following questions: What does the design pattern do? What is its rationale and intent? What particular design issue or problem does it address?
+
+Also Known As
+Other well-known names for the pattern, if any.
+
+Motivation
+A scenario that illustrates a design problem and how the class and object structures in the pattern solve the problem. The scenario will help you understand the more abstract description of the pattern that follows.
+
+Applicability
+What are the situations in which the design pattern can be applied? What are examples of poor designs that the pattern can address? How can you recognize these situations?
+
+Structure
+A graphical representation of the classes in the pattern using a notation based on the Object Modeling Technique (OMT) [RBP+91]. We also use interaction diagrams [JCJO92, Boo94] to illustrate sequences of requests and collaborations between objects. Appendix B describes these notations in detail.
+
+Participants
+The classes and/or objects participating in the design pattern and their responsibilities.
+
+Collaborations
+How the participants collaborate to carry out their responsibilities.
+
+Consequences
+How does the pattern support its objectives? What are the trade-offs and results of using the pattern? What aspect of system structure does it let you vary independently?
+
+Implementation
+What pitfalls, hints, or techniques should you be aware of when implementing the pattern? Are there language-specific issues?
+
+Sample Code
+Code fragments that illustrate how you might implement the pattern in C++ or Smalltalk.
+
+Known Uses
+Examples of the pattern found in real systems. We include at least two examples from different domains.
+
+Related Patterns
+What design patterns are closely related to this one? What are the important differences? With which other patterns should this one be used?
+
+The appendices provide background information that will help you understand the patterns and the discussions surrounding them. Appendix A is a glossary of terminology we use. We&apos;ve already mentioned Appendix B, which presents the various notations. We&apos;ll also describe aspects of the notations as we introduce them in the upcoming discussions. Finally, Appendix C contains source code for the foundation classes we use in code samples.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;The hidden pattern, finally&lt;/h2&gt;
+&lt;p&gt;And here we are. The approach taken to describe the Patterns in the first place.&lt;/p&gt;
+&lt;p&gt;It is repeated 23 times in the book. In each chapter, to be precise. If you read the book thoroughly, not only do you understand specific patterns in full, but you learn how to analyse and understand patterns. It is similiar to learning algorithms, but it is &lt;em&gt;NOT just about learning algorithms&lt;/em&gt;, but learning &lt;em&gt;how to analyse them&lt;/em&gt; as well.&lt;/p&gt;
+&lt;p&gt;The outline presented here is basically what I fall back to everytime I need to explain a concept. And like patterns itself, I use some of it, all of it, or in combination with something else, but the concept remains.&lt;/p&gt;
+&lt;p&gt;Thus, Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.&lt;/p&gt;
+&lt;h2&gt;The &apos;Concept Elucidation Pattern&apos;.&lt;/h2&gt;
+&lt;p&gt;All yours, now.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>DevOps - Getting off the blocks.</title>
+      <link>http://localhost:8080/2017/09/27/DevOps-Making-A-Start/</link>
+      <pubDate>Wed, 27 Sep 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">http://localhost:8080/2017/09/27/DevOps-Making-A-Start/</guid>
+      <description>&lt;p&gt;DevOps is everywhere these days. As it should be, yes. Yet that doesn&apos;t take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the &lt;em&gt;where to begin&lt;/em&gt; question comes in, and that is a very difficult question for something as nebulous as DevOps.&lt;/p&gt;
+&lt;p&gt;So how does one start being &apos;DevOps&apos;y?  What drives DevOps?&lt;/p&gt;
+&lt;h2&gt;Context, Culture, Tools, Change, Automation, Feedback Loops and Collaboration !&lt;/h2&gt;
+&lt;p&gt;The above set summarizes the key drivers of DevOps anywhere. Additionally, there are a small but definite set of foundational DevOps practises, which have been proven enablers of DevOps over time.&lt;/p&gt;
+&lt;h2&gt;Foundational DevOps Practises&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;One touch build - &lt;em&gt;there should be a single command to build and package the tested version of a system.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;One touch deploy - &lt;em&gt;there should be a single command to deploy a tried and tested version to an environment.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Automation - &lt;em&gt;everything repetitive should be automated.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Monitoring Dashboards - &lt;em&gt;all process information, tests, builds, deploys, operations, features, analytics should be monitored and available.&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Essentially, the practises above together cumulate into a CI/CD pipeline. How sophisticated/refined your CI/CD pipeline is, is one of the key technological measures of a DevOps oriented team&apos;s maturity level.&lt;/p&gt;
+&lt;p&gt;So then the question driving a group trying to adopt a DevOps-y approach to software service delivery is, most likely, this&lt;/p&gt;
+&lt;h2&gt;Our DevOps Question&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Given our current context, what culture, practises and tools should I adopt which will enable&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;faster change adoption&lt;/strong&gt;?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;more automation&lt;/strong&gt;?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;more shared process information&lt;/strong&gt;?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;more closed feedback loops&lt;/strong&gt;?&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Note : Remember this question, We&apos;ll come back to this time and again.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;If we formulate an answer to the question above, we should have a workable Devops Strategy 101. Let us try an exercise and see.&lt;/p&gt;
+&lt;h2&gt;Setting the &apos;&lt;em&gt;Context&lt;/em&gt;&apos;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Context&lt;/strong&gt; is all about &lt;em&gt;NOT&lt;/em&gt; sacrificing global optima to achieve local optima. &lt;em&gt;But then my junior dev comes up, the one I hired last month, saying he doesn&apos;t know what the ceo knows so he doesn&apos;t have all the context so he can&apos;t code a-la DevOps.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Oops!&lt;/p&gt;
+&lt;p&gt;That didn&apos;t sound legit, did it? Cos it wasn&apos;t. In DevOps context itself is context-sensitive, i.e. it means take the biggest picture from where you stand. That&apos;s all you can do anyways.&lt;/p&gt;
+&lt;p&gt;Since context is king, we will set a context within which to start out on our DevOps analysis. Assume the following organizational scenario first.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;A team trying to provide custom software development and integration services on Azure. A team trying to a create a distributed processing layer for the .NET Stack system. A team working on big-data analytics and data presentation system on Azure. A management team trying to manage all these.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also assume that all of the teams have various degrees of maturity on the build, test, deploy aspects of their individual systems - so effectively, automated builds, automated tests, and CI/CD exists, but to various degrees. Which is usually the case in diverse organizations.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So the context here is a bunch of &lt;em&gt;software engineers trying to provide system development services on Azure&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Next.&lt;/p&gt;
+&lt;h2&gt;Consider &apos;Culture&apos;&lt;/h2&gt;
+&lt;p&gt;Now what can we do about Culture here?&lt;/p&gt;
+&lt;p&gt;Well, in a software development group, there is one &lt;em&gt;&apos;Culture&apos;&lt;/em&gt; culture, or group culture or organization culture.&lt;/p&gt;
+&lt;p&gt;Now this top-level culture is probably not something everybody can start off with. But in every culture, there are sub-cultures. And there are sub-cultures across development tools, eco-systems or resources. &lt;em&gt;(Java vs .Net, anyone?)&lt;/em&gt;. So for a start, let&apos;s just pick a culture by eco-system. Since Azure is common across, let&apos;s pick Azure.&lt;/p&gt;
+&lt;p&gt;Enter &lt;em&gt;&lt;strong&gt;Azure Culture&lt;/strong&gt;&lt;/em&gt;. But what does &lt;em&gt;Azure Culture&lt;/em&gt; in a DevOps organization mean? Let&apos;s go back and see how our original question changes.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;What practises and tools should I adopt which will enable&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;faster change adoption&lt;/strong&gt; in Azure?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;more automation&lt;/strong&gt; in Azure?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;more shared process&lt;/strong&gt; information in Azure?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;more closed feedback&lt;/strong&gt; loops in Azure?&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Note - Should we limit ourselves to Azure specific tools. What if we work on Scala, Node, .NET? So perhaps, we need to analyse tooling more comprehensively.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The above is the kind of question that completely derails initiatives if we sit down to exhaustively analyse the options. Sometime you just pick the first option and go - just so that it sets an operational context, if nothing else.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So we will just set one - the .NET stack. &lt;em&gt;Keeping things within the family, you see. You pick scala, or hadoop or node as per your needs. After all, you need multiple iterations of this.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So our task has now decomposed into a search for tooling options on the Azure platform and the .NET software development stack that enables foundational DevOps practises while achieving one or more of our goals - &lt;em&gt;faster change adoption, more automation,more shared process information, more closed feedback loops&lt;/em&gt;. Once we identify tools and technologies, we &lt;em&gt;assess our maturity levels on identified tools and practises&lt;/em&gt; to &lt;em&gt;identify &lt;strong&gt;gaps&lt;/strong&gt; which can be plugged&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The gaps are what we attack in our DevOps strategy 101&lt;/strong&gt;. The number of iterations of this process you go through, and the reviews with all concerned stakeholders should pare the list to items with highest overall priority.&lt;/p&gt;
+&lt;p&gt;Now we will do a non technical map-reduce. In &lt;em&gt;map&lt;/em&gt; phase, we list out every possible tool, practise or activity that looks like it might help. In &lt;em&gt;reduce&lt;/em&gt; phase - we prioritize items from list.&lt;/p&gt;
+&lt;p&gt;And in map phase our goals are simple.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;tools we can adopt&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;practises we can encourage&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;activities we can do&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now, the initial list will probably be large, as both Azure and Microsoft .NET are huge eco-systems, but remember two things,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We are just looking for what to start with.&lt;/li&gt;
+&lt;li&gt;As of now, we are just identifying as many options as we can that are applicable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But we do need to manage, classify and process this list. Wikipedia, in its DevOps page, suggests the SDLC stages - Code, Test, Build/Package/Relase (&lt;em&gt;merged these as boundaries between them are overlapping, especially in the matter of tooling&lt;/em&gt;), and Monitor.&lt;/p&gt;
+&lt;h3&gt;Azure/.NET Stack | SDLC Stage - Code&lt;/h3&gt;
+&lt;p&gt;A basic DevOps practise here is &lt;em&gt;Version Control&lt;/em&gt;. Distributed VCS are now standard, so we pick &lt;em&gt;&lt;strong&gt;Git&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Architectural support targeting DevOps enablement for Azure PaaS systems is a much-needed eco-system centric practise. Enter &lt;em&gt;&lt;strong&gt;Microservice architectures&lt;/strong&gt;&lt;/em&gt; which by encouraging small pieces and plug-and-play composition help keeping pieces small and nimble. Smaller pieces offer much greater ability to respond to change, better automation and easier deployment options.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Test-Driven Design (TDD)&lt;/strong&gt;&lt;/em&gt; and &lt;em&gt;&lt;strong&gt;Domain Driven Design (DDD)&lt;/strong&gt;&lt;/em&gt; are other standard practises that help in better code and decoupled pieces.&lt;/p&gt;
+&lt;p&gt;Thus&lt;/p&gt;
+&lt;h4&gt;Tools&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Git.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Practises&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Test Driven Design (TDD)&lt;/li&gt;
+&lt;li&gt;Domain Driven Design (DDD)&lt;/li&gt;
+&lt;li&gt;Microservices architectural style&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Azure/.NET Stack | SDLC Stage - Test&lt;/h3&gt;
+&lt;p&gt;Test automation has several flavours&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Unit Tests&lt;/li&gt;
+&lt;li&gt;Integration Tests&lt;/li&gt;
+&lt;li&gt;Performance tests.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additionally, we can also automate the test generation process through Behavior Driven Design Tools like SpecFlow, and test execution automation is usually done through build pipelines and Continuous Integration (CI)/Continuous Delivery(CD).&lt;/p&gt;
+&lt;h4&gt;Tools&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://docs.microsoft.com/en-us/visualstudio/test/intellitest-manual/introduction&quot;&gt;Pex - Generates boundary conditions tests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Unit And Integrated Testing Frameworks&lt;/li&gt;
+&lt;li&gt;Identify Metrics and tools to report Metrics - NCover, Ndepend, Ncrunch&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Azure Dev/Test Labs&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some possible activities. The one around &lt;em&gt;logging formats&lt;/em&gt; and &lt;em&gt;test reports&lt;/em&gt; is especially interesting -&lt;/p&gt;
+&lt;h4&gt;Activities&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;There seems to be no standards in the world around Logging formats and Test reports&lt;/strong&gt;&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Persona based metrics - &lt;em&gt;who needs what metrics?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Automation ROI graphs - &lt;em&gt;how to demonstrate?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;How to enable specification to final product traceability?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Azure .NET Stack | SDLC Stage - Build/Package/Release&lt;/h3&gt;
+&lt;p&gt;In this section, practises are common across software development verticals and horizontals.&lt;/p&gt;
+&lt;h4&gt;Practises&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;One Touch Build and Deploys.&lt;/li&gt;
+&lt;li&gt;Build Pipelines - Same builds on dev and test machines, Setup builds and Automated local deployment.&lt;/li&gt;
+&lt;li&gt;Automated provisioning &lt;em&gt;(Infrastructure configuration and management and Infrastructure as Code tools)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Tools&lt;/h4&gt;
+&lt;p&gt;These include&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Automation tools (in and out-system) - Powershell, MSDeploy,  Puppet, Chef, Docker, Ansible, OctopusDeploy.&lt;/li&gt;
+&lt;li&gt;Build tools and Servers (in and out-system) - MSBuild, PSake, DACPAC, TeamCity, Jenkins.&lt;/li&gt;
+&lt;li&gt;Eco System specific tools - Azure Resource Management (ARM) Templates and Azure CLI.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Azure/.NET Stack | SDLC Stage - Monitor&lt;/h3&gt;
+&lt;p&gt;This is probably a big problem area. For now we will gloss over it, but in practise, we would now probably take just monitoring as a problem area for DevOps and resort to the same technique we used throughout this post to break that down into tools, practises and activities.&lt;/p&gt;
+&lt;h4&gt;Practises&lt;/h4&gt;
+&lt;p&gt;What is needed here is feedback loops and operation trend monitoring through shared dashboards. To large extents, these feedback loops across localized scope (from a DevOps point of view) can be provided by ALM tools like JIRA on the scope and requirements and features perspective, while build and test feedback loops can be provided by CI servers and build-pipelines.&lt;/p&gt;
+&lt;p&gt;The difficult part is actually setting up on what to record and monitor. Sifting noise from signal here is a significant and &lt;em&gt;not-always-technical&lt;/em&gt; step. And once past this, we have the technically demanding part in setting up a system which integrates separate local scopes into integrated dashboards. That is hard and definitely not DevOps 101. Maybe later.&lt;/p&gt;
+&lt;p&gt;Tools include VSTS - for application life-cycle management, Azure AppInsight for application operation management, standard external tools like NewRelic, and ELK, advanced services like Azure OMS (native) and Google Analytics (external).&lt;/p&gt;
+&lt;h4&gt;Activities&lt;/h4&gt;
+&lt;p&gt;Following activities are required.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run Maturity Model evaluation on standard tools.&lt;/li&gt;
+&lt;li&gt;Establish Personas for Dashboards&lt;/li&gt;
+&lt;li&gt;Estrablish Metrics by View/Persona&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;At some point, build a &lt;strong&gt;Data Collection and Aggregation Tooling/Implementation&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;&lt;em&gt;Big List of Tools, Practises and Activities&lt;/em&gt;&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;What we have been doing so far, is basically running the &lt;em&gt;map&lt;/em&gt; part of a map-reduce analysis. Aggregating all of the tools, practises and activities found above, we get the following big list.&lt;/p&gt;
+&lt;h3&gt;Tools / Practises&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;li&gt;Selenium&lt;/li&gt;
+&lt;li&gt;Build pipelines and CI&lt;/li&gt;
+&lt;li&gt;PowerShell&lt;/li&gt;
+&lt;li&gt;Azure CLI&lt;/li&gt;
+&lt;li&gt;Azure Dev/Test Labs&lt;/li&gt;
+&lt;li&gt;Azure Operations Management Services&lt;/li&gt;
+&lt;li&gt;Azure AppInsights.&lt;/li&gt;
+&lt;li&gt;Azure Application Resource Templates&lt;/li&gt;
+&lt;li&gt;VSTS&lt;/li&gt;
+&lt;li&gt;Google Analytics&lt;/li&gt;
+&lt;li&gt;NewRelic&lt;/li&gt;
+&lt;li&gt;ELK&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Practises&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Microservices&lt;/li&gt;
+&lt;li&gt;TDD&lt;/li&gt;
+&lt;li&gt;DDD&lt;/li&gt;
+&lt;li&gt;BDD&lt;/li&gt;
+&lt;li&gt;Automated Unit Tests&lt;/li&gt;
+&lt;li&gt;Automated Integration Tests&lt;/li&gt;
+&lt;li&gt;One Touch Build and Deploys.&lt;/li&gt;
+&lt;li&gt;Build Pipelines - Same builds on dev and test machines, Setup builds and Automated local deployment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Activities&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;There seems to be no standards in the world around Logging formats and Test reports&lt;/strong&gt;&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;Persona based metrics - &lt;em&gt;who needs what metrics?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Automation ROI graphs - &lt;em&gt;how to demonstrate?&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;How to enable specification to final product traceability?&lt;/li&gt;
+&lt;li&gt;Maturity Model evaluation on identified tools.&lt;/li&gt;
+&lt;li&gt;Establish Personas for Dashboards&lt;/li&gt;
+&lt;li&gt;Establish Metrics by View/Persona&lt;/li&gt;
+&lt;li&gt;Establish Data Collection and Aggregation Tooling/Implementation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This may not be exactly the list you come up with, but if you followed along on the exercise model, you have your own list.&lt;/p&gt;
+&lt;p&gt;I am leaving the reduce part of this operation out, as that will probably diverge for everyone. At its basic premise, evaluating your group&apos;s maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now, but the no. of items should &apos;&lt;em&gt;reduce&lt;/em&gt;&apos; in reduce phase.&lt;/p&gt;
+&lt;p&gt;So there you are, with a set of starting points for a DevOps 101 Strategy. All we have to do now is Go forth, and Iterate.&lt;/p&gt;
+&lt;p&gt;Oh, and of course, implement !&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Azure AD and Office 365 OAuth integration through browsers and Postman.</title>
+      <link>http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/</link>
+      <pubDate>Sun, 24 Sep 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">http://localhost:8080/2017/09/24/Azure-AAD-with-Office-365/</guid>
+      <description>&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s Office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
+&lt;h2&gt;Longer answer.&lt;/h2&gt;
+&lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
+&lt;p&gt;The goal here is to understand how Azure OAuth authentication works when calling the outlook APIs through Azure AD. Preferably, I want to achieve this through raw HTTP calls, using just the browsers or Postman REST client, so that the HTTP based protocols and interactions are clear and open to visual inspection. In a nutshell, the steps are as follows.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create an Azure AD application / Service principal.&lt;/li&gt;
+&lt;li&gt;Redirect user to Exchange Active Directory for Authentication.&lt;/li&gt;
+&lt;li&gt;Return Auth Code to user after Azure AD, through OAuth, has authenticated against organization&apos;s Exchange AD.&lt;/li&gt;
+&lt;li&gt;Convert OAuth Code into Azure bearer token.&lt;/li&gt;
+&lt;li&gt;Call Microsoft Office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now, many online resources already exist on this, yet getting all the pieces playing together was rough. So, we&apos;ll walk the route I did and hope that the eco-system clears itself up.&lt;/p&gt;
+&lt;p&gt;In the process, I will briefly touch on OAuth in Azure, Azure AD, Scopes and Resources in MS Online API, Azure Service Principals aka App registrations, App permissions aka OAuth &lt;em&gt;on-behalf-of consent&lt;/em&gt; flow, Azure bearer tokens in Postman, JSON Web Tokens (JWT) and the Microsoft Graph explorer. Oh! and the Graph and Outlook sandboxes.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: In Azure, things change. The information here is of 24th Sept 2017.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;For the rest you need an Azure subscription, an Office 365 account, and an Azure AD membership. You can have non work accounts for all three, but its a lot easier if your company admin has done the configuring for you. Blogs are the way to go here if you want to setup trial accounts for each.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;findMeetingTimes API&lt;/h2&gt;
+&lt;p&gt;Do such APIs exist? Well, yes, they do. Problem is, more than &lt;strong&gt;&lt;em&gt;one&lt;/em&gt;&lt;/strong&gt; exist.&lt;/p&gt;
+&lt;h4&gt;Outlook/Office 365 APIs&lt;/h4&gt;
+&lt;p&gt;Documentation link here - &lt;a href=&quot;https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times&quot;&gt;https://msdn.microsoft.com/en-us/office/office365/api/calendar-rest-operations#find-meeting-times&lt;/a&gt;,
+The API is shown below -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST https://outlook.office.com/api/{version}/me/findmeetingtimes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and there are &lt;em&gt;three&lt;/em&gt; &lt;em&gt;version&lt;/em&gt;s of it - &lt;em&gt;v1.0, v2.0, beta&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Moreover, to use the API, the docs mention that we also need at least one of the following scopes -  &lt;code&gt;https://outlook.office.com/calendars.read.shared, wl.calendars, wl.contacts_calendars&lt;/code&gt;. Scopes are an important concept in Azure auth governing permissions, and we&apos;ll see more of them in later sections.&lt;/p&gt;
+&lt;p&gt;The sandbox to play-around with all of this is here &lt;a href=&quot;https://oauthplay.azurewebsites.net/&quot;&gt;https://oauthplay.azurewebsites.net/&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Microsoft Graph APIs&lt;/h4&gt;
+&lt;p&gt;This is the second, latest and greatest option from Microsoft. Again, documentation is here - &lt;a href=&quot;https://developer.microsoft.com/en-us/graph/docs/concepts/findmeetingtimes_example&quot;&gt;https://developer.microsoft.com/en-us/graph/docs/concepts/findmeetingtimes_example&lt;/a&gt;, the API looks like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST https://graph.microsoft.com/v1.0/me/findMeetingTimes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and the sandbox (called MS Graph Explorer), is here - &lt;a href=&quot;https://developer.microsoft.com/en-us/graph/graph-explorer&quot;&gt;https://developer.microsoft.com/en-us/graph/graph-explorer&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Outlook vs Graph.&lt;/h4&gt;
+&lt;p&gt;So why two? When to use what?&lt;/p&gt;
+&lt;p&gt;Well previously MS had multiple APIs available - Office, Azure AD, etc. MS Graph is intended to unify all of these endpoints into a single REST-ful gateway for all of Microsoft&apos;s underlying platform APIs viz. Azure AD, Excel, Outlook, OneDrive, OneNote, SharePoint etc. It is not fully at par with existing APIs, but Microsoft&apos;s recommendation is to prefer MS Graph unless you need a feature which it does not have.&lt;/p&gt;
+&lt;p&gt;For current and future work, prefer MS Graph over other means.&lt;/p&gt;
+&lt;h4&gt;API Request body.&lt;/h4&gt;
+&lt;p&gt;In either case the POST body is the same, so that&apos;s a relief. A detailed request is given towards the end of this post.&lt;/p&gt;
+&lt;p&gt;So endpoints - Check.&lt;/p&gt;
+&lt;p&gt;Request Body and Response - Check.&lt;/p&gt;
+&lt;p&gt;Well, on to Azure AD and OAuth SSO, then.&lt;/p&gt;
+&lt;h2&gt;Azure Active Directory (AAD) and OAuth.&lt;/h2&gt;
+&lt;p&gt;Azure OAuth based authentication is a big and complex topic and cannot be covered adequately in a single blog post. Conceptually, the Azure OAuth flow is like &lt;img src=&quot;/blog/img/posts/azureoauth.png&quot; alt=&quot;this&quot; /&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The diagram source and more documentation can be found at &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#main&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In our case, as mentioned before, the full authentication process needs the following -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create an Azure AD application / Service principal.&lt;/li&gt;
+&lt;li&gt;Redirect user to Exchange Active Directory for Authentication.&lt;/li&gt;
+&lt;li&gt;Return Auth Code to user after Azure AD, through OAuth, has authenticated against organization&apos;s Exchange AD.&lt;/li&gt;
+&lt;li&gt;Convert OAuth Code into Azure bearer token.&lt;/li&gt;
+&lt;li&gt;Call Microsoft Office APIs in SSO mode using token received above to retrieve the available meeting times for a employee given a specified time window.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But lets look at the details, where the devils lurk.&lt;/p&gt;
+&lt;h4&gt;Theory - App Registration / Generate Service Principal&lt;/h4&gt;
+&lt;p&gt;First, someone needs to get authenticated. This, in Azure terms, is a Service Principal. This is achieved by registering an application with Azure AD, which gives us three important keys, the &lt;em&gt;tenantId, clientId&lt;/em&gt; and the &lt;em&gt;clientSecret&lt;/em&gt; after registration.
+&lt;em&gt;For details about how to register an app, see  &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;After registration, we save the following key-value pairs for subsequent use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;tenantId&lt;/em&gt;: guid looking code of the AD instance in your Azure subscription.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;clientId&lt;/em&gt;: guid looking code of the application being registered.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;clientSecret&lt;/em&gt;: guid looking key corresponding to a code we create in the application properties on Azure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Note : The clientSecret will be shown only once when creating a app property. If you don&apos;t note it down, you need to delete and recreate a key. It canot be recovered.&lt;/em&gt;&lt;/p&gt;
+&lt;h4&gt;Theory - Azure AD and OAuth.&lt;/h4&gt;
+&lt;p&gt;The OAuth dance is a two-step process here.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Get a authentication code from the underlying authentication provider (OpenId, Active Directory).&lt;/li&gt;
+&lt;li&gt;Convert that code into a &lt;a href=&quot;https://jwt.io&quot;&gt;JSON Web Token&lt;/a&gt;. For subsequent calls, this token needs to be used as the Authorization header.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Theory - Authorize API&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The following are the current logon/authorization endpoints for both v1.0 and v2.0.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/{tenantId}/oauth2/authorize
+https://login.microsoftonline.com/{tenantId/oauth2/v2.0/authorize
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and a sample logon request with query parameters is as follows -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;GET https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=CLIENT_ID&amp;amp;redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&amp;amp;response_type=code&amp;amp;scope=openid+https://office.outlook.com/Calendars.Read.Shared
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The query parameter definitions are given below -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-   client_id: the clientId generated before during registering the app. This lets Azure know which app/service principal is requesting the logon.
+-   redirect_uri: the location that Azure will redirect to once the user has granted consent to the app. This value must correspond to the value of Redirect URI used when *registering the app*.
+-   response_type: the type of response the app is expecting. For the Authorization Grant Flow, this should always be the string `code`.
+-   scope: a space-delimited list of access scopes that the app requires. For access to all outlook shared readable calendars in our Active Directory We have specified the following 
+    - scope=openid+https://office.outlook.com/Calendars.Read.Shared
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Theory - Key things to remember&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Previous versions had the domain &lt;code&gt;login.windows.net&lt;/code&gt;. Some blogs use this. This is now not exposed, even though, based on inspection of HTTP headers, can be seen to be active in the background.&lt;/li&gt;
+&lt;li&gt;Also note we have two versions of the current endpoint as well - v1.0 and v2.0, and v2.0 has some differences from v1.0, viz., &lt;em&gt;v2.0 endpoint does not understand the query parameter &apos;resource&apos; and throws an error&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;For multi-tenant apps, replace &lt;em&gt;tenantId&lt;/em&gt; with &lt;em&gt;&apos;common&apos;&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;The keys given to us from Azure app registration are &lt;strong&gt;&lt;em&gt;clientId, tenantId, clientSecret&lt;/em&gt;&lt;/strong&gt;. However, in the authorize call, the API expects the query parameters as &lt;em&gt;underscore_separated&lt;/em&gt;, i.e., as &lt;strong&gt;&lt;em&gt;client_id, tenant_id, and client_secret&lt;/em&gt;&lt;/strong&gt;. I got stuck here for a while too.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Theory - OAuth response&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The authorization takes the required query string parameters, in our case, returns an authentication code. This is one of the possible variations on the request.&lt;/p&gt;
+&lt;p&gt;Using OAuth, authentication is redirected to your organizations Windows Active Directory SSO page, so that you can log in with your Windows credentials.&lt;/p&gt;
+&lt;p&gt;It then returns the code to the &lt;em&gt;response_uri&lt;/em&gt; specified. The &lt;em&gt;code&lt;/em&gt; looks like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;QABAAIAAAABlDrqfEFlSaui6xnRjX5Ef_{removed_lots_of_crazy_characters_here}_OSXEQcdFf2RLPAXbz30RgbyAA
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Theory - Scopes in brief.&lt;/h4&gt;
+&lt;p&gt;Scopes correspond to permissions which the account making the Rest API call will need to successfully interact with Azure resources. In our case, it the application corresponding to the &lt;em&gt;clientId&lt;/em&gt; which needs the permissions, as we are logging on to our tenant as this client, i.e. we will use this &lt;em&gt;clientId&lt;/em&gt; during the logon/authorize call.&lt;/p&gt;
+&lt;p&gt;Roughly speaking, we can think of an Azure Resource equals an domain viz. &lt;code&gt;office.outlook.com, graph.microsoft.com,&lt;/code&gt; etc. Note that Azure resources can be a lot more granular though.&lt;/p&gt;
+&lt;p&gt;The application we registered can request these set of permissions after the logon page is past,
+OR we can pre-allow these permissions to the application while registering. This option is the &lt;em&gt;OAuth On-Behalf-Of Consent Flow&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;A fuller discussion on scopes can be found at &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes&quot;&gt;https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A key thing to remember is the difference between how scopes are provided for Outlook REST APIs at &lt;code&gt;outlook.office.com&lt;/code&gt; vs. MS Graph at &lt;code&gt;graph.microsoft.com&lt;/code&gt;. For Outlook - &lt;em&gt;resource&lt;/em&gt; permissions (permissions for a particular URL) need to be specified in the query parameter in the format &lt;code&gt;https://url/permissions&lt;/code&gt;. See example below.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;openid+offline access+https://outlook.office.com/Calendars.Read.Shared+https://outlook.office.com/Contacts.Read
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For Graph API, the URL can be omitted, so the query param for MS Graph will be&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;openid+offline access+Calendars.Read.Shared+Contacts.Read
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We do not need &lt;code&gt;https://graph.microsoft.com&lt;/code&gt; in the URL&apos;s &lt;em&gt;scope&lt;/em&gt; parameter.&lt;/p&gt;
+&lt;h3&gt;Theory - Convert Auth Code To Bearer Token&lt;/h3&gt;
+&lt;p&gt;The second part of authentication is in converting the auth code into a JSON Web Token (see &lt;code&gt;https://jwt.io&lt;/code&gt;). The base tokenization URL is&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST https://login.windows.net/common/oauth2/token
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The body is of type www-form-encoded and has the following key-value pairs.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;grant_type=authorization_code&amp;amp;code={code from the authorize request}&amp;amp;redirect_uri={reply url for your application}&amp;amp;client_id={your application&apos;s client id in AAD}&amp;amp;client_secret={your application&apos;s client secret}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The HTTP response is a JSON document of form -&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JSON&quot;&gt;{
+    &amp;quot;token_type&amp;quot;: &amp;quot;Bearer&amp;quot;,
+    &amp;quot;scope&amp;quot;: &amp;quot;Calendars.Read Calendars.Read.All Calendars.Read.Shared offline_access&amp;quot;
+    &amp;quot;expires_in&amp;quot;: &amp;quot;3599&amp;quot;,
+    &amp;quot;ext_expires_in&amp;quot;: &amp;quot;262800&amp;quot;,
+    &amp;quot;expires_on&amp;quot;: &amp;quot;1506082448&amp;quot;,
+    &amp;quot;not_before&amp;quot;: &amp;quot;1506078548&amp;quot;,
+    &amp;quot;resource&amp;quot;: &amp;quot;https://outlook.office.com/&amp;quot;,
+    &amp;quot;access_token&amp;quot;: &amp;quot;{removed-use your own tokens}&amp;quot;,
+    &amp;quot;refresh_token&amp;quot;: &amp;quot;{removed-use your own tokens}&amp;quot;,
+    &amp;quot;id_token&amp;quot;: &amp;quot;{removed-use your own tokens}&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A access token is as per the JWT specification. Encoded, it looks like this - &lt;code&gt;eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1-{removed_lots_of_chars_here}-CTN2M3GXpo53GaXko0FgwPFjPA&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;However, this contains a lot of information. When decoded (via &lt;a href=&quot;http://jwt.io&quot;&gt;JWT.io&lt;/a&gt;), we can see the information it contains -&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JSON&quot;&gt;{
+  &amp;quot;aud&amp;quot;: &amp;quot;https://outlook.office.com/&amp;quot;,
+  &amp;quot;iss&amp;quot;: &amp;quot;https://sts.windows.net/{tenantId}/&amp;quot;,
+  &amp;quot;iat&amp;quot;: 1506070849,
+  &amp;quot;nbf&amp;quot;: 1506070849,
+  &amp;quot;exp&amp;quot;: 1506074749,
+  &amp;quot;acr&amp;quot;: &amp;quot;1&amp;quot;,
+  &amp;quot;aio&amp;quot;: &amp;quot;Y2VgYHjuJj1PSJv1qLb8h9Y9s3wvRa5NSegLEFNqsHqx9d6LHgcA&amp;quot;,
+  &amp;quot;amr&amp;quot;: [
+    &amp;quot;pwd&amp;quot;
+  ],
+  &amp;quot;appid&amp;quot;: &amp;quot;registered_app_id&amp;quot;,
+  &amp;quot;appidacr&amp;quot;: &amp;quot;1&amp;quot;,
+  &amp;quot;e_exp&amp;quot;: 262800,
+  &amp;quot;enfpolids&amp;quot;: [],
+  &amp;quot;family_name&amp;quot;: &amp;quot;my_family_name&amp;quot;,
+  &amp;quot;given_name&amp;quot;: &amp;quot;my_first_name&amp;quot;,
+  &amp;quot;ipaddr&amp;quot;: &amp;quot;219.91.160.98&amp;quot;,
+  &amp;quot;name&amp;quot;: &amp;quot;my_full_name&amp;quot;,
+  &amp;quot;oid&amp;quot;: &amp;quot;oid&amp;quot;,
+  &amp;quot;onprem_sid&amp;quot;: &amp;quot;S-1-5-21-1708537768-789336058-725345543-1974208&amp;quot;,
+  &amp;quot;puid&amp;quot;: &amp;quot;1003BFFD870F4BB4&amp;quot;,
+  &amp;quot;scp&amp;quot;: &amp;quot;Calendars.Read Calendars.Read.All Calendars.Read.Shared Contacts.Read Contacts.Read.Shared offline_access&amp;quot;,
+  &amp;quot;sub&amp;quot;: &amp;quot;5M4_YhrPEtd558TCLIWVHGxhgKyxqsctKvtjYpnEx1o&amp;quot;,
+  &amp;quot;tid&amp;quot;: &amp;quot;tenantId&amp;quot;,
+  &amp;quot;unique_name&amp;quot;: &amp;quot;my logon mail id here&amp;quot;,
+  &amp;quot;upn&amp;quot;: &amp;quot;my logon mail id here&amp;quot;,
+  &amp;quot;ver&amp;quot;: &amp;quot;1.0&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Theory - MS Office API, REST call.&lt;/h3&gt;
+&lt;p&gt;Most of the nitty-gritties should have been worked out of the way now. We just need to call the Outlook REST API as follows -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST https://outlook.office.com/api/{version}/me/findmeetingtimes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add the following HTTP headers to the request&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Content-Type : application/json&lt;/li&gt;
+&lt;li&gt;Authorization : bearer &lt;em&gt;{token_returned_by_token_endpoint}&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt; : Note the string &lt;em&gt;bearer&lt;/em&gt;, followed by a space, in front of the token. I struggled for a long time at this step before figuring this out.&lt;/p&gt;
+&lt;p&gt;And voila. everything works. or does it? Since practise beats theory everytime, let&apos;s get down to browsers and POSTMAN.&lt;/p&gt;
+&lt;h2&gt;Practise - Putting it all together.&lt;/h2&gt;
+&lt;p&gt;Okay, brass-tacking time now.&lt;/p&gt;
+&lt;h4&gt;Practise - Add Application into AD.  Save the &lt;em&gt;tenantId, clientId and clientSecret&lt;/em&gt;.&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Added a new application called &apos;Postman&apos; in the linked Azure Active Directory through Azure portal.&lt;/li&gt;
+&lt;li&gt;Specify &apos;Read User and Shared Calendars&apos; in the permissions panel, and explicitly granted those permissions. Through this, we are implementing &lt;em&gt;OAuth On-Behalf-Of-Consent flow&lt;/em&gt;. Otherwise, we would have an intermediate screen after entering our Windows credentials where we would have to accept the use of these permissions.&lt;/li&gt;
+&lt;li&gt;Add two response_uri, one for Postman REST client to use the response auth code, and one to see the raw http auth request and response in a browser window myself. For Postman I added &lt;code&gt;https://www.getpostman.com/oauth2/callback&lt;/code&gt;, as per Postman REST client requirements, and a second one, &lt;code&gt;http://localhost/myapp/&lt;/code&gt; for my browser based calls.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once done, we keep the following key-values (&lt;em&gt;not exact, of course&lt;/em&gt;) handy.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-JSON&quot;&gt;tenantId : fea858f0-512d-4649-8228-d78fd9ef3c7f
+clientId : 794b53a6-e176-4185-92fe-617dd8512db5
+clientSecret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Practise - Invoke Azure Authorize API.&lt;/h4&gt;
+&lt;p&gt;The full &lt;code&gt;GET&lt;/code&gt; request for my use case is as follows. Paste this into a browser window which is not already signed into azure.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/common/oauth2/authorize?client_id=794b53a6-e176-4185-92fe-617dd8512db5&amp;amp;redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&amp;amp;response_type=code&amp;amp;scope=https://outlook.office.com/calendars.read.shared
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Important points to remember&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Note I have used the endpoint &apos;common&apos;.&lt;/li&gt;
+&lt;li&gt;Note that I have used v1.0 endpoint. v2.0 did not work for me. The Authorize call succeeds, but the token call fails with a version mismatch error.&lt;/li&gt;
+&lt;li&gt;Note the callback used here &apos;http://localhost/myapp/&apos;. This was one of the endpoints registered with AD as the call back URI for the &apos;Postman&apos; application/service principal.&lt;/li&gt;
+&lt;li&gt;Ensure that all URLs mentioned are escaped properly. in the above the &lt;em&gt;request_uri&lt;/em&gt; is escaped right, but the scope one isn&apos;t. It still works, but try not to do this.&lt;/li&gt;
+&lt;li&gt;Ensure that all URLs end with a trailing slash. This one causes a nasty error with an incomprehensible error message.&lt;/li&gt;
+&lt;li&gt;Add the scopes correctly and ensure that the corresponding permissions are granted in Azure portal to the Application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;When the call returns, it shows me a browser page with HTTP 404. That is expected, as the actual URL does not exist. The URL that can be seen in the browser address bar, is like this -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://localhost/myapp/?code=QABAAIAAAABlDrqfEFlSaui6-{removed_lots_of_chars_here}-e3e45d8d4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that this is the callback URL specified during application registration. The auth code is appended to the querystring. We will need this code subsequently.&lt;/p&gt;
+&lt;h4&gt;Practise - Invoke Azure token API&lt;/h4&gt;
+&lt;p&gt;In POSTMAN, Create a new &lt;code&gt;POST&lt;/code&gt; request to the following endpoint&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://login.microsoftonline.com/common/oauth2/token
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Create a request body as type &lt;code&gt;x-www-form-urlencoded&lt;/code&gt;. In the POSTMAN bulk-edit mode, add the following JSON parameters to it.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;client_id: 794b53a6-e176-4185-92fe-617dd8512db5
+scope: https://outlook.office.com/calendars.read.shared/
+resource: https://outlook.office.com/
+code: QABAAIAAAABlDrq-{removed_lots_of_chars_here}-UassQOSXEQcdFf2RLPAXbz30RgbyAA
+redirect_uri: http://localhost/myapp/
+grant_type: authorization_code
+client_secret: MyQt+7mKw/Vz7p6XjHRfBOe68ffWvjmjVhJP69K1dec!=
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Fire the request. We should get the following response.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+    &amp;quot;token_type&amp;quot;: &amp;quot;Bearer&amp;quot;,
+    &amp;quot;scope&amp;quot;: &amp;quot;Calendars.Read Calendars.Read.All Calendars.Read.Shared Contacts.Read Contacts.Read.Shared offline_access&amp;quot;,
+    &amp;quot;expires_in&amp;quot;: &amp;quot;3599&amp;quot;,
+    &amp;quot;ext_expires_in&amp;quot;: &amp;quot;262800&amp;quot;,
+    &amp;quot;expires_on&amp;quot;: &amp;quot;1506082448&amp;quot;,
+    &amp;quot;not_before&amp;quot;: &amp;quot;1506078548&amp;quot;,
+    &amp;quot;resource&amp;quot;: &amp;quot;https://outlook.office.com/&amp;quot;,        
+    &amp;quot;access_token&amp;quot;: &amp;quot;myJ0eXAiOiJKV1Qi-{removed_lots_of_chars_here}-ukX3nBlRfzh6Sg&amp;quot;,        
+    &amp;quot;refresh_token&amp;quot;: &amp;quot;QABAAAAAAABlDrq-{removed_lots_of_chars_here}-uoBFATkE6ZJHyAA&amp;quot;,       
+    &amp;quot;id_token&amp;quot;: &amp;quot;yJ0eXAiOiJKV1QiL-{removed_lots_of_chars_here}-SIsInZlciI6IjEuMCJ9.&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Practise - Invoke Outlook REST API.&lt;/h4&gt;
+&lt;p&gt;Again in POSTMAN, create another &lt;code&gt;POST&lt;/code&gt; request for the following URI.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://outlook.office.com/api/v2.0/me/findmeetingtimes
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Add the HTTP headers&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Content-Type: application/json,
+Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6Sg
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; the space between bearer and the rest of the &lt;em&gt;access_token&lt;/em&gt; returned by the previous token call.&lt;/p&gt;
+&lt;p&gt;Add the following as raw request JSON -&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{ 
+&amp;quot;Attendees&amp;quot;: [ 
+    { 
+    &amp;quot;Type&amp;quot;: &amp;quot;Required&amp;quot;,  
+    &amp;quot;EmailAddress&amp;quot;: { 
+        &amp;quot;Name&amp;quot;: &amp;quot;my_name&amp;quot;,
+        &amp;quot;Address&amp;quot;: &amp;quot;my_mail_id&amp;quot; 
+    } 
+    },
+{ 
+    &amp;quot;Type&amp;quot;: &amp;quot;Optional&amp;quot;,  
+    &amp;quot;EmailAddress&amp;quot;: { 
+        &amp;quot;Name&amp;quot;: &amp;quot;other_name&amp;quot;,
+        &amp;quot;Address&amp;quot;: &amp;quot;other_mail_id&amp;quot; 
+    } 
+    }  
+],  
+&amp;quot;TimeConstraint&amp;quot;: { 
+    &amp;quot;ActivityDomain&amp;quot;:&amp;quot;Work&amp;quot;,
+    &amp;quot;Timeslots&amp;quot;: [ 
+    { 
+        &amp;quot;Start&amp;quot;: { 
+        &amp;quot;DateTime&amp;quot;: &amp;quot;2017-09-22T07:00:00&amp;quot;,  
+        &amp;quot;TimeZone&amp;quot;: &amp;quot;Pacific Standard Time&amp;quot; 
+        },  
+        &amp;quot;End&amp;quot;: { 
+        &amp;quot;DateTime&amp;quot;: &amp;quot;2017-09-23T17:00:00&amp;quot;,  
+        &amp;quot;TimeZone&amp;quot;: &amp;quot;Pacific Standard Time&amp;quot; 
+        } 
+    } 
+    ] 
+},  
+&amp;quot;MeetingDuration&amp;quot;: &amp;quot;PT1H&amp;quot; 
+} 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Fire the request.  The outlook API should now return a valid response from Office 365.&lt;/p&gt;
+&lt;p&gt;If you want to try out the equivalent graph API, you need to do a fresh authentication. This time use the scopes as required for MS Graph &lt;em&gt;(no url, just the scope value)&lt;/em&gt;. Then use this Auth Code to get a fresh bearer token. Using this token for a call to the MS Graph API should work. It did work for me without any hassles.&lt;/p&gt;
+&lt;p&gt;And that&apos;s all of it. We can go home now.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blogging with Github Pages and Pretzel.</title>
+      <link>http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/</link>
+      <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">http://localhost:8080/2017/08/29/Blogging-Github-Pretzel/</guid>
+      <description>&lt;p&gt;As I mentioned in my &lt;a href=&quot;http://insen.github.io/blog/2017/08/29/helloblog/&quot;&gt;&apos;hello-blog&apos;&lt;/a&gt; post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.&lt;/p&gt;
+&lt;h3&gt;The Goal.&lt;/h3&gt;
+&lt;p&gt;The goal here is a system which has the following publish-a-blog sequence -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Write the blog in as close to english as possible. We use Markdown (filename.md) for close-to-english text files.&lt;/li&gt;
+&lt;li&gt;Add the file into a specific directory on local machine.&lt;/li&gt;
+&lt;li&gt;Review add/edited blog-site and added/edited blog-post without internet connectivity. Rinse and repeat as needed.&lt;/li&gt;
+&lt;li&gt;Check in all updates (aka backup). Enter Github - On successful check-in, online blog is automatically updated with new content. (Only this step needs internet connectivity).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Essentially, its very developer friendly. This process emulates the &lt;strong&gt;&lt;em&gt;code, build, test, deploy&lt;/em&gt;&lt;/strong&gt; cycle of software development.&lt;/p&gt;
+&lt;h3&gt;The Pieces.&lt;/h3&gt;
+&lt;p&gt;The infrastructure&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;Github project pages repository&lt;/strong&gt; which will have
+&lt;ul&gt;
+&lt;li&gt;A template project for a web-site, which I chose to be &lt;strong&gt;Hyde&lt;/strong&gt;. Why?
+&lt;ol&gt;
+&lt;li&gt;I liked it.&lt;/li&gt;
+&lt;li&gt;It is a Jekyll theme. Github pages default is Jekyll. I avoided using Jekyll because of reasons cited later, But staying close to defaults seemed a good idea.	&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;A directory within the repository named &apos;docs&apos; (as per Github rules) holding the pre-assembled auto-generated and checked-in web-site. Github pages automatically serves this web-site from a public Url.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pretzel&lt;/strong&gt; to build/rebuild the web-site template, new/edited posts and generate/preview the updated web-site while offline. Some batch files for the builds with Pretzel commands, so that the process is seamlessly repeatable.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Git&lt;/strong&gt;, to push the updates to the template, the posts and to the generated web-site (docs folder) into the repo and the publishable version into the docs folder. &lt;em&gt;(Note that we didn&apos;t say anything about copying anything over to docs folder - Pretzel build scripts take care of that.)&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Oh, and I almost forgot. &lt;strong&gt;Visual Studio Code&lt;/strong&gt; is the text editor. Pick whichever you like.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;(Note - If you don&apos;t have a github account, this is a good time to create one. Also, if you don&apos;t know Git, much of this blog won&apos;t make sense to you. if you really, really want to blog, this is a good alternative option &lt;a href=&quot;http://tumblr.com&quot;&gt;tumblr&lt;/a&gt;)&lt;/em&gt;.&lt;/p&gt;
+&lt;h3&gt;Github and &lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/&quot;&gt;Github Pages&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Github Pages are a feature inbuilt into Github which enables you to host static web-sites with minimum effort. There are a few different flavors.&lt;/p&gt;
+&lt;h4&gt;User Pages&lt;/h4&gt;
+&lt;p&gt;If your github account is &lt;strong&gt;acc&lt;/strong&gt;, Create a new repository named as &lt;strong&gt;acc&lt;/strong&gt; (same as the account name). A public web-site with no content is available at http://&lt;strong&gt;acc&lt;/strong&gt;.github.io.&lt;/p&gt;
+&lt;p&gt;Add a index.html with only the text &apos;Hello World&apos; into the &apos;master&apos; branch.  You should see &apos;Hello World&apos; in your browser from http://&lt;strong&gt;acc&lt;/strong&gt;.github.io/.&lt;/p&gt;
+&lt;h4&gt;Organization Pages&lt;/h4&gt;
+&lt;p&gt;Similar to user pages except the repo is at the organization level, and has the same name as the
+organization. Gets published(approximately) at http://github.com/&lt;strong&gt;organizationname&lt;/strong&gt;. *Check with official Github documentation as I didn&apos;t investigate this much.&lt;/p&gt;
+&lt;h4&gt;Project Pages&lt;/h4&gt;
+&lt;p&gt;If your github account is &lt;strong&gt;acc&lt;/strong&gt;, viz, your Github account is at https://&lt;strong&gt;acc&lt;/strong&gt;.github.com, and you add a new repository named as &lt;strong&gt;repo&lt;/strong&gt;, the Project pages site with no content is available at https://&lt;strong&gt;acc&lt;/strong&gt;.github.io/&lt;strong&gt;repo&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Add a folder called &apos;docs&apos; in repo in the master branch.&lt;/p&gt;
+&lt;p&gt;Add a &lt;strong&gt;index.html&lt;/strong&gt; with just the text &apos;Hello World&apos; into the &apos;docs&apos; folder. This automatically gets published as http://&lt;strong&gt;acc&lt;/strong&gt;.github.io/&lt;strong&gt;repo&lt;/strong&gt;. You should see &apos;Hello World&apos; in your browser from this site.&lt;/p&gt;
+&lt;p&gt;These sites are available at a per-repository level. They can also be configured so that the web-site is geing served either from master branch, from a top level folder in the master branch named as &lt;strong&gt;docs&lt;/strong&gt; or a branch specifically named as &lt;strong&gt;gh-pages&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;I am using the &lt;strong&gt;docs&lt;/strong&gt; option above.&lt;/p&gt;
+&lt;h4&gt;Other Things...&lt;/h4&gt;
+&lt;p&gt;Note that it is perfectly possible to have user-pages, organization-pages and project-pages in the same account. Given that the user account is &lt;strong&gt;acc&lt;/strong&gt;, the organization name is &lt;strong&gt;organizationname&lt;/strong&gt;, and the project repo name is &lt;strong&gt;repo&lt;/strong&gt;, the following public web-sites will be available.
+-	http://&lt;strong&gt;acc&lt;/strong&gt;.github.io/  as the User Page Site.
+-	http://github.com/&lt;strong&gt;organizationname&lt;/strong&gt; as an Organization Page Site
+-	http://&lt;strong&gt;acc&lt;/strong&gt;.github.io/&lt;strong&gt;repo&lt;/strong&gt;  as a Project Page Site&lt;/p&gt;
+&lt;p&gt;The site can be a Jekyll based, &lt;strong&gt;OR&lt;/strong&gt; a plain vanilla html website but with with an index.html at the top level of the site. I presume how this works is this - Github passes a http call to the site url through a web-server which can process &lt;a href=&quot;http://liquid.org&quot;&gt;Liquid&lt;/a&gt; - a html templating engine. This engine passes on plain vanilla html as is, so html spec based content just flows through that web server. We are using this approach as we are pre-building the web-site as a collection of static html pages.&lt;/p&gt;
+&lt;p&gt;If using Jekyll, you need to create a Jekyll based website in the repo and branch as per your choice from the page types - user, organization or project. Github&apos;s Jekyll based build process will probably do the Jekyll builds on your behalf before publishing online. More details about Github&apos;s inbuilt support for Jekyll publishing can be found at &lt;a href=&quot;https://help.github.com/articles/user-organization-and-project-pages/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Hello &lt;a href=&quot;https://Github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; &lt;em&gt;(and Static-site generators)&lt;/em&gt;!&lt;/h3&gt;
+&lt;p&gt;Pretzel is a open source, static-site generator in .NET.&lt;/p&gt;
+&lt;p&gt;Maybe the first question to address is how many of these there are? &lt;a href=&quot;https://www.staticgen.com/&quot;&gt;Take a look&lt;/a&gt;. When it comes to frameworks, We are living in a world of plenty these days.&lt;/p&gt;
+&lt;p&gt;What do they do? Well, basically a static site generator, especially the ones targeting blogging, take a bunch of layout templates (e.g. site-header.html, sidebar.html, footer.html), your CSS stylesheets, your Javascript, and your posts (usually in markdown, but based on support you could probably use any syntax - markdown, yaml, plain html, razor) - and processes them to a colection of plain vanilla HTML/CSS/Javascript pages - one for each post. Each page generated is a complete and self-contained html page, combining all the common layout templates, the CSS, the  Javascript and the Markdown content, with links between pages and navigation.&lt;/p&gt;
+&lt;p&gt;I picked Pretzel because it is written in C#. I know C# well so I can read the code, debug or enhance Pretzel if I ever so require. (Other possible options included &lt;a href=&quot;http://wyam.io&quot;&gt;Wyam&lt;/a&gt;, and &lt;a href=&quot;https://github.com&quot;&gt;Sandra.Snow&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;Now Pretzel tries to keep as close as possible to Jekyll. Considering I am looking for a offline Jekyll replacement, Pretzel seemed appropriate.&lt;/p&gt;
+&lt;p&gt;And with Pretzel I can build/rebuild/run the entire site on my local machine with minimal fiddling (Which Jekyll setup, debug, or enhancement will all force me to do, and all in Ruby). As a .NET developer, my primary machine is usually all set to do just about anything with the CLR. Once testing is done, all I need to do is copy the local machine site folder into the folder from which Github serves project pages (the &lt;strong&gt;&apos;docs&apos;&lt;/strong&gt; folder under Github repository root). With build scripts, I can automate this step. When I check-in to Github, after allowing some time for Github to build the site and CDN propagation to happen, the latest content comes up on the public site.&lt;/p&gt;
+&lt;p&gt;For further details, check out the &lt;a href=&quot;https://Github.com/Code52/pretzel/wiki&quot;&gt;Pretzel wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Setup&lt;/h3&gt;
+&lt;h4&gt;Setting up the repository in Github portal.&lt;/h4&gt;
+&lt;p&gt;Do the following to setup your Github blogging. This method sets up a Project Site as the blog site.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a Github account, viz. &lt;strong&gt;acc&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Create a repository in github, viz. &lt;strong&gt;repo&lt;/strong&gt;. I created https://github.com/insen/blog.&lt;/li&gt;
+&lt;li&gt;Git clone into local machine. This is where you will be adding your site.
+&lt;ul&gt;
+&lt;li&gt;Add a &lt;strong&gt;docs&lt;/strong&gt; folder. &lt;em&gt;(Name needs to be exact)&lt;/em&gt;.
+&lt;ul&gt;
+&lt;li&gt;Add an index.html with the text &apos;Hello world&apos;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Push to Github.&lt;/li&gt;
+&lt;li&gt;Goto Github repository settings, Gh-Pages section - Select &apos;master branch/docs folder&apos;.&lt;/li&gt;
+&lt;li&gt;Check &lt;a href=&quot;#&quot;&gt;https://&lt;strong&gt;acc&lt;/strong&gt;.github.io/repo/&lt;/a&gt; - the contents of index.html should be visible in your browser.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And that&apos;s it. The blog post you are currently reading at &lt;a href=&quot;https://insen.github.io/blog/&quot;&gt;https://insen.github.io/blog/&lt;/a&gt; has been built in the same fashion, though we are still missing a few steps yet - We need to setup pretzel and then make our site look decent. But reversing th order makes things easier, So onto Hyde first, then Pretzel.&lt;/p&gt;
+&lt;h4&gt;Importing Hyde to local machine.&lt;/h4&gt;
+&lt;p&gt;Hyde is a pre-built theme for Jekyll. Since Pretzel closely follows Jekyll paradigms, It should work without issues, or so I thought. I was mostly correct. All we have to do here is git clone the &lt;a href=&quot;https://github.com/poole/hyde&quot;&gt;Hyde repository at Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The reason we need this is that the basic site created by Pretzel is quite horrible, both aesthetically and structurally. I started looking for something that works from an aesthetic point of view, but as close to Jekyll as possible, which led me to &lt;a href=&quot;https://github.com/poole/hyde&quot;&gt;Hyde&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;Setting up Pretzel on local machine and basic usage.&lt;/h4&gt;
+&lt;p&gt;Setting up Pretzel is quite straight forward. Get Pretzel from &lt;a href=&quot;https://github.com/Code52/pretzel&quot;&gt;here&lt;/a&gt;, &lt;strong&gt;OR&lt;/strong&gt; use Chocolatey - a package manager for windows. To use Chocolatey, install Chocolatey from &lt;a href=&quot;https://chocolatey.org/&quot;&gt;here&lt;/a&gt;, and on an elevated command prompt or powershell console, run the command&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;	choco install pretzel
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;To create a basic site for you. The command details are &lt;a href=&quot;https://Github.com/Code52/pretzel/wiki&quot;&gt;here&lt;/a&gt;. You can
+lookup the various possible options.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;	pretzel create [options]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Bake the site - means generate the output website and put it into a default folder. Usually named &lt;strong&gt;_site&lt;/strong&gt; and located at project root level. The command details are &lt;a href=&quot;https://Github.com/Code52/pretzel/wiki&quot;&gt;here&lt;/a&gt;. I will use the following version.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;	pretzel bake 
+		--source=&amp;quot;c://srcpath&amp;quot; 
+		--destination=&amp;quot;d://dpath&amp;quot; 
+		--cleantarget
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Test the site&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;	pretzel taste 
+		--source=&amp;quot;c://dpath&amp;quot; 
+		--port=8001
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;Important note&lt;/em&gt; - the source directory in &lt;em&gt;&apos;taste&apos;&lt;/em&gt; command is the destination directory in &lt;em&gt;&apos;bake&apos;&lt;/em&gt; command. This is what we are using. For other options, check Pretzel wiki.&lt;/p&gt;
+&lt;p&gt;I will be creating batch scripts for the &lt;em&gt;(bake)&lt;/em&gt; and &lt;em&gt;(taste)&lt;/em&gt; snippets which will be useful.&lt;/p&gt;
+&lt;h3&gt;Getting jiggy with it.&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Delete the contents of your repository (except docs folder), and then copy the entire contents of the hyde repo into your blog repo.&lt;/li&gt;
+&lt;li&gt;Run the Pretzel bake command from a prompt at the repository root folder with no command-line args. Pretzel should create a folder called &lt;strong&gt;_site&lt;/strong&gt; under repository folder. It does NOT. It does this instead.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-c#&quot;&gt;	Unhandled Exception: Pretzel.Logic.Exceptions.PageProcessingException: Failed to process E:\work\blogging\blog\_site\201
+	2\02\07\example-content\index.html, see inner exception for more details ---&amp;gt; DotLiquid.Exceptions.SyntaxException: Unknown tag &apos;gist&apos;
+		at DotLiquid.Block.UnknownTag(String tag, String markup, List`1 tokens)
+		at DotLiquid.Block.Parse(List`1 tokens)
+		at DotLiquid.Document.Initialize(String tagName, String markup, List`1 tokens)
+		at DotLiquid.Template.ParseInternal(String source)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Why? The reason here is that a sample post in the _posts folder contains, among other bits, the following content&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;{&amp;#37; gist 5555251 gist.md &amp;#37;}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;And this does not work in Pretzel.&lt;/p&gt;
+&lt;p&gt;Why again? Because Hyde is a Jekyll theme, and Jekyll has a parser for the &lt;strong&gt;gist&lt;/strong&gt; command. Pretzel does NOT. Delete this line from the post.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(However, this also means, you have to figure out an alternative way to embed gists in your post, if you need to)&lt;/em&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;strong&gt;bake&lt;/strong&gt; again with no parameters. Pretzel uses the current directory as the source directory and creates the web-site. Now, &lt;strong&gt;bake&lt;/strong&gt; should succeed, and you should see a sub-folder called &lt;strong&gt;_site&lt;/strong&gt;. This contains your entire blog site.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Delete the &lt;strong&gt;CNAME&lt;/strong&gt; file from the repository folder as well as the generated &lt;strong&gt;_site&lt;/strong&gt; folder *(This causes issues   if you don&apos;t have a top level domain name. And no, you CANNOT point this to the Github site url).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change &lt;strong&gt;index.html&lt;/strong&gt;. This file should be in the &lt;strong&gt;repo&lt;/strong&gt; directory.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There should be a line towards the top. md &lt;code&gt;{% for post in paginator.posts %}&lt;/code&gt;. Change &apos;paginator&apos; to &apos;site&apos;. Paginator is a Jekyll plugin and does NOT work in Pretzel. No posts show up if we retain paginator.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There should be a line a little below the above &lt;code&gt;&amp;lt;a href=&amp;quot; {{ post.url }}&amp;quot;&amp;gt;&lt;/code&gt;. Change this to &lt;code&gt;&amp;lt;a href=&amp;quot;{{ post.url | prepend: site.baseurl }}&amp;quot;&amp;gt;&lt;/code&gt;. Navigation between posts does not work otherwise.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the config.yml. A config.yml is given below. I changed the &lt;strong&gt;&apos;connect&apos;&lt;/strong&gt; and its sub-items. These fields are used in the Liquid based html templates, viz. &lt;code&gt;&amp;lt;span&amp;gt;{{ site.title }}&amp;lt;/span&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;lt;span&amp;gt;{{ site.connect.github }}&amp;lt;/span&amp;gt;&lt;/code&gt;, etc. The sections marked as &lt;em&gt;(Setup)&lt;/em&gt; in ths file have to be filed in and be accurate. They are used to generate the site.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My config.yml is shown.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-yml&quot;&gt;# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            &apos;Some text&apos;
+tagline:          &apos;Some text&apos;  
+description:      &apos;Some text&apos;
+url:              &apos;your blog url after publication - use https if https expected, else use http&apos;
+baseurl:          &apos;your blog url after publication - use https if https expected, else use http. Could be same or different from previous&apos;
+
+author:
+  name:           &apos;a name&apos;
+  url:            &apos;a url&apos;
+
+paginate:         5
+
+# Custom vars
+version:          1.0.0
+
+connect:
+  github:          &apos;@github&apos;
+  linkedin:        &apos;@linkedin&apos;
+  email:           &apos;@email&apos;
+
+exclude:
+  - docs\
+  - .gitignore
+  - .git
+  - pbake.bat
+  - ptaste.bat 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;strong&gt;taste&lt;/strong&gt; command as specified above from the repository directory. This command should run, open a browser on local machine and show you the sample posts (ref - we removed the &apos;gist&apos; tag from one of them).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bake and taste the site again - Check the _site and the docs folder. There should be no recursive folder patterns. &lt;em&gt;(Note - this means that the bake and taste commands you used are correct with source and destination file names and other options. Otherwise your site generation times, and github check-in times, and github repo size will exponentially increase with the number of bakes. The two example commands given in usage section are correct except for file-names and avoid the recursive folders issue. I added these two commands as batch files to my repo - pbake.bat and ptaste.bat. These are my build files. Also, since the pretzel bake output is already redirected to the &apos;docs&apos; folder in the batch files, I don&apos;t have to manually copy anything)&lt;/em&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check-in to Github.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Next is what?&lt;/h3&gt;
+&lt;p&gt;There&apos;s quite a bit left to do -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A header&lt;/li&gt;
+&lt;li&gt;Landing site should show a list of posts, not posts and post-content.&lt;/li&gt;
+&lt;li&gt;Disqus integration.&lt;/li&gt;
+&lt;li&gt;Google Analytics integration.&lt;/li&gt;
+&lt;li&gt;Tag cloud.&lt;/li&gt;
+&lt;li&gt;Maybe CNAME and site search.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But for now, this blog seems to be showing up on the internet. If you followed along this far with no problems, you should also be good to go.&lt;/p&gt;
+&lt;p&gt;Go forth, and typo. &lt;em&gt;(pssst !! pun intended)&lt;/em&gt;.&lt;/p&gt;
+&lt;h3&gt;Additional resources&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.freeformatter.com/html-entities.html&quot;&gt;Free Formatter&lt;/a&gt; for html encoding.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://daringfireball.net/projects/markdown/syntax&quot;&gt;Markdown Syntax&lt;/a&gt; for reference.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gist.githubusercontent.com/VEnis/7465176/raw&quot;&gt;Markdown Sample&lt;/a&gt; which works in Github.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Blog like you are coming home.</title>
+      <link>http://localhost:8080/2017/08/29/Hello-Blog/</link>
+      <pubDate>Tue, 29 Aug 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">http://localhost:8080/2017/08/29/Hello-Blog/</guid>
+      <description>&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
+&lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
+&lt;p&gt;But, I had conditions -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Not much overhead beyond the writing.&lt;/li&gt;
+&lt;li&gt;Retain maximum possible control over content, display and offline support.&lt;/li&gt;
+&lt;li&gt;Also, I have a technical background so I wanted to learn something out of it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Note :&lt;/em&gt; The first and the third above may be self-contradictory, but I am ok with that.&lt;/p&gt;
+&lt;p&gt;So I started looking. Now, traditional blogging platforms end up keeping my data. I didnt like that.
+Plus I havent seen good web-based blog editors. So the web based blogs weren&apos;t options I was inclined to
+try first. Having encountered github blogging in the past and liked what I saw, I investigated it again.
+Soon, it was clear that the simplicity of a static site was hard to beat. The catch was, Github integrates
+Jekyl. Now Jekyll is good, but getting Jekyll on windows involves some fiddling and a good deal of ruby.
+Having recently gone through .Net Core, Scala, Spark, Azure and NodeJs recently in quick succession, I had
+no appetite for another. A little more looking, and I found &lt;a href=&quot;https://Github.com/Code52/pretzel&quot;&gt;Pretzel&lt;/a&gt; - a .NET
+based static-site generator, plus extras.&lt;/p&gt;
+&lt;p&gt;Thus I settled. &lt;em&gt;(The living-happily-there-ever-after-question has no answers yet.)&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Blogging should be simple. Hence Github pages.&lt;/li&gt;
+&lt;li&gt;Blogging i.e. content, display and offline mode should remain in blogger&apos;s control. Hence pretzel and
+not jekyll. Also see &lt;a href=&quot;https://thomasfreudenberg.com/archive/2016/05/16/from-jekyll-to-pretzel/&quot;&gt;here&lt;/a&gt; for
+more details.&lt;/li&gt;
+&lt;li&gt;And I get to dig into pretzel and maybe learn about static-site-generators.&lt;/li&gt;
+&lt;li&gt;Oh, and I rather liked the &lt;a href=&quot;https://github.com/poole/hyde&quot;&gt;Jekyll Hyde Theme&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Therefore, this blog is being served from a Github-pages static site, with the site template taken from
+the Jekyll theme called Hyde, actually being generated by Pretzel on local machine and getting checked
+into Github.&lt;/p&gt;
+&lt;p&gt;I just need to figure out markdown now, and then technically speaking, I am back to &lt;strong&gt;write, build,
+test and deploy&lt;/strong&gt;. Blog or not, thats like coming home.&lt;/p&gt;</description>
+    </item>
+    
+  </channel> 
+</rss>
