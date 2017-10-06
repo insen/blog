@@ -3,7 +3,7 @@ layout: post
 title: "GOF - The hidden pattern."
 author: "Author"
 comments: true
-tags : [Pattern, Analysis, Strategy, Design]
+tags : [Design, Patterns, Analysis, Strategy]
 ---
 
 The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.
@@ -31,7 +31,7 @@ Now here's the kicker - explain your concept to me, in writing. (*It doesn't hav
 
 Yes, go right ahead. Get some notes, stickers, postits, onenotes/evernotes, mindmaps and just write out the outline of your explanation. I can wait. See I have coffee, blogs, white-noise. I am all good with waiting a bit.
 
-Writing down a concept is not an uncommon activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I have done my fair share.
+Writing down a concept is not an uncommon activity in the software engineering line of business. We are asked to explain concepts all of the while, in writing - RFP submissions, software design documents, new initiative proposals, POC summaries. I have done my bit.
 
 Recently I did one more - A *'starting devOps'* analysis. And it was while doing this that I also started to think about '*how to explain*' such a thing to someone else. And I found that everytime I need to explain a concept, I tend to use the same patterns to do so. It was a curious co-incidence that design pattern fever was running rather high at the workplace at that period, and recurring discussions were happening around this famous book and its contents.
 
@@ -134,5 +134,3 @@ Thus, Ladies and Gentlemen, Geeks and Nerds, I give you the GOF Pattern No. 24.
 ## The 'Concept Elucidation Pattern'.
 
 All yours, now.
-
------------------------------------------------------------------------------------------------

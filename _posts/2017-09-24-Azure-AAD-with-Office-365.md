@@ -345,6 +345,4 @@ If you want to try out the equivalent graph API, you need to do a fresh authenti
 
 And that's all of it. We can go home now. 
 
------------------------------------------------------------------------------------------------
-
 

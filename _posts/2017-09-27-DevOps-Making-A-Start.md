@@ -3,7 +3,7 @@ layout: post
 title: "DevOps - Getting off the blocks."
 author: "Author"
 comments: true
-tags : [DevOps, Automation, Strategy, Azure]
+tags : [DevOps, Azure, Automation, Strategy]
 ---
 
 DevOps is everywhere these days. As it should be, yes. Yet that doesn't take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the *where to begin* question comes in, and that is a very difficult question for something as nebulous as DevOps.
@@ -92,9 +92,11 @@ But we do need to manage, classify and process this list. Wikipedia, in its DevO
 ### Azure/.NET Stack | SDLC Stage - Code
 A basic DevOps practise here is *Version Control*. Distributed VCS are now standard, so we pick *__Git__*.
 
-Architectural support targeting DevOps enablement for Azure PaaS systems is a much-needed eco-system centric practise. Enter *__Microservice architectures__* which by encouraging by encouraging small pieces and plug-and-play composition help keeping pieces small and nimble.
+Architectural support targeting DevOps enablement for Azure PaaS systems is a much-needed eco-system centric practise. Enter *__Microservice architectures__* which by encouraging small pieces and plug-and-play composition help keeping pieces small and nimble. Smaller pieces offer much greater ability to respond to change, better automation and easier deployment options.
 
-*__Test-Driven Design (TDD)__* and *__Domain Driven Design (DDD)__* are other standard practises that help in better code, decoupled pieces. 
+*__Test-Driven Design (TDD)__* and *__Domain Driven Design (DDD)__* are other standard practises that help in better code and decoupled pieces. 
+
+Thus 
 
 #### Tools
 -   Git.
@@ -196,10 +198,8 @@ What we have been doing so far, is basically running the *map* part of a map-red
 
 This may not be exactly the list you come up with, but if you followed along on the exercise model, you have your own list. 
 
-I am leaving the reduce part of this operation out, as that will probably diverge for everyone. But, at its basic premise, evaluating your group's maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now.  But no. of items should '*reduce*' in reduce phase.
+I am leaving the reduce part of this operation out, as that will probably diverge for everyone. At its basic premise, evaluating your group's maturity model on each of these items and identifying the highest priority items should get you there. Multiple rounds of reviews from multiple stake-holders is the way forward now, but the no. of items should '*reduce*' in reduce phase.
 
 So there you are, with a set of starting points for a DevOps 101 Strategy. All we have to do now is Go forth, and Iterate.
 
 Oh, and of course, implement !
-
------------------------------------------------------------------------------------------------

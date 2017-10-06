@@ -75,28 +75,72 @@ html {
   color: #fff;
 }
 
+
 /* About section */
 .sidebar-about h1 {
   color: #fff;
-  margin-top: 0;
+  margin-top: 2rem;
   font-family: "Abril Fatface", serif;
   font-size: 3.25rem;
+}
+
+
+.sidebar-about img { 
+  margin : 0.1rem;
+  height: 80%; 
+  width: 100%;
+  vertical-align: text-bottom;
+  justify-content: center;
 }
 
 /* Sidebar nav */
 .sidebar-nav {
   margin-bottom: 1rem;
 }
+
+
 .sidebar-nav-item {
   display: block;
   line-height: 1.75;
 }
+
+
 a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
   text-decoration: underline;
 }
 .sidebar-nav-item.active {
   font-weight: bold;
+}
+
+/* for the side-bar social items" */
+.sidebar-social {
+  display: inline-block;
+  line-height: 1.75;
+}
+
+.sidebar-social img{
+  height: 2rem;
+  width: 2rem;
+}
+
+.fa::before {
+  font: normal normal normal 14px/1 FontAwesome
+}
+
+.linkedin::before {
+  content: "\f08c";
+  font-size: 1.5em
+}
+
+.github::before {
+  content: "\f09b";
+  font-size: 1.5em
+}
+
+.rss::before {
+  content: "\f143";
+  font-size: 1.5em
 }
 
 /* Sticky sidebar

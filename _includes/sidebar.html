@@ -2,7 +2,8 @@
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
       <h1>
-        <a href="{{ site.baseurl }}">
+        <a href="{{ site.baseurl }}"> 
+          <img src="{{ site.baseurl }}/img/profile.png"/>
           {{ site.title }}
         </a>
       </h1>
@@ -25,13 +26,14 @@
           {% endif %}
         {% endif %}
       {% endfor %}
-
-      <a class="sidebar-nav-item" href="{{ site.connect.github }}">@Github</a>
-      <a class="sidebar-nav-item" href="{{ site.connect.linkedin }}">@LinkedIn</a>
-      <a class="sidebar-nav-item" href="{{ site.connect.email }}">@gmail</a>
-      <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
     </nav>
 
-    <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+  <!-- subsequent parts use fontawesome content icons!-->
+  <a class="sidebar-nav-item fa rss" href="/atom.xml"></a> 
+  <a class="sidebar-nav-item fa github" href="https://github.com/insen"></a> 
+  <a class="sidebar-nav-item fa linkedin" href="https://www.linkedin.com/in/nilsengupta/"></a> 
+
+  <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved. 
+      <small>Personal opinions. <i>Hefty pinches of salt !!</i></small>.</p>
   </div>
 </div>

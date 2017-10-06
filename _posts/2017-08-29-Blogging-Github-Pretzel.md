@@ -3,7 +3,7 @@ layout: post
 title: "Blogging with Github Pages and Pretzel."
 author: "Author"
 comments: true
-tags : [Github, Pretzel, Hyde, Markdown, Blogging, Static Site Generators]
+tags : [Blogging, Github, Pretzel, Hyde, Markdown, Static Site Generators]
 ---
 
 As I mentioned in my ['hello-blog'](http://insen.github.io/blog/2017/08/29/helloblog/) post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.
@@ -236,5 +236,3 @@ Go forth, and typo. *(pssst !! pun intended)*.
 -	[Free Formatter](https://www.freeformatter.com/html-entities.html) for html encoding.
 -	[Markdown Syntax](https://daringfireball.net/projects/markdown/syntax) for reference.
 -	[Markdown Sample](https://gist.githubusercontent.com/VEnis/7465176/raw) which works in Github.
-
--------------------------------------------------------------------------------------------------------------------
