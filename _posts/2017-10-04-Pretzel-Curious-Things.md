@@ -1,6 +1,6 @@
 --- 
 layout: post
-title: "Blogging - Loose ends and curious things when using Pretzel, Hyde and Jekyll together."
+title: "Blogging - Loose ends and curious things when using Pretzel and the Jekyll-Hyde template."
 author: "Author"
 comments: true
 tags : [Blogging, Pretzel, Hyde, Liquid]

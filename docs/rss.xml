@@ -6,11 +6,11 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Fri, 06 Oct 2017 16:09:32 +0530</pubDate>
-    <lastBuildDate>Fri, 06 Oct 2017 16:09:32 +0530</lastBuildDate>
+    <pubDate>Fri, 06 Oct 2017 16:11:57 +0530</pubDate>
+    <lastBuildDate>Fri, 06 Oct 2017 16:11:57 +0530</lastBuildDate>
     
     <item>
-      <title>Blogging - Loose ends and curious things when using Pretzel, Hyde and Jekyll together.</title>
+      <title>Blogging - Loose ends and curious things when using Pretzel and the Jekyll-Hyde template.</title>
       <link>https://insen.github.io/blog/2017/10/04/Pretzel-Curious-Things/</link>
       <pubDate>Wed, 04 Oct 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
