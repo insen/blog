@@ -6,8 +6,8 @@
     <atom:link href="http://localhost:8080/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 10 Oct 2017 09:37:45 +0530</pubDate>
-    <lastBuildDate>Tue, 10 Oct 2017 09:37:45 +0530</lastBuildDate>
+    <pubDate>Tue, 10 Oct 2017 10:04:39 +0530</pubDate>
+    <lastBuildDate>Tue, 10 Oct 2017 10:04:39 +0530</lastBuildDate>
     
     <item>
       <title>Blogging - Loose ends and curious things when using Pretzel and the Jekyll-Hyde template.</title>
