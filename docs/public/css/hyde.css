@@ -112,26 +112,6 @@ a.sidebar-nav-item:focus {
   font-weight: bold;
 }
 
-/* font awesome section for social logos */
-.fa::before {
-  font: normal normal normal 14px/1 FontAwesome
-}
-
-.linkedin::before {
-  content: "\f08c";
-  font-size: 1.5em
-}
-
-.github::before {
-  content: "\f09b";
-  font-size: 1.5em
-}
-
-.rss::before {
-  content: "\f143";
-  font-size: 1.5em
-}
-/* end fontawesome section */
 
 /* Sticky sidebar
  *
@@ -200,7 +180,6 @@ a.sidebar-nav-item:focus {
     margin-right: 22rem;
   }
 }
-
 
 
 /*

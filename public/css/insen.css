@@ -1,0 +1,37 @@
+/*
+ * a header, (with tabs - todo)
+ */
+
+.header-strip {
+  display: inline-block;
+  width: 100%;
+  padding-right: 1rem;
+  margin-top:1rem;
+  color: rgba(255,255,255,.5);
+  background-color: #202020;
+  justify-content: center;
+  text-align: right;
+}
+
+/* font awesome section for social logos */
+.fa::before {
+  font: normal normal normal 14px/1 FontAwesome
+}
+
+.linkedin::before {
+  content: "\f08c";
+  font-size: 1.5em
+}
+
+.github::before {
+  content: "\f09b";
+  font-size: 1.5em
+}
+
+.rss::before {
+  content: "\f143";
+  font-size: 1.5em
+}
+/* end fontawesome section */
+
+
