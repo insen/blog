@@ -6,20 +6,20 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Thu, 12 Oct 2017 20:35:20 +0530</pubDate>
-    <lastBuildDate>Thu, 12 Oct 2017 20:35:20 +0530</lastBuildDate>
+    <pubDate>Thu, 12 Oct 2017 20:49:58 +0530</pubDate>
+    <lastBuildDate>Thu, 12 Oct 2017 20:49:58 +0530</lastBuildDate>
     
     <item>
-      <title>The road to wisdom</title>
+      <title>Words - The Road To Wisdom</title>
       <link>https://insen.github.io/blog/2017/10/12/The-Road-To-Wisdom/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
       <guid isPermaLink="true">https://insen.github.io/blog/2017/10/12/The-Road-To-Wisdom/</guid>
       <description>&lt;p&gt;Over my life I have always collected words, but over time, they keep getting lost. Now that this blog has gotten going, that&apos;s one place I have to both store and share.&lt;/p&gt;
 &lt;p&gt;All backed by Github.&lt;/p&gt;
-&lt;p&gt;Came across the following &lt;a href=&quot;http://leptonica.com/local-sources.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;
-The road to wisdom? -- Well, it&apos;s plain
+&lt;p&gt;Came across the following marvellous collection &lt;a href=&quot;http://leptonica.com/cachedpages/grooks/grooks.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A sample or two below. Click on through for more.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;The road to wisdom? -- Well, it&apos;s plain
     and simple to express:
         Err
         and err
@@ -27,9 +27,21 @@ The road to wisdom? -- Well, it&apos;s plain
         but less
         and less
         and less.
-&lt;pre&gt;&lt;code&gt;        --Piet Hein (Grooks)
+
+            --Piet Hein (Grooks)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/p&gt;</description>
+&lt;p&gt;And another&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;We must expect posterity
+    to view with some asperity
+    the marvels and the wonders
+        we&apos;re passing on to it;
+    but it should change its attitude
+    to one of heartfelt gratitude
+    when thinking of the blunders
+        we didn&apos;t quite commit.
+
+        --Piet Hein (Grooks)
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>

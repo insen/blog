@@ -1,6 +1,6 @@
 --- 
 layout: post
-title: "The road to wisdom"
+title: "Words - The Road To Wisdom"
 author: "Author"
 comments: true
 tags : [Write, Poetry, Words]
@@ -10,7 +10,9 @@ Over my life I have always collected words, but over time, they keep getting los
 
 All backed by Github. 
 
-Came across the following [here](http://leptonica.com/local-sources.html)
+Came across the following marvellous collection [here](http://leptonica.com/cachedpages/grooks/grooks.html)
+
+A sample or two below. Click on through for more.
 
     The road to wisdom? -- Well, it's plain
         and simple to express:
@@ -23,4 +25,16 @@ Came across the following [here](http://leptonica.com/local-sources.html)
 
                 --Piet Hein (Grooks)
 
+And another 
+
+    We must expect posterity
+        to view with some asperity
+        the marvels and the wonders
+            we're passing on to it;
+        but it should change its attitude
+        to one of heartfelt gratitude
+        when thinking of the blunders
+            we didn't quite commit.
+
+            --Piet Hein (Grooks)
 
