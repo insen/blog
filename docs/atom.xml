@@ -4,13 +4,35 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-12T14:13:09.6571246+05:30</updated>
+ <updated>2017-10-12T20:35:20.9669074+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>The road to wisdom</title>
+   <link href="https://insen.github.io/blog/2017/10/12/The-Road-To-Wisdom/"/>
+   <updated>2017-10-12T00:00:00+05:30</updated>
+   <id>https://insen.github.io/blog/2017/10/12/The-Road-To-Wisdom/</id>
+   <content type="html">&lt;p&gt;Over my life I have always collected words, but over time, they keep getting lost. Now that this blog has gotten going, that&apos;s one place I have to both store and share.&lt;/p&gt;
+&lt;p&gt;All backed by Github.&lt;/p&gt;
+&lt;p&gt;Came across the following &lt;a href=&quot;http://leptonica.com/local-sources.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+The road to wisdom? -- Well, it&apos;s plain
+    and simple to express:
+        Err
+        and err
+        and err again
+        but less
+        and less
+        and less.
+&lt;pre&gt;&lt;code&gt;        --Piet Hein (Grooks)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>W3C LinkChecker & Perl - Check broken links before commit</title>
