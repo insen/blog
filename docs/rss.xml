@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Thu, 12 Oct 2017 21:06:51 +0530</pubDate>
-    <lastBuildDate>Thu, 12 Oct 2017 21:06:51 +0530</lastBuildDate>
+    <pubDate>Thu, 12 Oct 2017 21:17:46 +0530</pubDate>
+    <lastBuildDate>Thu, 12 Oct 2017 21:17:46 +0530</lastBuildDate>
     
     <item>
       <title>Words - The Road To Wisdom</title>
@@ -17,8 +17,7 @@
       <guid isPermaLink="true">https://insen.github.io/blog/2017/10/12/The-Road-To-Wisdom/</guid>
       <description>&lt;p&gt;Over my life I have always collected words, but over time, they keep getting lost. Now that this blog has gotten going, that&apos;s one place I have to both store and share.&lt;/p&gt;
 &lt;p&gt;All backed by Github.&lt;/p&gt;
-&lt;p&gt;Came across the following marvellous collection &lt;a href=&quot;http://leptonica.com/cachedpages/grooks/grooks.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;A sample or two below. Click on through for more &lt;a href=&quot;http://www.archimedes-lab.org/grooks.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Came across something marvellous called &lt;em&gt;&apos;grooks&apos;&lt;/em&gt; by this Danish guy called Piet Hein. A sample or two below.&lt;/p&gt;
 &lt;p&gt;Here&apos;s one&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;The road to wisdom? -- Well, it&apos;s plain
     and simple to express:
@@ -42,7 +41,9 @@
         we didn&apos;t quite commit.
 
         --Piet Hein (Grooks)
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;from &lt;a href=&quot;http://leptonica.com/cachedpages/grooks/grooks.html&quot;&gt;leptonica&lt;/a&gt; - a site on particle physics and image processing, of all places.&lt;/p&gt;
+&lt;p&gt;Click on through for more &lt;a href=&quot;http://www.archimedes-lab.org/grooks.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>

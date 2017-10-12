@@ -3,16 +3,14 @@ layout: post
 title: "Words - The Road To Wisdom"
 author: "Author"
 comments: true
-tags : [Write, Poetry, Words]
+tags : [Write, Poetry, Words, Grooks, Leptonica]
 ---
 
 Over my life I have always collected words, but over time, they keep getting lost. Now that this blog has gotten going, that's one place I have to both store and share.
 
 All backed by Github. 
 
-Came across the following marvellous collection [here](http://leptonica.com/cachedpages/grooks/grooks.html)
-
-A sample or two below. Click on through for more [here](http://www.archimedes-lab.org/grooks.html).
+Came across something marvellous called *'grooks'* by this Danish guy called Piet Hein. A sample or two below. 
 
 Here's one
 
@@ -40,3 +38,6 @@ And another
 
             --Piet Hein (Grooks)
 
+from [leptonica](http://leptonica.com/cachedpages/grooks/grooks.html) - a site on particle physics and image processing, of all places.
+
+Click on through for more [here](http://www.archimedes-lab.org/grooks.html).
