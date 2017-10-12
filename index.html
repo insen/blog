@@ -7,8 +7,8 @@ paginate: 100
 <div class="posts">
   {% for post in paginator.posts %}
   <div class="post">
-    <h1>
-      <a href="{{ post.url | prepend: site.url }}" class="listing-title">
+    <h2 class="post-title">
+      <a href="{{ post.url | prepend: site.url }}">
         {{ post.title }}
       </a>
     </h1>

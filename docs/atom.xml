@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Insen</title>
- <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
- <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-10T13:06:26.1961851+05:30</updated>
- <id>https://insen.github.io/blog</id>
+ <link href="http://127.0.0.1:8080/atom.xml" rel="self"/>
+ <link href="http://127.0.0.1:8080/"/>
+ <updated>2017-10-12T14:07:22.5490122+05:30</updated>
+ <id>http://127.0.0.1:8080</id>
  <author>
    <name>insen</name>
    <email></email>
@@ -13,10 +13,128 @@
 
  
  <entry>
+   <title>W3C LinkChecker & Perl - Check broken links before commit</title>
+   <link href="http://127.0.0.1:8080/2017/10/10/Blogging-Perl-DevOps/"/>
+   <updated>2017-10-10T00:00:00+05:30</updated>
+   <id>http://127.0.0.1:8080/2017/10/10/Blogging-Perl-DevOps/</id>
+   <content type="html">&lt;p&gt;I finally encounter Perl.&lt;/p&gt;
+&lt;p&gt;Now it started simple. And turned into a blog post. That pretty much sums up many aspects of software engineering, but digress let us not.&lt;/p&gt;
+&lt;p&gt;I was having a problem with my still nascent blog.&lt;/p&gt;
+&lt;p&gt;I am figuring out a lot more CSS than I thought I ever would and I&apos;m still tweaking and turning, so churn is high. Therefore links and cross references are breaking every now and then.&lt;/p&gt;
+&lt;p&gt;This, however, is not acceptable in production.&lt;/p&gt;
+&lt;p&gt;Moreover, since I have been dealing with devOps a bit lately, let us try some devOps in blogging. Automated link checking sounds nice.&lt;/p&gt;
+&lt;h3&gt;Enter W3C Link Checker.&lt;/h3&gt;
+&lt;p&gt;A link checker should be freely available. Yep. Many are. Including a highly recommended one from the world wide web consortium, no less.&lt;/p&gt;
+&lt;p&gt;Copyrighted From 1999.&lt;/p&gt;
+&lt;p&gt;With both online and commmand-line options. &lt;em&gt;someone come and tell me again that SAAS is new?!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Written and packaged in Perl  !&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h3&gt;Okay, Perl !&lt;/h3&gt;
+&lt;p&gt;Wikipedia says&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;It has been nicknamed &amp;quot;the Swiss Army chainsaw of scripting languages&amp;quot; because of its flexibility and power,[18] and also its ugliness.[19]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This ugliness and power combined of Perl is something I have repeatedly encountered in the blogosphere over the years. At some period of time I had also read a good deal of a blog called &lt;a href=&quot;http://www.sidhe.org/%7Edan/blog/&quot;&gt;&lt;em&gt;squawks of the parrot&lt;/em&gt;&lt;/a&gt;. And so I have avoided Perl.&lt;/p&gt;
+&lt;p&gt;And then there is Larry Wall - creator of Perl. From the last line of wikipedia on Larry Wall.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;The official Perl documentation states that:
+	Larry is always by definition right about how Perl should behave. This means he has final veto power on the core functionality.
+	Larry is allowed to change his mind about any matter at a later date, regardless of whether he previously invoked Rule 1.
+	Got that? Larry is always right, even when he was wrong.[10]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Second, the tool source comes zipped as &lt;code&gt;tar.gz&lt;/code&gt;. That alreadys tell me how windows friendly it is likely to be.&lt;/p&gt;
+&lt;h3&gt;Up and running&lt;/h3&gt;
+&lt;p&gt;Ok, perl it is. So what is the goal here ?&lt;/p&gt;
+&lt;p&gt;Get a local version of the W3C Link Checker running so that I could test all the links in my blog before I publish/push them to Github.&lt;/p&gt;
+&lt;h4&gt;Download Perl.&lt;/h4&gt;
+&lt;p&gt;There are two windows distros - Active Perl and Strawberry. very &lt;em&gt;unix-y&lt;/em&gt;. Both recommended by &lt;a href=&quot;http://www.perl.org/&quot;&gt;http://www.perl.org/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I went with strawberry as it is also available on chocolatey.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;choco install strawberryperl
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By default, gets installed at &lt;code&gt;C:\Windows\Strawberry&lt;/code&gt;&lt;/p&gt;
+&lt;h4&gt;Clone W3C Link Checker source.&lt;/h4&gt;
+&lt;p&gt;Luckily we don&apos;t have to eyeball tarballs. The source is on &lt;a href=&quot;https://github.com/w3c&quot;&gt;Github&lt;/a&gt; with docs &lt;a href=&quot;https://github.com/w3c/link-checker&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The main instructions are to execute the following commands from root directory the unzipped tarball package or the cloned source.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;#if you have cpanminus installed
+cpanm --installdeps .
+perl Makefile.PL
+make
+make test
+make install # as root unless you are using local::lib
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;CPAN, perl and make&lt;/h4&gt;
+&lt;p&gt;What &lt;em&gt;is&lt;/em&gt; CPAN? CPAN is basically like a Maven central for Java or Nuget central for .NET. It&apos;s one of the major perl eco-system&apos;s package repositories. &lt;code&gt;cpan&lt;/code&gt; and &lt;code&gt;cpanm&lt;/code&gt; are command line tools that enable interaction with this repo.&lt;/p&gt;
+&lt;p&gt;Do I have CPAN? Apparently yes, after some reading around! Strawberry Perl comes with its own CPAN client. &lt;a href=&quot;https://stackoverflow.com/questions/6643939/installing-modules-using-strawberry-perl&quot;&gt;Stack Overflow&lt;/a&gt; says this -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;you can still use ppm, but it is not recommended. Run CPAN client from the Strawberry Perl or Strawberry Perl (64-bit), sub folder Tools, entry in the Start menu.
+
+Type install Module::Name there.
+
+On Windows 7, Start Menu &amp;gt; Strawberry Perl &amp;gt; Tools &amp;gt; CPAN Client 
+On Windows 8.1, Start&amp;gt;Cpan Client 
+On Windows 10, Start Menu &amp;gt; All Apps &amp;gt; Strawberry Perl &amp;gt; CPAN Client 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Add strawberryperl/c/bin to &apos;%PATH%&apos;&lt;/h4&gt;
+&lt;p&gt;Combining the two steps above, we should be good. So on an elevated Powershell, we navigate to the root of our unzipped tarball and run&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;cpanm --installdeps .
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;No we are not good.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&apos;cpanm&apos; is not recognized as an internal or external command, operable program or batch file - Windows 7.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Forgot the &lt;code&gt;%PATH%&lt;/code&gt; environment variable ! Add &lt;code&gt;full/path/to/strawberry/c/bin&lt;/code&gt; to &lt;code&gt;%PATH%&lt;/code&gt;. Restart powershell prompt and re-execute same command.&lt;/p&gt;
+&lt;h4&gt;makefile&lt;/h4&gt;
+&lt;p&gt;This one goes without hiccups.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;perl Makefile.PL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;&apos;make&apos;&lt;/h4&gt;
+&lt;p&gt;And then, I am at &lt;em&gt;make&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&apos;make&apos; is not recognized as an internal or external command, operable program or batch file - Windows 7.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Looking through the files in strawberry, you find a &lt;code&gt;gmake.exe&lt;/code&gt; and a &lt;code&gt;dmake.exe&lt;/code&gt;. A quick google for gmake.exe shows this as first result&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Make for Windows - GnuWin32
+gnuwin32.sourceforge.net/packages/make.htm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Looks like we need the &lt;code&gt;gmake&lt;/code&gt; command. The following works&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;gmake
+gmake test
+qmake install # as root unless you are using local::lib
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command shell shows the following&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Installing C:\STRAWB~1\perl\site\lib\W3C\LinkChecker.pm
+Installing C:\STRAWB~1\perl\site\bin\checklink
+Installing C:\STRAWB~1\perl\site\bin\checklink.bat
+Appending installation info to C:\STRAWB~1\perl\lib/perllocal.pod
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So the batch file is ready at &lt;code&gt;full\path\to\strawberry\perl\site\bin&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The trick I missed here was that there is a copy of these files in the unzipped tarball folder itself, so it looks like all I needed was &lt;code&gt;gmake&lt;/code&gt;, not &lt;code&gt;gmake install&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;p.s: 1 test fails. Ignored.&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Invoke linkChecker from command line.&lt;/h3&gt;
+&lt;p&gt;The docs are &lt;a href=&quot;https://wummel.github.io/linkchecker/man1/linkchecker.1.html&quot;&gt;here&lt;/a&gt;, And as per the docs, that&apos;s trivial, execute from a command prompt. OR is it?&lt;/p&gt;
+&lt;p&gt;when you run the following&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;$&amp;gt; full/path/to/checklink.bat uri
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You get this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;-T&amp;quot; is on the #! line, it must also be used on the command line.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The problem here is that the &lt;code&gt;checklink&lt;/code&gt; and the &lt;code&gt;checklink.bat&lt;/code&gt; files contain a line&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-batch&quot;&gt;#!/usr/bin/perl -wT
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;this file path does not exist in windows. Replace with &lt;code&gt;full/path/to/strawberry/perl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note I removed the -wT as well. The &apos;T&apos; refers to something called tainted mode and is safer, but more restrictive as well.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Run the command again. Linkchecker should now give you a HTTP status code based report. There are a few problems though. Some valid links fail, viz.  &lt;code&gt;https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CAbril+Fatface&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Well, since I intend to inspect the failures manually, my goal here is achieved. I can now run the linkchecker against &lt;code&gt;http://127.0.0.0:8080/&lt;/code&gt; and confirm that all my links are fine.&lt;/p&gt;
+&lt;h4&gt;Next Steps&lt;/h4&gt;
+&lt;p&gt;Programmatic detection of fails.
+Explore exclusion flag in command options.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: Running this against HTTPS involves more work. lots more. Primarily around installing LWP::Protocol::Https through CPAN and ensuring all dependencies are set up right ! In my case, I did some of the work, but I haven&apos;t gotten all https links to work. Some still keep failing, sometimes intermittently. Primary issue encountered is this&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;https://www.linkedin.com/in/nilsengupta/
+Line: 127
+Code: 500 Can&apos;t locate object method &amp;quot;new&amp;quot; via package &amp;quot;LWP::Protocol::https::Socket&amp;quot;
+To do: This is a server side problem. Check the URI.
+&lt;/code&gt;&lt;/pre&gt;</content>
+ </entry>
+ 
+ <entry>
    <title>Blogging - Loose ends and curious things when using Pretzel and the Jekyll-Hyde template.</title>
-   <link href="https://insen.github.io/blog/2017/10/04/Pretzel-Curious-Things/"/>
+   <link href="http://127.0.0.1:8080/2017/10/04/Pretzel-Curious-Things/"/>
    <updated>2017-10-04T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/10/04/Pretzel-Curious-Things/</id>
+   <id>http://127.0.0.1:8080/2017/10/04/Pretzel-Curious-Things/</id>
    <content type="html">&lt;p&gt;Pretzel blogging turned up some normal headscratchers, and some very curious ones.&lt;/p&gt;
 &lt;h4&gt;Paginator&lt;/h4&gt;
 &lt;p&gt;Couldn&apos;t get paginator to work. Well, it works now. Turns out you have to add&lt;/p&gt;
@@ -91,9 +209,9 @@ paginate:   number_of_posts_in_a_page
  
  <entry>
    <title>GOF - The hidden pattern.</title>
-   <link href="https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/"/>
+   <link href="http://127.0.0.1:8080/2017/10/03/GOF-The-24th-Pattern/"/>
    <updated>2017-10-03T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/10/03/GOF-The-24th-Pattern/</id>
+   <id>http://127.0.0.1:8080/2017/10/03/GOF-The-24th-Pattern/</id>
    <content type="html">&lt;p&gt;The Gang-Of-Four book has 24 patterns. And it only took me only about 12 years or so to get it, considering that I first encountered the book in 2005.&lt;/p&gt;
 &lt;p&gt;I know, I know. I can hear the collective tirade of protest.&lt;/p&gt;
 &lt;p&gt;All the analysis and the literature says 23.&lt;/p&gt;
@@ -209,9 +327,9 @@ The appendices provide background information that will help you understand the 
  
  <entry>
    <title>DevOps - Getting off the blocks.</title>
-   <link href="https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/"/>
+   <link href="http://127.0.0.1:8080/2017/09/27/DevOps-Making-A-Start/"/>
    <updated>2017-09-27T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/</id>
+   <id>http://127.0.0.1:8080/2017/09/27/DevOps-Making-A-Start/</id>
    <content type="html">&lt;p&gt;DevOps is everywhere these days. As it should be, yes. Yet that doesn&apos;t take anything away from the fact that DevOps is a difficult concept to understand and implement. The principles are fair and easy enough to grasp, but then the &lt;em&gt;where to begin&lt;/em&gt; question comes in, and that is a very difficult question for something as nebulous as DevOps.&lt;/p&gt;
 &lt;p&gt;So how does one start being &apos;DevOps&apos;y?  What drives DevOps?&lt;/p&gt;
 &lt;h2&gt;Context, Culture, Tools, Change, Automation, Feedback Loops and Collaboration !&lt;/h2&gt;
@@ -389,9 +507,9 @@ The appendices provide background information that will help you understand the 
  
  <entry>
    <title>Azure AD and Office 365 OAuth integration through browsers and Postman.</title>
-   <link href="https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/"/>
+   <link href="http://127.0.0.1:8080/2017/09/24/Azure-AAD-with-Office-365/"/>
    <updated>2017-09-24T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/09/24/Azure-AAD-with-Office-365/</id>
+   <id>http://127.0.0.1:8080/2017/09/24/Azure-AAD-with-Office-365/</id>
    <content type="html">&lt;p&gt;I spent last week answering a question. Is there a way to find available meeting times on a given user&apos;s Office 365 calendar next week? The short answer is &lt;strong&gt;yes&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2&gt;Longer answer.&lt;/h2&gt;
 &lt;p&gt;At work we have MSDN Azure subscriptions. These are linked to our organization&apos;s Azure Active Directory (AAD) and we can sign on to Azure with our Windows credentials. We also Office 365 accounts linked to our Exchange AD and Azure AD. I can seamlessly navigate to Office 365 on the browser after logging into Azure portal through my Windows account (OAuth magics). If this works for you too, then your Single Sign On (SSO) setup is also done.&lt;/p&gt;
@@ -673,9 +791,9 @@ Authorization: bearer myJ0eXAiOiJKV1-{removed_lots_of_chars_here}-PNukX3nBlRfzh6
  
  <entry>
    <title>Blogging with Github Pages and Pretzel.</title>
-   <link href="https://insen.github.io/blog/2017/08/29/Blogging-Github-Pretzel/"/>
+   <link href="http://127.0.0.1:8080/2017/08/29/Blogging-Github-Pretzel/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/08/29/Blogging-Github-Pretzel/</id>
+   <id>http://127.0.0.1:8080/2017/08/29/Blogging-Github-Pretzel/</id>
    <content type="html">&lt;p&gt;As I mentioned in my &lt;a href=&quot;http://insen.github.io/blog/2017/08/29/helloblog/&quot;&gt;&apos;hello-blog&apos;&lt;/a&gt; post, my search for blogging tools ended at Github Pages and Pretzel. In this post, I will outline the process of setting up a blog using Github pages, Pretzel, Hyde and Markdown, using what I learnt while setting up this one.&lt;/p&gt;
 &lt;h3&gt;The Goal.&lt;/h3&gt;
 &lt;p&gt;The goal here is a system which has the following publish-a-blog sequence -&lt;/p&gt;
@@ -895,9 +1013,9 @@ exclude:
  
  <entry>
    <title>Blog like you are coming home.</title>
-   <link href="https://insen.github.io/blog/2017/08/29/Hello-Blog/"/>
+   <link href="http://127.0.0.1:8080/2017/08/29/Hello-Blog/"/>
    <updated>2017-08-29T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/08/29/Hello-Blog/</id>
+   <id>http://127.0.0.1:8080/2017/08/29/Hello-Blog/</id>
    <content type="html">&lt;h2&gt;Hello blog, eh, I mean, world!&lt;/h2&gt;
 &lt;p&gt;As far back as I can remember, I have always been writing. However, I have never blogged. Probably because I preferred the diary and the pen. Having caught a lot of flak for it from my friends, well-wishers, colleagues and bosses alike over the years, I finally decided to fix that.&lt;/p&gt;
 &lt;p&gt;But, I had conditions -&lt;/p&gt;

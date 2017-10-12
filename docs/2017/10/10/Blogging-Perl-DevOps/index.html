@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      W3C LinkChecker & Perl - Check broken links before commit &middot; Insen
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="http://127.0.0.1:8080/public/css/poole.css">
+  <link rel="stylesheet" href="http://127.0.0.1:8080/public/css/syntax.css">
+  <link rel="stylesheet" href="http://127.0.0.1:8080/public/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="http://127.0.0.1:8080/public/css/font-awesome.css" >
+  <link rel="stylesheet" href="http://127.0.0.1:8080/public/css/insen.css" >
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://127.0.0.1:8080/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="http://127.0.0.1:8080/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="http://127.0.0.1:8080/"> 
+          <img src="http://127.0.0.1:8080//img/profile.png"/>
+          Insen
+        </a>
+      </h1>
+      <p class="lead">Write, Code, Dream !</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="http://127.0.0.1:8080/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/E:/work/blogging/blog/./docs/about.html">About</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+
+  <!-- subsequent parts use fontawesome content icons!-->
+  <a class="sidebar-nav-item fa rss" href="/atom.xml"></a> 
+  <a class="sidebar-nav-item fa github" href="https://github.com/insen"></a> 
+  <a class="sidebar-nav-item fa linkedin" href="https://www.linkedin.com/in/nilsengupta/"></a> 
+
+  <p>&copy; 2017. All rights reserved. 
+      <small>Personal opinions. <i>Hefty pinches of salt !!</i></small>.</p>
+  
+  <p><i><small><small> site based on <a href="hyde"> hyde </a> by <a href="https://twitter.com/mdo">@mdo</a> </small></small></i></p>
+
+  </div>
+</div>
+
+    
+    <div class="header-strip">
+  <small><i> 'Not all those who wander are lost' - J.R.R Tolkien </i></small>
+</div>
+    
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">W3C LinkChecker & Perl - Check broken links before commit</h1>
+  <span class="post-date">10 Oct 2017</span>
+  <p>I finally encounter Perl.</p>
+<p>Now it started simple. And turned into a blog post. That pretty much sums up many aspects of software engineering, but digress let us not.</p>
+<p>I was having a problem with my still nascent blog.</p>
+<p>I am figuring out a lot more CSS than I thought I ever would and I'm still tweaking and turning, so churn is high. Therefore links and cross references are breaking every now and then.</p>
+<p>This, however, is not acceptable in production.</p>
+<p>Moreover, since I have been dealing with devOps a bit lately, let us try some devOps in blogging. Automated link checking sounds nice.</p>
+<h3>Enter W3C Link Checker.</h3>
+<p>A link checker should be freely available. Yep. Many are. Including a highly recommended one from the world wide web consortium, no less.</p>
+<p>Copyrighted From 1999.</p>
+<p>With both online and commmand-line options. <em>someone come and tell me again that SAAS is new?!</em></p>
+<p><strong><em>Written and packaged in Perl  !</em></strong></p>
+<h3>Okay, Perl !</h3>
+<p>Wikipedia says</p>
+<pre><code>It has been nicknamed &quot;the Swiss Army chainsaw of scripting languages&quot; because of its flexibility and power,[18] and also its ugliness.[19]
+</code></pre>
+<p>This ugliness and power combined of Perl is something I have repeatedly encountered in the blogosphere over the years. At some period of time I had also read a good deal of a blog called <a href="http://www.sidhe.org/%7Edan/blog/"><em>squawks of the parrot</em></a>. And so I have avoided Perl.</p>
+<p>And then there is Larry Wall - creator of Perl. From the last line of wikipedia on Larry Wall.</p>
+<pre><code>The official Perl documentation states that:
+	Larry is always by definition right about how Perl should behave. This means he has final veto power on the core functionality.
+	Larry is allowed to change his mind about any matter at a later date, regardless of whether he previously invoked Rule 1.
+	Got that? Larry is always right, even when he was wrong.[10]
+</code></pre>
+<p>Second, the tool source comes zipped as <code>tar.gz</code>. That alreadys tell me how windows friendly it is likely to be.</p>
+<h3>Up and running</h3>
+<p>Ok, perl it is. So what is the goal here ?</p>
+<p>Get a local version of the W3C Link Checker running so that I could test all the links in my blog before I publish/push them to Github.</p>
+<h4>Download Perl.</h4>
+<p>There are two windows distros - Active Perl and Strawberry. very <em>unix-y</em>. Both recommended by <a href="http://www.perl.org/">http://www.perl.org/</a>.</p>
+<p>I went with strawberry as it is also available on chocolatey.</p>
+<pre><code>choco install strawberryperl
+</code></pre>
+<p>By default, gets installed at <code>C:\Windows\Strawberry</code></p>
+<h4>Clone W3C Link Checker source.</h4>
+<p>Luckily we don't have to eyeball tarballs. The source is on <a href="https://github.com/w3c">Github</a> with docs <a href="https://github.com/w3c/link-checker">here</a>.</p>
+<p>The main instructions are to execute the following commands from root directory the unzipped tarball package or the cloned source.</p>
+<pre><code class="language-batch">#if you have cpanminus installed
+cpanm --installdeps .
+perl Makefile.PL
+make
+make test
+make install # as root unless you are using local::lib
+</code></pre>
+<h4>CPAN, perl and make</h4>
+<p>What <em>is</em> CPAN? CPAN is basically like a Maven central for Java or Nuget central for .NET. It's one of the major perl eco-system's package repositories. <code>cpan</code> and <code>cpanm</code> are command line tools that enable interaction with this repo.</p>
+<p>Do I have CPAN? Apparently yes, after some reading around! Strawberry Perl comes with its own CPAN client. <a href="https://stackoverflow.com/questions/6643939/installing-modules-using-strawberry-perl">Stack Overflow</a> says this -</p>
+<pre><code>you can still use ppm, but it is not recommended. Run CPAN client from the Strawberry Perl or Strawberry Perl (64-bit), sub folder Tools, entry in the Start menu.
+
+Type install Module::Name there.
+
+On Windows 7, Start Menu &gt; Strawberry Perl &gt; Tools &gt; CPAN Client 
+On Windows 8.1, Start&gt;Cpan Client 
+On Windows 10, Start Menu &gt; All Apps &gt; Strawberry Perl &gt; CPAN Client 
+</code></pre>
+<h4>Add strawberryperl/c/bin to '%PATH%'</h4>
+<p>Combining the two steps above, we should be good. So on an elevated Powershell, we navigate to the root of our unzipped tarball and run</p>
+<pre><code class="language-batch">cpanm --installdeps .
+</code></pre>
+<p>No we are not good.</p>
+<pre><code>'cpanm' is not recognized as an internal or external command, operable program or batch file - Windows 7.
+</code></pre>
+<p>Forgot the <code>%PATH%</code> environment variable ! Add <code>full/path/to/strawberry/c/bin</code> to <code>%PATH%</code>. Restart powershell prompt and re-execute same command.</p>
+<h4>makefile</h4>
+<p>This one goes without hiccups.</p>
+<pre><code>perl Makefile.PL
+</code></pre>
+<h4>'make'</h4>
+<p>And then, I am at <em>make</em></p>
+<pre><code>'make' is not recognized as an internal or external command, operable program or batch file - Windows 7.
+</code></pre>
+<p>Looking through the files in strawberry, you find a <code>gmake.exe</code> and a <code>dmake.exe</code>. A quick google for gmake.exe shows this as first result</p>
+<pre><code>Make for Windows - GnuWin32
+gnuwin32.sourceforge.net/packages/make.htm
+</code></pre>
+<p>Looks like we need the <code>gmake</code> command. The following works</p>
+<pre><code class="language-batch">gmake
+gmake test
+qmake install # as root unless you are using local::lib
+</code></pre>
+<p>The command shell shows the following</p>
+<pre><code>Installing C:\STRAWB~1\perl\site\lib\W3C\LinkChecker.pm
+Installing C:\STRAWB~1\perl\site\bin\checklink
+Installing C:\STRAWB~1\perl\site\bin\checklink.bat
+Appending installation info to C:\STRAWB~1\perl\lib/perllocal.pod
+</code></pre>
+<p>So the batch file is ready at <code>full\path\to\strawberry\perl\site\bin</code>.</p>
+<p>The trick I missed here was that there is a copy of these files in the unzipped tarball folder itself, so it looks like all I needed was <code>gmake</code>, not <code>gmake install</code>.</p>
+<p><em>p.s: 1 test fails. Ignored.</em></p>
+<h3>Invoke linkChecker from command line.</h3>
+<p>The docs are <a href="https://wummel.github.io/linkchecker/man1/linkchecker.1.html">here</a>, And as per the docs, that's trivial, execute from a command prompt. OR is it?</p>
+<p>when you run the following</p>
+<pre><code class="language-batch">$&gt; full/path/to/checklink.bat uri
+</code></pre>
+<p>You get this</p>
+<pre><code>&quot;-T&quot; is on the #! line, it must also be used on the command line.
+</code></pre>
+<p>The problem here is that the <code>checklink</code> and the <code>checklink.bat</code> files contain a line</p>
+<pre><code class="language-batch">#!/usr/bin/perl -wT
+</code></pre>
+<p>this file path does not exist in windows. Replace with <code>full/path/to/strawberry/perl</code></p>
+<p><em>Note I removed the -wT as well. The 'T' refers to something called tainted mode and is safer, but more restrictive as well.</em></p>
+<p>Run the command again. Linkchecker should now give you a HTTP status code based report. There are a few problems though. Some valid links fail, viz.  <code>https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CAbril+Fatface</code></p>
+<p>Well, since I intend to inspect the failures manually, my goal here is achieved. I can now run the linkchecker against <code>http://127.0.0.0:8080/</code> and confirm that all my links are fine.</p>
+<h4>Next Steps</h4>
+<p>Programmatic detection of fails.
+Explore exclusion flag in command options.</p>
+<p><em>Note: Running this against HTTPS involves more work. lots more. Primarily around installing LWP::Protocol::Https through CPAN and ensuring all dependencies are set up right ! In my case, I did some of the work, but I haven't gotten all https links to work. Some still keep failing, sometimes intermittently. Primary issue encountered is this</em></p>
+<pre><code>https://www.linkedin.com/in/nilsengupta/
+Line: 127
+Code: 500 Can't locate object method &quot;new&quot; via package &quot;LWP::Protocol::https::Socket&quot;
+To do: This is a server side problem. Check the URI.
+</code></pre>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      
+    
+      
+        <li>
+          <h3>
+            <a href="http://127.0.0.1:8080/2017/10/04/Pretzel-Curious-Things/">
+              Blogging - Loose ends and curious things when using Pretzel and the Jekyll-Hyde template.
+              <small>04 Oct 2017</small>
+            </a>
+          </h3>
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <li>
+          <h3>
+            <a href="http://127.0.0.1:8080/2017/08/29/Blogging-Github-Pretzel/">
+              Blogging with Github Pages and Pretzel.
+              <small>29 Aug 2017</small>
+            </a>
+          </h3>
+        </li>
+      
+    
+  </ul>
+</div>
+    </div>
+      
+  </body>
+
+</html>
