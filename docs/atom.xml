@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-12T20:49:58.0754847+05:30</updated>
+ <updated>2017-10-12T21:01:11.9855578+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -20,7 +20,8 @@
    <content type="html">&lt;p&gt;Over my life I have always collected words, but over time, they keep getting lost. Now that this blog has gotten going, that&apos;s one place I have to both store and share.&lt;/p&gt;
 &lt;p&gt;All backed by Github.&lt;/p&gt;
 &lt;p&gt;Came across the following marvellous collection &lt;a href=&quot;http://leptonica.com/cachedpages/grooks/grooks.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;A sample or two below. Click on through for more.&lt;/p&gt;
+&lt;p&gt;A sample or two below. Click on through for more &lt;a href=&quot;http://www.archimedes-lab.org/grooks.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here&apos;s one&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;The road to wisdom? -- Well, it&apos;s plain
     and simple to express:
         Err
@@ -43,6 +44,12 @@
         we didn&apos;t quite commit.
 
         --Piet Hein (Grooks)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and this special one&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;No cow&apos;s like a horse,
+and no horse like a cow.
+That&apos;s one similarity
+anyhow.
 &lt;/code&gt;&lt;/pre&gt;</content>
  </entry>
  

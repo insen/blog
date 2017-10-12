@@ -12,7 +12,9 @@ All backed by Github.
 
 Came across the following marvellous collection [here](http://leptonica.com/cachedpages/grooks/grooks.html)
 
-A sample or two below. Click on through for more.
+A sample or two below. Click on through for more [here](http://www.archimedes-lab.org/grooks.html).
+
+Here's one
 
     The road to wisdom? -- Well, it's plain
         and simple to express:
