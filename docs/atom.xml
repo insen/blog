@@ -4,13 +4,97 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-12T21:17:46.5932689+05:30</updated>
+ <updated>2017-10-16T18:45:21.3302908+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Connecting to Windows Azure Storage through PowerShell</title>
+   <link href="https://insen.github.io/blog/2017/10/16/Powershell-And-Azure-Storage/"/>
+   <updated>2017-10-16T00:00:00+05:30</updated>
+   <id>https://insen.github.io/blog/2017/10/16/Powershell-And-Azure-Storage/</id>
+   <content type="html">&lt;p&gt;I came across this paper describing the Windows Azure Storage design &lt;a href=&quot;&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And with that, I stopped thinking about Windows Azure Storage as as an extended file system and started thinking of it as a distributed, highly available, noSql persistence layer provided by the Azure platform.&lt;/p&gt;
+&lt;p&gt;That changes things quite a bit.&lt;/p&gt;
+&lt;h2&gt;Windows Azure Storage - &lt;em&gt;not an extended file system&lt;/em&gt;.&lt;/h2&gt;
+&lt;p&gt;It provides all three of Consistency, Availability and Partition tolerance, which apparently violates CAP, but has actually been made possible through some heavy lifting as detailed in the paper.&lt;/p&gt;
+&lt;p&gt;It offers five different sorts of distributed data services&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Blobs
+&lt;ul&gt;
+&lt;li&gt;Block blob &lt;em&gt;for streaming data&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Page blob &lt;em&gt;for Random Access data&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Append blob &lt;em&gt;for Append-only data&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Table &lt;em&gt;for unstructured tabular data&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Queues &lt;em&gt;for sequential processing&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Disks &lt;em&gt;are usually usually VHDs for IAAS&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Files - &lt;em&gt;are usually premium NAS for lift-and-shift&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Only problem, is, all of this through the Azure Portal is a lot of clicks. Now, all Azure services offer REST apis, and PowerShell access. So, let&apos;s see if all those clicks can be mutated into key-strokes, logging into and accessing Windows Azure Storage through PowerShell commands.&lt;/p&gt;
+&lt;h3&gt;A short but important note.&lt;/h3&gt;
+&lt;p&gt;After a while of fiddling around with Azure PowerShell commands, you will find that there are two versions of almost everything.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Login-AzureAccount&lt;/code&gt; vs &lt;code&gt;Login-AzureRmAccount&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Get-AzureStorageAccount&lt;/code&gt; vs &lt;code&gt;Get-AzureRmStorageAccount&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This non &lt;code&gt;Rm&lt;/code&gt; and &lt;code&gt;Rm&lt;/code&gt; options indicate Azure operational models before and after there was a Azure concept called &lt;em&gt;resource group&lt;/em&gt;. A &lt;em&gt;resource group&lt;/em&gt; is a logical grouping of Azure physical services - viz. storage, VMs, etc.&lt;/p&gt;
+&lt;p&gt;To read more, look &lt;a href=&quot;https://blogs.technet.microsoft.com/meamcs/2016/12/22/difference-between-azure-service-manager-and-azure-resource-manager/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://azuredepot.com/2017/01/02/azure-login-options/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In our case, we need to be conscious that wherever there is a choice, we need to go with the &lt;code&gt;Rm&lt;/code&gt; versions.&lt;/p&gt;
+&lt;h2&gt;Setting Up PowerShell for Windows Azure&lt;/h2&gt;
+&lt;p&gt;For a fresh machine, we need to have the &lt;code&gt;AzureRM&lt;/code&gt; package installed. On and elevated (Administrator) prompt&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Verify you have &lt;code&gt;PowerShellGet&lt;/code&gt; Module installed.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Get-Module PowerShellGet -list | Select-Object Name,Version,Path&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install Azure RM&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Install-Module AzureRM&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you have a previous version of Azure PowerShell installed that includes the Service Management module, you may receive an error. In that case, do this.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Install-Module AzureRM -AllowClobber&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To verify &lt;code&gt;AzureRM&lt;/code&gt; was installed run&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Get-Module -ListAvailable -Name AzureRM&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Azure Credentials for PowerShell Session&lt;/h2&gt;
+&lt;p&gt;Close the current PS prompt and open a non-elevated one.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Login to Azure&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Login-AzureRmAccount&lt;/code&gt; - This now does the Oauth dance and takes you to a login screen, takes your input, authenticates and returns to the prompt.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add Azure Account to PowerShell&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Add-AzureAccount&lt;/code&gt; - This should show you subscription details on command prompt&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Id/Type/Subscriptions/Tenants
+
+id@mail.com/User/d81de17a-cc30-4bee-a874-27d1eea6062/{aea858f0-512d-4649-8228-d78fd9ef3c76}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set your current subscription as the default.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Select-AzureSubscription -Current -SubscriptionId &amp;quot;your-subscription-id&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To verify, run&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Get-AzureRmContext&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Access Specific Storage Account&lt;/h2&gt;
+&lt;p&gt;All the pre-requisites are done with now. Running the following should show you your account details.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Get-AzureRmStorageAccount -ResourceGroupName &amp;quot;your-resource-group&amp;quot; -AccountName &amp;quot;account-name&amp;quot; | Select StorageAccountName&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;You should see your StorageAccountName on your console.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: do create the StorageAccount through the portal before this.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;So here we are, interacting with our Azure Storage Accounts through PowerShell and the command prompt.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Words - The Road To Wisdom</title>
