@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-16T18:45:21.3302908+05:30</updated>
+ <updated>2017-10-16T18:54:27.0874616+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Connecting to Windows Azure Storage through PowerShell</title>
-   <link href="https://insen.github.io/blog/2017/10/16/Powershell-And-Azure-Storage/"/>
+   <link href="https://insen.github.io/blog/2017/10/16/Powershell-Azure-Storage/"/>
    <updated>2017-10-16T00:00:00+05:30</updated>
-   <id>https://insen.github.io/blog/2017/10/16/Powershell-And-Azure-Storage/</id>
+   <id>https://insen.github.io/blog/2017/10/16/Powershell-Azure-Storage/</id>
    <content type="html">&lt;p&gt;I came across this paper describing the Windows Azure Storage design &lt;a href=&quot;&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;And with that, I stopped thinking about Windows Azure Storage as as an extended file system and started thinking of it as a distributed, highly available, noSql persistence layer provided by the Azure platform.&lt;/p&gt;
 &lt;p&gt;That changes things quite a bit.&lt;/p&gt;

@@ -6,15 +6,15 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Mon, 16 Oct 2017 18:45:21 +0530</pubDate>
-    <lastBuildDate>Mon, 16 Oct 2017 18:45:21 +0530</lastBuildDate>
+    <pubDate>Mon, 16 Oct 2017 18:54:27 +0530</pubDate>
+    <lastBuildDate>Mon, 16 Oct 2017 18:54:27 +0530</lastBuildDate>
     
     <item>
       <title>Connecting to Windows Azure Storage through PowerShell</title>
-      <link>https://insen.github.io/blog/2017/10/16/Powershell-And-Azure-Storage/</link>
+      <link>https://insen.github.io/blog/2017/10/16/Powershell-Azure-Storage/</link>
       <pubDate>Mon, 16 Oct 2017 00:00:00 +0530</pubDate>
       <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
-      <guid isPermaLink="true">https://insen.github.io/blog/2017/10/16/Powershell-And-Azure-Storage/</guid>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/10/16/Powershell-Azure-Storage/</guid>
       <description>&lt;p&gt;I came across this paper describing the Windows Azure Storage design &lt;a href=&quot;&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;And with that, I stopped thinking about Windows Azure Storage as as an extended file system and started thinking of it as a distributed, highly available, noSql persistence layer provided by the Azure platform.&lt;/p&gt;
 &lt;p&gt;That changes things quite a bit.&lt;/p&gt;
