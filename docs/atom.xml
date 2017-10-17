@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2017-10-16T18:54:27.0874616+05:30</updated>
+ <updated>2017-10-17T11:17:18.3787834+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -45,7 +45,7 @@
 &lt;p&gt;To read more, look &lt;a href=&quot;https://blogs.technet.microsoft.com/meamcs/2016/12/22/difference-between-azure-service-manager-and-azure-resource-manager/&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://azuredepot.com/2017/01/02/azure-login-options/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In our case, we need to be conscious that wherever there is a choice, we need to go with the &lt;code&gt;Rm&lt;/code&gt; versions.&lt;/p&gt;
 &lt;h2&gt;Setting Up PowerShell for Windows Azure&lt;/h2&gt;
-&lt;p&gt;For a fresh machine, we need to have the &lt;code&gt;AzureRM&lt;/code&gt; package installed. On and elevated (Administrator) prompt&lt;/p&gt;
+&lt;p&gt;For a fresh machine, we need to have the &lt;code&gt;AzureRM&lt;/code&gt; package installed. On an elevated (Administrator) prompt&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Verify you have &lt;code&gt;PowerShellGet&lt;/code&gt; Module installed.&lt;/p&gt;
@@ -88,8 +88,8 @@ id@mail.com/User/d81de17a-cc30-4bee-a874-27d1eea6062/{aea858f0-512d-4649-8228-d7
 &lt;p&gt;&lt;code&gt;Get-AzureRmContext&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Access Specific Storage Account&lt;/h2&gt;
-&lt;p&gt;All the pre-requisites are done with now. Running the following should show you your account details.&lt;/p&gt;
+&lt;p&gt;And that is it. We are all set.&lt;/p&gt;
+&lt;p&gt;To access a specific storage account, try this -&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Get-AzureRmStorageAccount -ResourceGroupName &amp;quot;your-resource-group&amp;quot; -AccountName &amp;quot;account-name&amp;quot; | Select StorageAccountName&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;You should see your StorageAccountName on your console.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Note: do create the StorageAccount through the portal before this.&lt;/em&gt;&lt;/p&gt;

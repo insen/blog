@@ -44,7 +44,7 @@ In our case, we need to be conscious that wherever there is a choice, we need to
 
 ## Setting Up PowerShell for Windows Azure
 
-For a fresh machine, we need to have the ```AzureRM``` package installed. On and elevated (Administrator) prompt
+For a fresh machine, we need to have the ```AzureRM``` package installed. On an elevated (Administrator) prompt
 
 - Verify you have ```PowerShellGet``` Module installed. 
 
@@ -86,9 +86,9 @@ Close the current PS prompt and open a non-elevated one.
 
     ```Get-AzureRmContext```
 
-## Access Specific Storage Account
+And that is it. We are all set. 
 
-All the pre-requisites are done with now. Running the following should show you your account details.
+To access a specific storage account, try this - 
 
 ```Get-AzureRmStorageAccount -ResourceGroupName "your-resource-group" -AccountName "account-name" | Select StorageAccountName```
 

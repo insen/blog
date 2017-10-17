@@ -171,7 +171,7 @@
 <p>To read more, look <a href="https://blogs.technet.microsoft.com/meamcs/2016/12/22/difference-between-azure-service-manager-and-azure-resource-manager/">here</a> and <a href="https://azuredepot.com/2017/01/02/azure-login-options/">here</a>.</p>
 <p>In our case, we need to be conscious that wherever there is a choice, we need to go with the <code>Rm</code> versions.</p>
 <h2>Setting Up PowerShell for Windows Azure</h2>
-<p>For a fresh machine, we need to have the <code>AzureRM</code> package installed. On and elevated (Administrator) prompt</p>
+<p>For a fresh machine, we need to have the <code>AzureRM</code> package installed. On an elevated (Administrator) prompt</p>
 <ul>
 <li>
 <p>Verify you have <code>PowerShellGet</code> Module installed.</p>
@@ -214,8 +214,8 @@ id@mail.com/User/d81de17a-cc30-4bee-a874-27d1eea6062/{aea858f0-512d-4649-8228-d7
 <p><code>Get-AzureRmContext</code></p>
 </li>
 </ul>
-<h2>Access Specific Storage Account</h2>
-<p>All the pre-requisites are done with now. Running the following should show you your account details.</p>
+<p>And that is it. We are all set.</p>
+<p>To access a specific storage account, try this -</p>
 <p><code>Get-AzureRmStorageAccount -ResourceGroupName &quot;your-resource-group&quot; -AccountName &quot;account-name&quot; | Select StorageAccountName</code></p>
 <p>You should see your StorageAccountName on your console.</p>
 <p><em>Note: do create the StorageAccount through the portal before this.</em></p>
