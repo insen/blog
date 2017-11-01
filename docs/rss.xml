@@ -6,8 +6,20 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 17 Oct 2017 11:17:18 +0530</pubDate>
-    <lastBuildDate>Tue, 17 Oct 2017 11:17:18 +0530</lastBuildDate>
+    <pubDate>Wed, 01 Nov 2017 15:43:16 +0530</pubDate>
+    <lastBuildDate>Wed, 01 Nov 2017 15:43:16 +0530</lastBuildDate>
+    
+    <item>
+      <title>JavaScript - The Good Parts vs The Definitive Guide</title>
+      <link>https://insen.github.io/blog/2017/11/01/JS-Good-Vs-Definitive/</link>
+      <pubDate>Wed, 01 Nov 2017 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">https://insen.github.io/blog/2017/11/01/JS-Good-Vs-Definitive/</guid>
+      <description>&lt;p&gt;It&apos;s said that some pictures say more than a thousand words. Case in point below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/img/posts/Javascript-GoodPartsVsDefinitiveGuide.png&quot; alt=&quot;JavaScript - Good vs Definitive&quot; /&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Disclaimer : Your inferences are your own.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Note: Image source is &lt;a href=&quot;https://medium.com/@basarat/typescript-won-a4e0dfde4b08&quot;&gt;here&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Connecting to Windows Azure Storage through PowerShell</title>
@@ -87,11 +99,18 @@ id@mail.com/User/d81de17a-cc30-4bee-a874-27d1eea6062/{aea858f0-512d-4649-8228-d7
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And that is it. We are all set.&lt;/p&gt;
-&lt;p&gt;To access a specific storage account, try this -&lt;/p&gt;
+&lt;h2&gt;Working with Azure Storage Accounts&lt;/h2&gt;
+&lt;h3&gt;Create&lt;/h3&gt;
+&lt;p&gt;To create a Azure Storage Account&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;New-AzureRmStorageAccount -ResourceGroupName $your-resource-group -Name &amp;quot;your-storage-acc-name&amp;quot; -Location $yourDefinedlocation -SkuName Standard_LRS -Kind Storage -EnableEncryptionService Blob&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;View&lt;/h3&gt;
+&lt;p&gt;To access all the storage accounts for your MSDN account, try this -&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;Get-AzureRmStorageAccount -ResourceGroupName &amp;quot;your-resource-group&amp;quot; -AccountName &amp;quot;account-name&amp;quot; | Select StorageAccountName&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;You should see your StorageAccountName on your console.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Note: do create the StorageAccount through the portal before this.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;So here we are, interacting with our Azure Storage Accounts through PowerShell and the command prompt.&lt;/p&gt;</description>
+&lt;p&gt;You should see your StorageAccountName on your console, including the one created above.&lt;/p&gt;
+&lt;h3&gt;Delete&lt;/h3&gt;
+&lt;p&gt;To remove a storage account, the following applies -&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Remove-AzureRmStorageAccount -ResourceGroupName &amp;quot;your-resource-group&amp;quot; -AccountName &amp;quot;your-storage-account&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;From here on, PowerShell commands should enable you to do almost anything with an Azure Storage Account you can do over REST or .NET libraries. All we need to do is explore.&lt;/p&gt;</description>
     </item>
     
     <item>

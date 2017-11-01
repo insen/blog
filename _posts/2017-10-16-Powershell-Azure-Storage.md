@@ -88,15 +88,28 @@ Close the current PS prompt and open a non-elevated one.
 
 And that is it. We are all set. 
 
-To access a specific storage account, try this - 
+## Working with Azure Storage Accounts
+
+### Create
+To create a Azure Storage Account
+
+```New-AzureRmStorageAccount -ResourceGroupName $your-resource-group -Name "your-storage-acc-name" -Location $yourDefinedlocation -SkuName Standard_LRS -Kind Storage -EnableEncryptionService Blob```
+
+### View
+To access all the storage accounts for your MSDN account, try this - 
 
 ```Get-AzureRmStorageAccount -ResourceGroupName "your-resource-group" -AccountName "account-name" | Select StorageAccountName```
 
-You should see your StorageAccountName on your console.
+You should see your StorageAccountName on your console, including the one created above.
 
-*Note: do create the StorageAccount through the portal before this.*
+### Delete
 
-So here we are, interacting with our Azure Storage Accounts through PowerShell and the command prompt.
+To remove a storage account, the following applies - 
+
+```Remove-AzureRmStorageAccount -ResourceGroupName "your-resource-group" -AccountName "your-storage-account"```
+
+From here on, PowerShell commands should enable you to do almost anything with an Azure Storage Account you can do over REST or .NET libraries. All we need to do is explore.
+
 
 
 

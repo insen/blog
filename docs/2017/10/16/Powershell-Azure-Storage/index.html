@@ -43,7 +43,7 @@
           Insen
         </a>
       </h1>
-      <p class="lead">Write, Code, Dream !</p>
+      <p class="lead">Write, Code, Dream, Travel, Play !</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -81,6 +81,8 @@
       
         
           
+        
+      
         
       
         
@@ -215,11 +217,18 @@ id@mail.com/User/d81de17a-cc30-4bee-a874-27d1eea6062/{aea858f0-512d-4649-8228-d7
 </li>
 </ul>
 <p>And that is it. We are all set.</p>
-<p>To access a specific storage account, try this -</p>
+<h2>Working with Azure Storage Accounts</h2>
+<h3>Create</h3>
+<p>To create a Azure Storage Account</p>
+<p><code>New-AzureRmStorageAccount -ResourceGroupName $your-resource-group -Name &quot;your-storage-acc-name&quot; -Location $yourDefinedlocation -SkuName Standard_LRS -Kind Storage -EnableEncryptionService Blob</code></p>
+<h3>View</h3>
+<p>To access all the storage accounts for your MSDN account, try this -</p>
 <p><code>Get-AzureRmStorageAccount -ResourceGroupName &quot;your-resource-group&quot; -AccountName &quot;account-name&quot; | Select StorageAccountName</code></p>
-<p>You should see your StorageAccountName on your console.</p>
-<p><em>Note: do create the StorageAccount through the portal before this.</em></p>
-<p>So here we are, interacting with our Azure Storage Accounts through PowerShell and the command prompt.</p>
+<p>You should see your StorageAccountName on your console, including the one created above.</p>
+<h3>Delete</h3>
+<p>To remove a storage account, the following applies -</p>
+<p><code>Remove-AzureRmStorageAccount -ResourceGroupName &quot;your-resource-group&quot; -AccountName &quot;your-storage-account&quot;</code></p>
+<p>From here on, PowerShell commands should enable you to do almost anything with an Azure Storage Account you can do over REST or .NET libraries. All we need to do is explore.</p>
 </div>
 
 <div class="related">
@@ -236,15 +245,6 @@ id@mail.com/User/d81de17a-cc30-4bee-a874-27d1eea6062/{aea858f0-512d-4649-8228-d7
     
       
     
-      
-        <li>
-          <h3>
-            <a href="https://insen.github.io/blog/2017/09/27/DevOps-Making-A-Start/">
-              DevOps - Getting off the blocks.
-              <small>27 Sep 2017</small>
-            </a>
-          </h3>
-        </li>
       
     
   </ul>
