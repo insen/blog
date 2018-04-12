@@ -11,7 +11,7 @@
 
   <title>
     
-      Hello SARG ! &middot; Insen
+      Hello SARG ! Let's index and tune a SQL! &middot; Insen
     
   </title>
 
@@ -147,60 +147,78 @@
     
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">Hello SARG !</h1>
+  <h1 class="post-title">Hello SARG ! Let's index and tune a SQL!</h1>
   <span class="post-date">12 Apr 2018</span>
-  <p>No, not your Beetle Bailey Sarge.</p>
-<p>This story begins with LINQ and composite keys in EF. (<small>in fact, many programmer stories usually begin with LINQ. It’s a veritable treasure trove of stories</small>). Here we have composite keys and query plans and cryptic acronyms all playing ball really well together, only in a fashion nobody understands.</p>
-<p>What I needed was the LINQ equivalent of a SQL IN query. Consider a table with a single column primary key called Id. The query to get records with a IN clause via LINQ is -</p>
+  <p>No, Not your Beetle Bailey Sarge ! Focus !! Here we have composite keys and query plans and cryptic acronyms all playing ball really well together, only in their own fashion, much like today's unsupervised machine learning methods which nobody really understands.</p>
+<h4>The pole position <em>('Pole Problem'??)</em>.</h4>
+<p>The story begins with LINQ and composite keys in EF. (<small>in fact, many programmer stories usually begin with LINQ. It’s a veritable treasure trove of stories</small>). So one day I needed the LINQ equivalent of a SQL IN query. That's what started this whole SARG thing.</p>
+<p>Consider a table with a single column primary key called Id. The query to get records with a IN clause via LINQ is this</p>
 <pre><code>    from entity in db.Table where computedList.Contains(entity.Id) select x.
 </code></pre>
 <p>Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can't match multiple values in the contains option. And so you write</p>
-<pre><code>    from entity in db.Table 
-    join pair in locals on new { entity.Id1, entity.Id2 }
+<pre><code class="language-from">    join pair in locals on new { entity.Id1, entity.Id2 }
                         equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity
 </code></pre>
-<p>Boom! Welcome to error message 101. (<small> ps. Did you ever hear that joke about the guy who wanted to write great things, move people to joy and tears through his words and ended up writing error messages for Microsoft</small>). Here is an example in action, he result of executing the above LINQ -</p>
-<pre><code>...Only primitive types or enumeration types are supported in this context.
-</code></pre>
+<p>Boom! Error message 101. (<small> ps. Did you ever hear that joke about the guy who wanted to write great things, move people to joy and tears through his words and ended up writing error messages for Microsoft</small>). Here is an example in action - the result of executing the above LINQ is an error ending with <code>	...Only primitive types or enumeration types are supported in this context.</code>.</p>
 <p>What it means here is EF and SQL Server have no idea how to join a table in database with a list in memory. It cannot be done. You can either have a SQL query (generated through the IQueryable implementation of LINQ) or you fetch all database data into memory and then do the join. The latter is a very bad idea in a table with even 200000 rows, let alone millions.</p>
-<p>So how do you write the LINQ such that you get SQL which runs in SQL server? Turns out that this problem is very intractable, with no elegant solutions.</p>
-<p>You have one SQL equivalent which uses LINQ's 'Contains' option awkwardly -</p>
+<p>So how do you write the LINQ such that you get SQL which runs in SQL server? Turns out that this problem is quite intractable, with no elegant solutions.</p>
+<p>You have one SQL equivalent which uses LINQ's 'Contains' option awkwardly</p>
 <pre><code>    from entity in db.Table
     where computed.Contains(&quot;Id1=&quot; + entity.Id1 + &quot;,&quot; + &quot;Id2=&quot; + entity.Id2)
     select entity
 </code></pre>
 <p>In this case, you have created your list 'computed' with key values which are a concatenation of all key columns as strings. In your LINQ query, you create equivalent keys from all of the database rows and compare this generated key with your predefined list. This generates a SQL of the sort</p>
-<pre><code>Select * from Table Where (&quot;Id1=&quot; + Id1 + &quot;,&quot; + &quot;Id2=&quot; + Id2) in ( &quot;Id1=Id1,Id2=Id2&quot;, &quot;Id1=Id2221,Id2=Id2222&quot;)
+<pre><code>    Select * from Table 
+    Where (&quot;Id1=&quot; + Id1 + &quot;,&quot; + &quot;Id2=&quot; + Id2) 
+    in ( &quot;Id1=Id1,Id2=Id2&quot;, &quot;Id1=Id91,Id2=Id92&quot;)
 </code></pre>
 <p><small><em>Note:</em> Not exact, but that’s handwritten un-compiled SQL, so there may be issues, but you get the drift.</small></p>
-<p>This is messy. But that is not the main problem. Quoting from SO - &quot;But a more important problem is that this solution is not <strong>sargable</strong>, which means: it bypasses any database indexes on Id1 and Id2 that could have been used otherwise. This will perform very very poorly.&quot;</p>
-<p>Note: For an in-depth discussion of Composite Keys and EF, check out this <a href="https://stackoverflow.com/questions/26198860/entityframework-contains-query-of-composite-key/26199792">Stack Overflow question</a> or this <a href="https://www.codesd.com/item/entityframework-contains-a-composite-key-query.html">link</a>.</p>
+<p>This is messy. But that is not the main problem. Quoting from Stack Overflow - &quot;a more important problem is that this solution is not <strong>sargable</strong>, which means: it bypasses any database indexes on Id1 and Id2 that could have been used otherwise. This will perform very very poorly.&quot;</p>
+<p>Note: For an in-depth discussion of Composite Keys and EF ad the general recommended ways of handling them check either this <a href="https://stackoverflow.com/questions/26198860/entityframework-contains-query-of-composite-key/26199792">Stack Overflow question</a> or this <a href="https://www.codesd.com/item/entityframework-contains-a-composite-key-query.html">link</a>.</p>
 <h2>Enter the SARG !</h2>
 <p>I had encountered this SARG before, but had forgotten the details of it, so had to look it up. Turns out SARGability is a big deal in SQL server and other RDBMSs.</p>
 <p>So what is <strong>SARG</strong>?
 It’s an acronym word derived from Search and Argument. An alternative usage is <strong>SARGable</strong>, which means <em>'Search Argument Able'</em>. As per Wikipedia <strong>SARGable</strong> is defined as <em>'In relational databases, a condition (or predicate) in a query is said to be sargable if the DBMS engine can take advantage of an index to speed up the execution of the query'</em>.</p>
-<p>A much more technical definition would be <em>'Sargability is the query's ability to traverse the b-tree index using the binary search method that relies on half-set elimination for the sorted items array</em>. In SQL, it would be displayed on the execution plan as a &quot;index seek&quot;.'</p>
-<p>Now why is this important?</p>
+<p>A technical definition would be <em>'Sargability is the query's ability to traverse the b-tree index using the binary search method that relies on half-set elimination for the sorted items array</em>. In SQL, it would be displayed on the execution plan as a &quot;index seek&quot;.'</p>
+<h3>Now why is this important?</h3>
 <p>Because indexes are key to fast and efficient RDBMS queries and stored procedures. <small> <em>Note:</em> At this point, if you are not interested in fast and efficient database queries, you can now go read something else. For the rest however, hopefully this will help.</small></p>
 <p>Databases have <strong>Index</strong>es. In fact so important and ubiquitous are database indexes that RDBMSs create all manner of indexes automatically for you. Primary Keys, Foreign Keys, Unique contraints - all are indexes created silently behind the scenes in any respectable database. However, indexes are no good if you query cannot take advantage of them. That is where SARGability comes in.</p>
-<p><em><em>IMPORTANT NOTE</em></em> - A non sargable query will not use your indexes.</p>
-<p>Instead it will fall back to  table scans instead of seeks all of the time, destroying the entire purpose of indexes and our goal of fast efficient queries.</p>
-<p>To understand why this happens, We will look a simple but oft-repeated SQL need. Consider a Table called Customer with an primary key fields - <strong>Id</strong>, and a <strong>LastName</strong> varchar column with an index on it. We need to retrieve Customers whose last name is Smith. So let us look at two simple queries which can do this.</p>
+<p><em><em>IMPORTANT NOTE - A non sargable query will not use your indexes.</em></em></p>
+<p>Instead it will fall back to  index scans/table scans (indexed and non-indexed tables respectively) instead of index seeks, and it will do so all of the time, destroying the entire purpose of indexes and our goal of fast efficient queries.</p>
+<p>To understand why this happens, we will look at a simple but oft-repeated SQL need. Consider a table called Customer with an primary key fields - <strong>Id</strong>, and a <strong>LastName</strong> varchar column with an index on it. <em>We need to retrieve Customers whose last name is Smith</em>.</p>
+<p>Here are two simple queries which can do this and their query plans</p>
+<h4>Option 1</h4>
 <pre><code>1. Select * from Customer where LastName = 'Smith'
 </code></pre>
-<pre><code>2. Select * from Customer where Upper(LastName) = 'SMITH'
-</code></pre>
-<p>A quick look at the query plans for each</p>
-<h4>Option 1</h4>
 <p><img src="/blog/img/posts/sarg-query-plan-seek.png" alt="Option 1" />.</p>
 <h4>Option 2</h4>
+<pre><code>2. Select * from Customer where Upper(LastName) = 'SMITH'
+</code></pre>
 <p><img src="/blog/img/posts/sarg-query-plan-scan.png" alt="Option 1" />.</p>
-<p>Did you see what happened? The query plan changed from <em>index <strong>seek</strong></em> to <em>index <strong>scan</strong></em>.</p>
-<p>In this case my table had two columns, with indexes defined on each. A primary key and a non-primary index on LastName and still we have a scan.</p>
-<p>In real world scenarios, with multiple tables, joins and complex clauses and functions, a predicate (where clause) or join condition can easily go from a index seek to an index scan to a table scan. SARG-ability greatly determines the choice of indexing used, or not used and thus has a direct impact on the execution time of queries.</p>
+<p>See what happened? The query plan changed from <em>index <strong>seek</strong></em> to <em>index <strong>scan</strong></em>.</p>
+<p>In this case my table had two columns, with indexes defined on each. A primary key on <em>Id</em>, a non-primary index on <em>LastName</em> and still we go from index seek to index scan.</p>
+<h3>Why does this happen? A tale Of B-Trees and Database Indexes.</h3>
+<p>A database is basically like a giant dictionary, with its pages shuffled. The index at the back lists the start word per page number, and each page is numbered. Moreover, more pages are being continuously added or removed, so the index at the back needs to be constantly maintained. But there is an extra twist. The index pages are themselves jumbled. So while the index keeps track of whats where in the main pages, we have to keep track of the index pages itself.  The Database depends on keeping rows in logical order by virtue of its keys, separate from physical order. However, that does not mean that all of those rows are in the same contiguous order on disc. The database also depends on keeping its physical order separate from its logical order. This is essentially what a RDBMS <strong>index</strong> does. The mechanism used to do implement all of this consists of a doubly linked list, a B-Tree and a fetch process.</p>
+<h4>Doubly linked list</h4>
+<p>The logical sequence is established between leaf index nodes through a doubly linked list. Each node points to a database block and to its previous and next block. Each page stores as many index entries as possible. Thus there is two layer ordering, across nodes followed by within nodes. Note the sequential entries in an index leaf node has no guarantee of sequential entries on disk or on database blocks. They could be pointing to different areas of physical storage.</p>
+<h4>B-Tree - the Balanced Tree in DBMS.</h4>
+<p>Now for the operating system each page is in random order on disk. To find the database block pages, the database uses what is called as B-Tree, or Balanced Tree. (No, it is not binary tree, an n-ary tree, with n flexible). In a B-Tree, each branch node consists of the starting entries of the set of leaf nodes it covers. Since it is also a database block in itself, it is quite large and in sorted order of leaf node entries. Thus each entry in each branch node has the starting value(s, if composite key) of the indexed column of the leaf node and the leaf node's location on disk. An index B-Tree is initially built in such a way that all leaf nodes are covered by a branch node. New layers of branches are created until a branch contains enough information to enable traversing down to the leaf node with the desired index column values and fits in a single database page block. This is constantly maintained. A characteristic of this B-Tree is that all elements can be accessed with the same number of steps, and the depth can change based on the size of the database page block being used by the database to store data.</p>
+<h4>The fetch.</h4>
+<p>There are a few different ways for a database to approach fetching the data.</p>
+<h5>The index seek.</h5>
+<p>The act of reaching for a row data in a particular table based on a given index i.e, you are given the column values to search for, involves the following steps. The database looks up the index and its root page, traverses the page until it finds a branch node whose range covers these keys values, goes deeper one layer, recursively does the same until it finds the leaf node which contains the given keys. Once the leaf node is found, it is iterated/searched until the specific row/key values are reached. This key points to the database block which stores the table data on the heap. Now corresponding data can be fetched if needed, since it depends on the query.</p>
+<h5>The index scan.</h5>
+<p>Index Scan is nothing but scanning on the data pages from the first page to the last page. If there is an index on a table, and if the query is touching a larger amount of data, which means the query is retrieving more than 50 percent or 90 percent of the data, and then the optimizer would just scan all the data pages to retrieve the data rows.</p>
+<h5>The table scan.</h5>
+<p>If there is no index, then you might see a Table Scan (Index Scan) in the execution plan. Index scan touches all database blocks and rows for the table as it doesn't have the aid of an index's B-Tree.</p>
+<h3>So, why 'index seek' to 'index scan'?</h3>
+<p>So, coming back to the question - <em>Why did the query plan change from index <strong>seek</strong> to index <strong>scan</strong>?</em></p>
+<p>Well, because, in our case the index key was defined on column 'LastName'. So the index had the key 'Smith' somewhere - root, branch or leaf node. However, 'SMITH' was not a value which was present in the index. So a full scan of all table rows, using the index on LastName wpuld be needed, as the Sql Optimiser cannot be sure of the data until the string is manually compared, for which it needs to physically read in the table row data from the database block on disk.</p>
+<p>In real world scenarios, with multiple tables, joins and complex clauses and functions, a predicate (where clause) or join condition can easily go from a index seek to an index scan to a table scan.</p>
+<p>SARGability thus greatly determines the choice of indexing <em>used</em> , <strong>OR</strong> <em>not used</em>, and has a direct impact on the query execution time.</p>
 <h2>Breaking SARGability and how to fix.</h2>
-<p>Many scenarios break Sargability. General thumbrules of breaking Sargability include</p>
+<p>Many scenarios break SARGability. General thumbrules of breaking SARGability and things not to do include -</p>
 <h3>Implicit/explicit datatype conversion before comparision</h3>
 <p>Given that column B is defined as a varchar.</p>
 <pre><code>Select * from F WHERE B = 1 
@@ -235,11 +253,12 @@ Fixed: SELECT ...WHERE Number  = 42 - 0
 <p>This basically turns the query into a full-text search query with most probably a table scan, or in slightly better case, an index scan.</p>
 <h4>Tip : Indexes on computed columns.</h4>
 <p>Sometimes the use of functions and so on is unavoidable. The general solution is to add a calculated column for the field value returned by the function and then create a non-clustered index for thet calculated column.</p>
-<p>Note that this computed column is not required to be persisted.</p>
-<p>Consider the query</p>
+<p>Note that this computed column is not required to be persisted.Consider the query</p>
 <pre><code>SELECT LastName  FROM Customers where LEFT(LastName,1)='K'
 </code></pre>
-<p>In this case, add a computed column <em>'LastNameStartsWith'</em> to hold <code>Left(LastName, 1)</code>, and add a non-clustered index on <em>'LastNameStartWith'</em>. <strong><em>Be aware that this is a double edged sword</em></strong> however, as you may end up creating lots of indexes for every use combination. Each index addition creates more runtime maintenance work for the database and ultimately may be counter effective. Be discreet.</p>
+<p>In this case, add a computed column <em>'LastNameStartsWith'</em> to hold <code>Left(LastName, 1)</code>, and add a non-clustered index on <em>'LastNameStartWith'</em>.</p>
+<p><strong><em>Be aware that this is a double edged sword</em></strong> however, as you may end up creating lots of indexes for every use combination. Each new index needs to be maintained continuously by the database and ultimately may be counter effective. Be discreet.</p>
+<p>Hope this helped. Good luck with the queries.</p>
 <h3>References</h3>
 <ul>
 <li>
