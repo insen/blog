@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-04-13T12:10:53.9018029+05:30</updated>
+ <updated>2018-04-13T12:32:06.310503+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -146,6 +146,9 @@ Fixed: SELECT ...WHERE Number  = 42 - 0
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;http://blogs.lobsterpot.com.au/2010/01/22/sargable-functions-in-sql-server/&quot;&gt;Sql Server Sargable functions&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://blogs.msmvps.com/robfarley/2010/02/01/a-case-study-in-sargability/&quot;&gt;Case study in Sargability&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</content>
  </entry>

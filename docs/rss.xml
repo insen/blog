@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Fri, 13 Apr 2018 12:10:53 +0530</pubDate>
-    <lastBuildDate>Fri, 13 Apr 2018 12:10:53 +0530</lastBuildDate>
+    <pubDate>Fri, 13 Apr 2018 12:32:06 +0530</pubDate>
+    <lastBuildDate>Fri, 13 Apr 2018 12:32:06 +0530</lastBuildDate>
     
     <item>
       <title>Hello SARG ! Let&apos;s index and tune a SQL!</title>
@@ -144,6 +144,9 @@ Fixed: SELECT ...WHERE Number  = 42 - 0
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&quot;http://blogs.lobsterpot.com.au/2010/01/22/sargable-functions-in-sql-server/&quot;&gt;Sql Server Sargable functions&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;https://blogs.msmvps.com/robfarley/2010/02/01/a-case-study-in-sargability/&quot;&gt;Case study in Sargability&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>

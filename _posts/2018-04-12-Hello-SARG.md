@@ -201,3 +201,5 @@ Hope this helped. Good luck with the queries.
 - [Inverting Joins](https://tsqlninja.wordpress.com/2012/05/29/join-me-inverting-joins-to-maintain-sargability/)
 
 - [Sql Server Sargable functions](http://blogs.lobsterpot.com.au/2010/01/22/sargable-functions-in-sql-server/)
+
+- [Case study in Sargability](https://blogs.msmvps.com/robfarley/2010/02/01/a-case-study-in-sargability/)
