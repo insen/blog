@@ -157,8 +157,9 @@
 </code></pre>
 <p>Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can't match multiple values in the contains option. And so you write</p>
 <pre><code>    from entity in db.Table
-    join pair in locals on new { entity.Id1, entity.Id2 }
-                        equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
+    join pair in locals 
+    on new { entity.Id1, entity.Id2 }
+    equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity
 </code></pre>
 <p>Boom! Error message 101. (<small> ps. Did you ever hear that joke about the guy who wanted to write great things, move people to joy and tears through his words and ended up writing error messages for Microsoft</small>). Here is an example in action - the result of executing the above LINQ is an error ending with <code>	...Only primitive types or enumeration types are supported in this context.</code>.</p>

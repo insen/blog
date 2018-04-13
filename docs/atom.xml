@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-04-13T12:50:46.9306901+05:30</updated>
+ <updated>2018-04-13T12:52:23.5700763+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -25,8 +25,9 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can&apos;t match multiple values in the contains option. And so you write&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    from entity in db.Table
-    join pair in locals on new { entity.Id1, entity.Id2 }
-                        equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
+    join pair in locals 
+    on new { entity.Id1, entity.Id2 }
+    equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Boom! Error message 101. (&lt;small&gt; ps. Did you ever hear that joke about the guy who wanted to write great things, move people to joy and tears through his words and ended up writing error messages for Microsoft&lt;/small&gt;). Here is an example in action - the result of executing the above LINQ is an error ending with &lt;code&gt;	...Only primitive types or enumeration types are supported in this context.&lt;/code&gt;.&lt;/p&gt;

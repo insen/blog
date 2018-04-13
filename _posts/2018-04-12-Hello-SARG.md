@@ -21,8 +21,9 @@ Therefore, extrapolating merrily, you reason that tables with Composite keys wou
 
 ```
     from entity in db.Table
-    join pair in locals on new { entity.Id1, entity.Id2 }
-                        equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
+    join pair in locals 
+    on new { entity.Id1, entity.Id2 }
+    equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity
 ```
 Boom! Error message 101. (<small> ps. Did you ever hear that joke about the guy who wanted to write great things, move people to joy and tears through his words and ended up writing error messages for Microsoft</small>). Here is an example in action - the result of executing the above LINQ is an error ending with ```	...Only primitive types or enumeration types are supported in this context.```.
