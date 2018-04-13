@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Fri, 13 Apr 2018 12:52:23 +0530</pubDate>
-    <lastBuildDate>Fri, 13 Apr 2018 12:52:23 +0530</lastBuildDate>
+    <pubDate>Fri, 13 Apr 2018 12:53:59 +0530</pubDate>
+    <lastBuildDate>Fri, 13 Apr 2018 12:53:59 +0530</lastBuildDate>
     
     <item>
       <title>Hello SARG ! Let&apos;s index and tune a SQL!</title>
@@ -19,7 +19,9 @@
 &lt;h4&gt;The pole position &lt;em&gt;(&apos;Pole Problem&apos;??)&lt;/em&gt;.&lt;/h4&gt;
 &lt;p&gt;The story begins with LINQ and composite keys in EF. (&lt;small&gt;in fact, many programmer stories usually begin with LINQ. It’s a veritable treasure trove of stories&lt;/small&gt;). So one day I needed the LINQ equivalent of a SQL IN query for a composite keyed table. That&apos;s what started this whole SARG thing.&lt;/p&gt;
 &lt;p&gt;Consider a table with a single column primary key called Id. The query to get records with a IN clause via LINQ is this&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    from entity in db.Table where computedList.Contains(entity.Id) select x.
+&lt;pre&gt;&lt;code&gt;    from entity in db.Table 
+    where computedList.Contains(entity.Id) 
+    select x.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can&apos;t match multiple values in the contains option. And so you write&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;    from entity in db.Table

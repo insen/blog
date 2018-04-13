@@ -14,7 +14,9 @@ The story begins with LINQ and composite keys in EF. (<small>in fact, many progr
 Consider a table with a single column primary key called Id. The query to get records with a IN clause via LINQ is this 
 
 ```
-    from entity in db.Table where computedList.Contains(entity.Id) select x.
+    from entity in db.Table 
+    where computedList.Contains(entity.Id) 
+    select x.
 ```
 
 Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can't match multiple values in the contains option. And so you write
