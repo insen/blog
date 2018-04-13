@@ -19,7 +19,8 @@ Consider a table with a single column primary key called Id. The query to get re
 
 Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can't match multiple values in the contains option. And so you write
 
-```from entity in db.Table
+```
+    from entity in db.Table
     join pair in locals on new { entity.Id1, entity.Id2 }
                         equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity

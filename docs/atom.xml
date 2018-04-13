@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-04-13T12:32:06.310503+05:30</updated>
+ <updated>2018-04-13T12:50:46.9306901+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -24,7 +24,8 @@
 &lt;pre&gt;&lt;code&gt;    from entity in db.Table where computedList.Contains(entity.Id) select x.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can&apos;t match multiple values in the contains option. And so you write&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-from&quot;&gt;    join pair in locals on new { entity.Id1, entity.Id2 }
+&lt;pre&gt;&lt;code&gt;    from entity in db.Table
+    join pair in locals on new { entity.Id1, entity.Id2 }
                         equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity
 &lt;/code&gt;&lt;/pre&gt;

@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Fri, 13 Apr 2018 12:32:06 +0530</pubDate>
-    <lastBuildDate>Fri, 13 Apr 2018 12:32:06 +0530</lastBuildDate>
+    <pubDate>Fri, 13 Apr 2018 12:50:46 +0530</pubDate>
+    <lastBuildDate>Fri, 13 Apr 2018 12:50:46 +0530</lastBuildDate>
     
     <item>
       <title>Hello SARG ! Let&apos;s index and tune a SQL!</title>
@@ -22,7 +22,8 @@
 &lt;pre&gt;&lt;code&gt;    from entity in db.Table where computedList.Contains(entity.Id) select x.
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Therefore, extrapolating merrily, you reason that tables with Composite keys would need a join as you can&apos;t match multiple values in the contains option. And so you write&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-from&quot;&gt;    join pair in locals on new { entity.Id1, entity.Id2 }
+&lt;pre&gt;&lt;code&gt;    from entity in db.Table
+    join pair in locals on new { entity.Id1, entity.Id2 }
                         equals new { Id1 = pair.Item1, Id2 = pair.Item2 }
     select entity
 &lt;/code&gt;&lt;/pre&gt;
