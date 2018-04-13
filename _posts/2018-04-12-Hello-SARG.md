@@ -9,7 +9,7 @@ tags : [SQL, RDBMS, SARGability, SQL Server, LINQ]
 No, Not your Beetle Bailey Sarge ! Focus !! Here we have composite keys and query plans and cryptic acronyms all playing ball really well together, only in their own fashion, much like today's unsupervised machine learning methods which nobody really understands. 
 
 #### The pole position _('Pole Problem'??)_.
-The story begins with LINQ and composite keys in EF. (<small>in fact, many programmer stories usually begin with LINQ. It’s a veritable treasure trove of stories</small>). So one day I needed the LINQ equivalent of a SQL IN query. That's what started this whole SARG thing. 
+The story begins with LINQ and composite keys in EF. (<small>in fact, many programmer stories usually begin with LINQ. It’s a veritable treasure trove of stories</small>). So one day I needed the LINQ equivalent of a SQL IN query for a composite keyed table. That's what started this whole SARG thing. 
 
 Consider a table with a single column primary key called Id. The query to get records with a IN clause via LINQ is this 
 
@@ -64,11 +64,11 @@ A technical definition would be _'Sargability is the query's ability to traverse
 
 Because indexes are key to fast and efficient RDBMS queries and stored procedures. <small> *Note:* At this point, if you are not interested in fast and efficient database queries, you can now go read something else. For the rest however, hopefully this will help.</small>
 
-Databases have **Index**es. In fact so important and ubiquitous are database indexes that RDBMSs create all manner of indexes automatically for you. Primary Keys, Foreign Keys, Unique contraints - all are indexes created silently behind the scenes in any respectable database. However, indexes are no good if you query cannot take advantage of them. That is where SARGability comes in. 
+Databases have **Index**es. In fact so important and ubiquitous are database indexes that RDBMSs create all manner of indexes automatically for you. Primary Keys, Foreign Keys, Unique contraints - all are indexes created silently behind the scenes in any respectable database. However, indexes are no good if your query cannot take advantage of them. That is where SARGability comes in. 
 
 _*IMPORTANT NOTE - A non sargable query will not use your indexes.*_ 
 
-Instead it will fall back to  index scans/table scans (indexed and non-indexed tables respectively) instead of index seeks, and it will do so all of the time, destroying the entire purpose of indexes and our goal of fast efficient queries. 
+Instead it will fall back to  index scans and table scans, for indexed and non-indexed tables respectively, instead of index seeks, and it will do so all of the time, destroying the entire purpose of indexes and our goal of fast efficient queries. 
 
 To understand why this happens, we will look at a simple but oft-repeated SQL need. Consider a table called Customer with an primary key fields - **Id**, and a **LastName** varchar column with an index on it. _We need to retrieve Customers whose last name is Smith_. 
 
@@ -91,13 +91,13 @@ In this case my table had two columns, with indexes defined on each. A primary k
 
 ### Why does this happen? A tale Of B-Trees and Database Indexes.
 
-A database is basically like a giant dictionary, with its pages shuffled. The index at the back lists the start word per page number, and each page is numbered. Moreover, more pages are being continuously added or removed, so the index at the back needs to be constantly maintained. But there is an extra twist. The index pages are themselves jumbled. So while the index keeps track of whats where in the main pages, we have to keep track of the index pages itself.  The Database depends on keeping rows in logical order by virtue of its keys, separate from physical order. However, that does not mean that all of those rows are in the same contiguous order on disc. The database also depends on keeping its physical order separate from its logical order. This is essentially what a RDBMS **index** does. The mechanism used to do implement all of this consists of a doubly linked list, a B-Tree and a fetch process. 
+A database is basically like a giant dictionary, with its pages shuffled. The index at the back lists the start word per page number, and each page is numbered. Moreover, more pages are being continuously added or removed, so the index at the back needs to be constantly maintained. But there is an extra twist. The index pages are themselves jumbled. So while the index keeps track of whats where in the main pages, we have to keep track of the index pages itself.  The database depends on keeping rows in logical order by virtue of its keys, separate from physical order. However, that does not mean that all of those rows are in the same contiguous order on disc. The database also depends on keeping its physical order separate from its logical order. This is essentially what a RDBMS **index** does. The mechanism used to implement all of this consists of a doubly linked list, a B-Tree and a fetch process. 
 
 #### Doubly linked list
 The logical sequence is established between leaf index nodes through a doubly linked list. Each node points to a database block and to its previous and next block. Each page stores as many index entries as possible. Thus there is two layer ordering, across nodes followed by within nodes. Note the sequential entries in an index leaf node has no guarantee of sequential entries on disk or on database blocks. They could be pointing to different areas of physical storage.
 
 #### B-Tree - the Balanced Tree in DBMS.
-Now for the operating system each page is in random order on disk. To find the database block pages, the database uses what is called as B-Tree, or Balanced Tree. (No, it is not binary tree, an n-ary tree, with n flexible). In a B-Tree, each branch node consists of the starting entries of the set of leaf nodes it covers. Since it is also a database block in itself, it is quite large and in sorted order of leaf node entries. Thus each entry in each branch node has the starting value(s, if composite key) of the indexed column of the leaf node and the leaf node's location on disk. An index B-Tree is initially built in such a way that all leaf nodes are covered by a branch node. New layers of branches are created until a branch contains enough information to enable traversing down to the leaf node with the desired index column values and fits in a single database page block. This is constantly maintained. A characteristic of this B-Tree is that all elements can be accessed with the same number of steps, and the depth can change based on the size of the database page block being used by the database to store data.
+Now for the operating system each page is in random order on disk. To find the database block pages, the database uses what is called as B-Tree, or Balanced Tree. (No, it is not binary tree; At the least, its an n-ary tree, with n variable). In a B-Tree, each branch node consists of the starting entries of the set of leaf nodes it covers. Since it is also a database block in itself, it is quite large and in sorted order of leaf node entries. Thus each entry in each branch node has the starting value(s, if composite key) of the indexed column of the leaf node and the leaf node's location on disk. An index B-Tree is initially built in such a way that all leaf nodes are covered by a branch node. New layers of branches are created until a branch contains enough information to enable traversing down to the leaf node with the desired index column values and fits in a single database page block. This is constantly maintained. A characteristic of this B-Tree is that all elements can be accessed with the same number of steps, and the depth can change based on the size of the database page block being used by the database to store data.
 
 #### The fetch.
 There are a few different ways for a database to approach fetching the data.
@@ -109,12 +109,12 @@ The act of reaching for a row data in a particular table based on a given index 
 Index Scan is nothing but scanning on the data pages from the first page to the last page. If there is an index on a table, and if the query is touching a larger amount of data, which means the query is retrieving more than 50 percent or 90 percent of the data, and then the optimizer would just scan all the data pages to retrieve the data rows. 
 
 ##### The table scan.
-If there is no index, then you might see a Table Scan (Index Scan) in the execution plan. Index scan touches all database blocks and rows for the table as it doesn't have the aid of an index's B-Tree.
+If there is no index, then you might see a Table Scan in the execution plan. A Table scan touches all database blocks and rows for the table as it doesn't have the aid of an index's B-Tree.
 
 ### So, why 'index seek' to 'index scan'?
 So, coming back to the question - _Why did the query plan change from index **seek** to index **scan**?_
 
-Well, because, in our case the index key was defined on column 'LastName'. So the index had the key 'Smith' somewhere - root, branch or leaf node. However, 'SMITH' was not a value which was present in the index. So a full scan of all table rows, using the index on LastName wpuld be needed, as the Sql Optimiser cannot be sure of the data until the string is manually compared, for which it needs to physically read in the table row data from the database block on disk.
+Well, because, in our case the index key was defined on column 'LastName'. So the index had the key 'Smith' somewhere - root, branch or leaf node. However, 'SMITH' was not a value which was present in the index. So a full scan of all table rows, using the index on LastName would be needed, as the Sql optimiser cannot be sure of the data until the string is manually compared, for which it needs to physically read in the table row data from the database block on disk.
 
 In real world scenarios, with multiple tables, joins and complex clauses and functions, a predicate (where clause) or join condition can easily go from a index seek to an index scan to a table scan. 
 
@@ -163,20 +163,21 @@ Fixed: SELECT ...WHERE Number  = 42 - 0
 
 ### Wild-cards
 
-Leading on from the last query in the list just above, do you see the wildcard in 
-```Select ... WHERE DealerName Like 'Ford%'``` . Note that the wildcard is not a leading wildcard.
+Leading on from the substring query in the list just above, do you see the wildcard in 
 
-Leading wildcards are bad. This is bad.
+```Select ... WHERE Manufacturer Like 'Ford%'```
 
-```Select ... WHERE DealerName Like '%ord%'```
+_Note that the wildcard is **NOT** a leading wildcard_. Leading wildcards are bad. The following is bad.
 
-This basically turns the query into a full-text search query with most probably a table scan, or in slightly better case, an index scan.
+```Select ... WHERE Manufacturer Like '%ord%'```
+
+This basically turns the query into a full-text search query with an index scan, or worse, a table scan.
 
 #### Tip : Indexes on computed columns.
 
-Sometimes the use of functions and so on is unavoidable. The general solution is to add a calculated column for the field value returned by the function and then create a non-clustered index for thet calculated column.
+Sometimes the use of functions and so on is unavoidable. The general solution is to add a calculated column for the field value returned by the function and then create a non-clustered index for that calculated column.
 
-Note that this computed column is not required to be persisted.Consider the query 
+Note that this computed column does not need to be persisted. Consider the query 
 ```
 SELECT LastName  FROM Customers where LEFT(LastName,1)='K'
 ```
