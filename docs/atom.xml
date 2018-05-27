@@ -4,13 +4,38 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-04-13T12:53:59.0874237+05:30</updated>
+ <updated>2018-05-25T22:21:37.9986119+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>The Selfish Test</title>
+   <link href="https://insen.github.io/blog/2018/05/16/The-Selfish-Test/"/>
+   <updated>2018-05-16T00:00:00+05:30</updated>
+   <id>https://insen.github.io/blog/2018/05/16/The-Selfish-Test/</id>
+   <content type="html">&lt;p&gt;Well, you know, there&apos;s automated testing. And then there&apos;s &apos;this&apos; automated testing. And then there is &apos;that&apos; automated testing. And then there is &apos;this-and-that&apos; automated testing. And then there are the debates about &apos;this&apos; vs &apos;that&apos; vs &apos;this-and-that&apos; and so on and on.&lt;/p&gt;
+&lt;p&gt;Except for the fact that, nobody really tells you what&apos;s in it for you. After all it is just a boatload more work. And frankly, nobody cares about work which exists just to prove (Parkinson&apos;s Law)[https://en.wikipedia.org/wiki/Parkinson&apos;s_law].&lt;/p&gt;
+&lt;p&gt;Which brings us to the million dollar question - Whats in it for me?  And to answer that, we will start with a simple example from a programmers day job.&lt;/p&gt;
+&lt;h1&gt;The Programmers Day Job. (Context setting coming up ...)&lt;/h1&gt;
+&lt;p&gt;The basic requirement is to be able to run a file copy operation in windows in C# under an account different from the logged in users. So we immediately raise our hands - Windows Impersonation.&lt;/p&gt;
+&lt;p&gt;Eh? Thats correct, but just slow down a bit, will you. Lets pile on the context a bit.&lt;/p&gt;
+&lt;p&gt;This file is the output file of an long operation.&lt;/p&gt;
+&lt;p&gt;Which accumulates data from multiple sources/APIs.&lt;/p&gt;
+&lt;p&gt;And does a bunch of batch processing and tansformations.&lt;/p&gt;
+&lt;p&gt;And accepts user intervention.&lt;/p&gt;
+&lt;p&gt;And redoes a bunch of calculations based on the user intervention, if any.&lt;/p&gt;
+&lt;p&gt;And at the end of it all creates a file in memory.&lt;/p&gt;
+&lt;p&gt;And reads some configuration file settings whose keys are determined by part of the in-memory file newly created.&lt;/p&gt;
+&lt;p&gt;And then based on that configuration data determines a remote target network folder.&lt;/p&gt;
+&lt;p&gt;And then switches accounts just for copying this generated file to the target remote folder.&lt;/p&gt;
+&lt;p&gt;Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.&lt;/p&gt;
+&lt;p&gt;And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we&apos;ll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing.&lt;/p&gt;
+&lt;p&gt;Welcome to a programmers day job 101.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>Hello SARG ! Let's index and tune a SQL!</title>

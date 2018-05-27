@@ -11,7 +11,7 @@
 
   <title>
     
-      Words - The Road To Wisdom &middot; Insen
+      The Selfish Test &middot; Insen
     
   </title>
 
@@ -147,37 +147,26 @@
     
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">Words - The Road To Wisdom</h1>
-  <span class="post-date">12 Oct 2017</span>
-  <p>Over my life I have always collected words, but over time, they keep getting lost. Now that this blog has gotten going, that's one place I have to both store and share.</p>
-<p>All backed by Github.</p>
-<p>Came across something marvellous called <em>'grooks'</em> by this Danish guy called Piet Hein. A sample or two below.</p>
-<p>Here's one</p>
-<pre><code>The road to wisdom? -- Well, it's plain
-    and simple to express:
-        Err
-        and err
-        and err again
-        but less
-        and less
-        and less.
-
-            --Piet Hein (Grooks)
-</code></pre>
-<p>And another</p>
-<pre><code>We must expect posterity
-    to view with some asperity
-    the marvels and the wonders
-        we're passing on to it;
-    but it should change its attitude
-    to one of heartfelt gratitude
-    when thinking of the blunders
-        we didn't quite commit.
-
-        --Piet Hein (Grooks)
-</code></pre>
-<p>from <a href="http://leptonica.com/cachedpages/grooks/grooks.html">leptonica</a> - a site on particle physics and image processing, of all places.</p>
-<p>Click on through for more <a href="http://www.archimedes-lab.org/grooks.html">here</a>.</p>
+  <h1 class="post-title">The Selfish Test</h1>
+  <span class="post-date">16 May 2018</span>
+  <p>Well, you know, there's automated testing. And then there's 'this' automated testing. And then there is 'that' automated testing. And then there is 'this-and-that' automated testing. And then there are the debates about 'this' vs 'that' vs 'this-and-that' and so on and on.</p>
+<p>Except for the fact that, nobody really tells you what's in it for you. After all it is just a boatload more work. And frankly, nobody cares about work which exists just to prove (Parkinson's Law)[https://en.wikipedia.org/wiki/Parkinson's_law].</p>
+<p>Which brings us to the million dollar question - Whats in it for me?  And to answer that, we will start with a simple example from a programmers day job.</p>
+<h1>The Programmers Day Job. (Context setting coming up ...)</h1>
+<p>The basic requirement is to be able to run a file copy operation in windows in C# under an account different from the logged in users. So we immediately raise our hands - Windows Impersonation.</p>
+<p>Eh? Thats correct, but just slow down a bit, will you. Lets pile on the context a bit.</p>
+<p>This file is the output file of an long operation.</p>
+<p>Which accumulates data from multiple sources/APIs.</p>
+<p>And does a bunch of batch processing and tansformations.</p>
+<p>And accepts user intervention.</p>
+<p>And redoes a bunch of calculations based on the user intervention, if any.</p>
+<p>And at the end of it all creates a file in memory.</p>
+<p>And reads some configuration file settings whose keys are determined by part of the in-memory file newly created.</p>
+<p>And then based on that configuration data determines a remote target network folder.</p>
+<p>And then switches accounts just for copying this generated file to the target remote folder.</p>
+<p>Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.</p>
+<p>And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we'll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing.</p>
+<p>Welcome to a programmers day job 101.</p>
 </div>
 
 <div class="related">

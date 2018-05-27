@@ -1,1 +1,1 @@
-pretzel bake --destination=./docs --cleantarget;
+D:\work\blogging\pretzel\src\Pretzel\bin\Release\pretzel.exe bake --destination=./docs --cleantarget;
