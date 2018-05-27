@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Sun, 27 May 2018 23:52:06 +0530</pubDate>
-    <lastBuildDate>Sun, 27 May 2018 23:52:06 +0530</lastBuildDate>
+    <pubDate>Sun, 27 May 2018 23:57:14 +0530</pubDate>
+    <lastBuildDate>Sun, 27 May 2018 23:57:14 +0530</lastBuildDate>
     
     <item>
       <title>Windows Impersonation and The Selfish Test</title>
