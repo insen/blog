@@ -11,7 +11,7 @@
 
   <title>
     
-      The Selfish Test &middot; Insen
+      Windows Impersonation and The Selfish Test &middot; Insen
     
   </title>
 
@@ -147,26 +147,199 @@
     
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">The Selfish Test</h1>
+  <h1 class="post-title">Windows Impersonation and The Selfish Test</h1>
   <span class="post-date">16 May 2018</span>
-  <p>Well, you know, there's automated testing. And then there's 'this' automated testing. And then there is 'that' automated testing. And then there is 'this-and-that' automated testing. And then there are the debates about 'this' vs 'that' vs 'this-and-that' and so on and on.</p>
-<p>Except for the fact that, nobody really tells you what's in it for you. After all it is just a boatload more work. And frankly, nobody cares about work which exists just to prove (Parkinson's Law)[https://en.wikipedia.org/wiki/Parkinson's_law].</p>
-<p>Which brings us to the million dollar question - Whats in it for me?  And to answer that, we will start with a simple example from a programmers day job.</p>
-<h1>The Programmers Day Job. (Context setting coming up ...)</h1>
-<p>The basic requirement is to be able to run a file copy operation in windows in C# under an account different from the logged in users. So we immediately raise our hands - Windows Impersonation.</p>
-<p>Eh? Thats correct, but just slow down a bit, will you. Lets pile on the context a bit.</p>
-<p>This file is the output file of an long operation.</p>
-<p>Which accumulates data from multiple sources/APIs.</p>
-<p>And does a bunch of batch processing and tansformations.</p>
-<p>And accepts user intervention.</p>
-<p>And redoes a bunch of calculations based on the user intervention, if any.</p>
-<p>And at the end of it all creates a file in memory.</p>
-<p>And reads some configuration file settings whose keys are determined by part of the in-memory file newly created.</p>
-<p>And then based on that configuration data determines a remote target network folder.</p>
-<p>And then switches accounts just for copying this generated file to the target remote folder.</p>
-<p>Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.</p>
-<p>And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we'll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing.</p>
-<p>Welcome to a programmers day job 101.</p>
+  <p>Well, you know, there's automated testing. And then there's <em>'this'</em> automated testing. And then there is <em>'that'</em> automated testing. And then there is <em>'this-and-that'</em> automated testing. And then there are the debates about <em>'this'</em> vs <em>'that'</em> vs <em>'this-and-that'</em>.</p>
+<p>Except for the fact that, nobody really tells you what's in it for you.</p>
+<p>After all it is just a boatload more work. And frankly, nobody pays for work which exists just to prove <a href="https://en.wikipedia.org/wiki/Parkinson%27s_law">Parkinson's Law</a>.</p>
+<p>Which brings us to the million dollar question - What's in it for the dear programmer, toiling away to finish a ticket?</p>
+<p>Welcome to the programmers day job.</p>
+<h2>The Programmers day job - 101.</h2>
+<p><em>Along came a context...</em></p>
+<p>You are relatively new into a project.</p>
+<p>A ticket arrives in a sprint. Blessed by the hands of the product owner. The basic requirement is to be able to run a file copy operation in windows in C# under an account different from the logged in users.</p>
+<p>So we immediately raise our hands - Windows Impersonation.</p>
+<p><em>Eh? right ! Slow down a bit, will you. Lets finish with the context, ok?.</em></p>
+<ul>
+<li>This file is the output file of a long operation, - a long, multiple step, time delayed process.</li>
+<li>Which aggregates data from multiple APIs.</li>
+<li>And does a bunch of batch processing and tansformations on that.</li>
+<li>And then displays and accepts user intervention.</li>
+<li>And then redoes a bunch of calculations based on the user intervention, if any.</li>
+<li>And at the end of it all creates a file in memory.</li>
+<li>And then reads some configuration file settings whose keys are determined by part of the in-memory file newly created.</li>
+<li>And then based on that configuration data determines a remote target network folder.</li>
+<li>And then based on this remote folders location, switches to the corresponding configured account, which has folder write access, to copy this generated file to the target remote folder.</li>
+<li>Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.</li>
+<li>And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we'll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing.</li>
+<li>And the existing code-base which runs this uses windows integration which needs a complex Active Directory setup which does not exist. It has a way of falling back to a hard-coded account based authentication implementation for local testing purposes.</li>
+</ul>
+<p>Your job is to run that private method under a different user-account. <em>Lets hear it again now for that Windows Impersonation thing.</em></p>
+<p>Welcome to a programmers life, my friend, <em>Its all about the context !</em></p>
+<h2>Solutioning</h2>
+<p>You need a change in code, but, as a developer, you cannot just add the code and hand it over to QA - you need to be sure that your code works. And thus, you have a few problems.</p>
+<ul>
+<li>Can you change private method accesibility? Only locally, you may not check-in.</li>
+<li>Can you run the full system? No you cannot. You don't have the AD, the local authentication scheme is too limited to be sufficient to test. The actual process in production runs within a windows service which is configured to use a specific system windows account with elevated and customized permissions.</li>
+<li>Can you run the entire operation from end to end? No, you cannot, the data setup costs will be prohibitively expensive in terms of man-hours.</li>
+</ul>
+<h3>Development</h3>
+<p>Going by the <em><strong>'Principle of least interference'</strong></em>. the code change should preferably be limited to the code in that <code>private</code> method, encapsulating the copy operation. <em>And let's just go ahead and do the hard thing first and name the method <code>FileCopy</code></em>.</p>
+<p>Now you start by writing a wrapper library around the basic Windows Impersonation logic from the <a href="https://msdn.microsoft.com/en-us/library/w070t6ka(v=vs.110).aspx">Microsoft Windows Impersonation documentation</a>. Better still - don't write it. Someone's already written one <a href="https://github.com/mj1856/SimpleImpersonation">here</a>. A simple API based on the  <code>using</code> statement gives you nice, elegant syntax, and the ability to wrap any block of code in an <em>impersonation</em> section.</p>
+<pre><code>using (Impersonation.LogonUser(domain, username, password, logonType))
+{
+  // do whatever you want as this user.```
+}
+</code></pre>
+<p><em>(Note that there is debate about using <code>using</code> this way - find discussed <a href="https://stackoverflow.com/questions/2101524/is-it-abusive-to-use-idisposable-and-using-as-a-means-for-getting-scoped-beha">here</a>, <a href="http://grabbagoft.blogspot.in/2007/06/example-of-creating-scope-with-using.html">here</a> and <a href="https://stackoverflow.com/questions/1095438/bad-practice-non-canon-usage-of-cs-using-statement">here</a>.)</em>,</p>
+<p>So off you go -</p>
+<ul>
+<li>Change the <code>private</code> method to <code>internal/public</code> in your class. <em>You will change it back before check-in</em>.</li>
+<li>Wrap the file copy operation in an impersonation block as per the usage shown above.</li>
+<li>Add <code>InternalsVisibleTo</code> attribute to the assembly, if change to <code>internal</code>.</li>
+<li>Configure the <code>app.settings</code> keys which provide the <em>user name</em> and <em>password</em>.</li>
+</ul>
+<h3>Infrastructure</h3>
+<p>You have asked your network admin to give you a test-account on the network, and you have configured all settings, and you are all set.</p>
+<h3>Verification</h3>
+<p>Now comes the diificult part - <em>How to verify a file-copy was by a specific account ?</em> when you cannot execute the whole system or the whole code.</p>
+<p>You start writing an automated test, because, sometimes, there is just no other viable way to verify your code.</p>
+<p>Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular requirement. But it is effectively unavoidable as all other ways of verifying the code you wrote is not feasible on account of time constraints.</p>
+<p>So lets structure the test.</p>
+<p><strong>Arrange</strong> - For a start, we need to Instantiate the target class. <em>Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem.</em></p>
+<p><strong>Act</strong> - Execute the fileCopy operation. The fileCopy operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.</p>
+<p><strong>Assert</strong> - Read in the  windows file system attributes and compare the file Created By attribute with the configured account for the file copy. They should match and we should be done.</p>
+<p>In real life, you still have a few problems.</p>
+<ul>
+<li>First, figure out the exact lines of code involved and</li>
+<li>Some peculiarities with how windows user accounts work, especially ones setup as administrators.</li>
+</ul>
+<p>But at this point lets get down to sample code. Find below the relevant snippets of the progarm and the test code, well commmented, and hopefully, self explanatory.</p>
+<h3>The Program Code</h3>
+<p>First, the program code - the part that goes into production, and the simpler part of the coding bit -</p>
+<pre><code>Public class BigBadClassWithLotsOfInitialization
+{
+    ...
+    ... OTHER CODE ELIDED ...
+    ...
+
+    //Note: this is a private method. We change it to public/internal 
+    //to test. Once done, we switch it back to private before check-in.
+    public void CopyFile(string localXmlFilePath, string newPath)
+    {
+        string domainAndUser = Cfg.GetServiceUserName();
+        string domain = domainAndUser.Split('\\')[0];
+        string user = domainAndUser.Split('\\')[1];
+        string password = Cfg.GetServiceUserPwd();
+        LogonType logonType = LogonType.Interactive;
+
+        //Impersonation block.
+        using (Impersonation.LogonUser(domain, user, password, logonType))
+        {
+            // pr-existing code.
+
+            var fileName = Path.GetFileName(localXmlFilePath);
+            if (fileName != null)
+                newPath = Path.Combine( newPath
+                               ,fileName.Replace(&quot;.xml&quot;, GetTimestamp() + &quot;.xml&quot;));
+
+            Logger.InfoFormat(&quot;Moving file {0} to {1}&quot;, localXmlFilePath, newPath);
+
+            if (File.Exists(newPath))
+            {
+                File.Delete(newPath);
+            }
+            File.Move(localXmlFilePath, newPath);
+
+            // end pr-existing code.
+        }
+    }
+}
+</code></pre>
+<h3>The Test Code</h3>
+<p>This is the part of the code that goes no-where, and doesn't even work after its checked-in. And ironically, the more complex part of the coding, mainly because of the Windows file system know-how involved.</p>
+<pre><code>[Test, Ignore]
+public void CanWriteFileAsDifferentUserThroughJob()
+{
+    //Notes | This is a shortcut to test whether elevated permissions 
+    //are happening when 'MoveFile' is called. MoveFile is a private 
+    //method. So we need to change to public when we need to test. 
+    //Change it back when done.
+    var job = new BigBadClassWithLotsOfInitialization();
+
+    //Needs to be xml file.
+    var fname = Guid.NewGuid().ToString();
+    var fileName = fname + &quot;.xml&quot;; 
+
+    var fromPath = Cfg.GetAutomaticPlaceOrdersExportOutputDirectoryPath();
+    var fromFile = Path.Combine(fromPath, fileName);
+
+    //using File.Create opens a fileStream and keeps it so, thus 
+    //causing file cannot be used errors. this appends if it 
+    //exists. It is ok to keep creating without deleting as 
+    //MoveFile deletes source file after successful move.
+    using (StreamWriter sw = new StreamWriter(fromFile, true))
+    {
+        sw.Write(fname);
+    }
+
+    var toPath = Cfg.GetAutomaticPlaceOrdersRemoteDirectoryPath(440);
+
+    //NOTE 1: this line does not compile when the MoveFile method is 
+    //private. so you need to change it before running the test.
+    //NOTE 2: when using an account which does not have write access 
+    //to the target folder, this line throws an exception. so if the 
+    //user account set in config does not have permission, this line 
+    //throws an error. If it has permission then write happens ok, but 
+    //you encounter the subsequent notes.
+    job.CopyFile(fromFile, toPath);
+
+    var toFile = new DirectoryInfo(toPath
+                     .GetFiles()
+                     .First(e =&gt; e.Name.Contains(fname));
+    var fs = File.GetAccessControl(toFile.FullName);
+    var idRef = fs.GetOwner(typeof(SecurityIdentifier))
+                  .Translate(typeof(NTAccount));
+    
+    //this part is not working. why? Because the only other domain 
+    //account i have is also an administrator. when doing stuff with 
+    //administrator accounts, windows upgrades the user detail to the 
+    //administator group. For details check stackoverflow - https://stackoverflow.com/questions/3370146/how-can-i-find-out-who-created-a-file-in-windows-using-net for more details. So following assert doesnt work.
+    //Assert.AreEqual(Cfg.GetServiceUserName(), idRef.Value);
+
+    //This does.
+    Assert.AreEqual('BUILTIN\Administrators', 'idRef.Value');
+}
+</code></pre>
+<p>Thats all of the significant code. It might take some work to put into a consistently reproducible state - a class library, a test project. some settings, a couple of user accounts on your machine. But most of that should be relatively standard.</p>
+<h2>The Selfish Test <em>a.k.a</em> Automated Testing, By Developer, For Developer.</h2>
+<p>So coming back to the question - what's in it for you, the developer?</p>
+<p>The answer is selfish. Consider the test above -</p>
+<ul>
+<li>
+<p>Is it an automated test? <strong>Yes</strong>.</p>
+</li>
+<li>
+<p>Is it an unit test? <strong>No</strong>.  You will be changing the <code>FileCopy</code> method to private and the test to <code>Ignore</code> before check-in. You will also be commenting out the call to the <code>FileCopy</code> method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.</p>
+</li>
+<li>
+<p>Is it an integration test? <strong>Possibly</strong>. Why? It does integrate with the file system and active directory accounts, but the fact that you change the method to private and the test to ignore and comment out the <em>'act'</em> stage of the test renders it an unusable test for integration.</p>
+</li>
+<li>
+<p>Is it easy to write? <strong>No</strong>. In this case, this is the most complicated part of the code written for that ticket.</p>
+</li>
+</ul>
+<p>BUT CAN WE AVOID IT? <strong>NO</strong>. Simply, because none of the other approaches to verification are feasible options.</p>
+<p>So what sort of automated test is this exactly? What benefits does it provide? Whom does it help?</p>
+<p>This test, gives you, the developer -</p>
+<ul>
+<li>The ability to execute the code you added in <code>FileCopy</code>without lots of expensive setup.</li>
+<li>The ability to step-into and debug the code line by line if necessary.</li>
+<li>Since the change has a small surface area, It can be reasonably expected to reproduce similiar behavior in pre-production and production environment.</li>
+</ul>
+<p>This is a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its primary purpose is to help you. Its lifetime and use is limited to the duration of your development time.</p>
+<p>And thus we have, what I call, <strong>The Selfist Test</strong> - <strong>Automated verification, by developer, for developer</strong>. It exists only to help you.</p>
+<p>So, my dear developer, go help yourself.</p>
 </div>
 
 <div class="related">
