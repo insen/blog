@@ -323,7 +323,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
 <p>Is it an unit test? <strong>No</strong>.  You will be changing the <code>FileCopy</code> method to private and the test to <code>Ignore</code> before check-in. You will also be commenting out the call to the <code>FileCopy</code> method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.</p>
 </li>
 <li>
-<p>Is it an integration test? <strong>Possibly</strong>. Why? It does integrate with the file system and active directory accounts, but the point is moot since you change the method to private and the test to ignore and comment out the '<em>act</em>' stage of the test renders it an unusable test for anything after check-in.</p>
+<p>Is it an integration test? <strong>Possibly</strong>. Why? It does integrate with the file system and active directory accounts, but the point is moot since the fact that you change the method to private and the test to ignore and comment out the '<em>act</em>' stage of the test <em>renders it unusable for anything after check-in</em>.</p>
 </li>
 <li>
 <p>Is it easy to write? <strong>No</strong>. In this case, it is the most complicated part of the code written for that ticket.</p>

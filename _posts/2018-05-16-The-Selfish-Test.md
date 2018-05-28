@@ -208,7 +208,7 @@ The answer is selfish. Consider the test above -
 
 * Is it an unit test? **No**.  You will be changing the ```FileCopy``` method to private and the test to ```Ignore``` before check-in. You will also be commenting out the call to the ```FileCopy``` method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.
 
-* Is it an integration test? **Possibly**. Why? It does integrate with the file system and active directory accounts, but the point is moot since you change the method to private and the test to ignore and comment out the '_act_' stage of the test renders it an unusable test for anything after check-in.
+* Is it an integration test? **Possibly**. Why? It does integrate with the file system and active directory accounts, but the point is moot since the fact that you change the method to private and the test to ignore and comment out the '_act_' stage of the test _renders it unusable for anything after check-in_.
 
 * Is it easy to write? **No**. In this case, it is the most complicated part of the code written for that ticket. 
 

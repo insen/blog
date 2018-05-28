@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Mon, 28 May 2018 13:09:39 +0530</pubDate>
-    <lastBuildDate>Mon, 28 May 2018 13:09:39 +0530</lastBuildDate>
+    <pubDate>Mon, 28 May 2018 13:14:48 +0530</pubDate>
+    <lastBuildDate>Mon, 28 May 2018 13:14:48 +0530</lastBuildDate>
     
     <item>
       <title>Windows Impersonation and The Selfish Test</title>
@@ -189,7 +189,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
 &lt;p&gt;Is it an unit test? &lt;strong&gt;No&lt;/strong&gt;.  You will be changing the &lt;code&gt;FileCopy&lt;/code&gt; method to private and the test to &lt;code&gt;Ignore&lt;/code&gt; before check-in. You will also be commenting out the call to the &lt;code&gt;FileCopy&lt;/code&gt; method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Is it an integration test? &lt;strong&gt;Possibly&lt;/strong&gt;. Why? It does integrate with the file system and active directory accounts, but the point is moot since you change the method to private and the test to ignore and comment out the &apos;&lt;em&gt;act&lt;/em&gt;&apos; stage of the test renders it an unusable test for anything after check-in.&lt;/p&gt;
+&lt;p&gt;Is it an integration test? &lt;strong&gt;Possibly&lt;/strong&gt;. Why? It does integrate with the file system and active directory accounts, but the point is moot since the fact that you change the method to private and the test to ignore and comment out the &apos;&lt;em&gt;act&lt;/em&gt;&apos; stage of the test &lt;em&gt;renders it unusable for anything after check-in&lt;/em&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Is it easy to write? &lt;strong&gt;No&lt;/strong&gt;. In this case, it is the most complicated part of the code written for that ticket.&lt;/p&gt;
