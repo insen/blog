@@ -196,18 +196,17 @@
 <ul>
 <li>Change the <code>private</code> method to <code>internal/public</code> in your class. <em>You will change it back before check-in</em>.</li>
 <li>Wrap the file copy operation in an impersonation block as per the usage shown above.</li>
-<li>Add <code>InternalsVisibleTo</code> attribute to the assembly, if change to <code>internal</code>.</li>
+<li>Add <code>InternalsVisibleTo</code> attribute to the assembly, if you change the method to <code>internal</code>.</li>
 <li>Configure the <code>app.settings</code> keys which provide the <em>user name</em> and <em>password</em>.</li>
 </ul>
 <h3>Infrastructure</h3>
 <p>You have asked your network admin to give you a test-account on the network, and you have configured all settings, and you are all set.</p>
 <h3>Verification</h3>
-<p>Now comes the diificult part - <em>How to verify a file-copy was by a specific account ?</em> when you cannot execute the whole system or the whole code.</p>
-<p>You start writing an automated test, because, sometimes, there is just no other viable way to verify your code.</p>
-<p>Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular requirement. But it is effectively unavoidable as all other ways of verifying the code you wrote is not feasible on account of time constraints.</p>
+<p>Now comes the diificult part - <em>How to verify a file-copy was by a specific account ?</em> - when you cannot execute the whole system or the whole code.</p>
+<p>You start writing an automated test, because, sometimes, there is just no other viable way to verify your code. Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular ticket. Yet it is effectively unavoidable as all other ways of verifying the code you wrote are not feasible on account of time constraints.</p>
 <p>So lets structure the test.</p>
-<p><strong>Arrange</strong> - For a start, we need to Instantiate the target class. <em>Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem.</em></p>
-<p><strong>Act</strong> - Execute the fileCopy operation. The fileCopy operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.</p>
+<p><strong>Arrange</strong> - For a start, we need to instantiate the target class. <em>Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem.</em></p>
+<p><strong>Act</strong> - Execute the <code>FileCopy</code> operation. The <code>FileCopy</code> operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.</p>
 <p><strong>Assert</strong> - Read in the  windows file system attributes and compare the file Created By attribute with the configured account for the file copy. They should match and we should be done.</p>
 <p>In real life, you still have a few problems.</p>
 <ul>
@@ -225,7 +224,7 @@
 
     //Note: this is a private method. We change it to public/internal 
     //to test. Once done, we switch it back to private before check-in.
-    public void CopyFile(string localXmlFilePath, string newPath)
+    public void FileCopy(string localXmlFilePath, string newPath)
     {
         string domainAndUser = Cfg.GetServiceUserName();
         string domain = domainAndUser.Split('\\')[0];
@@ -262,7 +261,7 @@
 public void CanWriteFileAsDifferentUserThroughJob()
 {
     //Notes | This is a shortcut to test whether elevated permissions 
-    //are happening when 'MoveFile' is called. MoveFile is a private 
+    //are happening when 'FileCopy' is called. 'FileCopy' is a private 
     //method. So we need to change to public when we need to test. 
     //Change it back when done.
     var job = new BigBadClassWithLotsOfInitialization();
@@ -292,7 +291,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
     //user account set in config does not have permission, this line 
     //throws an error. If it has permission then write happens ok, but 
     //you encounter the subsequent notes.
-    job.CopyFile(fromFile, toPath);
+    job.FileCopy(fromFile, toPath);
 
     var toFile = new DirectoryInfo(toPath
                      .GetFiles()
@@ -323,23 +322,22 @@ public void CanWriteFileAsDifferentUserThroughJob()
 <p>Is it an unit test? <strong>No</strong>.  You will be changing the <code>FileCopy</code> method to private and the test to <code>Ignore</code> before check-in. You will also be commenting out the call to the <code>FileCopy</code> method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.</p>
 </li>
 <li>
-<p>Is it an integration test? <strong>Possibly</strong>. Why? It does integrate with the file system and active directory accounts, but the fact that you change the method to private and the test to ignore and comment out the <em>'act'</em> stage of the test renders it an unusable test for integration.</p>
+<p>Is it an integration test? <strong>Possibly</strong>. Why? It does integrate with the file system and active directory accounts, but the point is moot since you change the method to private and the test to ignore and comment out the '<em>act</em>' stage of the test renders it an unusable test for anything after check-in.</p>
 </li>
 <li>
-<p>Is it easy to write? <strong>No</strong>. In this case, this is the most complicated part of the code written for that ticket.</p>
+<p>Is it easy to write? <strong>No</strong>. In this case, it is the most complicated part of the code written for that ticket.</p>
 </li>
 </ul>
 <p>BUT CAN WE AVOID IT? <strong>NO</strong>.</p>
 <p>Simply, because none of the other approaches to verification are feasible options.</p>
 <p>So exactly what sort of automated test is this? What benefits does it provide? Whom does it help?</p>
-<p>This test, gives you, the developer -</p>
+<p>The answer is rather selfish. This test, gives you, the developer -</p>
 <ul>
 <li>The ability to execute the code you added in <code>FileCopy</code>without lots of expensive setup.</li>
 <li>The ability to step-into and debug the code line by line if necessary.</li>
 <li>And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.</li>
 </ul>
-<p>This is a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its only purpose is to assist you. Its lifetime and use is limited to the duration of your development time.</p>
-<p>And thus we have, what I call, <strong>The Selfish Test</strong> - <strong>Automated verification, by developer, for developer</strong>. It exists only to help you.</p>
+<p>And thus we have <strong>The Selfish Test</strong> - <strong><em>Automated verification, by developer, for developer</em></strong>. The above is an example of a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  It sole purpose is to help you.</p>
 <p>So, dear developer, go help yourself.</p>
 </div>
 

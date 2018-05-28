@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-05-28T12:21:31.6276166+05:30</updated>
+ <updated>2018-05-28T12:36:26.5187205+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -64,18 +64,17 @@
 &lt;ul&gt;
 &lt;li&gt;Change the &lt;code&gt;private&lt;/code&gt; method to &lt;code&gt;internal/public&lt;/code&gt; in your class. &lt;em&gt;You will change it back before check-in&lt;/em&gt;.&lt;/li&gt;
 &lt;li&gt;Wrap the file copy operation in an impersonation block as per the usage shown above.&lt;/li&gt;
-&lt;li&gt;Add &lt;code&gt;InternalsVisibleTo&lt;/code&gt; attribute to the assembly, if change to &lt;code&gt;internal&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Add &lt;code&gt;InternalsVisibleTo&lt;/code&gt; attribute to the assembly, if you change the method to &lt;code&gt;internal&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Configure the &lt;code&gt;app.settings&lt;/code&gt; keys which provide the &lt;em&gt;user name&lt;/em&gt; and &lt;em&gt;password&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Infrastructure&lt;/h3&gt;
 &lt;p&gt;You have asked your network admin to give you a test-account on the network, and you have configured all settings, and you are all set.&lt;/p&gt;
 &lt;h3&gt;Verification&lt;/h3&gt;
-&lt;p&gt;Now comes the diificult part - &lt;em&gt;How to verify a file-copy was by a specific account ?&lt;/em&gt; when you cannot execute the whole system or the whole code.&lt;/p&gt;
-&lt;p&gt;You start writing an automated test, because, sometimes, there is just no other viable way to verify your code.&lt;/p&gt;
-&lt;p&gt;Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular requirement. But it is effectively unavoidable as all other ways of verifying the code you wrote is not feasible on account of time constraints.&lt;/p&gt;
+&lt;p&gt;Now comes the diificult part - &lt;em&gt;How to verify a file-copy was by a specific account ?&lt;/em&gt; - when you cannot execute the whole system or the whole code.&lt;/p&gt;
+&lt;p&gt;You start writing an automated test, because, sometimes, there is just no other viable way to verify your code. Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular ticket. Yet it is effectively unavoidable as all other ways of verifying the code you wrote are not feasible on account of time constraints.&lt;/p&gt;
 &lt;p&gt;So lets structure the test.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Arrange&lt;/strong&gt; - For a start, we need to Instantiate the target class. &lt;em&gt;Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Act&lt;/strong&gt; - Execute the fileCopy operation. The fileCopy operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Arrange&lt;/strong&gt; - For a start, we need to instantiate the target class. &lt;em&gt;Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Act&lt;/strong&gt; - Execute the &lt;code&gt;FileCopy&lt;/code&gt; operation. The &lt;code&gt;FileCopy&lt;/code&gt; operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Assert&lt;/strong&gt; - Read in the  windows file system attributes and compare the file Created By attribute with the configured account for the file copy. They should match and we should be done.&lt;/p&gt;
 &lt;p&gt;In real life, you still have a few problems.&lt;/p&gt;
 &lt;ul&gt;
@@ -93,7 +92,7 @@
 
     //Note: this is a private method. We change it to public/internal 
     //to test. Once done, we switch it back to private before check-in.
-    public void CopyFile(string localXmlFilePath, string newPath)
+    public void FileCopy(string localXmlFilePath, string newPath)
     {
         string domainAndUser = Cfg.GetServiceUserName();
         string domain = domainAndUser.Split(&apos;\\&apos;)[0];
@@ -130,7 +129,7 @@
 public void CanWriteFileAsDifferentUserThroughJob()
 {
     //Notes | This is a shortcut to test whether elevated permissions 
-    //are happening when &apos;MoveFile&apos; is called. MoveFile is a private 
+    //are happening when &apos;FileCopy&apos; is called. &apos;FileCopy&apos; is a private 
     //method. So we need to change to public when we need to test. 
     //Change it back when done.
     var job = new BigBadClassWithLotsOfInitialization();
@@ -160,7 +159,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
     //user account set in config does not have permission, this line 
     //throws an error. If it has permission then write happens ok, but 
     //you encounter the subsequent notes.
-    job.CopyFile(fromFile, toPath);
+    job.FileCopy(fromFile, toPath);
 
     var toFile = new DirectoryInfo(toPath
                      .GetFiles()
@@ -191,23 +190,22 @@ public void CanWriteFileAsDifferentUserThroughJob()
 &lt;p&gt;Is it an unit test? &lt;strong&gt;No&lt;/strong&gt;.  You will be changing the &lt;code&gt;FileCopy&lt;/code&gt; method to private and the test to &lt;code&gt;Ignore&lt;/code&gt; before check-in. You will also be commenting out the call to the &lt;code&gt;FileCopy&lt;/code&gt; method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Is it an integration test? &lt;strong&gt;Possibly&lt;/strong&gt;. Why? It does integrate with the file system and active directory accounts, but the fact that you change the method to private and the test to ignore and comment out the &lt;em&gt;&apos;act&apos;&lt;/em&gt; stage of the test renders it an unusable test for integration.&lt;/p&gt;
+&lt;p&gt;Is it an integration test? &lt;strong&gt;Possibly&lt;/strong&gt;. Why? It does integrate with the file system and active directory accounts, but the point is moot since you change the method to private and the test to ignore and comment out the &apos;&lt;em&gt;act&lt;/em&gt;&apos; stage of the test renders it an unusable test for anything after check-in.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Is it easy to write? &lt;strong&gt;No&lt;/strong&gt;. In this case, this is the most complicated part of the code written for that ticket.&lt;/p&gt;
+&lt;p&gt;Is it easy to write? &lt;strong&gt;No&lt;/strong&gt;. In this case, it is the most complicated part of the code written for that ticket.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;BUT CAN WE AVOID IT? &lt;strong&gt;NO&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Simply, because none of the other approaches to verification are feasible options.&lt;/p&gt;
 &lt;p&gt;So exactly what sort of automated test is this? What benefits does it provide? Whom does it help?&lt;/p&gt;
-&lt;p&gt;This test, gives you, the developer -&lt;/p&gt;
+&lt;p&gt;The answer is rather selfish. This test, gives you, the developer -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The ability to execute the code you added in &lt;code&gt;FileCopy&lt;/code&gt;without lots of expensive setup.&lt;/li&gt;
 &lt;li&gt;The ability to step-into and debug the code line by line if necessary.&lt;/li&gt;
 &lt;li&gt;And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This is a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its only purpose is to assist you. Its lifetime and use is limited to the duration of your development time.&lt;/p&gt;
-&lt;p&gt;And thus we have, what I call, &lt;strong&gt;The Selfish Test&lt;/strong&gt; - &lt;strong&gt;Automated verification, by developer, for developer&lt;/strong&gt;. It exists only to help you.&lt;/p&gt;
+&lt;p&gt;And thus we have &lt;strong&gt;The Selfish Test&lt;/strong&gt; - &lt;strong&gt;&lt;em&gt;Automated verification, by developer, for developer&lt;/em&gt;&lt;/strong&gt;. The above is an example of a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  It sole purpose is to help you.&lt;/p&gt;
 &lt;p&gt;So, dear developer, go help yourself.&lt;/p&gt;</content>
  </entry>
  
