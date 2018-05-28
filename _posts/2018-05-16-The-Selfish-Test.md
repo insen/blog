@@ -38,7 +38,7 @@ _Eh? right ! Slow down a bit, will you. Lets finish with the context, ok?._
 * And then based on that configuration data determines a remote target network folder. 
 * And then based on this remote folders location, switches to the corresponding configured account, which has folder write access, to copy this generated file to the target remote folder.
 * Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.
-* And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we'll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing. 
+* And no, not every line of this code-base has automated tests. _You come with with list of whys and therefores, and chances are we'll have a few in common_. The testing on this is a mix of unit, API, integration, selenium and manual testing. 
 * And the existing code-base which runs this uses windows integration which needs a complex Active Directory setup which does not exist. It has a way of falling back to a hard-coded account based authentication implementation for local testing purposes. 
 
 Your job is to run that private method under a different user-account. _Lets hear it again now for that Windows Impersonation thing._
@@ -68,7 +68,7 @@ Now you start by writing a wrapper library around the basic Windows Impersonatio
 So off you go - 
 * Change the ```private``` method to ```internal/public``` in your class. _You will change it back before check-in_.
 * Wrap the file copy operation in an impersonation block as per the usage shown above. 
-* Add ```InternalsVisibleTo``` attribute to the assembly, if change to ```internal```.
+* Add ```InternalsVisibleTo``` attribute to the assembly, if you change the method to ```internal```.
 * Configure the ```app.settings``` keys which provide the _user name_ and _password_.
 
 ### Infrastructure
@@ -76,17 +76,15 @@ You have asked your network admin to give you a test-account on the network, and
 
 ### Verification
 
-Now comes the diificult part - _How to verify a file-copy was by a specific account ?_ when you cannot execute the whole system or the whole code.
+Now comes the diificult part - _How to verify a file-copy was by a specific account ?_ - when you cannot execute the whole system or the whole code.
 
-You start writing an automated test, because, sometimes, there is just no other viable way to verify your code. 
-
-Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular requirement. But it is effectively unavoidable as all other ways of verifying the code you wrote is not feasible on account of time constraints.
+You start writing an automated test, because, sometimes, there is just no other viable way to verify your code. Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular ticket. Yet it is effectively unavoidable as all other ways of verifying the code you wrote are not feasible on account of time constraints.
 
 So lets structure the test.
 
-**Arrange** - For a start, we need to Instantiate the target class. _Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem._ 
+**Arrange** - For a start, we need to instantiate the target class. _Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem._ 
 
-**Act** - Execute the fileCopy operation. The fileCopy operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.
+**Act** - Execute the ```FileCopy``` operation. The ```FileCopy``` operation reads in the user account information, creates a new impersonation block and executes the file copy operation with that scope.
 
 **Assert** - Read in the  windows file system attributes and compare the file Created By attribute with the configured account for the file copy. They should match and we should be done.
 
@@ -108,7 +106,7 @@ First, the program code - the part that goes into production, and the simpler pa
 
         //Note: this is a private method. We change it to public/internal 
         //to test. Once done, we switch it back to private before check-in.
-        public void CopyFile(string localXmlFilePath, string newPath)
+        public void FileCopy(string localXmlFilePath, string newPath)
         {
             string domainAndUser = Cfg.GetServiceUserName();
             string domain = domainAndUser.Split('\\')[0];
@@ -147,7 +145,7 @@ This is the part of the code that goes no-where, and doesn't even work after its
     public void CanWriteFileAsDifferentUserThroughJob()
     {
         //Notes | This is a shortcut to test whether elevated permissions 
-        //are happening when 'MoveFile' is called. MoveFile is a private 
+        //are happening when 'FileCopy' is called. 'FileCopy' is a private 
         //method. So we need to change to public when we need to test. 
         //Change it back when done.
         var job = new BigBadClassWithLotsOfInitialization();
@@ -177,7 +175,7 @@ This is the part of the code that goes no-where, and doesn't even work after its
         //user account set in config does not have permission, this line 
         //throws an error. If it has permission then write happens ok, but 
         //you encounter the subsequent notes.
-        job.CopyFile(fromFile, toPath);
+        job.FileCopy(fromFile, toPath);
 
         var toFile = new DirectoryInfo(toPath
                          .GetFiles()
@@ -208,21 +206,21 @@ The answer is selfish. Consider the test above -
 
 * Is it an unit test? **No**.  You will be changing the ```FileCopy``` method to private and the test to ```Ignore``` before check-in. You will also be commenting out the call to the ```FileCopy``` method withing the test, as otherwise all you will be distributing to your team members is a compile time error. At point, its hardly even a test. Just some dead-code in the system.
 
-* Is it an integration test? **Possibly**. Why? It does integrate with the file system and active directory accounts, but the fact that you change the method to private and the test to ignore and comment out the _'act'_ stage of the test renders it an unusable test for integration.
+* Is it an integration test? **Possibly**. Why? It does integrate with the file system and active directory accounts, but the point is moot since you change the method to private and the test to ignore and comment out the '_act_' stage of the test renders it an unusable test for anything after check-in.
 
-* Is it easy to write? **No**. In this case, this is the most complicated part of the code written for that ticket. 
+* Is it easy to write? **No**. In this case, it is the most complicated part of the code written for that ticket. 
 
-BUT CAN WE AVOID IT? **NO**. Simply, because none of the other approaches to verification are feasible options.
+BUT CAN WE AVOID IT? **NO**. 
 
-So what sort of automated test is this exactly? What benefits does it provide? Whom does it help?
+Simply, because none of the other approaches to verification are feasible options.
 
-This test, gives you, the developer -
+So exactly what sort of automated test is this? What benefits does it provide? Whom does it help?
+
+The answer is rather selfish. This test, gives you, the developer -
 * The ability to execute the code you added in ```FileCopy```without lots of expensive setup.
 * The ability to step-into and debug the code line by line if necessary. 
-* Since the change has a small surface area, It can be reasonably expected to reproduce similiar behavior in pre-production and production environment.  
+* And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.  
 
-This is a _Selfish Test_. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its primary purpose is to help you. Its lifetime and use is limited to the duration of your development time.  
+And thus we have **The Selfish Test** - **_Automated verification, by developer, for developer_**. The above is an example of a _Selfish Test_. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  It sole purpose is to help you.
 
-And thus we have, what I call, **The Selfist Test** - **Automated verification, by developer, for developer**. It exists only to help you.
-
-So, my dear developer, go help yourself.
+So, dear developer, go help yourself.

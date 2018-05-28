@@ -171,7 +171,7 @@
 <li>And then based on that configuration data determines a remote target network folder.</li>
 <li>And then based on this remote folders location, switches to the corresponding configured account, which has folder write access, to copy this generated file to the target remote folder.</li>
 <li>Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.</li>
-<li>And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we'll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing.</li>
+<li>And no, not every line of this code-base has automated tests. <em>You come with with list of whys and therefores, and chances are we'll have a few in common</em>. The testing on this is a mix of unit, API, integration, selenium and manual testing.</li>
 <li>And the existing code-base which runs this uses windows integration which needs a complex Active Directory setup which does not exist. It has a way of falling back to a hard-coded account based authentication implementation for local testing purposes.</li>
 </ul>
 <p>Your job is to run that private method under a different user-account. <em>Lets hear it again now for that Windows Impersonation thing.</em></p>
@@ -329,17 +329,18 @@ public void CanWriteFileAsDifferentUserThroughJob()
 <p>Is it easy to write? <strong>No</strong>. In this case, this is the most complicated part of the code written for that ticket.</p>
 </li>
 </ul>
-<p>BUT CAN WE AVOID IT? <strong>NO</strong>. Simply, because none of the other approaches to verification are feasible options.</p>
-<p>So what sort of automated test is this exactly? What benefits does it provide? Whom does it help?</p>
+<p>BUT CAN WE AVOID IT? <strong>NO</strong>.</p>
+<p>Simply, because none of the other approaches to verification are feasible options.</p>
+<p>So exactly what sort of automated test is this? What benefits does it provide? Whom does it help?</p>
 <p>This test, gives you, the developer -</p>
 <ul>
 <li>The ability to execute the code you added in <code>FileCopy</code>without lots of expensive setup.</li>
 <li>The ability to step-into and debug the code line by line if necessary.</li>
-<li>Since the change has a small surface area, It can be reasonably expected to reproduce similiar behavior in pre-production and production environment.</li>
+<li>And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.</li>
 </ul>
-<p>This is a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its primary purpose is to help you. Its lifetime and use is limited to the duration of your development time.</p>
-<p>And thus we have, what I call, <strong>The Selfist Test</strong> - <strong>Automated verification, by developer, for developer</strong>. It exists only to help you.</p>
-<p>So, my dear developer, go help yourself.</p>
+<p>This is a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its only purpose is to assist you. Its lifetime and use is limited to the duration of your development time.</p>
+<p>And thus we have, what I call, <strong>The Selfish Test</strong> - <strong>Automated verification, by developer, for developer</strong>. It exists only to help you.</p>
+<p>So, dear developer, go help yourself.</p>
 </div>
 
 <div class="related">

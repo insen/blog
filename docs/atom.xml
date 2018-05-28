@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-05-27T23:57:14.5352233+05:30</updated>
+ <updated>2018-05-28T12:21:31.6276166+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -39,7 +39,7 @@
 &lt;li&gt;And then based on that configuration data determines a remote target network folder.&lt;/li&gt;
 &lt;li&gt;And then based on this remote folders location, switches to the corresponding configured account, which has folder write access, to copy this generated file to the target remote folder.&lt;/li&gt;
 &lt;li&gt;Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.&lt;/li&gt;
-&lt;li&gt;And no, not every line of this code-base has automated tests. (You come with with list of whys and therefores, and chances are we&apos;ll have a few in common.) The testing on this is a mix of unit, API, integration, selenium and manual testing.&lt;/li&gt;
+&lt;li&gt;And no, not every line of this code-base has automated tests. &lt;em&gt;You come with with list of whys and therefores, and chances are we&apos;ll have a few in common&lt;/em&gt;. The testing on this is a mix of unit, API, integration, selenium and manual testing.&lt;/li&gt;
 &lt;li&gt;And the existing code-base which runs this uses windows integration which needs a complex Active Directory setup which does not exist. It has a way of falling back to a hard-coded account based authentication implementation for local testing purposes.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Your job is to run that private method under a different user-account. &lt;em&gt;Lets hear it again now for that Windows Impersonation thing.&lt;/em&gt;&lt;/p&gt;
@@ -197,17 +197,18 @@ public void CanWriteFileAsDifferentUserThroughJob()
 &lt;p&gt;Is it easy to write? &lt;strong&gt;No&lt;/strong&gt;. In this case, this is the most complicated part of the code written for that ticket.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;BUT CAN WE AVOID IT? &lt;strong&gt;NO&lt;/strong&gt;. Simply, because none of the other approaches to verification are feasible options.&lt;/p&gt;
-&lt;p&gt;So what sort of automated test is this exactly? What benefits does it provide? Whom does it help?&lt;/p&gt;
+&lt;p&gt;BUT CAN WE AVOID IT? &lt;strong&gt;NO&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Simply, because none of the other approaches to verification are feasible options.&lt;/p&gt;
+&lt;p&gt;So exactly what sort of automated test is this? What benefits does it provide? Whom does it help?&lt;/p&gt;
 &lt;p&gt;This test, gives you, the developer -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The ability to execute the code you added in &lt;code&gt;FileCopy&lt;/code&gt;without lots of expensive setup.&lt;/li&gt;
 &lt;li&gt;The ability to step-into and debug the code line by line if necessary.&lt;/li&gt;
-&lt;li&gt;Since the change has a small surface area, It can be reasonably expected to reproduce similiar behavior in pre-production and production environment.&lt;/li&gt;
+&lt;li&gt;And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This is a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its primary purpose is to help you. Its lifetime and use is limited to the duration of your development time.&lt;/p&gt;
-&lt;p&gt;And thus we have, what I call, &lt;strong&gt;The Selfist Test&lt;/strong&gt; - &lt;strong&gt;Automated verification, by developer, for developer&lt;/strong&gt;. It exists only to help you.&lt;/p&gt;
-&lt;p&gt;So, my dear developer, go help yourself.&lt;/p&gt;</content>
+&lt;p&gt;This is a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its only purpose is to assist you. Its lifetime and use is limited to the duration of your development time.&lt;/p&gt;
+&lt;p&gt;And thus we have, what I call, &lt;strong&gt;The Selfish Test&lt;/strong&gt; - &lt;strong&gt;Automated verification, by developer, for developer&lt;/strong&gt;. It exists only to help you.&lt;/p&gt;
+&lt;p&gt;So, dear developer, go help yourself.&lt;/p&gt;</content>
  </entry>
  
  <entry>
