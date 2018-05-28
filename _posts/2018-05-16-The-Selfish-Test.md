@@ -76,7 +76,7 @@ You have asked your network admin to give you a test-account on the network, and
 
 ### Verification
 
-Now comes the diificult part - _How to verify a file-copy was by a specific account ?_ - when you cannot execute the whole system or the whole code.
+Now comes the difficult part - _How to verify a file-copy was by a specific account ?_ - when you cannot execute the whole system or the whole code.
 
 You start writing an automated test, because, sometimes, there is just no other viable way to verify your code. Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular ticket. Yet it is effectively unavoidable as all other ways of verifying the code you wrote are not feasible on account of time constraints.
 
@@ -92,7 +92,7 @@ In real life, you still have a few problems.
 * First, figure out the exact lines of code involved and 
 * Some peculiarities with how windows user accounts work, especially ones setup as administrators. 
 
-But at this point lets get down to sample code. Find below the relevant snippets of the progarm and the test code, well commmented, and hopefully, self explanatory.
+But at this point lets get down to sample code. Find below the relevant snippets of the program and the test code, well commmented, and hopefully, self explanatory.
 
 ### The Program Code
 
@@ -196,7 +196,9 @@ This is the part of the code that goes no-where, and doesn't even work after its
 
 Thats all of the significant code. It might take some work to put into a consistently reproducible state - a class library, a test project. some settings, a couple of user accounts on your machine. But most of that should be relatively standard.
 
-## The Selfish Test _a.k.a_ Automated Testing, By Developer, For Developer.
+## The Selfish Test 
+
+## _a.k.a Automated Testing, By Developer, For Developer_.
 
 So coming back to the question - what's in it for you, the developer? 
 
@@ -221,6 +223,6 @@ The answer is rather selfish. This test, gives you, the developer -
 * The ability to step-into and debug the code line by line if necessary. 
 * And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.  
 
-And thus we have **The Selfish Test** - **_Automated verification, by developer, for developer_**. The above is an example of a _Selfish Test_. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  Its sole purpose is to help you.
+And thus we have **The Selfish Test** - **_Automated verification, by developer, for developer_**. The above is an example of a _Selfish Test_. You write this to help yourself. This is the only cheap, easy way to help you to debug as well as to verifythe code you wrote. Its lifetime and use is limited to the duration of your development time.  Its only purpose is to help you.
 
 So, dear developer, go help yourself.

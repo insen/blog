@@ -202,7 +202,7 @@
 <h3>Infrastructure</h3>
 <p>You have asked your network admin to give you a test-account on the network, and you have configured all settings, and you are all set.</p>
 <h3>Verification</h3>
-<p>Now comes the diificult part - <em>How to verify a file-copy was by a specific account ?</em> - when you cannot execute the whole system or the whole code.</p>
+<p>Now comes the difficult part - <em>How to verify a file-copy was by a specific account ?</em> - when you cannot execute the whole system or the whole code.</p>
 <p>You start writing an automated test, because, sometimes, there is just no other viable way to verify your code. Interestingly, however, in this particular context, it is also the most complicated coding involved in this particular ticket. Yet it is effectively unavoidable as all other ways of verifying the code you wrote are not feasible on account of time constraints.</p>
 <p>So lets structure the test.</p>
 <p><strong>Arrange</strong> - For a start, we need to instantiate the target class. <em>Luckily there was master suite of tests which needed this class so class instantiation with all dependencies was a solved problem.</em></p>
@@ -213,7 +213,7 @@
 <li>First, figure out the exact lines of code involved and</li>
 <li>Some peculiarities with how windows user accounts work, especially ones setup as administrators.</li>
 </ul>
-<p>But at this point lets get down to sample code. Find below the relevant snippets of the progarm and the test code, well commmented, and hopefully, self explanatory.</p>
+<p>But at this point lets get down to sample code. Find below the relevant snippets of the program and the test code, well commmented, and hopefully, self explanatory.</p>
 <h3>The Program Code</h3>
 <p>First, the program code - the part that goes into production, and the simpler part of the coding bit -</p>
 <pre><code>Public class BigBadClassWithLotsOfInitialization
@@ -311,7 +311,8 @@ public void CanWriteFileAsDifferentUserThroughJob()
 }
 </code></pre>
 <p>Thats all of the significant code. It might take some work to put into a consistently reproducible state - a class library, a test project. some settings, a couple of user accounts on your machine. But most of that should be relatively standard.</p>
-<h2>The Selfish Test <em>a.k.a</em> Automated Testing, By Developer, For Developer.</h2>
+<h2>The Selfish Test</h2>
+<h2><em>a.k.a Automated Testing, By Developer, For Developer</em>.</h2>
 <p>So coming back to the question - what's in it for you, the developer?</p>
 <p>The answer is selfish. Consider the test above -</p>
 <ul>
@@ -337,7 +338,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
 <li>The ability to step-into and debug the code line by line if necessary.</li>
 <li>And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.</li>
 </ul>
-<p>And thus we have <strong>The Selfish Test</strong> - <strong><em>Automated verification, by developer, for developer</em></strong>. The above is an example of a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  Its sole purpose is to help you.</p>
+<p>And thus we have <strong>The Selfish Test</strong> - <strong><em>Automated verification, by developer, for developer</em></strong>. The above is an example of a <em>Selfish Test</em>. You write this to help yourself. This is the only cheap, easy way to help you to debug as well as to verifythe code you wrote. Its lifetime and use is limited to the duration of your development time.  Its only purpose is to help you.</p>
 <p>So, dear developer, go help yourself.</p>
 </div>
 
