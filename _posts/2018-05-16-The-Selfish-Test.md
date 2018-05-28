@@ -221,7 +221,7 @@ So exactly what sort of automated test is this? What benefits does it provide? W
 The answer is rather selfish. This test, gives you, the developer -
 * The ability to execute the code you added in ```FileCopy```without lots of expensive setup.
 * The ability to step-into and debug the code line by line if necessary. 
-* And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.  
+* And since the change has a small surface area, the code tested by this can be reasonably expected to reproduce similiar behavior in pre-production and production environment.  
 
 And thus we have **The Selfish Test** - **_Automated verification, by developer, for developer_**. The above is an example of a _Selfish Test_. You write this to help yourself. This is the only cheap, easy way to help you to debug as well as to verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  Its only purpose is to help you.
 

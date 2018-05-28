@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-05-28T13:17:56.760813+05:30</updated>
+ <updated>2018-05-28T13:19:09.2273693+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -204,7 +204,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
 &lt;ul&gt;
 &lt;li&gt;The ability to execute the code you added in &lt;code&gt;FileCopy&lt;/code&gt;without lots of expensive setup.&lt;/li&gt;
 &lt;li&gt;The ability to step-into and debug the code line by line if necessary.&lt;/li&gt;
-&lt;li&gt;And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.&lt;/li&gt;
+&lt;li&gt;And since the change has a small surface area, the code tested by this can be reasonably expected to reproduce similiar behavior in pre-production and production environment.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And thus we have &lt;strong&gt;The Selfish Test&lt;/strong&gt; - &lt;strong&gt;&lt;em&gt;Automated verification, by developer, for developer&lt;/em&gt;&lt;/strong&gt;. The above is an example of a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you to debug as well as to verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  Its only purpose is to help you.&lt;/p&gt;
 &lt;p&gt;So, dear developer, go help yourself.&lt;/p&gt;</content>
