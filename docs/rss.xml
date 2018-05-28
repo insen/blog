@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Mon, 28 May 2018 13:14:48 +0530</pubDate>
-    <lastBuildDate>Mon, 28 May 2018 13:14:48 +0530</lastBuildDate>
+    <pubDate>Mon, 28 May 2018 13:17:56 +0530</pubDate>
+    <lastBuildDate>Mon, 28 May 2018 13:17:56 +0530</lastBuildDate>
     
     <item>
       <title>Windows Impersonation and The Selfish Test</title>
@@ -204,7 +204,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
 &lt;li&gt;The ability to step-into and debug the code line by line if necessary.&lt;/li&gt;
 &lt;li&gt;And since the change has a small surface area, The code tested by this test can be reasonably expected to reproduce similiar behavior in pre-production and production environment.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;And thus we have &lt;strong&gt;The Selfish Test&lt;/strong&gt; - &lt;strong&gt;&lt;em&gt;Automated verification, by developer, for developer&lt;/em&gt;&lt;/strong&gt;. The above is an example of a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you to debug as well as to verifythe code you wrote. Its lifetime and use is limited to the duration of your development time.  Its only purpose is to help you.&lt;/p&gt;
+&lt;p&gt;And thus we have &lt;strong&gt;The Selfish Test&lt;/strong&gt; - &lt;strong&gt;&lt;em&gt;Automated verification, by developer, for developer&lt;/em&gt;&lt;/strong&gt;. The above is an example of a &lt;em&gt;Selfish Test&lt;/em&gt;. You write this to help yourself. This is the only cheap, easy way to help you to debug as well as to verify the code you wrote. Its lifetime and use is limited to the duration of your development time.  Its only purpose is to help you.&lt;/p&gt;
 &lt;p&gt;So, dear developer, go help yourself.&lt;/p&gt;</description>
     </item>
     
