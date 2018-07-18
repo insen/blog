@@ -38,7 +38,7 @@ _Eh? right ! Slow down a bit, will you. Lets finish with the context, ok?._
 * And then based on that configuration data determines a remote target network folder. 
 * And then based on this remote folders location, switches to the corresponding configured account, which has folder write access, to copy this generated file to the target remote folder.
 * Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.
-* And no, not every line of this code-base has automated tests. _You come with with list of whys and therefores, and chances are we'll have a few in common_. The testing on this is a mix of unit, API, integration, selenium and manual testing. 
+* And no, not every line of this code-base has automated tests. _You come up with your list of whys and therefores, and chances are we'll have a few in common_. The testing on this is a mix of unit, API, integration, selenium and manual testing. 
 * And the existing code-base which runs this uses windows integration which needs a complex Active Directory setup which does not exist. It has a way of falling back to a hard-coded account based authentication implementation for local testing purposes. 
 
 Your job is to run that private method under a different user-account. _Lets hear it again now for that Windows Impersonation thing._
@@ -202,7 +202,7 @@ Thats all of the significant code. It might take some work to put into a consist
 
 So coming back to the question - what's in it for you, the developer? 
 
-The answer is selfish. Consider the test above -
+so lets consider the test above -
 
 * Is it an automated test? **Yes**.
 

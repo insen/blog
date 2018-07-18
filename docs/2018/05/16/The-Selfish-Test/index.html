@@ -171,7 +171,7 @@
 <li>And then based on that configuration data determines a remote target network folder.</li>
 <li>And then based on this remote folders location, switches to the corresponding configured account, which has folder write access, to copy this generated file to the target remote folder.</li>
 <li>Oh! And the method which copies the file over is buried deep in code as a private method which is called at the end of this entire process.</li>
-<li>And no, not every line of this code-base has automated tests. <em>You come with with list of whys and therefores, and chances are we'll have a few in common</em>. The testing on this is a mix of unit, API, integration, selenium and manual testing.</li>
+<li>And no, not every line of this code-base has automated tests. <em>You come up with your list of whys and therefores, and chances are we'll have a few in common</em>. The testing on this is a mix of unit, API, integration, selenium and manual testing.</li>
 <li>And the existing code-base which runs this uses windows integration which needs a complex Active Directory setup which does not exist. It has a way of falling back to a hard-coded account based authentication implementation for local testing purposes.</li>
 </ul>
 <p>Your job is to run that private method under a different user-account. <em>Lets hear it again now for that Windows Impersonation thing.</em></p>
@@ -314,7 +314,7 @@ public void CanWriteFileAsDifferentUserThroughJob()
 <h2>The Selfish Test</h2>
 <h2><em>a.k.a Automated Testing, By Developer, For Developer</em>.</h2>
 <p>So coming back to the question - what's in it for you, the developer?</p>
-<p>The answer is selfish. Consider the test above -</p>
+<p>so lets consider the test above -</p>
 <ul>
 <li>
 <p>Is it an automated test? <strong>Yes</strong>.</p>
@@ -346,6 +346,15 @@ public void CanWriteFileAsDifferentUserThroughJob()
   <h2>Related Posts</h2>
   <ul class="related-posts">
     
+      
+        <li>
+          <h3>
+            <a href="https://insen.github.io/blog/2018/07/18/Small-But-Irritating-Things/">
+              Small but irritating things - Git
+              <small>18 Jul 2018</small>
+            </a>
+          </h3>
+        </li>
       
     
       

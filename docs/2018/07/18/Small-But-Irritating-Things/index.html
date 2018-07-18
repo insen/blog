@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Small but irritating things - Git &middot; Insen
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/poole.css">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/font-awesome.css" >
+  <link rel="stylesheet" href="https://insen.github.io/blog/public/css/insen.css" >
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://insen.github.io/blog/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="https://insen.github.io/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="https://insen.github.io/blog/"> 
+          <img src="https://insen.github.io/blog//img/profile.png"/>
+          Insen
+        </a>
+      </h1>
+      <p class="lead">Write, Code, Dream, Travel, Play !</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://insen.github.io/blog/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/D:/work/blogging/blog/./docs/about.html">About</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </nav>
+
+  <!-- subsequent parts use fontawesome content icons!-->
+  <a class="sidebar-nav-item fa rss" href="/atom.xml"></a> 
+  <a class="sidebar-nav-item fa github" href="https://github.com/insen"></a> 
+  <a class="sidebar-nav-item fa linkedin" href="https://www.linkedin.com/in/nilsengupta/"></a> 
+
+  <p>&copy; 2018. All rights reserved. 
+      <small>Personal opinions. <i>Hefty pinches of salt !!</i></small>.</p>
+  
+  <p><i><small><small> site based on <a href="hyde"> hyde </a> by <a href="https://twitter.com/mdo">@mdo</a> </small></small></i></p>
+
+  </div>
+</div>
+
+    
+    <div class="header-strip">
+  <small><i> 'Not all those who wander are lost' - J.R.R Tolkien </i></small>
+</div>
+    
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Small but irritating things - Git</h1>
+  <span class="post-date">18 Jul 2018</span>
+  <p>I tried to retrieve a stash by name in Git. Honest, thats all I did.</p>
+<p>Yet here I am.</p>
+<p>Software is full of small and intensely irritating things.  Repeat after me - <em>Software is full of small and intensely irritating things.</em></p>
+<p>You will encounter it again and again, in good software, bad software, throw away software and never used software <em>(for obvious reasons)</em>. And you will encounter it in the best of software too.</p>
+<p>Which, from now onwards, I will be documenting.</p>
+<p>And today is a Git day.</p>
+<h2>Short historical background on GIT</h2>
+<p>Lets digress -</p>
+<ul>
+<li>The person who wrote Git was, or rather, is the most famous programmer alive and quite possibly, the most respected as well. Name's Linus Torvalds.</li>
+<li>Git again is like a cross between the Mona Lisa and the Swiss Army Knife (<em>the sort which Schwarzenneger carries into a Predator jungle and builds a seven storeyed Harrods with</em>). Its an engineering marvel; Considering the distributed part, its a conceptual marvel; its incredibly robust; It's blazing fast and its very versatile.</li>
+</ul>
+<p>So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that <em><strong>try to retrieve a stash by name</strong></em>.</p>
+<h2>Small but intensely irritating</h2>
+<p>Here is the small but intensely irritating part - <em><strong>there is no easy way to do it.</strong></em>. The best you can do is find the first one that matches a RegEx.</p>
+<p>That's odd (<em>and i am being polite here</em>).</p>
+<p>In Git, arguably one of the best softwares on the planet, <em>you can easily add a key-value pair</em>, but <em>you cannot easily retrieve it by key</em>.</p>
+<p>What?</p>
+<p>Let me rephrase this - You are using an excellent programming language. Probably the best ever. In that language there is a dictionary of hashtable or map implementation. It allowes you to stuff things into a key-value collection by a key (random string). But - here's the catch, it does not give you way to retrieve the same by name. Not easily anyway.</p>
+<ul>
+<li>Now list down your opinion of the programmer, designer and architect of the person who did this. And then...</li>
+<li>Map the attributes you wrote down against the names Linus Torvalds or Git.</li>
+</ul>
+<p>(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT DOES NOT COMPUTE. How did these people miss this?)</p>
+<h2>Software has issues. Period.</h2>
+<p>Ok, hyperbole apart, this is basically what software is.</p>
+<p>Take the best software, built by the best people - It doesn't matter. Something, somewhere is inevitably going to fall off the radar, or the planning, or the execution, or the design.</p>
+<p>In this case Git is probably the best DVCS out there, conceived by a marquee brand leader, built and maintained over many years by a great team, yet the fact that if you stored something by name, you would want to retrieve it by name seems to have escaped all those people who participated in it over all the years.</p>
+<p>And, as is usually the case, it never became important enough to get put back in.</p>
+<h2>So, Git Unstash.</h2>
+<p>Yeah, ok software got issues. But we got developers. And developers fix issues. <small><em>And what's a technical blog post without a solution to an issue anyway?</em></small> So here's how to do unstash in Git.<small> <em>(even though its available just a couple of google clicks away).</em></small></p>
+<h3>Git - stash by name</h3>
+<p>This works just so -</p>
+<p><code>git stash save &quot;thisName&quot;</code></p>
+<p>This is now deprecated by still works.</p>
+<p>The current recommended way is -</p>
+<p><code>git stash push &quot;thisName&quot;</code>.</p>
+<h3>Git - unstash by name</h3>
+<p>This is the iffy thing. you can do this -</p>
+<p><code>git stash apply stash^{/thisNa}</code></p>
+<p>Notice the <em>'thisNa'</em>, that's a regex which contains part of your stash message. Additionally, what this does is retrieve the first named stash value which matches. Which means, if you do this</p>
+<p><code>git stash save 'thisName1'</code></p>
+<p>and this -</p>
+<p><code>git stash save 'thisName2'</code>,</p>
+<p>You are out of luck during retrieval unless you can remember the exact second phrase, like this -</p>
+<p><code>git stash apply stash^{/thisName2}&quot;</code>,</p>
+<p>Since Git returns only the first match, using part of the phrase leads you to the first partial match which may or may not be what you want.</p>
+<p>For additional tips and sources and other more detailed knowhow, look up this <a href="https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git">SO question</a>.</p>
+<h2>Bottomline.</h2>
+<p>Software, even the best software, has nuances and idiosyncrasies.</p>
+<p>So stop cribbing, drink your medicine, and get back to work (arounds).</p>
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      
+    
+      
+        <li>
+          <h3>
+            <a href="https://insen.github.io/blog/2018/05/16/The-Selfish-Test/">
+              Windows Impersonation and The Selfish Test
+              <small>16 May 2018</small>
+            </a>
+          </h3>
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </ul>
+</div>
+    </div>
+      
+  </body>
+
+</html>
