@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-07-18T19:05:39.3629053+05:30</updated>
+ <updated>2018-07-19T15:17:14.8036155+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Small but irritating things - Git</title>
+   <title>Small but irritating things - Git.</title>
    <link href="https://insen.github.io/blog/2018/07/18/Small-But-Irritating-Things/"/>
    <updated>2018-07-18T00:00:00+05:30</updated>
    <id>https://insen.github.io/blog/2018/07/18/Small-But-Irritating-Things/</id>
@@ -23,51 +23,55 @@
 &lt;p&gt;You will encounter it again and again, in good software, bad software, throw away software and never used software &lt;em&gt;(for obvious reasons)&lt;/em&gt;. And you will encounter it in the best of software too.&lt;/p&gt;
 &lt;p&gt;Which, from now onwards, I will be documenting.&lt;/p&gt;
 &lt;p&gt;And today is a Git day.&lt;/p&gt;
-&lt;h2&gt;Short historical background on GIT&lt;/h2&gt;
+&lt;h2&gt;Short historical background on GIT.&lt;/h2&gt;
 &lt;p&gt;Lets digress -&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The person who wrote Git was, or rather, is the most famous programmer alive and quite possibly, the most respected as well. Name&apos;s Linus Torvalds.&lt;/li&gt;
 &lt;li&gt;Git again is like a cross between the Mona Lisa and the Swiss Army Knife (&lt;em&gt;the sort which Schwarzenneger carries into a Predator jungle and builds a seven storeyed Harrods with&lt;/em&gt;). Its an engineering marvel; Considering the distributed part, its a conceptual marvel; its incredibly robust; It&apos;s blazing fast and its very versatile.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that &lt;em&gt;&lt;strong&gt;try to retrieve a stash by name&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
-&lt;h2&gt;Small but intensely irritating&lt;/h2&gt;
+&lt;p&gt;So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that &lt;em&gt;&lt;strong&gt;try, just try, to retrieve a stash by name&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;Small but intensely irritating.&lt;/h2&gt;
 &lt;p&gt;Here is the small but intensely irritating part - &lt;em&gt;&lt;strong&gt;there is no easy way to do it.&lt;/strong&gt;&lt;/em&gt;. The best you can do is find the first one that matches a RegEx.&lt;/p&gt;
-&lt;p&gt;That&apos;s odd (&lt;em&gt;and i am being polite here&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;That&apos;s odd (&lt;em&gt;and I am being polite here&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;In Git, arguably one of the best softwares on the planet, &lt;em&gt;you can easily add a key-value pair&lt;/em&gt;, but &lt;em&gt;you cannot easily retrieve it by key&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;What?&lt;/p&gt;
-&lt;p&gt;Let me rephrase this - You are using an excellent programming language. Probably the best ever. In that language there is a dictionary of hashtable or map implementation. It allowes you to stuff things into a key-value collection by a key (random string). But - here&apos;s the catch, it does not give you way to retrieve the same by name. Not easily anyway.&lt;/p&gt;
+&lt;p&gt;Let me rephrase this - You are using an excellent programming language. Probably the best ever. In that language there is a dictionary or hashtable or map implementation. It allowes you to stuff things into a key-value collection by a key (random string). But here&apos;s the catch, it does not give you way to retrieve the same by name. Not easily anyway.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Now list down your opinion of the programmer, designer and architect of the person who did this. And then...&lt;/li&gt;
 &lt;li&gt;Map the attributes you wrote down against the names Linus Torvalds or Git.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT DOES NOT COMPUTE. How did these people miss this?)&lt;/p&gt;
+&lt;p&gt;(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT. DOES. NOT. COMPUTE. How did these people miss this?)&lt;/p&gt;
 &lt;h2&gt;Software has issues. Period.&lt;/h2&gt;
 &lt;p&gt;Ok, hyperbole apart, this is basically what software is.&lt;/p&gt;
 &lt;p&gt;Take the best software, built by the best people - It doesn&apos;t matter. Something, somewhere is inevitably going to fall off the radar, or the planning, or the execution, or the design.&lt;/p&gt;
 &lt;p&gt;In this case Git is probably the best DVCS out there, conceived by a marquee brand leader, built and maintained over many years by a great team, yet the fact that if you stored something by name, you would want to retrieve it by name seems to have escaped all those people who participated in it over all the years.&lt;/p&gt;
 &lt;p&gt;And, as is usually the case, it never became important enough to get put back in.&lt;/p&gt;
 &lt;h2&gt;So, Git Unstash.&lt;/h2&gt;
-&lt;p&gt;Yeah, ok software got issues. But we got developers. And developers fix issues. &lt;small&gt;&lt;em&gt;And what&apos;s a technical blog post without a solution to an issue anyway?&lt;/em&gt;&lt;/small&gt; So here&apos;s how to do unstash in Git.&lt;small&gt; &lt;em&gt;(even though its available just a couple of google clicks away).&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
-&lt;h3&gt;Git - stash by name&lt;/h3&gt;
+&lt;p&gt;Yeah, ok software got issues. But we got developers. And developers fix issues. &lt;small&gt;&lt;em&gt;And what&apos;s a technical blog post without a solution to an issue anyway?&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;So here&apos;s how to do unstash in Git.&lt;small&gt; &lt;em&gt;(even though its available just a couple of google clicks away).&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;h3&gt;Git - stash by name.&lt;/h3&gt;
 &lt;p&gt;This works just so -&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash save &amp;quot;thisName&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;This is now deprecated by still works.&lt;/p&gt;
-&lt;p&gt;The current recommended way is -&lt;/p&gt;
+&lt;p&gt;The above is deprecated but still works. The current recommended way is -&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash push &amp;quot;thisName&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;h3&gt;Git - unstash by name&lt;/h3&gt;
+&lt;h3&gt;Git - unstash by name.&lt;/h3&gt;
 &lt;p&gt;This is the iffy thing. you can do this -&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash apply stash^{/thisNa}&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Notice the &lt;em&gt;&apos;thisNa&apos;&lt;/em&gt;, that&apos;s a regex which contains part of your stash message. Additionally, what this does is retrieve the first named stash value which matches. Which means, if you do this&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash save &apos;thisName1&apos;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;and this -&lt;/p&gt;
+&lt;p&gt;and this&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash save &apos;thisName2&apos;&lt;/code&gt;,&lt;/p&gt;
 &lt;p&gt;You are out of luck during retrieval unless you can remember the exact second phrase, like this -&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git stash apply stash^{/thisName2}&amp;quot;&lt;/code&gt;,&lt;/p&gt;
 &lt;p&gt;Since Git returns only the first match, using part of the phrase leads you to the first partial match which may or may not be what you want.&lt;/p&gt;
+&lt;p&gt;There are alternatives which involve using a combination of&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git stash list&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git stash pop/apply stash@{n}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;where n is a number referring to nth stash from top, etc (&lt;em&gt;and use either pop or apply, not both&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;For additional tips and sources and other more detailed knowhow, look up this &lt;a href=&quot;https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git&quot;&gt;SO question&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Bottomline.&lt;/h2&gt;
-&lt;p&gt;Software, even the best software, has nuances and idiosyncrasies.&lt;/p&gt;
-&lt;p&gt;So stop cribbing, drink your medicine, and get back to work (arounds).&lt;/p&gt;</content>
+&lt;p&gt;Software, even the best software, has nuances and idiosyncrasies. Stop cribbing, drink your medicine, and get back to work(arounds).&lt;/p&gt;</content>
  </entry>
  
  <entry>

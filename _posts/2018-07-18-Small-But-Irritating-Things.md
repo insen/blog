@@ -1,6 +1,6 @@
 --- 
 layout: post
-title: "Small but irritating things - Git"
+title: "Small but irritating things - Git."
 author: "Author"
 comments: true
 tags : [Programming, Git]
@@ -18,17 +18,17 @@ Which, from now onwards, I will be documenting.
 
 And today is a Git day.
 
-## Short historical background on GIT
+## Short historical background on GIT.
 Lets digress - 
 - The person who wrote Git was, or rather, is the most famous programmer alive and quite possibly, the most respected as well. Name's Linus Torvalds.
 - Git again is like a cross between the Mona Lisa and the Swiss Army Knife (_the sort which Schwarzenneger carries into a Predator jungle and builds a seven storeyed Harrods with_). Its an engineering marvel; Considering the distributed part, its a conceptual marvel; its incredibly robust; It's blazing fast and its very versatile. 
 
-So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that *<strong>try to retrieve a stash by name</strong>*.
+So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that *<strong>try, just try, to retrieve a stash by name</strong>*.
 
-## Small but intensely irritating
+## Small but intensely irritating.
 Here is the small but intensely irritating part - *<strong>there is no easy way to do it.</strong>*. The best you can do is find the first one that matches a RegEx.
 
-That's odd (_and i am being polite here_).
+That's odd (_and I am being polite here_).
 
 In Git, arguably one of the best softwares on the planet, *you can easily add a key-value pair*, but *you cannot easily retrieve it by key*.
 
@@ -38,7 +38,7 @@ Let me rephrase this - You are using an excellent programming language. Probably
 - Now list down your opinion of the programmer, designer and architect of the person who did this. And then... 
 - Map the attributes you wrote down against the names Linus Torvalds or Git. 
 
-(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT DOES NOT COMPUTE. How did these people miss this?)
+(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT. DOES. NOT. COMPUTE. How did these people miss this?)
 
 ## Software has issues. Period.
 Ok, hyperbole apart, this is basically what software is. 
@@ -54,17 +54,17 @@ Yeah, ok software got issues. But we got developers. And developers fix issues. 
 
 So here's how to do unstash in Git.<small> _(even though its available just a couple of google clicks away)._</small>
 
-### Git - stash by name
+### Git - stash by name.
 
 This works just so - 
 
 ```git stash save "thisName"``` 
 
-The above is deprecated by still works. The current recommended way is - 
+The above is deprecated but still works. The current recommended way is - 
 
 ```git stash push "thisName"```.
 
-### Git - unstash by name
+### Git - unstash by name.
 
 This is the iffy thing. you can do this - 
 
@@ -74,7 +74,7 @@ Notice the *'thisNa'*, that's a regex which contains part of your stash message.
 
 ```git stash save 'thisName1'``` 
 
-and this -
+and this 
 
 ```git stash save 'thisName2'```, 
 
@@ -92,7 +92,9 @@ and
 
 ```git stash pop/apply stash@{n}```
 
-where n is a number referring to nth stash from top, etc (_and use either pop or apply, not both_). For additional tips and sources and other more detailed knowhow, look up this [SO question](https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git).
+where n is a number referring to nth stash from top, etc (_and use either pop or apply, not both_). 
+
+For additional tips and sources and other more detailed knowhow, look up this [SO question](https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git).
 
 ## Bottomline.
 

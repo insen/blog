@@ -11,7 +11,7 @@
 
   <title>
     
-      Small but irritating things - Git &middot; Insen
+      Small but irritating things - Git. &middot; Insen
     
   </title>
 
@@ -147,7 +147,7 @@
     
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">Small but irritating things - Git</h1>
+  <h1 class="post-title">Small but irritating things - Git.</h1>
   <span class="post-date">18 Jul 2018</span>
   <p>I tried to retrieve a stash by name in Git. Honest, thats all I did.</p>
 <p>Yet here I am.</p>
@@ -155,51 +155,55 @@
 <p>You will encounter it again and again, in good software, bad software, throw away software and never used software <em>(for obvious reasons)</em>. And you will encounter it in the best of software too.</p>
 <p>Which, from now onwards, I will be documenting.</p>
 <p>And today is a Git day.</p>
-<h2>Short historical background on GIT</h2>
+<h2>Short historical background on GIT.</h2>
 <p>Lets digress -</p>
 <ul>
 <li>The person who wrote Git was, or rather, is the most famous programmer alive and quite possibly, the most respected as well. Name's Linus Torvalds.</li>
 <li>Git again is like a cross between the Mona Lisa and the Swiss Army Knife (<em>the sort which Schwarzenneger carries into a Predator jungle and builds a seven storeyed Harrods with</em>). Its an engineering marvel; Considering the distributed part, its a conceptual marvel; its incredibly robust; It's blazing fast and its very versatile.</li>
 </ul>
-<p>So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that <em><strong>try to retrieve a stash by name</strong></em>.</p>
-<h2>Small but intensely irritating</h2>
+<p>So given these ancestors and these antecedents, you would assume that Git is flawless - right? And its venerable primary author and the plethora of talented programmers who have lovingly grafted their art onto the foundations laid by the erstwhile venerable one, have paid complete attention to both functionality and ease of use which is why you have a billion flags (options) with each command, and there are at least 7 ways to do any one thing (exaggerating only a bit), and its rock solid - correct? Well, yes, its all of that, but inspite of all that <em><strong>try, just try, to retrieve a stash by name</strong></em>.</p>
+<h2>Small but intensely irritating.</h2>
 <p>Here is the small but intensely irritating part - <em><strong>there is no easy way to do it.</strong></em>. The best you can do is find the first one that matches a RegEx.</p>
-<p>That's odd (<em>and i am being polite here</em>).</p>
+<p>That's odd (<em>and I am being polite here</em>).</p>
 <p>In Git, arguably one of the best softwares on the planet, <em>you can easily add a key-value pair</em>, but <em>you cannot easily retrieve it by key</em>.</p>
 <p>What?</p>
-<p>Let me rephrase this - You are using an excellent programming language. Probably the best ever. In that language there is a dictionary of hashtable or map implementation. It allowes you to stuff things into a key-value collection by a key (random string). But - here's the catch, it does not give you way to retrieve the same by name. Not easily anyway.</p>
+<p>Let me rephrase this - You are using an excellent programming language. Probably the best ever. In that language there is a dictionary or hashtable or map implementation. It allowes you to stuff things into a key-value collection by a key (random string). But here's the catch, it does not give you way to retrieve the same by name. Not easily anyway.</p>
 <ul>
 <li>Now list down your opinion of the programmer, designer and architect of the person who did this. And then...</li>
 <li>Map the attributes you wrote down against the names Linus Torvalds or Git.</li>
 </ul>
-<p>(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT DOES NOT COMPUTE. How did these people miss this?)</p>
+<p>(The second bullet point above would probably result in something resembling that OCD nightmare meme - a leaning tower of Pisa in a square box in a square wall picture frame. IT. DOES. NOT. COMPUTE. How did these people miss this?)</p>
 <h2>Software has issues. Period.</h2>
 <p>Ok, hyperbole apart, this is basically what software is.</p>
 <p>Take the best software, built by the best people - It doesn't matter. Something, somewhere is inevitably going to fall off the radar, or the planning, or the execution, or the design.</p>
 <p>In this case Git is probably the best DVCS out there, conceived by a marquee brand leader, built and maintained over many years by a great team, yet the fact that if you stored something by name, you would want to retrieve it by name seems to have escaped all those people who participated in it over all the years.</p>
 <p>And, as is usually the case, it never became important enough to get put back in.</p>
 <h2>So, Git Unstash.</h2>
-<p>Yeah, ok software got issues. But we got developers. And developers fix issues. <small><em>And what's a technical blog post without a solution to an issue anyway?</em></small> So here's how to do unstash in Git.<small> <em>(even though its available just a couple of google clicks away).</em></small></p>
-<h3>Git - stash by name</h3>
+<p>Yeah, ok software got issues. But we got developers. And developers fix issues. <small><em>And what's a technical blog post without a solution to an issue anyway?</em></small></p>
+<p>So here's how to do unstash in Git.<small> <em>(even though its available just a couple of google clicks away).</em></small></p>
+<h3>Git - stash by name.</h3>
 <p>This works just so -</p>
 <p><code>git stash save &quot;thisName&quot;</code></p>
-<p>This is now deprecated by still works.</p>
-<p>The current recommended way is -</p>
+<p>The above is deprecated but still works. The current recommended way is -</p>
 <p><code>git stash push &quot;thisName&quot;</code>.</p>
-<h3>Git - unstash by name</h3>
+<h3>Git - unstash by name.</h3>
 <p>This is the iffy thing. you can do this -</p>
 <p><code>git stash apply stash^{/thisNa}</code></p>
 <p>Notice the <em>'thisNa'</em>, that's a regex which contains part of your stash message. Additionally, what this does is retrieve the first named stash value which matches. Which means, if you do this</p>
 <p><code>git stash save 'thisName1'</code></p>
-<p>and this -</p>
+<p>and this</p>
 <p><code>git stash save 'thisName2'</code>,</p>
 <p>You are out of luck during retrieval unless you can remember the exact second phrase, like this -</p>
 <p><code>git stash apply stash^{/thisName2}&quot;</code>,</p>
 <p>Since Git returns only the first match, using part of the phrase leads you to the first partial match which may or may not be what you want.</p>
+<p>There are alternatives which involve using a combination of</p>
+<p><code>git stash list</code></p>
+<p>and</p>
+<p><code>git stash pop/apply stash@{n}</code></p>
+<p>where n is a number referring to nth stash from top, etc (<em>and use either pop or apply, not both</em>).</p>
 <p>For additional tips and sources and other more detailed knowhow, look up this <a href="https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git">SO question</a>.</p>
 <h2>Bottomline.</h2>
-<p>Software, even the best software, has nuances and idiosyncrasies.</p>
-<p>So stop cribbing, drink your medicine, and get back to work (arounds).</p>
+<p>Software, even the best software, has nuances and idiosyncrasies. Stop cribbing, drink your medicine, and get back to work(arounds).</p>
 </div>
 
 <div class="related">
