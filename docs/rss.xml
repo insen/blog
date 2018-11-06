@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 06 Nov 2018 18:36:21 +0530</pubDate>
-    <lastBuildDate>Tue, 06 Nov 2018 18:36:21 +0530</lastBuildDate>
+    <pubDate>Tue, 06 Nov 2018 18:39:31 +0530</pubDate>
+    <lastBuildDate>Tue, 06 Nov 2018 18:39:31 +0530</lastBuildDate>
     
     <item>
       <title>Merge across repositories - Git.</title>
@@ -95,7 +95,7 @@
 &lt;li&gt;Create two repositories in some remote location - &apos;prod&apos; and &apos;cd&apos;. Each with just the master branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like this :&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:8080/img/posts/repos-file-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Work with &apos;prod&apos;
 &lt;ul&gt;
@@ -108,7 +108,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;After setup, the history for branch &apos;pb&apos; from &apos;locprod&apos; is :&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:8080/img/posts/locprod-after-setup.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/img/posts/locprod-after-setup.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Now work with &apos;cd&apos;
 &lt;ul&gt;
@@ -121,7 +121,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;And branch &apos;cdb&apos; history from &apos;loccd&apos; is so :&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://localhost:8080/img/posts/loccd-after-setup.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/blog/img/posts/loccd-after-setup.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of &apos;cdb&apos; in &apos;loccd&apos; into &apos;pb&apos; in &apos;prod&apos;.
 Which means, at the end, the &apos;pb&apos; branch in &apos;prod&apos; should contain all the four folders &apos;f1&apos;, &apos;f2&apos;, &apos;f3&apos;, &apos;f4&apos; with all of their files, and the history of branch &apos;pb&apos; should contain all of the individual commit/operation logs from &apos;prod&apos;/&apos;locprod&apos; and &apos;cd&apos;/&apos;loccd&apos;.&lt;/p&gt;
 &lt;p&gt;I am not showing the steps for the above because if you need help there, you are really not ready for the next bits.&lt;/p&gt;
@@ -133,18 +133,18 @@ Which means, at the end, the &apos;pb&apos; branch in &apos;prod&apos; should co
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Switch to bash on &apos;loccd&apos;. Add &apos;locprod&apos; as a new remote repo for &apos;loccd&apos;. Name this remote as &apos;nremote&apos;. &lt;code&gt;git remote add nremote /full/file/path/to/gitrepo/.git&lt;/code&gt; To verify remotes are setup, run &lt;code&gt;git remote -v&lt;/code&gt;. On my machine, I see the following.
-&lt;img src=&quot;http://localhost:8080/img/posts/all-remotes.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/img/posts/all-remotes.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Fetch all from the newly configured remote. &lt;code&gt;git fetch nremote&lt;/code&gt;
 Viewing list of branches now shows this.
-&lt;img src=&quot;http://localhost:8080/img/posts/all-branches-with-nremote.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/img/posts/all-branches-with-nremote.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create new branch &apos;loccd&apos;.&apos;tmp&apos; from &apos;loccd&apos;.&apos;cdb&apos; &lt;code&gt;git checkout -b tmp&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Set it to track the branch &apos;tmp&apos; on &apos;locprod&apos;. &lt;code&gt;git push -u nremote tmp&lt;/code&gt;. Ensure that the target branch is not open  -i.e. &apos;tmp&apos; is not the currently checked out branch for &apos;locprod&apos;. If so, this is the error you get. &lt;img src=&quot;http://localhost:8080/img/posts/error-open-branch.png&quot; alt=&quot;&quot; /&gt; Switch to some other branch. Once this step is successfull you have the &apos;loccd&apos;.&apos;tmp&apos; data in &apos;locprod&apos;.&apos;tmp&apos;.&lt;/p&gt;
+&lt;p&gt;Set it to track the branch &apos;tmp&apos; on &apos;locprod&apos;. &lt;code&gt;git push -u nremote tmp&lt;/code&gt;. Ensure that the target branch is not open  -i.e. &apos;tmp&apos; is not the currently checked out branch for &apos;locprod&apos;. If so, this is the error you get. &lt;img src=&quot;/blog/img/posts/error-open-branch.png&quot; alt=&quot;&quot; /&gt; Switch to some other branch. Once this step is successfull you have the &apos;loccd&apos;.&apos;tmp&apos; data in &apos;locprod&apos;.&apos;tmp&apos;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Go to bash on &apos;loccd&apos;.&apos;tmp&apos; and merge &apos;loccd&apos;.&apos;cdb&apos; into &apos;loccd&apos;.&apos;tmp&apos;. Assuming you are on the &apos;tmp&apos; branch in bash, run &lt;code&gt;git push nremote tmp --allow-unrelated-histories&lt;/code&gt; . Note the flag. Once past this step, &apos;locprod&apos;.&apos;tmp&apos; should have everything from &apos;prod&apos;.&apos;pb&apos; and &apos;locprod&apos;.&apos;cdb&apos;, including histories.&lt;/p&gt;
@@ -160,11 +160,11 @@ Viewing list of branches now shows this.
 &lt;h3&gt;Assert&lt;/h3&gt;
 &lt;p&gt;And you are done.&lt;/p&gt;
 &lt;p&gt;This is how the final folders look.
-&lt;img src=&quot;http://localhost:8080/img/posts/post-merge-folders.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/img/posts/post-merge-folders.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;And this is the final log of history on &apos;prod.pb&apos;.
-&lt;img src=&quot;http://localhost:8080/img/posts/post-merge-log.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/img/posts/post-merge-log.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;And this is the final git merge tree.
-&lt;img src=&quot;http://localhost:8080/img/posts/post-merge-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/img/posts/post-merge-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Some Notes
 &lt;ul&gt;
