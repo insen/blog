@@ -259,8 +259,7 @@
 </ul>
 </li>
 </ul>
-<p>After setup, the history for branch 'pb' from 'locprod' is :</p>
-<p><img src="/blog/img/posts/locprod-after-setup.png" alt="" /></p>
+<p>After setup, the history for branch 'pb' from 'locprod' <img src="/blog/img/posts/locprod-after-setup.png" alt="is : " /></p>
 <ul>
 <li>Now work with 'cd'
 <ul>
@@ -272,8 +271,7 @@
 </ul>
 </li>
 </ul>
-<p>And branch 'cdb' history from 'loccd' is so :</p>
-<p><img src="/blog/img/posts/loccd-after-setup.png" alt="" /></p>
+<p>And branch 'cdb' history from 'loccd' <img src="/blog/img/posts/loccd-after-setup.png" alt="is :" /></p>
 <p>At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of 'cdb' in 'loccd' into 'pb' in 'prod'.
 Which means, at the end, the 'pb' branch in 'prod' should contain all the four folders 'f1', 'f2', 'f3', 'f4' with all of their files, and the history of branch 'pb' should contain all of the individual commit/operation logs from 'prod'/'locprod' and 'cd'/'loccd'.</p>
 <p>I am not showing the steps for the above because if you need help there, you are really not ready for the next bits.</p>
@@ -284,19 +282,19 @@ Which means, at the end, the 'pb' branch in 'prod' should contain all the four f
 <p>While on bash in 'locprod'.'master', add a new EMPTY branch 'tmp' in 'locprod' <code>git checkout --orphan tmp</code></p>
 </li>
 <li>
-<p>Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. <code>git remote add nremote /full/file/path/to/gitrepo/.git</code> To verify remotes are setup, run <code>git remote -v</code>. On my machine, I see the
-<img src="/blog/img/posts/all-remotes.png" alt="following" />.</p>
+<p>Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. <code>git remote add nremote /full/file/path/to/gitrepo/.git</code> To verify remotes are setup, run <code>git remote -v</code>. On my machine, I see
+<img src="/blog/img/posts/all-remotes.png" alt="this." /></p>
 </li>
 <li>
 <p>Fetch all from the newly configured remote. <code>git fetch nremote</code>
-Viewing list of branches now shows this.
-<img src="/blog/img/posts/all-branches-with-nremote.png" alt="" /></p>
+Viewing list of branches now shows
+<img src="/blog/img/posts/all-branches-with-nremote.png" alt="this." /></p>
 </li>
 <li>
 <p>Create new branch 'loccd'.'tmp' from 'loccd'.'cdb' <code>git checkout -b tmp</code></p>
 </li>
 <li>
-<p>Set it to track the branch 'tmp' on 'locprod'. <code>git push -u nremote tmp</code>. Ensure that the target branch is not open  -i.e. 'tmp' is not the currently checked out branch for 'locprod'. If so, this is the error you get. <img src="/blog/img/posts/error-open-branch.png" alt="" /> Switch to some other branch. Once this step is successfull you have the 'loccd'.'tmp' data in 'locprod'.'tmp'.</p>
+<p>Set it to track the branch 'tmp' on 'locprod'. <code>git push -u nremote tmp</code>. Ensure that the target branch is not open  -i.e. 'tmp' is not the currently checked out branch for 'locprod'. If so, this is the error <img src="/blog/img/posts/error-open-branch.png" alt="error." /> Switch to some other branch. Once this step is successfull you have the 'loccd'.'tmp' data in 'locprod'.'tmp'.</p>
 </li>
 <li>
 <p>Go to bash on 'loccd'.'tmp' and merge 'loccd'.'cdb' into 'loccd'.'tmp'. Assuming you are on the 'tmp' branch in bash, run <code>git push nremote tmp --allow-unrelated-histories</code> . Note the flag. Once past this step, 'locprod'.'tmp' should have everything from 'prod'.'pb' and 'locprod'.'cdb', including histories.</p>
@@ -311,12 +309,12 @@ Viewing list of branches now shows this.
 </ul>
 <h3>Assert</h3>
 <p>And you are done.</p>
-<p>This is how the final folders look.
-<img src="/blog/img/posts/post-merge-folders.png" alt="" /></p>
-<p>And this is the final log of history on 'prod.pb'.
-<img src="/blog/img/posts/post-merge-log.png" alt="" /></p>
-<p>And this is the final git merge tree.
-<img src="/blog/img/posts/post-merge-tree.png" alt="" /></p>
+<p>This is how the final folders
+<img src="/blog/img/posts/post-merge-folders.png" alt="look." /></p>
+<p>And this is the final log of history on<br />
+<img src="/blog/img/posts/post-merge-log.png" alt="'prod.pb'." /></p>
+<p>And this is the final git merge
+<img src="/blog/img/posts/post-merge-tree.png" alt=" tree." /></p>
 <ul>
 <li>Some Notes
 <ul>

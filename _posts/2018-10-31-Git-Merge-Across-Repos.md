@@ -124,9 +124,7 @@ For my purposes, everything is setup on local machine - all 4 instances of the g
     - Create branch 'pb' in 'locprod' from 'master'.
     - push 'pb' from 'locprod' to 'prod'.
 
-After setup, the history for branch 'pb' from 'locprod' is : 
-
-![](/blog/img/posts/locprod-after-setup.png)
+After setup, the history for branch 'pb' from 'locprod' ![is : ](/blog/img/posts/locprod-after-setup.png)
 
 - Now work with 'cd'
     - Get 'cd' onto local machine - 'loccd'.
@@ -135,9 +133,7 @@ After setup, the history for branch 'pb' from 'locprod' is :
     - Create branch 'cdb' in 'loccd' from 'master'.
     - push 'cdb' from 'loccd' to 'cd'.
 
-And branch 'cdb' history from 'loccd' is so : 
-
-![](/blog/img/posts/loccd-after-setup.png)
+And branch 'cdb' history from 'loccd' ![is :](/blog/img/posts/loccd-after-setup.png)
 
 At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of 'cdb' in 'loccd' into 'pb' in 'prod'. 
 Which means, at the end, the 'pb' branch in 'prod' should contain all the four folders 'f1', 'f2', 'f3', 'f4' with all of their files, and the history of branch 'pb' should contain all of the individual commit/operation logs from 'prod'/'locprod' and 'cd'/'loccd'. 
@@ -150,16 +146,16 @@ The goal here is to merge 'loccd'.'cdb' into, ultimately, 'prod'.'pb'. However, 
 
 - While on bash in 'locprod'.'master', add a new EMPTY branch 'tmp' in 'locprod' ``` git checkout --orphan tmp ```
 
-- Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. ``` git remote add nremote /full/file/path/to/gitrepo/.git ``` To verify remotes are setup, run ```git remote -v```. On my machine, I see the 
-![following](/blog/img/posts/all-remotes.png).
+- Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. ``` git remote add nremote /full/file/path/to/gitrepo/.git ``` To verify remotes are setup, run ```git remote -v```. On my machine, I see 
+![this.](/blog/img/posts/all-remotes.png)
 
 - Fetch all from the newly configured remote. ``` git fetch nremote ```
-Viewing list of branches now shows this.
-![](/blog/img/posts/all-branches-with-nremote.png)
+Viewing list of branches now shows
+![this.](/blog/img/posts/all-branches-with-nremote.png)
 
 - Create new branch 'loccd'.'tmp' from 'loccd'.'cdb' ```git checkout -b tmp```
 
-- Set it to track the branch 'tmp' on 'locprod'. ```git push -u nremote tmp```. Ensure that the target branch is not open  -i.e. 'tmp' is not the currently checked out branch for 'locprod'. If so, this is the error you get. ![](/blog/img/posts/error-open-branch.png) Switch to some other branch. Once this step is successfull you have the 'loccd'.'tmp' data in 'locprod'.'tmp'. 
+- Set it to track the branch 'tmp' on 'locprod'. ```git push -u nremote tmp```. Ensure that the target branch is not open  -i.e. 'tmp' is not the currently checked out branch for 'locprod'. If so, this is the error ![error.](/blog/img/posts/error-open-branch.png) Switch to some other branch. Once this step is successfull you have the 'loccd'.'tmp' data in 'locprod'.'tmp'. 
 
 - Go to bash on 'loccd'.'tmp' and merge 'loccd'.'cdb' into 'loccd'.'tmp'. Assuming you are on the 'tmp' branch in bash, run ```git push nremote tmp --allow-unrelated-histories``` . Note the flag. Once past this step, 'locprod'.'tmp' should have everything from 'prod'.'pb' and 'locprod'.'cdb', including histories.
 
@@ -172,14 +168,14 @@ Viewing list of branches now shows this.
 
 And you are done. 
 
-This is how the final folders look. 
-![](/blog/img/posts/post-merge-folders.png)
+This is how the final folders
+![look.](/blog/img/posts/post-merge-folders.png)
 
-And this is the final log of history on 'prod.pb'. 
-![](/blog/img/posts/post-merge-log.png)
+And this is the final log of history on  
+!['prod.pb'.](/blog/img/posts/post-merge-log.png)
 
-And this is the final git merge tree. 
-![](/blog/img/posts/post-merge-tree.png)
+And this is the final git merge
+![ tree.](/blog/img/posts/post-merge-tree.png)
 
 
 - Some Notes
