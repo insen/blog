@@ -150,8 +150,8 @@ The goal here is to merge 'loccd'.'cdb' into, ultimately, 'prod'.'pb'. However, 
 
 - While on bash in 'locprod'.'master', add a new EMPTY branch 'tmp' in 'locprod' ``` git checkout --orphan tmp ```
 
-- Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. ``` git remote add nremote /full/file/path/to/gitrepo/.git ``` To verify remotes are setup, run ```git remote -v```. On my machine, I see the following. 
-![](/blog/img/posts/all-remotes.png)
+- Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. ``` git remote add nremote /full/file/path/to/gitrepo/.git ``` To verify remotes are setup, run ```git remote -v```. On my machine, I see the 
+![following](/blog/img/posts/all-remotes.png).
 
 - Fetch all from the newly configured remote. ``` git fetch nremote ```
 Viewing list of branches now shows this.

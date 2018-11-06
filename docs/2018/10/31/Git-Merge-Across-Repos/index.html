@@ -284,8 +284,8 @@ Which means, at the end, the 'pb' branch in 'prod' should contain all the four f
 <p>While on bash in 'locprod'.'master', add a new EMPTY branch 'tmp' in 'locprod' <code>git checkout --orphan tmp</code></p>
 </li>
 <li>
-<p>Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. <code>git remote add nremote /full/file/path/to/gitrepo/.git</code> To verify remotes are setup, run <code>git remote -v</code>. On my machine, I see the following.
-<img src="/blog/img/posts/all-remotes.png" alt="" /></p>
+<p>Switch to bash on 'loccd'. Add 'locprod' as a new remote repo for 'loccd'. Name this remote as 'nremote'. <code>git remote add nremote /full/file/path/to/gitrepo/.git</code> To verify remotes are setup, run <code>git remote -v</code>. On my machine, I see the
+<img src="/blog/img/posts/all-remotes.png" alt="following" />.</p>
 </li>
 <li>
 <p>Fetch all from the newly configured remote. <code>git fetch nremote</code>

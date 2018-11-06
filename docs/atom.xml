@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-11-06T18:39:31.4885178+05:30</updated>
+ <updated>2018-11-06T18:45:57.4418099+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -134,8 +134,8 @@ Which means, at the end, the &apos;pb&apos; branch in &apos;prod&apos; should co
 &lt;p&gt;While on bash in &apos;locprod&apos;.&apos;master&apos;, add a new EMPTY branch &apos;tmp&apos; in &apos;locprod&apos; &lt;code&gt;git checkout --orphan tmp&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Switch to bash on &apos;loccd&apos;. Add &apos;locprod&apos; as a new remote repo for &apos;loccd&apos;. Name this remote as &apos;nremote&apos;. &lt;code&gt;git remote add nremote /full/file/path/to/gitrepo/.git&lt;/code&gt; To verify remotes are setup, run &lt;code&gt;git remote -v&lt;/code&gt;. On my machine, I see the following.
-&lt;img src=&quot;/blog/img/posts/all-remotes.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Switch to bash on &apos;loccd&apos;. Add &apos;locprod&apos; as a new remote repo for &apos;loccd&apos;. Name this remote as &apos;nremote&apos;. &lt;code&gt;git remote add nremote /full/file/path/to/gitrepo/.git&lt;/code&gt; To verify remotes are setup, run &lt;code&gt;git remote -v&lt;/code&gt;. On my machine, I see the
+&lt;img src=&quot;/blog/img/posts/all-remotes.png&quot; alt=&quot;following&quot; /&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Fetch all from the newly configured remote. &lt;code&gt;git fetch nremote&lt;/code&gt;
