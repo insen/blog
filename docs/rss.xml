@@ -6,8 +6,176 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Thu, 19 Jul 2018 15:17:14 +0530</pubDate>
-    <lastBuildDate>Thu, 19 Jul 2018 15:17:14 +0530</lastBuildDate>
+    <pubDate>Tue, 06 Nov 2018 18:36:21 +0530</pubDate>
+    <lastBuildDate>Tue, 06 Nov 2018 18:36:21 +0530</lastBuildDate>
+    
+    <item>
+      <title>Merge across repositories - Git.</title>
+      <link>https://insen.github.io/blog/2018/10/31/Git-Merge-Across-Repos/</link>
+      <pubDate>Wed, 31 Oct 2018 00:00:00 +0530</pubDate>
+      <author> ([name, insen][url, https://linkedin.com/nilsengupta])</author>
+      <guid isPermaLink="true">https://insen.github.io/blog/2018/10/31/Git-Merge-Across-Repos/</guid>
+      <description>&lt;p&gt;** &lt;small&gt;&lt;em&gt;TL;DR - Skip straight to the last section.&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;We all know that Git is an excellent piece of software and it is a DVCS and the D stands for &lt;em&gt;&apos;Distributed&apos;&lt;/em&gt; and all of that is very good and so on and so forth, etc.&lt;/p&gt;
+&lt;p&gt;But honestly, how often do you use the &apos;D&apos; part in there?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The &apos;D&apos; in DVCS. A short detour!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Digressing a bit. Once upon a time when I was young, in programming or otherwise, I needed to handle distributed transactions. In the Microsoft world it meant DTC - the Distributed Transaction Coordinator and I didn&apos;t know squat-jack about that. So I walked up to the venerable senior architect in the organization and asked for  help. His terse response - &lt;em&gt;&lt;strong&gt;&apos;Change the system so that you don&apos;t need it !&apos;&lt;/strong&gt;&lt;/em&gt;. I was quite taken aback then, given that my naive faith in the power of tools had not yet been battle-tested.&lt;/p&gt;
+&lt;p&gt;Over the years, this recurred once, then again, and again, and by now I have learned, both the hard way and the soft way, that the &lt;strong&gt;&lt;em&gt;&apos;D&apos;&lt;/em&gt;&lt;/strong&gt; basically means - &lt;strong&gt;&lt;em&gt;&apos;Don&apos;t go there. There be Dragons !!! &apos;&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;So back to the point - &lt;em&gt;how do we use Git most often?&lt;/em&gt;&lt;/p&gt;
+&lt;h1&gt;How do we use Git? Usually, mostly, as a better VCS.&lt;/h1&gt;
+&lt;p&gt;In my experience, it works mostly as a drop in replacement for a standard VCS.&lt;/p&gt;
+&lt;p&gt;Oh yes, it comes with value adds:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Robust behavior&lt;/li&gt;
+&lt;li&gt;Fast - try branching or checking out a big repo from Git vs SVN/VSTS.&lt;/li&gt;
+&lt;li&gt;Cheap feature branches.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But mostly, in spite of all the &lt;em&gt;distribu-thing-ummajigs&lt;/em&gt; in there, we still have a central source of truth.&lt;/p&gt;
+&lt;p&gt;Somewhere out there is a &apos;master&apos; which is &lt;em&gt;&apos;THE master&apos;&lt;/em&gt; branch.  And while we branch and fork and checkout and checkin and switch and &apos;pull request&apos; all  we like, sooner or later, all roads lead back to Rome - which in this case - is that particular &lt;em&gt;&apos;THE master&apos;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Short detour again - introducing Robert Frost !&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Do you know this Frost?&lt;/p&gt;
+&lt;p&gt;No? Ok, let me introduce you. The chief characteristic of the esteemed Mr. Frost is his rather well known penchant of taking the &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Road_Not_Taken&quot;&gt;road less tavelled by&lt;/a&gt;. (&lt;em&gt;Murphy must have been quite a fan !&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Point being, sometimes, Mr. Frost steps into the fray, and as is his wont, takes  the &lt;a href=&quot;https://en.wikipedia.org/wiki/The_Road_Not_Taken&quot;&gt;road less travelled by&lt;/a&gt;, and pulls you along into it.&lt;/p&gt;
+&lt;h1&gt;Road less travelled - Using Git as a &amp;quot;DVCS&amp;quot;.&lt;/h1&gt;
+&lt;p&gt;So finally, after several years of using Git as a VCS with a first name (&amp;quot;D&amp;quot;), I finally have a situation where I have to deal with the &amp;quot;Distributed&amp;quot; nature of Git.&lt;/p&gt;
+&lt;h2&gt;The context, and the problem.&lt;/h2&gt;
+&lt;p&gt;Let me explain the situation. In this here and now, this is how the cookie crumbled.&lt;/p&gt;
+&lt;p&gt;In my current engagement, work occurs in two Git repositories - &lt;em&gt;In two Git repositories&lt;/em&gt; - each with its own &apos;master&apos; branch and feature branches and history and so on.&lt;/p&gt;
+&lt;p&gt;Why so? Well, because,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The work is &lt;strong&gt;&lt;em&gt;explorative&lt;/em&gt;&lt;/strong&gt; in nature.&lt;/li&gt;
+&lt;li&gt;And there are multiple tracks of work for separate goals.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Moreover,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Many tracks of work &lt;strong&gt;DO NOT&lt;/strong&gt; have a deadline&lt;/em&gt;. It could be from &lt;em&gt;&apos;weeks&apos;&lt;/em&gt; to &lt;em&gt;&apos;years&apos;&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Many of them &lt;strong&gt;MAY&lt;/strong&gt; never become production code&lt;/em&gt;. Production happens when certain conditions become evident.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And the explorative work has way more volume than actual production work. So to cleanly enforce separation of code, there are two repositories -&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Repo Prod - The production code repository.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This is all code that will be go to production at some point. All code is production quality, tests, CI/CD pipelines etc, but not all of them are in the &lt;em&gt;&apos;master&apos;&lt;/em&gt;, or &lt;em&gt;&apos;source of truth&apos;&lt;/em&gt; branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Repo ConDev - The concept development repository.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Again lots of branches, with master, and feature branches, and spikes, and prospective candidates for production, and abandoned work and so on. As the name indicates, it is for concept development.&lt;/li&gt;
+&lt;li&gt;rules/coding guidelines/practises are a lot more lax here. Essentially, this if for feasibility studies, investigative work and other POCs (Proof-Of-Concept).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;But every now and then, a POC clears business validation.&lt;/p&gt;
+&lt;p&gt;Subsequently, a new branch in created in the POC repo, within which the concept based code is upgraded and polished, and code quality reviews and all of the other practises which production readiness demands happen.&lt;/p&gt;
+&lt;p&gt;Once that is done, though, what we have is this nice, freshly minted, production quality  sub-system residing in branch &apos;nice-production-quality-sub-system&apos; in repository &apos;POC&apos;.&lt;/p&gt;
+&lt;p&gt;What we need, however, is the above code sitting in branch &apos;checked-in-production-sub-system&apos; in repository &apos;Prod&apos; - along with its long history of development in the &apos;POC&apos; repo.&lt;/p&gt;
+&lt;p&gt;Thus what I have to do is &lt;strong&gt;move the code across git repositories, preserving history.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Eh! WHAT?&lt;/p&gt;
+&lt;h2&gt;The theory - Git merge across repositories.&lt;/h2&gt;
+&lt;p&gt;What is the first thing to do when you have something like this? Well, you look for volunteers. There are none. Ok, So someone must have done this before? Oops ! Double or nothing, its nobody again. Thus at this point, after successfully drawing two blanks, you go back to the drawing board and start doodling.&lt;/p&gt;
+&lt;p&gt;Which is when it hits you. Git is designed to do exactly that - it is, after all, a distributed VCS.&lt;/p&gt;
+&lt;p&gt;All version control systems have this concept of &apos;local repository&apos; and &apos;remote repository&apos;. The way you work, is that you make all changes in your local copy, and when it is done you check in into local. This local is something on your local physical machine. and at this point - only your copy has your changes.&lt;/p&gt;
+&lt;p&gt;But usually you want to synchronize things, Not just make endless changes to the same thing (repository). And synchronize implicitly means you needs two things to synchronize between - a &apos;source&apos; and a &apos;sink&apos;.&lt;/p&gt;
+&lt;p&gt;From wikipedia -&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Distributed revision control systems (DVCS) takes a peer-to-peer approach to version control, as opposed to the client–server approach of centralized systems. Distributed revision control synchronizes repositories by exchanging patches from peer to peer. There is no single central version of the codebase; instead, each user has a working copy and the full change history.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;And here is the trick that actually lets us do what we want.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;In traditional or client-server based synchronization, you can only synchronize from the &apos;sink&apos; to the &apos;source&apos;. The &apos;sink&apos; can keep changing its contents, and you can have many &apos;sink&apos;s, but every single &apos;sink&apos; needs to pass all its changes/records to the &apos;source&apos; for synchronization to be effective and available to all other &apos;sink&apos;s. And these synchronization steps are all sequential. The &apos;source&apos; is the gatekeeper, and cannot be changed.&lt;/p&gt;
+&lt;p&gt;Git however, eliminates, the difference between &apos;source&apos; and &apos;sink&apos; - &apos;source&apos; and &apos;sink&apos; are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of &apos;source&apos; or &apos;sink&apos; at will.&lt;/p&gt;
+&lt;p&gt;Some taxonomy now - In Git - the &apos;sink&apos; is called the &apos;local&apos; repo. The &apos;source&apos; is called the &apos;remote&apos;. And in Git or other DVCSs it is possible to switch out the &apos;remote&apos; to some other &apos;remote&apos;, or have any number of &apos;remote&apos;s.&lt;/p&gt;
+&lt;p&gt;On that principle, if I fetch the &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch into the &lt;em&gt;&apos;POC&apos; local repo&lt;/em&gt; from the &lt;em&gt;&apos;POC&apos; remote&lt;/em&gt;, then switch (or actually, add) the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; as another &apos;source&apos; - call it &apos;newremote&apos; - it should theoretically be possible to push the now local &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch from &lt;em&gt;&apos;POC&apos; local&lt;/em&gt; into a new branch - call it &lt;em&gt;&apos;new-in-prod&apos;&lt;/em&gt; - on the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; i.e. the &lt;em&gt;&apos;newremote&apos;&lt;/em&gt;. Git should, in principle, seamlessly merge both.&lt;/p&gt;
+&lt;p&gt;Or that&apos;s the theory anyway.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;small&gt;A complete discussion of why is beyond the scope of this post - but if you are interested you can get started with &lt;a href=&quot;https://git-scm.com/book/en/v2/Getting-Started-Git-Basics&quot;&gt;git basics&lt;/a&gt;. Another good source is &lt;a href=&quot;https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone&quot;&gt;here&lt;/a&gt;&lt;/small&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Walking the talk - Git merge across repositories.&lt;/h2&gt;
+&lt;p&gt;But theory and practise are very different things, so let&apos;s see what it takes to put theory into practise.&lt;/p&gt;
+&lt;h3&gt;Arrange&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Create two repositories in some remote location - &apos;prod&apos; and &apos;cd&apos;. Each with just the master branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like this :&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:8080/img/posts/repos-file-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Work with &apos;prod&apos;
+&lt;ul&gt;
+&lt;li&gt;Get &apos;prod&apos; onto local machine - &apos;locprod&apos;.&lt;/li&gt;
+&lt;li&gt;Add folder &apos;f1&apos; and &apos;f2&apos; to &apos;master&apos; in &apos;locprod&apos;.&lt;/li&gt;
+&lt;li&gt;Add files &apos;f11&apos; and &apos;f21&apos; to &apos;master&apos; in &apos;locprod&apos;.&lt;/li&gt;
+&lt;li&gt;Create branch &apos;pb&apos; in &apos;locprod&apos; from &apos;master&apos;.&lt;/li&gt;
+&lt;li&gt;push &apos;pb&apos; from &apos;locprod&apos; to &apos;prod&apos;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After setup, the history for branch &apos;pb&apos; from &apos;locprod&apos; is :&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:8080/img/posts/locprod-after-setup.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Now work with &apos;cd&apos;
+&lt;ul&gt;
+&lt;li&gt;Get &apos;cd&apos; onto local machine - &apos;loccd&apos;.&lt;/li&gt;
+&lt;li&gt;Add folder &apos;f3&apos; and &apos;f4&apos; to &apos;master&apos; in &apos;lcocd&apos;.&lt;/li&gt;
+&lt;li&gt;Add files &apos;f31&apos; and &apos;f41&apos; to &apos;master&apos; in &apos;loccd&apos;.&lt;/li&gt;
+&lt;li&gt;Create branch &apos;cdb&apos; in &apos;loccd&apos; from &apos;master&apos;.&lt;/li&gt;
+&lt;li&gt;push &apos;cdb&apos; from &apos;loccd&apos; to &apos;cd&apos;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And branch &apos;cdb&apos; history from &apos;loccd&apos; is so :&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:8080/img/posts/loccd-after-setup.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of &apos;cdb&apos; in &apos;loccd&apos; into &apos;pb&apos; in &apos;prod&apos;.
+Which means, at the end, the &apos;pb&apos; branch in &apos;prod&apos; should contain all the four folders &apos;f1&apos;, &apos;f2&apos;, &apos;f3&apos;, &apos;f4&apos; with all of their files, and the history of branch &apos;pb&apos; should contain all of the individual commit/operation logs from &apos;prod&apos;/&apos;locprod&apos; and &apos;cd&apos;/&apos;loccd&apos;.&lt;/p&gt;
+&lt;p&gt;I am not showing the steps for the above because if you need help there, you are really not ready for the next bits.&lt;/p&gt;
+&lt;h3&gt;Act&lt;/h3&gt;
+&lt;p&gt;The goal here is to merge &apos;loccd&apos;.&apos;cdb&apos; into, ultimately, &apos;prod&apos;.&apos;pb&apos;. However, this is a multi-step process.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;While on bash in &apos;locprod&apos;.&apos;master&apos;, add a new EMPTY branch &apos;tmp&apos; in &apos;locprod&apos; &lt;code&gt;git checkout --orphan tmp&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Switch to bash on &apos;loccd&apos;. Add &apos;locprod&apos; as a new remote repo for &apos;loccd&apos;. Name this remote as &apos;nremote&apos;. &lt;code&gt;git remote add nremote /full/file/path/to/gitrepo/.git&lt;/code&gt; To verify remotes are setup, run &lt;code&gt;git remote -v&lt;/code&gt;. On my machine, I see the following.
+&lt;img src=&quot;http://localhost:8080/img/posts/all-remotes.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fetch all from the newly configured remote. &lt;code&gt;git fetch nremote&lt;/code&gt;
+Viewing list of branches now shows this.
+&lt;img src=&quot;http://localhost:8080/img/posts/all-branches-with-nremote.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create new branch &apos;loccd&apos;.&apos;tmp&apos; from &apos;loccd&apos;.&apos;cdb&apos; &lt;code&gt;git checkout -b tmp&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set it to track the branch &apos;tmp&apos; on &apos;locprod&apos;. &lt;code&gt;git push -u nremote tmp&lt;/code&gt;. Ensure that the target branch is not open  -i.e. &apos;tmp&apos; is not the currently checked out branch for &apos;locprod&apos;. If so, this is the error you get. &lt;img src=&quot;http://localhost:8080/img/posts/error-open-branch.png&quot; alt=&quot;&quot; /&gt; Switch to some other branch. Once this step is successfull you have the &apos;loccd&apos;.&apos;tmp&apos; data in &apos;locprod&apos;.&apos;tmp&apos;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go to bash on &apos;loccd&apos;.&apos;tmp&apos; and merge &apos;loccd&apos;.&apos;cdb&apos; into &apos;loccd&apos;.&apos;tmp&apos;. Assuming you are on the &apos;tmp&apos; branch in bash, run &lt;code&gt;git push nremote tmp --allow-unrelated-histories&lt;/code&gt; . Note the flag. Once past this step, &apos;locprod&apos;.&apos;tmp&apos; should have everything from &apos;prod&apos;.&apos;pb&apos; and &apos;locprod&apos;.&apos;cdb&apos;, including histories.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Push everything back into &apos;prod&apos;.&apos;tmp&apos;. Since &apos;tmp&apos; was created in  &apos;locprod&apos;, it doesn&apos;t exist yet in &apos;prod&apos;, so you need to set the upstream tracking info. &lt;code&gt;git push -u origin tmp&lt;/code&gt; creates the branch if it doesnt exist and starts tracking.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Switch bash to &apos;locprod&apos;.&apos;pb&apos;. Reverse merge &apos;locprod&apos;.&apos;tmp&apos; into &apos;locprod&apos;.&apos;pb&apos;.
+&lt;code&gt;git merge tmp&lt;/code&gt;. This should be seamless.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Assert&lt;/h3&gt;
+&lt;p&gt;And you are done.&lt;/p&gt;
+&lt;p&gt;This is how the final folders look.
+&lt;img src=&quot;http://localhost:8080/img/posts/post-merge-folders.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;And this is the final log of history on &apos;prod.pb&apos;.
+&lt;img src=&quot;http://localhost:8080/img/posts/post-merge-log.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;And this is the final git merge tree.
+&lt;img src=&quot;http://localhost:8080/img/posts/post-merge-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Some Notes
+&lt;ul&gt;
+&lt;li&gt;Everything from both repos is merged and available in &apos;prod.pb&apos;.&lt;/li&gt;
+&lt;li&gt;There may be a few redundant steps in between, but I was gunning for a solution where, in case of issues, I could just delete stuff and restart - hence all thise temporary branches. It could conceivably work without those, but your mileage may vary.&lt;/li&gt;
+&lt;li&gt;One precaution - Always work off clean branches with no pending changes. Stage or commit everything before starting on this.- You are just one step away from having everything in &apos;prod&apos;.&apos;master&apos; by merging &apos;prod.pb&apos; into &apos;prod&apos;.&apos;master&apos;. Which you can do by whatever method works best for you - review, merge, push, pull-request whatever.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is what worked for me. Thank you for reading. Have a nice day!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Small but irritating things - Git.</title>
