@@ -113,9 +113,7 @@ But theory and practise are very different things, so let's see what it takes to
 ### Arrange
 - Create two repositories in some remote location - 'prod' and 'cd'. Each with just the master branch.
 
-For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like this :
-
-![](/blog/img/posts/repos-file-structure.png)
+For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like ![this :](/blog/img/posts/repos-file-structure.png)
 
 - Work with 'prod'
     - Get 'prod' onto local machine - 'locprod'.

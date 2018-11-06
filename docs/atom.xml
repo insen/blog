@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-11-06T18:58:41.1448967+05:30</updated>
+ <updated>2018-11-06T19:15:16.1278234+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -96,8 +96,7 @@
 &lt;ul&gt;
 &lt;li&gt;Create two repositories in some remote location - &apos;prod&apos; and &apos;cd&apos;. Each with just the master branch.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like this :&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like &lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;this :&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Work with &apos;prod&apos;
 &lt;ul&gt;

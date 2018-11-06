@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Tue, 06 Nov 2018 18:58:41 +0530</pubDate>
-    <lastBuildDate>Tue, 06 Nov 2018 18:58:41 +0530</lastBuildDate>
+    <pubDate>Tue, 06 Nov 2018 19:15:16 +0530</pubDate>
+    <lastBuildDate>Tue, 06 Nov 2018 19:15:16 +0530</lastBuildDate>
     
     <item>
       <title>Merge across repositories - Git.</title>
@@ -94,8 +94,7 @@
 &lt;ul&gt;
 &lt;li&gt;Create two repositories in some remote location - &apos;prod&apos; and &apos;cd&apos;. Each with just the master branch.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like this :&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like &lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;this :&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Work with &apos;prod&apos;
 &lt;ul&gt;
