@@ -167,7 +167,7 @@
       <div class="post">
   <h1 class="post-title">Merge across repositories - Git.</h1>
   <span class="post-date">31 Oct 2018</span>
-  <p>** <small><em>TL;DR - Skip straight to the last section.</em></small></p>
+  <p>** <small><em>TL;DR - Skip straight to the last two sections.</em></small></p>
 <p>We all know that Git is an excellent piece of software and it is a DVCS and the D stands for <em>'Distributed'</em> and all of that is very good and so on and so forth, etc.</p>
 <p>But honestly, how often do you use the 'D' part in there?</p>
 <p><strong>The 'D' in DVCS. A short detour!</strong></p>
@@ -237,8 +237,8 @@
 <p>In traditional or client-server based synchronization, you can only synchronize from the 'sink' to the 'source'. The 'sink' can keep changing its contents, and you can have many 'sink's, but every single 'sink' needs to pass all its changes/records to the 'source' for synchronization to be effective and available to all other 'sink's. And these synchronization steps are all sequential. The 'source' is the gatekeeper, and cannot be changed.</p>
 <p>Git however, eliminates, the difference between 'source' and 'sink' - 'source' and 'sink' are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of 'source' or 'sink' at will.</p>
 <p>Some taxonomy now - In Git - the 'sink' is called the 'local' repo. The 'source' is called the 'remote'. And in Git or other DVCSs it is possible to switch out the 'remote' to some other 'remote', or have any number of 'remote's.</p>
-<p>On that principle, if I fetch the <em>'prod-ready-poc'</em> branch into the <em>'POC' local repo</em> from the <em>'POC' remote</em>, then switch (or actually, add) the <em>'Prod' remote</em> as another 'source' - call it 'newremote' - it should theoretically be possible to push the now local <em>'prod-ready-poc'</em> branch from <em>'POC' local</em> into a new branch - call it <em>'new-in-prod'</em> - on the <em>'Prod' remote</em> i.e. the <em>'newremote'</em>. Git should, in principle, seamlessly merge both.</p>
-<p>Or that's the theory anyway.</p>
+<p>On that principle, if I fetch the <em>'prod-ready-poc'</em> branch from the <em>'POC' remote</em> into the <em>'POC' local repo</em>, then switch (or actually, add) the <em>'Prod' remote</em> as another 'source' (call it 'newremote'), it should theoretically be possible to push the now local <em>'prod-ready-poc'</em> branch from <em>'POC' local</em> into a new branch (call it <em>'new-in-prod'</em>),  on the <em>'Prod' remote</em> (i.e. the <em>'newremote'</em> added to <em>'POC local'</em>).</p>
+<p>Git should seamlessly merge both. Or that's the theory anyway.</p>
 <p><em><small>A complete discussion of why is beyond the scope of this post - but if you are interested you can get started with <a href="https://git-scm.com/book/en/v2/Getting-Started-Git-Basics">git basics</a>. Another good source is <a href="https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone">here</a></small></em></p>
 <h2>Walking the talk - Git merge across repositories.</h2>
 <p>But theory and practise are very different things, so let's see what it takes to put theory into practise.</p>
@@ -246,7 +246,7 @@
 <ul>
 <li>Create two repositories in some remote location - 'prod' and 'cd'. Each with just the master branch.</li>
 </ul>
-<p>For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like <img src="/blog/img/posts/repos-file-structure.png" alt="this :" /></p>
+<p>For my purposes, everything is setup on local machine - since we need a total of 4, prod, prod local copy, condev, condev local copy - all 4 instances of the git repos have been setup on the file system. After setup, it looks like <img src="/blog/img/posts/repos-file-structure.png" alt="this :" /></p>
 <ul>
 <li>Work with 'prod'
 <ul>
@@ -273,7 +273,7 @@
 <p>And branch 'cdb' history from 'loccd' <img src="/blog/img/posts/loccd-after-setup.png" alt="is :" /></p>
 <p>At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of 'cdb' in 'loccd' into 'pb' in 'prod'.
 Which means, at the end, the 'pb' branch in 'prod' should contain all the four folders 'f1', 'f2', 'f3', 'f4' with all of their files, and the history of branch 'pb' should contain all of the individual commit/operation logs from 'prod'/'locprod' and 'cd'/'loccd'.</p>
-<p>I am not showing the steps for the above because if you need help there, you are really not ready for the next bits.</p>
+<p>I am not showing the steps for the above because if you need help here, you are really not ready for the next bits.</p>
 <h3>Act</h3>
 <p>The goal here is to merge 'loccd'.'cdb' into, ultimately, 'prod'.'pb'. However, this is a multi-step process.</p>
 <ul>

@@ -6,7 +6,7 @@ comments: true
 tags : [Programming, Git]
 ---
 
-** <small>_TL;DR - Skip straight to the last section._</small>
+** <small>_TL;DR - Skip straight to the last two sections._</small>
 
 We all know that Git is an excellent piece of software and it is a DVCS and the D stands for _'Distributed'_ and all of that is very good and so on and so forth, etc.
 
@@ -100,9 +100,9 @@ Git however, eliminates, the difference between 'source' and 'sink' - 'source' a
 
 Some taxonomy now - In Git - the 'sink' is called the 'local' repo. The 'source' is called the 'remote'. And in Git or other DVCSs it is possible to switch out the 'remote' to some other 'remote', or have any number of 'remote's.
 
-On that principle, if I fetch the _'prod-ready-poc'_ branch into the _'POC' local repo_ from the _'POC' remote_, then switch (or actually, add) the _'Prod' remote_ as another 'source' - call it 'newremote' - it should theoretically be possible to push the now local _'prod-ready-poc'_ branch from _'POC' local_ into a new branch - call it _'new-in-prod'_ - on the _'Prod' remote_ i.e. the _'newremote'_. Git should, in principle, seamlessly merge both.
+On that principle, if I fetch the _'prod-ready-poc'_ branch from the _'POC' remote_ into the _'POC' local repo_, then switch (or actually, add) the _'Prod' remote_ as another 'source' (call it 'newremote'), it should theoretically be possible to push the now local _'prod-ready-poc'_ branch from _'POC' local_ into a new branch (call it _'new-in-prod'_),  on the _'Prod' remote_ (i.e. the _'newremote'_ added to _'POC local'_). 
 
-Or that's the theory anyway. 
+Git should seamlessly merge both. Or that's the theory anyway. 
 
 _<small>A complete discussion of why is beyond the scope of this post - but if you are interested you can get started with [git basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics). Another good source is [here](https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone)</small>_ 
 
@@ -113,7 +113,7 @@ But theory and practise are very different things, so let's see what it takes to
 ### Arrange
 - Create two repositories in some remote location - 'prod' and 'cd'. Each with just the master branch.
 
-For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like ![this :](/blog/img/posts/repos-file-structure.png)
+For my purposes, everything is setup on local machine - since we need a total of 4, prod, prod local copy, condev, condev local copy - all 4 instances of the git repos have been setup on the file system. After setup, it looks like ![this :](/blog/img/posts/repos-file-structure.png)
 
 - Work with 'prod'
     - Get 'prod' onto local machine - 'locprod'.
@@ -136,7 +136,7 @@ And branch 'cdb' history from 'loccd' ![is :](/blog/img/posts/loccd-after-setup.
 At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of 'cdb' in 'loccd' into 'pb' in 'prod'. 
 Which means, at the end, the 'pb' branch in 'prod' should contain all the four folders 'f1', 'f2', 'f3', 'f4' with all of their files, and the history of branch 'pb' should contain all of the individual commit/operation logs from 'prod'/'locprod' and 'cd'/'loccd'. 
 
-I am not showing the steps for the above because if you need help there, you are really not ready for the next bits.
+I am not showing the steps for the above because if you need help here, you are really not ready for the next bits.
 
 ### Act
 

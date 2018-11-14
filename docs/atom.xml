@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-11-14T14:17:05.6073222+05:30</updated>
+ <updated>2018-11-14T20:36:44.116393+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -17,7 +17,7 @@
    <link href="https://insen.github.io/blog/2018/10/31/Git-Merge-Across-Repos/"/>
    <updated>2018-10-31T00:00:00+05:30</updated>
    <id>https://insen.github.io/blog/2018/10/31/Git-Merge-Across-Repos/</id>
-   <content type="html">&lt;p&gt;** &lt;small&gt;&lt;em&gt;TL;DR - Skip straight to the last section.&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;** &lt;small&gt;&lt;em&gt;TL;DR - Skip straight to the last two sections.&lt;/em&gt;&lt;/small&gt;&lt;/p&gt;
 &lt;p&gt;We all know that Git is an excellent piece of software and it is a DVCS and the D stands for &lt;em&gt;&apos;Distributed&apos;&lt;/em&gt; and all of that is very good and so on and so forth, etc.&lt;/p&gt;
 &lt;p&gt;But honestly, how often do you use the &apos;D&apos; part in there?&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;The &apos;D&apos; in DVCS. A short detour!&lt;/strong&gt;&lt;/p&gt;
@@ -87,8 +87,8 @@
 &lt;p&gt;In traditional or client-server based synchronization, you can only synchronize from the &apos;sink&apos; to the &apos;source&apos;. The &apos;sink&apos; can keep changing its contents, and you can have many &apos;sink&apos;s, but every single &apos;sink&apos; needs to pass all its changes/records to the &apos;source&apos; for synchronization to be effective and available to all other &apos;sink&apos;s. And these synchronization steps are all sequential. The &apos;source&apos; is the gatekeeper, and cannot be changed.&lt;/p&gt;
 &lt;p&gt;Git however, eliminates, the difference between &apos;source&apos; and &apos;sink&apos; - &apos;source&apos; and &apos;sink&apos; are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of &apos;source&apos; or &apos;sink&apos; at will.&lt;/p&gt;
 &lt;p&gt;Some taxonomy now - In Git - the &apos;sink&apos; is called the &apos;local&apos; repo. The &apos;source&apos; is called the &apos;remote&apos;. And in Git or other DVCSs it is possible to switch out the &apos;remote&apos; to some other &apos;remote&apos;, or have any number of &apos;remote&apos;s.&lt;/p&gt;
-&lt;p&gt;On that principle, if I fetch the &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch into the &lt;em&gt;&apos;POC&apos; local repo&lt;/em&gt; from the &lt;em&gt;&apos;POC&apos; remote&lt;/em&gt;, then switch (or actually, add) the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; as another &apos;source&apos; - call it &apos;newremote&apos; - it should theoretically be possible to push the now local &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch from &lt;em&gt;&apos;POC&apos; local&lt;/em&gt; into a new branch - call it &lt;em&gt;&apos;new-in-prod&apos;&lt;/em&gt; - on the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; i.e. the &lt;em&gt;&apos;newremote&apos;&lt;/em&gt;. Git should, in principle, seamlessly merge both.&lt;/p&gt;
-&lt;p&gt;Or that&apos;s the theory anyway.&lt;/p&gt;
+&lt;p&gt;On that principle, if I fetch the &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch from the &lt;em&gt;&apos;POC&apos; remote&lt;/em&gt; into the &lt;em&gt;&apos;POC&apos; local repo&lt;/em&gt;, then switch (or actually, add) the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; as another &apos;source&apos; (call it &apos;newremote&apos;), it should theoretically be possible to push the now local &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch from &lt;em&gt;&apos;POC&apos; local&lt;/em&gt; into a new branch (call it &lt;em&gt;&apos;new-in-prod&apos;&lt;/em&gt;),  on the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; (i.e. the &lt;em&gt;&apos;newremote&apos;&lt;/em&gt; added to &lt;em&gt;&apos;POC local&apos;&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Git should seamlessly merge both. Or that&apos;s the theory anyway.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;small&gt;A complete discussion of why is beyond the scope of this post - but if you are interested you can get started with &lt;a href=&quot;https://git-scm.com/book/en/v2/Getting-Started-Git-Basics&quot;&gt;git basics&lt;/a&gt;. Another good source is &lt;a href=&quot;https://www.atlassian.com/git/tutorials/setting-up-a-repository/git-clone&quot;&gt;here&lt;/a&gt;&lt;/small&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Walking the talk - Git merge across repositories.&lt;/h2&gt;
 &lt;p&gt;But theory and practise are very different things, so let&apos;s see what it takes to put theory into practise.&lt;/p&gt;
@@ -96,7 +96,7 @@
 &lt;ul&gt;
 &lt;li&gt;Create two repositories in some remote location - &apos;prod&apos; and &apos;cd&apos;. Each with just the master branch.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;For my purposes, everything is setup on local machine - all 4 instances of the git repos are on my local file system. After setup, it looks like &lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;this :&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;For my purposes, everything is setup on local machine - since we need a total of 4, prod, prod local copy, condev, condev local copy - all 4 instances of the git repos have been setup on the file system. After setup, it looks like &lt;img src=&quot;/blog/img/posts/repos-file-structure.png&quot; alt=&quot;this :&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Work with &apos;prod&apos;
 &lt;ul&gt;
@@ -123,7 +123,7 @@
 &lt;p&gt;And branch &apos;cdb&apos; history from &apos;loccd&apos; &lt;img src=&quot;/blog/img/posts/loccd-after-setup.png&quot; alt=&quot;is :&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;At this point we have two repositories with branches whose histories have diverged. The goal is to get all the contents and history of &apos;cdb&apos; in &apos;loccd&apos; into &apos;pb&apos; in &apos;prod&apos;.
 Which means, at the end, the &apos;pb&apos; branch in &apos;prod&apos; should contain all the four folders &apos;f1&apos;, &apos;f2&apos;, &apos;f3&apos;, &apos;f4&apos; with all of their files, and the history of branch &apos;pb&apos; should contain all of the individual commit/operation logs from &apos;prod&apos;/&apos;locprod&apos; and &apos;cd&apos;/&apos;loccd&apos;.&lt;/p&gt;
-&lt;p&gt;I am not showing the steps for the above because if you need help there, you are really not ready for the next bits.&lt;/p&gt;
+&lt;p&gt;I am not showing the steps for the above because if you need help here, you are really not ready for the next bits.&lt;/p&gt;
 &lt;h3&gt;Act&lt;/h3&gt;
 &lt;p&gt;The goal here is to merge &apos;loccd&apos;.&apos;cdb&apos; into, ultimately, &apos;prod&apos;.&apos;pb&apos;. However, this is a multi-step process.&lt;/p&gt;
 &lt;ul&gt;
