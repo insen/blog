@@ -166,13 +166,13 @@ Viewing list of branches now shows
 
 And you are done. 
 
-This is how the final folders
-![look.](/blog/img/posts/post-merge-folders.png)
+These are the final folders
+![](/blog/img/posts/post-merge-folders.png)
 
-And this is the final log of history on  
+This is the final log of history 
 !['prod.pb'.](/blog/img/posts/post-merge-log.png)
 
-And this is the final git merge
+And the final git merge
 ![ tree.](/blog/img/posts/post-merge-tree.png)
 
 

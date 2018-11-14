@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-11-14T20:43:00.8441463+05:30</updated>
+ <updated>2018-11-14T20:57:04.9648612+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -158,11 +158,11 @@ Viewing list of branches now shows
 &lt;/ul&gt;
 &lt;h3&gt;Assert&lt;/h3&gt;
 &lt;p&gt;And you are done.&lt;/p&gt;
-&lt;p&gt;This is how the final folders
-&lt;img src=&quot;/blog/img/posts/post-merge-folders.png&quot; alt=&quot;look.&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;And this is the final log of history on&lt;br /&gt;
+&lt;p&gt;These are the final folders
+&lt;img src=&quot;/blog/img/posts/post-merge-folders.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This is the final log of history
 &lt;img src=&quot;/blog/img/posts/post-merge-log.png&quot; alt=&quot;&apos;prod.pb&apos;.&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;And this is the final git merge
+&lt;p&gt;And the final git merge
 &lt;img src=&quot;/blog/img/posts/post-merge-tree.png&quot; alt=&quot; tree.&quot; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Some Notes
