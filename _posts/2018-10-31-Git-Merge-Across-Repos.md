@@ -179,8 +179,9 @@ And this is the final git merge
 - Some Notes
     - Everything from both repos is merged and available in 'prod.pb'. 
     - There may be a few redundant steps in between, but I was gunning for a solution where, in case of issues, I could just delete stuff and restart - hence all thise temporary branches. It could conceivably work without those, but your mileage may vary.
-    - One precaution - Always work off clean branches with no pending changes. Stage or commit everything before starting on this.- You are just one step away from having everything in 'prod'.'master' by merging 'prod.pb' into 'prod'.'master'. Which you can do by whatever method works best for you - review, merge, push, pull-request whatever.
+    - One precaution - Always work off clean branches with no pending changes. Stage or commit everything before starting on this.
     
-
+Thats it. You are just one step away from having everything in 'prod'.'master' by merging 'prod.pb' into 'prod'.'master'. Which you can do by whatever method works best for you - review, merge, push, pull-request whatever.
+    
 This is what worked for me. Thank you for reading. Have a nice day!
 

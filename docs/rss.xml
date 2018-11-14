@@ -6,8 +6,8 @@
     <atom:link href="https://insen.github.io/blog/rss.xml" rel="self" type="application/rss+xml" />
     <description>Personal blog of [name, insen][url, https://linkedin.com/nilsengupta]</description>
     <language>en-us</language>
-    <pubDate>Wed, 14 Nov 2018 20:36:44 +0530</pubDate>
-    <lastBuildDate>Wed, 14 Nov 2018 20:36:44 +0530</lastBuildDate>
+    <pubDate>Wed, 14 Nov 2018 20:43:00 +0530</pubDate>
+    <lastBuildDate>Wed, 14 Nov 2018 20:43:00 +0530</lastBuildDate>
     
     <item>
       <title>Merge across repositories - Git.</title>
@@ -167,10 +167,11 @@ Viewing list of branches now shows
 &lt;ul&gt;
 &lt;li&gt;Everything from both repos is merged and available in &apos;prod.pb&apos;.&lt;/li&gt;
 &lt;li&gt;There may be a few redundant steps in between, but I was gunning for a solution where, in case of issues, I could just delete stuff and restart - hence all thise temporary branches. It could conceivably work without those, but your mileage may vary.&lt;/li&gt;
-&lt;li&gt;One precaution - Always work off clean branches with no pending changes. Stage or commit everything before starting on this.- You are just one step away from having everything in &apos;prod&apos;.&apos;master&apos; by merging &apos;prod.pb&apos; into &apos;prod&apos;.&apos;master&apos;. Which you can do by whatever method works best for you - review, merge, push, pull-request whatever.&lt;/li&gt;
+&lt;li&gt;One precaution - Always work off clean branches with no pending changes. Stage or commit everything before starting on this.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;Thats it. You are just one step away from having everything in &apos;prod&apos;.&apos;master&apos; by merging &apos;prod.pb&apos; into &apos;prod&apos;.&apos;master&apos;. Which you can do by whatever method works best for you - review, merge, push, pull-request whatever.&lt;/p&gt;
 &lt;p&gt;This is what worked for me. Thank you for reading. Have a nice day!&lt;/p&gt;</description>
     </item>
     
