@@ -60,7 +60,7 @@ Why so? Well, because,
 And the explorative work has way more volume than actual production work. So to cleanly enforce separation of code, there are two repositories -
 
 - Repo Prod - The production code repository. 
-    -   This is all code that will be go to production at some point. All code is production quality, tests, CI/CD pipelines etc, but not all of them are in the _'master'_, or _'source of truth'_ branch.
+    -   This is code that will go to production at some point. All code here has to be of production quality, with tests, automated CI/CD pipelines etc. Not all of them, however, are in the _'master'_, or _'source of truth'_ branch.
 
 - Repo ConDev - The concept development repository. 
     - Again lots of branches, with master, and feature branches, and spikes, and prospective candidates for production, and abandoned work and so on. As the name indicates, it is for concept development. 
@@ -96,7 +96,7 @@ _And here is the trick that actually lets us do what we want._
 
 In traditional or client-server based synchronization, you can only synchronize from the 'sink' to the 'source'. The 'sink' can keep changing its contents, and you can have many 'sink's, but every single 'sink' needs to pass all its changes/records to the 'source' for synchronization to be effective and available to all other 'sink's. And these synchronization steps are all sequential. The 'source' is the gatekeeper, and cannot be changed.
 
-Git however, eliminates, the difference between 'source' and 'sink' - 'source' and 'sink' are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of 'source' or 'sink' at will.  
+Git, however, eliminates the difference between 'source' and 'sink' - 'source' and 'sink' are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of 'source' or 'sink' at will.  
 
 Some taxonomy now - In Git - the 'sink' is called the 'local' repo. The 'source' is called the 'remote'. And in Git or other DVCSs it is possible to switch out the 'remote' to some other 'remote', or have any number of 'remote's.
 

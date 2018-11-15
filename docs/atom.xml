@@ -4,7 +4,7 @@
  <title>Insen</title>
  <link href="https://insen.github.io/blog/atom.xml" rel="self"/>
  <link href="https://insen.github.io/blog/"/>
- <updated>2018-11-14T20:57:04.9648612+05:30</updated>
+ <updated>2018-11-15T14:59:55.3302908+05:30</updated>
  <id>https://insen.github.io/blog</id>
  <author>
    <name>insen</name>
@@ -58,7 +58,7 @@
 &lt;li&gt;
 &lt;p&gt;Repo Prod - The production code repository.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;This is all code that will be go to production at some point. All code is production quality, tests, CI/CD pipelines etc, but not all of them are in the &lt;em&gt;&apos;master&apos;&lt;/em&gt;, or &lt;em&gt;&apos;source of truth&apos;&lt;/em&gt; branch.&lt;/li&gt;
+&lt;li&gt;This is code that will go to production at some point. All code here has to be of production quality, with tests, automated CI/CD pipelines etc. Not all of them, however, are in the &lt;em&gt;&apos;master&apos;&lt;/em&gt;, or &lt;em&gt;&apos;source of truth&apos;&lt;/em&gt; branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -85,7 +85,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;em&gt;And here is the trick that actually lets us do what we want.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;In traditional or client-server based synchronization, you can only synchronize from the &apos;sink&apos; to the &apos;source&apos;. The &apos;sink&apos; can keep changing its contents, and you can have many &apos;sink&apos;s, but every single &apos;sink&apos; needs to pass all its changes/records to the &apos;source&apos; for synchronization to be effective and available to all other &apos;sink&apos;s. And these synchronization steps are all sequential. The &apos;source&apos; is the gatekeeper, and cannot be changed.&lt;/p&gt;
-&lt;p&gt;Git however, eliminates, the difference between &apos;source&apos; and &apos;sink&apos; - &apos;source&apos; and &apos;sink&apos; are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of &apos;source&apos; or &apos;sink&apos; at will.&lt;/p&gt;
+&lt;p&gt;Git, however, eliminates the difference between &apos;source&apos; and &apos;sink&apos; - &apos;source&apos; and &apos;sink&apos; are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of &apos;source&apos; or &apos;sink&apos; at will.&lt;/p&gt;
 &lt;p&gt;Some taxonomy now - In Git - the &apos;sink&apos; is called the &apos;local&apos; repo. The &apos;source&apos; is called the &apos;remote&apos;. And in Git or other DVCSs it is possible to switch out the &apos;remote&apos; to some other &apos;remote&apos;, or have any number of &apos;remote&apos;s.&lt;/p&gt;
 &lt;p&gt;On that principle, if I fetch the &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch from the &lt;em&gt;&apos;POC&apos; remote&lt;/em&gt; into the &lt;em&gt;&apos;POC&apos; local repo&lt;/em&gt;, then switch (or actually, add) the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; as another &apos;source&apos; (call it &apos;newremote&apos;), it should theoretically be possible to push the now local &lt;em&gt;&apos;prod-ready-poc&apos;&lt;/em&gt; branch from &lt;em&gt;&apos;POC&apos; local&lt;/em&gt; into a new branch (call it &lt;em&gt;&apos;new-in-prod&apos;&lt;/em&gt;),  on the &lt;em&gt;&apos;Prod&apos; remote&lt;/em&gt; (i.e. the &lt;em&gt;&apos;newremote&apos;&lt;/em&gt; added to &lt;em&gt;&apos;POC local&apos;&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;Git should seamlessly merge both. Or that&apos;s the theory anyway.&lt;/p&gt;

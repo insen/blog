@@ -208,7 +208,7 @@
 <li>
 <p>Repo Prod - The production code repository.</p>
 <ul>
-<li>This is all code that will be go to production at some point. All code is production quality, tests, CI/CD pipelines etc, but not all of them are in the <em>'master'</em>, or <em>'source of truth'</em> branch.</li>
+<li>This is code that will go to production at some point. All code here has to be of production quality, with tests, automated CI/CD pipelines etc. Not all of them, however, are in the <em>'master'</em>, or <em>'source of truth'</em> branch.</li>
 </ul>
 </li>
 <li>
@@ -235,7 +235,7 @@
 </code></pre>
 <p><em>And here is the trick that actually lets us do what we want.</em></p>
 <p>In traditional or client-server based synchronization, you can only synchronize from the 'sink' to the 'source'. The 'sink' can keep changing its contents, and you can have many 'sink's, but every single 'sink' needs to pass all its changes/records to the 'source' for synchronization to be effective and available to all other 'sink's. And these synchronization steps are all sequential. The 'source' is the gatekeeper, and cannot be changed.</p>
-<p>Git however, eliminates, the difference between 'source' and 'sink' - 'source' and 'sink' are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of 'source' or 'sink' at will.</p>
+<p>Git, however, eliminates the difference between 'source' and 'sink' - 'source' and 'sink' are just roles you play. Moreover, any repository can choose any other repository, and between those two, either party may play the role of 'source' or 'sink' at will.</p>
 <p>Some taxonomy now - In Git - the 'sink' is called the 'local' repo. The 'source' is called the 'remote'. And in Git or other DVCSs it is possible to switch out the 'remote' to some other 'remote', or have any number of 'remote's.</p>
 <p>On that principle, if I fetch the <em>'prod-ready-poc'</em> branch from the <em>'POC' remote</em> into the <em>'POC' local repo</em>, then switch (or actually, add) the <em>'Prod' remote</em> as another 'source' (call it 'newremote'), it should theoretically be possible to push the now local <em>'prod-ready-poc'</em> branch from <em>'POC' local</em> into a new branch (call it <em>'new-in-prod'</em>),  on the <em>'Prod' remote</em> (i.e. the <em>'newremote'</em> added to <em>'POC local'</em>).</p>
 <p>Git should seamlessly merge both. Or that's the theory anyway.</p>
